@@ -1,0 +1,688 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Companies API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Companies
+  description: Companies represent the customers your organization serves through the Pax8 platform. Fetch a list of your company records, or a specific company by its companyId
+paths:
+  /companies:
+    post:
+      tags:
+      - Companies
+      summary: Create Company
+      description: Creates a new company. You can optionally include contacts in the request body to create the company with contacts in a single request. If no contacts are provided, the company will be placed in an "inactive" status until the [company has primary contacts added](#tag/Contacts). Once contacts are added, the company will move to "Active".
+      operationId: createCompany
+      requestBody:
+        description: Company object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+            examples:
+              company-post:
+                $ref: '#/components/examples/company-post'
+      responses:
+        '200':
+          description: Successful Company create
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+              examples:
+                company-0:
+                  $ref: '#/components/examples/company-0'
+        '422':
+          description: Invalid Company
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+      - Companies
+      summary: List Companies
+      description: Returns a paginated list of all your companies filtered by optional parameters
+      operationId: findCompanies
+      parameters:
+      - name: page
+        in: query
+        description: The page number to request for in the companies list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        description: Return this number of company records per page
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      - name: sort
+        in: query
+        description: Return companies sorted by this field and direction. Formatted as fieldName,direction - ex. sort=name,desc
+        required: false
+        schema:
+          type: string
+          enum:
+          - name
+          - city
+          - country
+          - stateOrProvince
+          - postalCode
+      - name: city
+        in: query
+        description: Return only companies matching this ```city``` value
+        required: false
+        schema:
+          type: string
+          example: Greenwood Village
+      - name: country
+        in: query
+        description: Return only companies matching this ```country``` value
+        required: false
+        schema:
+          type: string
+          example: United States
+      - name: stateOrProvince
+        in: query
+        description: Return only companies matching this ```stateOrProvince``` value
+        required: false
+        schema:
+          type: string
+          example: Colorado
+      - name: postalCode
+        in: query
+        description: Return only companies matching this ```postalCode``` value
+        required: false
+        schema:
+          type: string
+          example: '80111'
+      - name: selfServiceAllowed
+        in: query
+        description: Return only companies matching this ```selfServiceAllowed``` value
+        required: false
+        schema:
+          type: boolean
+      - name: billOnBehalfOfEnabled
+        in: query
+        description: Return only companies matching this ```billOnBehalfOfEnabled``` value
+        required: false
+        schema:
+          type: boolean
+      - name: orderApprovalRequired
+        in: query
+        description: Return only companies matching this ```orderApprovalRequired``` value
+        required: false
+        schema:
+          type: boolean
+      - name: status
+        in: query
+        description: Return only companies matching this ```status``` value
+        required: false
+        schema:
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Deleted
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+                  page:
+                    $ref: '#/components/schemas/Page'
+              examples:
+                companies-paged:
+                  $ref: '#/components/examples/companies-paged'
+  /companies/{companyId}:
+    get:
+      tags:
+      - Companies
+      summary: Get Company By ID
+      description: Returns a single company record matching the ```companyId``` you specify
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+              examples:
+                company-0:
+                  $ref: '#/components/examples/company-0'
+        '404':
+          description: Company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+      - Companies
+      summary: Update Company
+      description: Updates an existing Company. ATTENTION - at least one parameter has to be modified.
+      operationId: updateCompany
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      requestBody:
+        description: Company object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyUpdate'
+            examples:
+              company-post:
+                $ref: '#/components/examples/company-update-post'
+      responses:
+        '200':
+          description: Successful Company update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+              examples:
+                company-0:
+                  $ref: '#/components/examples/company-0'
+        '422':
+          description: Invalid Company
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    CompanyUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: The unique id of the company
+        name:
+          type: string
+          example: Pax8
+          description: The company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+          description: The primary phone number of the company
+          example: 555-555-5555
+        website:
+          type: string
+          description: The full URL of the company website
+          example: https://www.pax8.com/
+        externalId:
+          type: string
+          description: An external ID that can be assigned to the company for reference
+        billOnBehalfOfEnabled:
+          type: boolean
+          description: Value is ```true``` if Pax8 handles billing transactions, value is ```false``` if partner handles billing transactions
+        selfServiceAllowed:
+          type: boolean
+          description: Value is ```true``` if self-service privileges are available to the company, otherwise value is ```false```
+        orderApprovalRequired:
+          type: boolean
+          description: Value is ```true``` if the company's self-service orders require approval, otherwise value is ```false```
+        status:
+          readOnly: true
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Deleted
+          description: "Company Status:\n  * `Active` - The company is active\n  * `Inactive` - The company is inactive due to missing contacts\n  * `Deleted` - The company has been deleted\n"
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    Contact:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - email
+      - phone
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: The id
+          example: 18d6329e-93f9-46a5-9df7-37e4c29d2840
+        firstName:
+          type: string
+          description: The first name
+          example: John
+        lastName:
+          type: string
+          description: The last name
+          example: Doe
+        email:
+          type: string
+          format: email
+          description: The email
+          example: john@doe.com
+        phone:
+          type: string
+          format: phone
+          description: The phone number
+          example: 555-555-5555
+        createdDate:
+          readOnly: true
+          type: string
+          description: The created date
+          example: '2020-05-12'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactType'
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          description: The primary street information
+          example: 5500 S Quebec St
+        street2:
+          type: string
+          description: The secondary street information
+          example: Ste. 350
+        city:
+          type: string
+          description: The city
+          example: Greenwood Village
+        stateOrProvince:
+          type: string
+          description: The state or province
+          example: CO
+        postalCode:
+          type: string
+          description: The postal code
+          example: '80111'
+        country:
+          type: string
+          description: The ISO 3166-1 alpha-2 code for the country
+          pattern: ^[A-Z]{2}$
+          example: US
+    ContactType:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Admin
+          - Billing
+          - Technical
+          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
+        primary:
+          type: boolean
+          description: Is this contact the primary contact for this Contact Type
+    Company:
+      type: object
+      required:
+      - name
+      - address
+      - phone
+      - website
+      - billOnBehalfOfEnabled
+      - selfServiceAllowed
+      - orderApprovalRequired
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: The unique id of the company
+        name:
+          type: string
+          example: Pax8
+          description: The company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+          description: The primary phone number of the company
+          example: 555-555-5555
+        website:
+          type: string
+          description: The full URL of the company website
+          example: https://www.pax8.com/
+        externalId:
+          type: string
+          description: An external ID that can be assigned to the company for reference
+        billOnBehalfOfEnabled:
+          type: boolean
+          description: Value is ```true``` if Pax8 handles billing transactions, value is ```false``` if partner handles billing transactions
+        selfServiceAllowed:
+          type: boolean
+          description: Value is ```true``` if self-service privileges are available to the company, otherwise value is ```false```
+        orderApprovalRequired:
+          type: boolean
+          description: Value is ```true``` if the company's self-service orders require approval, otherwise value is ```false```
+        status:
+          readOnly: true
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Deleted
+          description: "Company Status:\n  * `Active` - The company is active\n  * `Inactive` - The company is inactive due to missing contacts\n  * `Deleted` - The company has been deleted\n"
+        updatedDate:
+          type: string
+          format: date-time
+          readOnly: true
+          description: The date and time the company was last updated
+        contacts:
+          type: array
+          description: Optional array of contacts to create with the company. Including contacts during company creation will set the company status to "Active" immediately.
+          items:
+            $ref: '#/components/schemas/Contact'
+  examples:
+    companies-paged:
+      summary: A page of companies
+      description: An example page of companies
+      value:
+        content:
+        - id: 9ba32659-d339-4539-be21-1f461dc1a415
+          name: 112 Cloud Communications Backup
+          address:
+            street: 6905 N Winterhold Drive
+            city: Dayton
+            postalCode: '82691'
+            country: US
+            stateOrProvince: Utah
+          website: cloud-communications-backup.com
+          status: Active
+          externalId: A123
+          selfServiceAllowed: true
+          billOnBehalfOfEnabled: true
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: 0d3f48ae-9764-4b3a-9554-d28fe345230c
+          name: 021 Modern Executive
+          address:
+            street: 15320 Pipeline St
+            city: Tacoma
+            postalCode: '50921'
+            country: CA
+            stateOrProvince: Ontario
+          website: 021-modern-executive.com
+          status: Active
+          externalId: B123
+          selfServiceAllowed: true
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: d904c896-e19e-4daa-9b73-c992a000ad8a
+          name: 047 Acupuncture Search, Inc.
+          address:
+            street: asdasdasd4 Commerce Ave
+            city: Centennial
+            postalCode: '92426'
+            country: US
+            stateOrProvince: Colorado
+          website: 32peakviewave.com
+          status: Active
+          externalId: C123
+          selfServiceAllowed: false
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: e74bc79a-71ce-414e-a8e9-d6a155933f86
+          name: 0633 - Citizens State Bank
+          address:
+            street: 2445 South West Ski Rd
+            city: Salt Lake City
+            postalCode: '79510'
+            country: US
+            stateOrProvince: Texas
+          website: sout-west-ski-2.com
+          status: Inactive
+          externalId: D123
+          selfServiceAllowed: false
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: 9ebc4a03-1c08-4c8b-9cc7-f5eb0b686cc4
+          name: 0671 - Motivational County Bank Systems
+          address:
+            street: 10191 King Zane Ave N
+            city: Buffalo Grove
+            postalCode: '61079'
+            country: US
+            stateOrProvince: Connecticut
+          website: motivational-county-bank-systems.com
+          status: Active
+          externalId: E123
+          selfServiceAllowed: false
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: 81bfe305-e56c-483e-ba4f-943c3e31411a
+          name: 0721 - Bank of Physicians
+          address:
+            street: 7589 W. Bahia Rd Suite 300
+            city: Scottsdale
+            postalCode: '52322'
+            country: US
+            stateOrProvince: Indiana
+          website: bank-of-physicians.net
+          status: Active
+          externalId: F123
+          selfServiceAllowed: false
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: 20497fca-e228-44ae-8f2d-08296d7e0e4d
+          name: 072 - New Sharpco Veterinary Printing
+          address:
+            street: Inks Greensboro Drive, Suite 200
+            city: Winchester
+            postalCode: '61289'
+            country: US
+            stateOrProvince: Arizona
+          website: new-sharpco-veterinary-printing.com
+          status: Active
+          externalId: G123
+          selfServiceAllowed: false
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: eeb7763f-0d25-49a1-a3f6-842631abe0ff
+          name: 0841 - Precision Community Insurance
+          address:
+            street: 40915 Sorrento Mask Blvd.
+            city: Gotham
+            postalCode: '89258'
+            country: US
+            stateOrProvince: New Jersey
+          website: precision-community-insurance.com
+          status: Active
+          externalId: H123
+          selfServiceAllowed: false
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: 3953a817-c9b5-46bf-9002-8ba8648cd9a4
+          name: 0I-Ride Powersports
+          address:
+            street: East Camelback Hwy, Suite 6711
+            city: New Britain
+            postalCode: 55446-2800
+            country: US
+            stateOrProvince: North Carolina
+          website: 0i-ride-powersports.com
+          status: Active
+          externalId: J123
+          selfServiceAllowed: false
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        - id: a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a
+          name: 100 Smith Avenue Condos
+          address:
+            street: 2677 Carlson Willis Pkwy 618, Suite 1197
+            city: Spring Park
+            postalCode: '85158'
+            country: US
+            stateOrProvince: Arizona
+          website: 100-smith-avenue-condos.com
+          status: Active
+          externalId: K123
+          selfServiceAllowed: false
+          billOnBehalfOfEnabled: false
+          updatedDate: 2023-08-11T11:33:12.314-0600
+        page:
+          size: 10
+          totalElements: 65
+          totalPages: 7
+          number: 0
+    company-post:
+      summary: An example company with contacts
+      description: An example request for creating a company with contacts
+      value:
+        name: VFC Network, Inc
+        address:
+          street: 48918 Liberty Lane Ave
+          city: Denver
+          postalCode: '80210'
+          country: US
+          stateOrProvince: Colorado
+        phone: 123-456-5555
+        website: vfc-network-inc-liberty.com
+        externalId: A123
+        selfServiceAllowed: false
+        billOnBehalfOfEnabled: false
+        orderApprovalRequired: false
+        contacts:
+        - firstName: John
+          lastName: Doe
+          email: john.doe@vfc-network-inc-liberty.com
+          phone: 555-555-5555
+          types:
+          - type: Admin
+            primary: true
+          - type: Billing
+            primary: true
+          - type: Technical
+            primary: true
+    company-update-post:
+      summary: An example company
+      description: An example response for a company
+      value:
+        id: a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a
+        name: VFC Network, Inc
+        address:
+          street: 48918 Liberty Lane Ave
+          city: Denver
+          postalCode: '80210'
+          country: US
+          stateOrProvince: Colorado
+        phone: 123-456-5555
+        website: vfc-network-inc-liberty.com
+        status: Active
+        externalId: A123
+        selfServiceAllowed: false
+        billOnBehalfOfEnabled: false
+        orderApprovalRequired: false
+    company-0:
+      summary: An example company
+      description: An example response for a company
+      value:
+        id: a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a
+        name: VFC Network, Inc
+        address:
+          street: 48918 Liberty Lane Ave
+          city: Denver
+          postalCode: '80210'
+          country: US
+          stateOrProvince: Colorado
+        phone: 123-456-5555
+        website: vfc-network-inc-liberty.com
+        status: Active
+        externalId: A123
+        selfServiceAllowed: false
+        billOnBehalfOfEnabled: false
+        orderApprovalRequired: false
+        updatedDate: 2023-08-11T11:33:12.314-0600
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

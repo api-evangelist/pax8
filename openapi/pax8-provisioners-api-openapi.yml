@@ -1,0 +1,274 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Provisioners API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Provisioners
+paths:
+  /provisioners/{provisionerId}/webhooks:
+    get:
+      tags:
+      - Provisioners
+      summary: Get All Webhook Configurations for a Provisioner
+      operationId: getAllWebhooksForProvisioner
+      parameters:
+      - name: provisionerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDTOWebhook'
+    post:
+      tags:
+      - Provisioners
+      summary: Create a Webhook Configuration for a Provisioner
+      operationId: createWebhookForProvisioner
+      parameters:
+      - name: provisionerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreatedWebhook'
+  /provisioners:
+    get:
+      tags:
+      - Provisioners
+      summary: Get All Provisioners
+      operationId: getAllProvisioners
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDTOProvisioner'
+  /provisioners/{provisionerId}:
+    get:
+      tags:
+      - Provisioners
+      summary: Get One Provisioner by ID
+      operationId: getOneProvisioner
+      parameters:
+      - name: provisionerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Provisioner'
+  /provisioners/{provisionerId}/webhooks/{webhookId}:
+    get:
+      tags:
+      - Provisioners
+      summary: Get One Webhook for a Provisioner
+      operationId: getOneWebhookForProvisioner
+      parameters:
+      - name: provisionerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: webhookId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Webhook'
+  /provisioners/{provisionerId}/webhooks/latest:
+    get:
+      tags:
+      - Provisioners
+      summary: Get Latest Webhook for a Provisioner
+      operationId: getLatestWebhookForProvisioner
+      parameters:
+      - name: provisionerId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Webhook'
+components:
+  schemas:
+    Provisioner:
+      required:
+      - name
+      - vendorId
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        vendorId:
+          type: string
+          format: uuid
+        name:
+          type: string
+    SharedSecretCreate:
+      type: object
+      properties:
+        header:
+          type: string
+    PageDTOProvisioner:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Provisioner'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
+    CreatedSharedSecret:
+      required:
+      - credential
+      - header
+      type: object
+      properties:
+        header:
+          type: string
+        credential:
+          type: string
+    PageDTOWebhook:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+    WebhookCreate:
+      required:
+      - url
+      type: object
+      properties:
+        url:
+          type: string
+        sharedSecret:
+          $ref: '#/components/schemas/SharedSecretCreate'
+    SharedSecret:
+      required:
+      - credential
+      type: object
+      properties:
+        header:
+          type: string
+        credential:
+          type: string
+    CreatedWebhook:
+      required:
+      - createdDate
+      - sharedSecret
+      - url
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+        sharedSecret:
+          $ref: '#/components/schemas/CreatedSharedSecret'
+        createdDate:
+          type: string
+          format: date-time
+    Webhook:
+      required:
+      - createdDate
+      - sharedSecret
+      - url
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+        sharedSecret:
+          $ref: '#/components/schemas/SharedSecret'
+        createdDate:
+          type: string
+          format: date-time
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

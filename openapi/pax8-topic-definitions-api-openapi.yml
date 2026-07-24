@@ -1,0 +1,465 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Topic Definitions API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Topic Definitions
+paths:
+  /webhooks/topic-definitions:
+    get:
+      operationId: getTopicDefinitions
+      summary: Get topic definitions
+      description: Get all available webhook subscription topic definitions and their filterable conditions
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        explode: false
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+        explode: false
+      - name: search
+        in: query
+        required: false
+        schema:
+          type: string
+        explode: false
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+        explode: false
+      - name: topic
+        in: query
+        required: false
+        schema:
+          type: string
+        explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicDefinitionPagedResult'
+        '400':
+          description: The request is missing required parameters or has invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - BAD_REQUEST
+                    message:
+                      type: string
+        '401':
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - UNAUTHORIZED
+                    message:
+                      type: string
+        '403':
+          description: User does not have permission to access this resource
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - FORBIDDEN
+                    message:
+                      type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - INTERNAL_SERVER_ERROR
+                    message:
+                      type: string
+      tags:
+      - Topic Definitions
+components:
+  schemas:
+    TopicDefinitionPagedResult:
+      type: object
+      required:
+      - content
+      - number
+      - size
+      - totalElements
+      - totalPages
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicDefinition'
+          description: List of topic definitions
+        number:
+          type: integer
+          format: int32
+          description: Current page number
+        size:
+          type: integer
+          format: int32
+          description: Number of items per page
+        totalElements:
+          type: integer
+          format: int64
+          description: Total number of elements
+        totalPages:
+          type: integer
+          format: int32
+          description: Total number of pages
+      description: Paged response for topic definitions
+    ErrorType:
+      type: string
+      enum:
+      - NOT_FOUND
+      - UNAUTHORIZED
+      - FORBIDDEN
+      - BAD_REQUEST
+      - INTERNAL_SERVER_ERROR
+      - INVALID_PARAM
+      description: The type of error that occurred
+    WebhookFilterDefinition:
+      type: object
+      required:
+      - action
+      - actionDisplayName
+      - description
+      - conditions
+      properties:
+        action:
+          type: string
+          description: Action to filter on
+        actionDisplayName:
+          type: string
+          description: Display name normalizing the action for consistency in presentation
+        description:
+          type: string
+          description: Description of the filter
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterConditionDefinition'
+          description: Available conditions for this filter
+      description: Filter definition with available conditions
+    TopicDefinition:
+      type: object
+      required:
+      - topic
+      - name
+      - description
+      - availableFilters
+      - samplePayload
+      properties:
+        topic:
+          type: string
+          description: The topic name
+        name:
+          type: string
+          description: Human-readable name of the topic
+        description:
+          type: string
+          description: Description of the topic
+        availableFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookFilterDefinition'
+          description: Available filters for this topic
+        samplePayload:
+          allOf:
+          - $ref: '#/components/schemas/WebhookPayload'
+          description: Sample payload for this topic
+      description: Topic definition information
+    WebhookTopic:
+      type: object
+      required:
+      - id
+      - topic
+      - filters
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the webhook topic
+        topic:
+          type: string
+          description: The topic name
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookFilter'
+          description: Advanced filtering configuration
+      description: Topic configuration for a webhook subscription
+    WebhookPayload:
+      type: object
+      required:
+      - accountId
+      - url
+      - webhookId
+      - sentAt
+      - webhookTopic
+      properties:
+        accountId:
+          type: string
+          format: uuid
+          description: Account ID associated with the event
+        url:
+          type: string
+          description: URL where the webhook was sent
+        webhookId:
+          type: string
+          format: uuid
+          description: Webhook ID that sent this payload
+        sentAt:
+          type: string
+          format: date-time
+          description: Timestamp when the webhook was sent
+        webhookTopic:
+          allOf:
+          - $ref: '#/components/schemas/WebhookTopic'
+          description: The webhook topic information
+        payloadData:
+          type: object
+          additionalProperties: {}
+          description: The actual event data
+      description: Webhook payload structure
+    FilterOperator:
+      type: string
+      enum:
+      - EQUALS
+      - NOT_EQUALS
+      - GREATER_THAN
+      - LESS_THAN
+      - IN
+      - NOT_IN
+      - CONTAINS
+      description: Filter operator for webhook conditions
+    WebhookFilter:
+      type: object
+      required:
+      - action
+      - conditions
+      properties:
+        action:
+          type: string
+          description: Action to filter on
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterCondition'
+          description: List of conditions that must all be true
+      description: Filter configuration for webhook actions
+    FilterCondition:
+      type: object
+      required:
+      - field
+      - operator
+      - value
+      properties:
+        field:
+          type: string
+          description: Field path to filter on
+        operator:
+          allOf:
+          - $ref: '#/components/schemas/FilterOperator'
+          description: Operator to use for comparison
+        value:
+          type: array
+          items:
+            type: string
+          description: Values to compare against
+      description: Condition for filtering webhook events
+    FilterConditionDefinition:
+      type: object
+      required:
+      - field
+      - operator
+      - dataType
+      - description
+      - value
+      properties:
+        field:
+          type: string
+          description: Field path to filter on
+        operator:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterOperator'
+          description: Available operators for this field
+        dataType:
+          type: string
+          description: Data type of the field
+        description:
+          type: string
+          description: Description of the field
+        value:
+          type: string
+          description: Example value for the field
+      description: Filter condition definition with metadata
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

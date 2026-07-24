@@ -1,0 +1,588 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Products API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Products
+  description: The Products resource lets you fetch all the information required to complete an Order -- product descriptions, pricing, provisioning details, and the dependencies associated with each product
+paths:
+  /products:
+    get:
+      tags:
+      - Products
+      summary: List Products
+      description: Returns a paginated list of Pax8 products filtered by optional query parameters
+      operationId: findAllProducts
+      parameters:
+      - name: page
+        in: query
+        description: The page number to request for in the products list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        description: Return this number of products per page
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      - name: sort
+        in: query
+        description: Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc
+        required: false
+        schema:
+          type: string
+          enum:
+          - name
+          - vendor
+      - name: search
+        in: query
+        description: Search on fields like name, vendor, SKU and ID.
+        required: false
+        schema:
+          type: string
+          example: Office 365
+      - name: vendorName
+        in: query
+        description: Return only products matching the specified vendor name
+        required: false
+        schema:
+          type: string
+          example: Microsoft
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  page:
+                    $ref: '#/components/schemas/Page'
+  /products/{productId}:
+    get:
+      tags:
+      - Products
+      summary: Get Product By ID
+      description: Returns only the product record for the productId you specify
+      operationId: findProductByProductId
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDetail'
+              examples:
+                microsoft-office-365-e3:
+                  $ref: '#/components/examples/microsoft-office-365-e3'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /products/{productId}/provision-details:
+    get:
+      tags:
+      - Products
+      summary: Get Provisioning Details
+      description: Returns provisioning details for the specified productId. Provisioning details for a product are dynamic data.
+      operationId: findProvisionDetailsByProductId
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProvisioningDetail'
+              examples:
+                microsoft-office-365-e3-details:
+                  $ref: '#/components/examples/microsoft-office-365-e3-details'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /products/{productId}/dependencies:
+    get:
+      tags:
+      - Products
+      summary: Get Product Dependencies
+      description: Returns associated dependencies for the specified ```productId```. A products dependencies are dynamic data.
+      operationId: findProductDependenciesByProductId
+      parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dependencies'
+              examples:
+                dependencies-example:
+                  $ref: '#/components/examples/dependencies-example'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /products/{productId}/pricing:
+    get:
+      tags:
+      - Products
+      summary: Get Pricing
+      description: Returns recommended pricing and partner cost for the specified productId. A products pricing is dynamic data.
+      operationId: findPricingByProductId
+      parameters:
+      - name: productId
+        in: path
+        description: The product id
+        required: true
+        schema:
+          type: string
+          example: aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7
+      - name: companyId
+        in: query
+        description: Use the companyId in the query to see company-specific pricing
+        required: false
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pricing'
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ProductDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          description: The name of a product
+          example: Acme Corps Productivity Suite
+        vendorName:
+          type: string
+          description: The name of the vendor
+          example: Acme Corps
+        shortDescription:
+          example: Short description about the product to sell
+          description: A short description of the product
+          type: string
+        description:
+          type: string
+          description: A long description of the Product
+          example: A Long description about the product to sell
+        sku:
+          type: string
+          example: 4225-776-3234
+          description: The product sku
+        vendorSku:
+          type: string
+          example: 12345-AA-XYZ
+          description: The product vendor sku
+        altVendorSku:
+          type: string
+          format: uuid
+          deprecated: true
+          description: The Microsoft legacy sku has been deprecated. Please transition to vendorSku
+        requiresCommitment:
+          type: boolean
+          example: false
+          description: Whether the product requires a commitment
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    Commitment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the commitment record
+          format: uuid
+          readOnly: true
+        term:
+          type: string
+          description: Duration of the commitment
+          example: 3-Year
+        autoRenew:
+          type: boolean
+          description: Renews without manual intervention at the end of the term
+        renewalWindowDaysBeforeTermEnd:
+          type: number
+          description: Number of days _before_ term end-date when renewal window opens
+        renewalWindowDaysAfterTermEnd:
+          type: number
+          description: Number of days after the term end-date that renewal window closes
+        allowForQuantityIncrease:
+          description: Is ```true``` if quantity can be increased during commitment term
+          type: boolean
+        allowForQuantityDecrease:
+          type: boolean
+          description: Is ```true``` if quantity can be decreased during commitment term
+        allowForEarlyCancellation:
+          description: Is ```true``` if commitment can be cancelled prior to end of term
+          type: boolean
+        cancellationFeeApplied:
+          type: boolean
+          description: Is ```true``` if canceling subscription entails a fee
+        isTransferable:
+          type: boolean
+          description: Is ```true``` if commitment can be transferred to another company
+    ProductDependency:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the product constraint
+        products:
+          type: array
+          description: A list of products that satisfy the constraint
+          items:
+            $ref: '#/components/schemas/Product'
+    Dependencies:
+      type: object
+      properties:
+        commitmentDependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Commitment'
+        productDependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDependency'
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          description: The name of a product
+          example: Acme Corps Productivity Suite
+        vendorName:
+          type: string
+          description: The name of the vendor
+          example: Acme Corps
+        shortDescription:
+          example: Short description about the product to sell
+          description: A short description of the product
+          type: string
+        sku:
+          type: string
+          example: 4225-776-3234
+          description: The product sku
+        vendorSku:
+          type: string
+          example: 12345-AA-XYZ
+          description: The product vendor sku
+        altVendorSku:
+          type: string
+          format: uuid
+          deprecated: true
+          description: The Microsoft legacy sku has been deprecated. Please transition to vendorSku
+        requiresCommitment:
+          type: boolean
+          example: false
+          description: Whether the product requires a commitment
+    ProvisioningDetail:
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          description: The label to display
+        key:
+          type: string
+          example: userEmailAddress
+          description: The key
+        values:
+          type: array
+          items:
+            type: string
+          description: A list of values based on the ```valuetype``` and ```possibleValues```
+          writeOnly: true
+        description:
+          type: string
+          example: Provide the user's email address
+          description: Instructions and context to help enter the required provisioning information
+          readOnly: true
+        valueType:
+          type: string
+          readOnly: true
+          enum:
+          - Input
+          - Single-Value
+          - Multi-Value
+          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
+        possibleValues:
+          type: array
+          readOnly: true
+          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    Pricing:
+      type: object
+      properties:
+        productId:
+          type: string
+          format: uuid
+          readOnly: true
+        productName:
+          type: string
+          description: The name of a product
+          example: Acme Corps Productivity Suite
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 2-Year
+          - 3-Year
+          - One-Time
+          - Trial
+          - Activation
+        commitmentTerm:
+          type: string
+          description: Duration of the commitment
+          example: 3-Year
+        commitmentTermInMonths:
+          type: number
+          description: Commitment in months
+          example: 36
+        type:
+          type: string
+          enum:
+          - Flat
+          - Volume
+          - Tiered
+          - Mark-Up
+        unitOfMeasurement:
+          type: string
+          description: The unit of measurement
+          example: Each
+        rates:
+          description: A list of rates
+          items:
+            $ref: '#/components/schemas/Rate'
+    Rate:
+      type: object
+      properties:
+        partnerBuyRate:
+          type: number
+          description: The partner cost
+          example: 145.8
+        suggestedRetailPrice:
+          type: number
+          description: The suggested customer cost
+          example: 151.8
+        startQuantityRange:
+          type: number
+          example: 5
+          description: The start of the quantity range. If not set 0 is the default
+        endQuantityRange:
+          type: number
+          example: 200
+          description: The end of the quantity range. If ```null``` there is no end of range
+        chargeType:
+          type: string
+          enum:
+          - Per Unit
+          - Flat Rate
+          description: "Rate Charge Type:\n  * `Per Unit` - The rate is multiplied directly by the quantity based on the start and end quantity range\n  * `Flat Rate` - The rate is flat for the quantity based on the start and end quantity range\n"
+  examples:
+    microsoft-office-365-e3:
+      summary: Microsoft Office 365 E3
+      description: an example response for `Microsoft Office 365 E3`
+      value:
+        id: e91bba5e-a9a3-483f-b036-f80165d410e3
+        name: Microsoft Office 365 E3
+        vendorName: Microsoft
+        shortDescription: Microsoft Office 365 E3 includes fully installed Office applications across multiple devices, email hosting, HD video conferencing, and features to support compliance.
+        description: 'Microsoft 365 E3 is part of a new lineup of M365 and O365 suites that don''t include Teams. Microsoft 365 E3 is designed for large organizations and integrates Office 365 Enterprise E3, Windows 10 Enterprise, and Enterprise Mobility + Security to empower employees to be creative and work together, securely. The comprehensive set of services range from Office apps like Word and Excel, to video conferencing apps, to robust security, mobile device management, and identity and access management. This solution lets you improve productivity and foster a culture of collaboration with connected experiences and transform how you manage your business and enhance customer relationships with integrated workflows. Plus, you can proactively protect your employees, data, and customer information with intelligent security. '
+        sku: MST-OFC-EE3-C100
+        vendorSku: 796B6B5F-613C-4E24-A17C-EBA730D49C02
+    dependencies-example:
+      summary: An example of product dependencies
+      description: An example of product dependencies
+      value:
+        commitmentDependencies:
+        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          term: 3-Year
+          autoRenew: true
+          renewalWindowDaysBeforeTermEnd: 0
+          renewalWindowDaysAfterTermEnd: 0
+          allowForQuantityIncrease: true
+          allowForQuantityDecrease: true
+          allowForEarlyCancellation: true
+          cancellationFeeApplied: true
+          isTransferable: true
+        productDependencies:
+        - name: Requires
+          products:
+          - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+            name: Acme Corps Productivity Suite
+            vendorName: Acme Corps
+            shortDescription: Short description about the product to sell
+            sku: 4225-776-3234
+    microsoft-office-365-e3-details:
+      summary: Provision details for `Microsoft Office 365 E3`
+      description: An example response of provision details for `Microsoft Office 365 E3`
+      value:
+        content:
+        - label: Does the customer have an existing Microsoft account and can they log into https://login.microsoftonline.com?
+          key: msCustExists
+          valueType: Single-Value
+          possibleValues:
+          - No, the customer does not have a Microsoft account
+          - Yes, the customer has and can log into their Microsoft account
+        - label: Desired .onmicrosoft.com Customer Domain Prefix
+          key: msDomain
+          valueType: Input
+          description: Do not include the TLD when entering your domain (e.g. mydomain.onmicrosoft.com should be entered as mydomain
+        - label: Contact First Name
+          key: arrowContactFirstName
+          valueType: Input
+        - label: Contact Last Name
+          key: arrowContactLastName
+          valueType: Input
+        - label: Contact Email
+          key: arrowContactEmail
+          valueType: Input
+        - label: Microsoft Customer Tenant ID
+          key: msTenantId
+          valueType: Input
+        - label: First Name
+          key: mca2020FirstName
+          valueType: Input
+        - label: Last Name
+          key: mca2020LastName
+          valueType: Input
+        - label: Email Address
+          key: mca2020Email
+          valueType: Input
+        - label: Date of Acceptance
+          key: mca2020EffectiveDate
+          valueType: Input
+          description: (YYYY-MM-DD)
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

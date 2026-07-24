@@ -1,0 +1,513 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Orders API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Orders
+  description: Orders describe your purchases of Pax8 products. Endpoints let you create new product orders and query past purchases
+paths:
+  /orders:
+    get:
+      tags:
+      - Orders
+      summary: List Orders
+      description: Returns a paginated list of orders. Currently NOT supported for scheduled orders(orders with a future date).
+      operationId: findOrders
+      parameters:
+      - name: page
+        in: query
+        description: The page number to request for in the orders list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      - name: companyId
+        in: query
+        required: false
+        description: The company id to filter on
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  page:
+                    $ref: '#/components/schemas/Page'
+        '404':
+          description: Order not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Orders
+      summary: Create Order
+      description: Create a new order. Currently NOT supported for scheduled orders(orders with a future date).
+      operationId: createOrder
+      requestBody:
+        description: Order object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrder'
+            examples:
+              microsoft-office-365-e3-order:
+                $ref: '#/components/examples/microsoft-office-365-e3-order'
+      parameters:
+      - in: query
+        name: isMock
+        schema:
+          type: boolean
+        description: Perform validations only. Skip any interactions with the database.
+        required: false
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                microsoft-office-365-e3-order-response:
+                  $ref: '#/components/examples/microsoft-office-365-e3-order-response'
+        '422':
+          description: Invalid order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /orders/{orderId}:
+    get:
+      tags:
+      - Orders
+      summary: Get Order By ID
+      description: Returns the Order record specified by OrderId. Currently NOT supported for scheduled orders
+      operationId: findOrdersByOrderId
+      parameters:
+      - name: orderId
+        description: The unique identifier for an order record
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 8f72220b-2a13-4856-a647-b80448722bbb
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                microsoft-office-365-e3-order-get-response:
+                  $ref: '#/components/examples/microsoft-office-365-e3-order-get-response'
+        '404':
+          description: Invalid order id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  examples:
+    microsoft-office-365-e3-order-response:
+      summary: Response from Ordering `Microsoft Office 365 E3`
+      description: An example response from ordering `Microsoft Office 365 E3`
+      value:
+        id: 8e42de97-6bfe-4db5-864b-d2e4b18c71e2
+        companyId: fe7a2d5f-4a14-43ff-940e-a65cda66474a
+        createdDate: '2020-12-01'
+        isScheduled: false
+        lineItems:
+        - id: 4915142b-1b3f-4488-9e68-e979dc661130
+          productId: e91bba5e-a9a3-483f-b036-f80165d410e3
+          subscriptionId: efcf8cb8-63fc-4dc4-8caa-6d6810ee8a97
+          provisionStartDate: '2021-01-01T08:30:00Z'
+          billingTerm: Monthly
+          quantity: 5
+    microsoft-office-365-e3-order:
+      summary: Order for `Microsoft Office 365 E3`
+      description: An example request body to order `Microsoft Office 365 E3`
+      value:
+        companyId: f7fc273a-8d86-45c9-a26f-ffd42416adda
+        lineItems:
+        - productId: aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7
+          subscriptionId: 04814f37-bef0-48b7-b388-c04a1e31f889
+          commitmentTermID: c000effb-98c9-4ea0-bf00-f6112c6d7649
+          provisionStartDate: '2000-10-31T01:30:00.000-05:00'
+          billingTerm: Monthly
+          parentSubscriptionId: 78e6c85e-71b6-412c-8a59-d1b75072cd22
+          quantity: 5
+          provisioningDetails:
+          - key: msCustExists
+            values:
+            - No, the customer does not have a Microsoft account
+          - key: msDomain
+            values:
+            - vfc-network-inc-liberty
+          - key: arrowContactFirstName
+            values:
+            - Oliver
+          - key: arrowContactLastName
+            values:
+            - Harrison
+          - key: arrowContactEmail
+            values:
+            - oharrison@vfc-network-inc-liberty.com
+          - key: mca2020FirstName
+            values:
+            - Oliver
+          - key: mca2020LastName
+            values:
+            - Harrison
+          - key: mca2020Email
+            values:
+            - oharrison@vfc-network-inc-liberty.com
+          - key: mca2020EffectiveDate
+            values:
+            - '2020-02-01'
+    microsoft-office-365-e3-order-get-response:
+      summary: Response from Ordering `Microsoft Office 365 E3`
+      description: An example response from ordering `Microsoft Office 365 E3`
+      value:
+        id: 8e42de97-6bfe-4db5-864b-d2e4b18c71e2
+        companyId: fe7a2d5f-4a14-43ff-940e-a65cda66474a
+        createdDate: '2020-12-01'
+        orderedBy: Pax8 Partner
+        orderedByUserId: c1eb37ba-9515-4f1b-9d42-b1d7cc3b23f5
+        orderedByUserEmail: john@doe.com
+        isScheduled: false
+        lineItems:
+        - id: 4915142b-1b3f-4488-9e68-e979dc661130
+          productId: e91bba5e-a9a3-483f-b036-f80165d410e3
+          subscriptionId: efcf8cb8-63fc-4dc4-8caa-6d6810ee8a97
+          provisionStartDate: '2021-01-01T08:30:00Z'
+          billingTerm: Monthly
+          quantity: 5
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    Order:
+      type: object
+      required:
+      - companyId
+      - lineItems
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: unique id of the order
+          readOnly: true
+        companyId:
+          type: string
+          format: uuid
+          description: unique id of the purchasing company ie. end-user
+        createdDate:
+          type: string
+          format: date
+          description: the date the order was created
+          readOnly: true
+        orderedBy:
+          type: string
+          enum:
+          - Pax8 Partner
+          - Customer
+          - Pax8
+          description: the type of user who created the order
+        orderedByUserId:
+          type: string
+          format: uuid
+          description: unique id of the user who created this order
+          readOnly: true
+        orderedByUserEmail:
+          type: string
+          format: email
+          description: the email address of the user who created this order
+          example: john@doe.com
+        isScheduled:
+          type: boolean
+          description: is ```true``` if order is future dated
+          readOnly: true
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+    ProvisioningDetail:
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          description: The label to display
+        key:
+          type: string
+          example: userEmailAddress
+          description: The key
+        values:
+          type: array
+          items:
+            type: string
+          description: A list of values based on the ```valuetype``` and ```possibleValues```
+          writeOnly: true
+        description:
+          type: string
+          example: Provide the user's email address
+          description: Instructions and context to help enter the required provisioning information
+          readOnly: true
+        valueType:
+          type: string
+          readOnly: true
+          enum:
+          - Input
+          - Single-Value
+          - Multi-Value
+          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
+        possibleValues:
+          type: array
+          readOnly: true
+          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
+          items:
+            type: string
+    CreateOrder:
+      type: object
+      required:
+      - companyId
+      - lineItems
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: unique id of the order
+          readOnly: true
+        companyId:
+          type: string
+          format: uuid
+          description: unique id of the purchasing company ie. end-user
+        createdDate:
+          type: string
+          format: date
+          description: the date the order was created
+          readOnly: true
+        orderedBy:
+          type: string
+          enum:
+          - Pax8 Partner
+          - Customer
+          - Pax8
+          description: the type of user who created the order
+        orderedByUserId:
+          type: string
+          format: uuid
+          description: unique id of the user who created this order
+          readOnly: true
+        orderedByUserEmail:
+          type: string
+          format: email
+          description: the email address of the user who created this order
+          example: john@doe.com
+        isScheduled:
+          type: boolean
+          description: is ```true``` if order is future dated
+          readOnly: true
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateLineItem'
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    LineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        productId:
+          type: string
+          format: uuid
+        subscriptionId:
+          type: string
+          format: uuid
+        commitmentTermId:
+          type: string
+          format: uuid
+        provisionStartDate:
+          type: string
+          format: date-time
+        lineItemNumber:
+          writeOnly: true
+          type: number
+          example: 1
+          description: Required. Number used as a reference to the line item for parent line items
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 2-Year
+          - 3-Year
+          - One-Time
+          - Trial
+          - Activation
+        parentSubscriptionId:
+          writeOnly: true
+          type: string
+          format: uuid
+          description: Reference to the subscription this item depends on
+        parentLineItemNumber:
+          writeOnly: true
+          type: number
+          example: 1
+          description: Reference to the required parent line item in this same order
+        quantity:
+          type: number
+          example: 45
+          description: Whole Number
+        provisioningDetails:
+          writeOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisioningDetail'
+      required:
+      - productId
+      - companyId
+      - lineItemNumber
+      - quantity
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    CreateLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        productId:
+          type: string
+          format: uuid
+        commitmentTermId:
+          type: string
+          format: uuid
+          description: This field is required when the product associated with the order has requiresCommitment field set to true. To pick the correct commitment term, use the https://devx.pax8.com/reference/findproductdependenciesbyproductid endpoint and chose a commitment term whose term field represents an equal or greater time than the desired billingTerm. For example, when the order billingTerm is annual, pass the identifier of the commitment term that matches an annual commitment, or if desired and available, pass a commitment term id of 2-year, or 3-year
+        provisionStartDate:
+          type: string
+          format: date-time
+        lineItemNumber:
+          writeOnly: true
+          type: number
+          example: 1
+          description: Required. Number used as a reference to the line item for parent line items
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 2-Year
+          - 3-Year
+          - One-Time
+          - Trial
+          - Activation
+        parentSubscriptionId:
+          writeOnly: true
+          type: string
+          format: uuid
+          description: Reference to the subscription this item depends on
+        parentLineItemNumber:
+          writeOnly: true
+          type: number
+          example: 1
+          description: Reference to the required parent line item in this same order
+        quantity:
+          type: number
+          example: 45
+          description: Whole Number
+        provisioningDetails:
+          writeOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisioningDetail'
+      required:
+      - productId
+      - companyId
+      - lineItemNumber
+      - quantity
+      - billingTerm
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

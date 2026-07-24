@@ -1,0 +1,341 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Contacts API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Contacts
+  description: Contacts represent the people who should be provided visibility into events such as provisioning
+paths:
+  /companies/{companyId}/contacts:
+    post:
+      tags:
+      - Contacts
+      summary: Create Contact
+      description: Creates a new Contact
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      requestBody:
+        description: Contact object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '404':
+          description: Company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid contact create
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      tags:
+      - Contacts
+      summary: List Contacts
+      description: Returns a paginated list of contacts ordered by ```createDate``` descending
+      parameters:
+      - name: page
+        in: query
+        description: The page number to request for in the contacts list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        description: Return this number of company records per page
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+                  page:
+                    $ref: '#/components/schemas/Page'
+        '404':
+          description: Company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies/{companyId}/contacts/{contactId}:
+    get:
+      tags:
+      - Contacts
+      summary: Get Contact By ID
+      description: Returns a contact
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 5ba26319-00e4-4a8f-986b-02a1170af269
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '404':
+          description: Contact or company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid contact update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+      - Contacts
+      summary: Update Contact
+      description: Update a contacts information
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 5ba26319-00e4-4a8f-986b-02a1170af269
+      requestBody:
+        description: Updated contact
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '404':
+          description: Contact or company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid contact update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - Contacts
+      summary: Delete Contact
+      description: Deletes a contact
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      - name: contactId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 5ba26319-00e4-4a8f-986b-02a1170af269
+      responses:
+        '204':
+          description: Successful operation
+          content: {}
+        '404':
+          description: Contact or company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid contact delete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    Contact:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - email
+      - phone
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: The id
+          example: 18d6329e-93f9-46a5-9df7-37e4c29d2840
+        firstName:
+          type: string
+          description: The first name
+          example: John
+        lastName:
+          type: string
+          description: The last name
+          example: Doe
+        email:
+          type: string
+          format: email
+          description: The email
+          example: john@doe.com
+        phone:
+          type: string
+          format: phone
+          description: The phone number
+          example: 555-555-5555
+        createdDate:
+          readOnly: true
+          type: string
+          description: The created date
+          example: '2020-05-12'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactType'
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    ContactType:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Admin
+          - Billing
+          - Technical
+          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
+        primary:
+          type: boolean
+          description: Is this contact the primary contact for this Contact Type
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

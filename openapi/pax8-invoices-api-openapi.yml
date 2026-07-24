@@ -1,0 +1,771 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Invoices API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Invoices
+paths:
+  /invoices:
+    get:
+      tags:
+      - Invoices
+      summary: List Invoices
+      description: Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200
+      operationId: findPartnerInvoices
+      parameters:
+      - name: page
+        in: query
+        description: The page number to request in the invoices list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        description: Returns _this_ number of invoices per page
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      - name: sort
+        in: query
+        description: Return invoices sorted by this field and direction Formatted as fieldName,direction - ex. sort=invoiceDate,desc
+        required: false
+        schema:
+          type: string
+          enum:
+          - invoiceDate
+          - dueDate
+          - status
+          - partnerName
+          - total
+          - balance
+          - carriedBalance
+      - name: status
+        in: query
+        description: Return only invoices matching this ```status``` value
+        required: false
+        schema:
+          type: string
+          enum:
+          - Unpaid
+          - Paid
+          - Void
+          - Carried
+          - Nothing Due
+          - Credited
+      - name: invoiceDate
+        in: query
+        description: Return only invoices matching this ```invoiceDate``` value
+        required: false
+        schema:
+          type: string
+          format: yyyy-MM-dd
+          example: '2000-10-31'
+      - name: invoiceDateRangeStart
+        in: query
+        description: Return only invoices with an ```invoiceDate``` greater than or equal to this date
+        required: false
+        schema:
+          type: string
+          format: yyyy-MM-dd
+          example: '2000-10-31'
+      - name: invoiceDateRangeEnd
+        in: query
+        description: Return only invoices with an ```invoiceDate``` less than or equal to this date
+        required: false
+        schema:
+          type: string
+          format: yyyy-MM-dd
+          example: '2001-10-31'
+      - name: dueDate
+        in: query
+        description: Return only invoices matching this ```dueDate``` value
+        required: false
+        schema:
+          type: string
+          format: yyyy-MM-dd
+          example: '2000-10-31'
+      - name: total
+        in: query
+        description: Return only invoices matching this ```total``` value
+        required: false
+        schema:
+          type: number
+          example: '100.00'
+      - name: balance
+        in: query
+        description: Return only invoices matching this ```balance``` value
+        required: false
+        schema:
+          type: number
+          example: '1000.00'
+      - name: carriedBalance
+        in: query
+        description: Return only invoices matching this ```carriedBalance``` value
+        required: false
+        schema:
+          type: number
+          example: '2000.00'
+      - name: companyId
+        in: query
+        description: Return only invoices matching this ```companyId``` value
+        required: false
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  page:
+                    $ref: '#/components/schemas/Page'
+              examples:
+                invoices-paged:
+                  $ref: '#/components/examples/invoices-paged'
+        '404':
+          description: Invalid companyId or productId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /invoices/{invoiceId}:
+    get:
+      tags:
+      - Invoices
+      summary: Get Invoice By ID
+      description: Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200
+      operationId: getPartnerInvoice
+      parameters:
+      - name: invoiceId
+        in: path
+        description: The invoice id
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 57328a3c-6e95-493c-ad2f-e33b896378c7
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+              examples:
+                invoice-0:
+                  $ref: '#/components/examples/invoice-0'
+  /invoices/{invoiceId}/items:
+    get:
+      tags:
+      - Invoices
+      summary: List Invoice Items
+      description: Fetch a paginated list of invoice items. Default page is 0 and default size is 10. The maximum page size is 200
+      operationId: findPartnerInvoiceItems
+      parameters:
+      - name: invoiceId
+        in: path
+        description: The invoice id
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 57328a3c-6e95-493c-ad2f-e33b896378c7
+      - name: page
+        in: query
+        description: The page number to request in the invoices items list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        description: Returns _this_ number of invoices items per page
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InvoiceItem'
+                  page:
+                    $ref: '#/components/schemas/Page'
+              examples:
+                invoice-items:
+                  $ref: '#/components/examples/invoice-items'
+        '404':
+          description: Invalid invoice id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /invoices/draftItems:
+    get:
+      tags:
+      - Invoices
+      summary: List Draft Invoice Items
+      description: 'Fetch a paginated list of draft invoice items before they are finalized into invoices. Default page is 0 and default size is 10. The maximum page size is 200.
+
+
+        DISCLAIMER: For future-dated items, the data represents a snapshot of charges that will be applied to a future invoice as of the request date. This is not an actual invoice. Clients should be aware that the final invoice generated on the 5th of the month may differ. This endpoint does not include charges for usage-based products billed in arrears. Tax calculations are based on current account taxability status and current month tax rates, both of which are subject to change for future invoices.
+
+        '
+      operationId: findPartnerDraftInvoiceItems
+      parameters:
+      - name: page
+        in: query
+        description: The page number to request in the draft invoice items list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        description: Returns _this_ number of draft invoice items per page
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      - name: monthOffset
+        in: query
+        required: false
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+          default: 1
+        description: 'Number of months from current to return draft items for. 0 = current month, 1 = next month. Only values 0 and 1 are currently supported. If omitted, defaults to 1 (next month).
+
+          '
+      - name: companyId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+          example: 7e338a9b-7bf5-4489-ad0a-59f5e664be19
+        description: 'Filter draft items to a specific company.
+
+          '
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InvoiceItem'
+                  page:
+                    $ref: '#/components/schemas/Page'
+              examples:
+                draft-invoice-items:
+                  $ref: '#/components/examples/draft-invoice-items'
+        '403':
+          description: Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '408':
+          description: Request timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid monthOffset value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    InvoiceItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique id for this invoice item
+        purchaseOrderNumber:
+          type: string
+          description: The purchase order number
+        type:
+          type: string
+          enum:
+          - rebate
+          - prorate
+          - subscription
+          - payment-credit
+          - one-time
+          - service-charge
+          - service-credit
+          - invoice-credit
+          description: The item type
+        companyId:
+          type: string
+          format: uuid
+          description: The company id
+        externalId:
+          type: string
+          description: The company external id
+        companyName:
+          type: string
+          description: The name of the company
+        startPeriod:
+          type: string
+          format: yyyy-MM-dd
+          description: The start period
+        endPeriod:
+          type: string
+          format: yyyy-MM-dd
+          description: The end period
+        quantity:
+          type: number
+          description: The quantity of this SKU
+        unitOfMeasure:
+          type: string
+          description: The unit of measure
+        term:
+          type: string
+          enum:
+          - 3 Year
+          - Annual
+          - 2 Year
+          - Activation
+          - One-Time
+          - Arrears
+          - Trial
+          - Rebate
+          - One-time
+          - Monthly
+          description: The billing term
+        sku:
+          type: string
+          description: The product sku
+        description:
+          type: string
+          description: The description
+        details:
+          type: string
+          description: The details
+        rateType:
+          type: string
+          description: The rate type
+          enum:
+          - markup (Percentage based markup over to be determined base cost)
+          - single (Single price for any quantity, same as flat)
+          - flat (Single price for any quantity, same as single)
+          - volume (Price scales linearly with quantity)
+          - tiered (Price dependant on quantity)
+        chargeType:
+          type: string
+          description: The charge type
+          enum:
+          - flat
+          - per
+        price:
+          type: number
+          description: The customer unit price
+        subTotal:
+          type: number
+          description: The customer sub total. Represents cost of services plus billing fees.
+        cost:
+          type: number
+          description: The partner unit cost
+        costTotal:
+          type: number
+          description: The partner total cost of the services
+        offeredBy:
+          type: string
+          description: The account who offers this product
+        billedByPax8:
+          type: boolean
+          description: Is the item billed directly by Pax8
+        total:
+          type: number
+          description: The customer total including all services and fees
+        productId:
+          type: string
+          format: uuid
+          description: The product id
+        productName:
+          type: string
+          description: The product name
+        billingFee:
+          type: number
+          description: The fee for Pax8 billing a bill on behalf of company
+        billingFeeRate:
+          type: number
+          description: The fee rate for Pax8 billing a bill on behalf of company
+        amountDue:
+          type: number
+          description: The final total due for the item for this invoice
+        currencyCode:
+          type: string
+          description: The currency ISO 4217 code
+        salesTax:
+          type: number
+          description: The sales tax amount for this invoice item
+        subscriptionId:
+          type: string
+          format: uuid
+          description: The identifier of the associated subscription. This field will contain the subscription identifier for all product types, allowing partners to link this invoice line item to the relevant subscription details. Products that do not have a subscription id (i.e., BitTitan migration) will return a null value.
+        vendorName:
+          type: string
+          description: The name of the vendor
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The id
+        invoiceDate:
+          type: string
+          format: yyyy-MM-dd
+          description: The date the invoice is generated for
+        dueDate:
+          type: string
+          format: yyyy-MM-dd
+          description: The date on which payment is due
+        balance:
+          type: number
+          description: The current invoice balance
+        carriedBalance:
+          type: number
+          description: The outstanding balance until current invoiceDate
+        total:
+          type: number
+          description: The total amount due
+        currencyCode:
+          type: string
+          description: The currency ISO 4217 code
+        partnerName:
+          type: string
+          description: The name of the invoiced partner
+        companyId:
+          type: string
+          format: uuid
+          description: The company id
+        externalId:
+          type: string
+          description: The company external id
+  examples:
+    invoice-0:
+      summary: An invoice
+      description: An invoice example
+      value:
+        id: 17029935-36b0-4f0f-9d5e-c8af04f7b57a
+        total: 17432960
+        currencyCode: USD
+        balance: 560470.66
+        carriedBalance: 17204372.33
+        status: Paid
+        invoiceDate: '2020-09-01'
+        dueDate: '2020-09-15'
+        partnerName: My Partner Name
+    invoices-paged:
+      summary: A page of invoices
+      description: An example page of invoices
+      value:
+        content:
+        - id: 0b157f32-a423-4fc4-bed0-82ef2f913ab2
+          total: 9985.96
+          currencyCode: USD
+          balance: 729.22
+          carriedBalance: 9801.13
+          status: Unpaid
+          invoiceDate: '2021-01-01'
+          dueDate: '2021-01-15'
+          partnerName: A Child Partner Name
+        - id: 909f2b60-d3e6-4488-9224-5f4788aa7128
+          total: 19796231.89
+          currencyCode: USD
+          balance: 562939.58
+          carriedBalance: 19565889.67
+          status: Unpaid
+          invoiceDate: '2021-01-01'
+          dueDate: '2021-01-15'
+          partnerName: My Partner Name
+        - id: 94444ad7-1237-4dcf-a391-ccf201b4151f
+          total: 19228924.94
+          currencyCode: USD
+          balance: 620266.05
+          carriedBalance: 18939345.97
+          status: Carried
+          invoiceDate: '2020-12-01'
+          dueDate: '2020-12-15'
+          partnerName: My Partner Name
+        - id: 0adfca6c-8c5c-4de2-922c-331271d20aa7
+          total: 9256.74
+          currencyCode: USD
+          balance: 957.55
+          carriedBalance: 8843.58
+          status: Carried
+          invoiceDate: '2020-12-01'
+          dueDate: '2020-12-15'
+          partnerName: A Child Partner Name
+        - id: 62631fa6-b44a-466d-b6f5-ea2bd320cf3d
+          total: 8299.19
+          currencyCode: USD
+          balance: 729.22
+          carriedBalance: 8114.36
+          status: Carried
+          invoiceDate: '2020-11-01'
+          dueDate: '2020-11-15'
+          partnerName: A Child Partner
+        - id: 06053601-a52e-4751-b90e-cc46ab466e96
+          total: 18601239.24
+          currencyCode: USD
+          balance: 560669.68
+          carriedBalance: 18373057.17
+          status: Carried
+          invoiceDate: '2020-11-01'
+          dueDate: '2020-11-15'
+          partnerName: My Partner Name
+        - id: d5129fb2-7adf-4829-a3a7-d6def853e067
+          total: 7429.99
+          currencyCode: USD
+          balance: 815.42
+          carriedBalance: 7298.94
+          status: Carried
+          invoiceDate: '2020-10-01'
+          dueDate: '2020-10-15'
+          partnerName: A Child Partner
+        - id: 7a390f4e-67dc-4ea7-80a5-0f058998c646
+          total: 18036312.44
+          currencyCode: USD
+          balance: 597022.66
+          carriedBalance: 17770441.73
+          status: Carried
+          invoiceDate: '2020-10-01'
+          dueDate: '2020-10-15'
+          partnerName: My Partner Name
+        - id: be1ede52-31e2-4091-97c8-629a09f3293d
+          total: 7210.94
+          currencyCode: USD
+          balance: 442.4
+          carriedBalance: 6856.54
+          status: Carried
+          invoiceDate: '2020-09-01'
+          dueDate: '2020-09-15'
+          partnerName: A Child Partner
+        - id: 17029935-36b0-4f0f-9d5e-c8af04f7b57a
+          total: 17432960
+          currencyCode: USD
+          balance: 560470.66
+          carriedBalance: 17204372.33
+          status: Void
+          invoiceDate: '2020-09-01'
+          dueDate: '2020-09-15'
+          partnerName: My Partner Name
+        page:
+          size: 10
+          totalElements: 204
+          totalPages: 21
+          number: 0
+    invoice-items:
+      summary: An invoice items page
+      description: An invoice items page example
+      value:
+        content:
+        - type: subscription
+          purchaseOrderNumber: N/A
+          companyId: cc0ac255-7c0b-4123-ac8d-a6c280b85eae
+          companyName: Brick and Mortar Tech
+          startPeriod: '2019-04-01'
+          endPeriod: '2019-05-01'
+          quantity: 11
+          unitOfMeasure: User
+          term: Monthly
+          sku: PAX-233-ukw0-9092
+          description: Microsoft Office E3
+          rateType: single
+          chargeType: per
+          price: 50000
+          subTotal: 27500
+          cost: 2500
+          costTotal: 27500
+          offeredBy: Pax8
+          billedByPax8: false
+          total: 550000
+          productId: de4ff8a5-e836-4412-89e7-03236c0641c4
+          productName: Microsoft Office E3
+          billingFee: 0
+          billingFeeRate: 0
+          amountDue: 27500
+          currencyCode: USD
+          salesTax: 2200
+          subscriptionId: f6b60139-8ab6-45f4-b808-354ebbe53070
+        page:
+          size: 1
+          totalElements: 762
+          totalPages: 762
+          number: 0
+    draft-invoice-items:
+      summary: A draft invoice items page
+      description: A draft invoice items page example
+      value:
+        content:
+        - type: subscription
+          companyId: 7e338a9b-7bf5-4489-ad0a-59f5e664be19
+          companyName: 09/19 Ben
+          startPeriod: '2025-02-01'
+          endPeriod: '2025-02-28'
+          quantity: 1
+          unitOfMeasure: User
+          term: Monthly
+          sku: LIG-HTN-ING-BLT2
+          description: Lightning Bolt 2
+          rateType: single
+          chargeType: per
+          price: 120
+          subTotal: 120
+          cost: 100
+          costTotal: 100
+          offeredBy: Pax8
+          billedByPax8: false
+          total: 120
+          productId: fd8ec391-b6c0-4895-9dc6-74b7e8494ee3
+          productName: Lightning Bolt 2
+          billingFee: 0
+          billingFeeRate: 0
+          amountDue: 120
+          currencyCode: USD
+          salesTax: 8
+          subscriptionId: b2c47da5-d16e-4fcb-98d7-6e97b3c8f11a
+        - type: subscription
+          companyId: 7e338a9b-7bf5-4489-ad0a-59f5e664be19
+          companyName: 09/19 Ben
+          startPeriod: '2024-07-01'
+          endPeriod: '2024-07-31'
+          quantity: 5
+          unitOfMeasure: User
+          term: Monthly
+          sku: MS-OFF-EXC-PRO
+          description: Microsoft Office Excel Pro
+          rateType: single
+          chargeType: per
+          price: 85
+          subTotal: 425
+          cost: 75
+          costTotal: 375
+          offeredBy: Pax8
+          billedByPax8: false
+          total: 425
+          productId: a34eef76-8c9b-4521-9c7c-bf5417a8e123
+          productName: Microsoft Office Excel Pro
+          billingFee: 0
+          billingFeeRate: 0
+          amountDue: 425
+          currencyCode: USD
+          salesTax: 30
+          subscriptionId: c5e82a19-d738-48f9-a1b3-9c6f4e7d3210
+        page:
+          size: 10
+          totalElements: 115
+          totalPages: 12
+          number: 0
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

@@ -1,0 +1,847 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Webhook Logs API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Webhook Logs
+paths:
+  /webhooks/{webhookId}/logs:
+    get:
+      operationId: WebhookLogs_query
+      summary: Query webhook logs
+      description: Lists instances of WebhookLogView with the ability to query against fields in WebhookLogView.
+      parameters:
+      - name: webhookId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: topicName
+        in: query
+        required: false
+        description: Query params used to filter results
+        schema:
+          type: string
+        explode: false
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+        explode: false
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+        explode: false
+      - name: status
+        in: query
+        required: false
+        description: Filter value for the last delivery status of the webhook
+        schema:
+          type: string
+        explode: false
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+        explode: false
+      - name: endDate
+        in: query
+        required: false
+        schema:
+          type: string
+        explode: false
+      - name: sort
+        in: query
+        required: false
+        description: 'Sort field and order, format: field:asc/desc'
+        schema:
+          type: string
+        explode: false
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: object
+        explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookLogPagedResult'
+        '400':
+          description: The request is missing required parameters or has invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - BAD_REQUEST
+                    message:
+                      type: string
+        '401':
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - UNAUTHORIZED
+                    message:
+                      type: string
+        '403':
+          description: User does not have permission to access this resource
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - FORBIDDEN
+                    message:
+                      type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - INTERNAL_SERVER_ERROR
+                    message:
+                      type: string
+      tags:
+      - Webhook Logs
+  /webhooks/{webhookId}/logs/{id}:
+    get:
+      operationId: WebhookLogs_get
+      summary: Get webhook log by ID
+      description: Reads an instance of WebhookLogView.
+      parameters:
+      - name: webhookId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookLog'
+        '400':
+          description: The request is missing required parameters or has invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - BAD_REQUEST
+                    message:
+                      type: string
+        '401':
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - UNAUTHORIZED
+                    message:
+                      type: string
+        '403':
+          description: User does not have permission to access this resource
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - FORBIDDEN
+                    message:
+                      type: string
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - NOT_FOUND
+                    message:
+                      type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - INTERNAL_SERVER_ERROR
+                    message:
+                      type: string
+      tags:
+      - Webhook Logs
+  /webhooks/{webhookId}/logs/{logId}/retry:
+    post:
+      operationId: retryWebhookDelivery
+      summary: Retry webhook delivery
+      description: Retry sending a webhook that previously failed
+      parameters:
+      - name: webhookId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: logId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+        '400':
+          description: The request is missing required parameters or has invalid parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - BAD_REQUEST
+                    message:
+                      type: string
+        '401':
+          description: Missing or invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - UNAUTHORIZED
+                    message:
+                      type: string
+        '403':
+          description: User does not have permission to access this resource
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - FORBIDDEN
+                    message:
+                      type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                  instance:
+                    type: string
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          format: int32
+                      allOf:
+                      - type: object
+                        required:
+                        - type
+                        - message
+                        properties:
+                          type:
+                            $ref: '#/components/schemas/ErrorType'
+                          message:
+                            type: string
+                allOf:
+                - type: object
+                  required:
+                  - type
+                  - message
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - INTERNAL_SERVER_ERROR
+                    message:
+                      type: string
+      tags:
+      - Webhook Logs
+components:
+  schemas:
+    WebhookLog:
+      type: object
+      required:
+      - id
+      - webhookId
+      - webhookName
+      - finalStatus
+      - callHistory
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the log entry
+          readOnly: true
+        webhookId:
+          type: string
+          format: uuid
+          description: ID of the webhook this log belongs to
+        webhookName:
+          type: string
+          description: Display name of the webhook
+        finalStatus:
+          allOf:
+          - $ref: '#/components/schemas/WebhookDeliveryStatus'
+          description: Final status of the webhook delivery
+        callHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookCall'
+          description: History of delivery attempts
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the log was created
+          readOnly: true
+      description: Webhook log information
+    ErrorType:
+      type: string
+      enum:
+      - NOT_FOUND
+      - UNAUTHORIZED
+      - FORBIDDEN
+      - BAD_REQUEST
+      - INTERNAL_SERVER_ERROR
+      - INVALID_PARAM
+      description: The type of error that occurred
+    WebhookDeliveryStatus:
+      type: string
+      enum:
+      - PENDING
+      - SUCCESS
+      - FAILED
+      - RETRYING
+      description: Status of webhook delivery
+    WebhookLogPagedResult:
+      type: object
+      required:
+      - content
+      - page
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookLog'
+          description: List of webhook logs
+        page:
+          allOf:
+          - $ref: '#/components/schemas/Page'
+          description: Page information
+      description: Paged response for webhook logs
+    Page:
+      type: object
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      properties:
+        number:
+          type: integer
+          format: int32
+          default: 0
+        size:
+          type: integer
+          format: int32
+          default: 0
+        totalElements:
+          type: integer
+          format: int64
+          default: 0
+        totalPages:
+          type: integer
+          format: int32
+          default: 0
+    WebhookCall:
+      type: object
+      required:
+      - id
+      - timestamp
+      - status
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the call attempt
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the call attempt
+        status:
+          allOf:
+          - $ref: '#/components/schemas/WebhookDeliveryStatus'
+          description: Status of the call attempt
+        errorMessage:
+          type: string
+          description: Error message if the call failed
+        httpStatusCode:
+          type: integer
+          format: int32
+          description: HTTP status code returned by the webhook endpoint
+        payload:
+          type: object
+          additionalProperties: {}
+          description: The payload that was sent in the webhook
+      description: Individual webhook call attempt
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

@@ -1,0 +1,707 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Subscriptions API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Subscriptions
+  description: Subscriptions describe terms of service, including price and the billing start/end dates for a specified product/company combination. Resources let you update, cancel, and fetch details of existing subscriptions
+paths:
+  /subscriptions:
+    get:
+      tags:
+      - Subscriptions
+      summary: List Subscriptions
+      description: Fetch a paginated list of subscriptions. Default page is 0 and default size is 10. The maximum page size is 200
+      operationId: findSubscriptions
+      parameters:
+      - name: page
+        in: query
+        description: The page number to request in the subscriptions list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        description: Returns _this_ number of subscriptions per page
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      - name: sort
+        in: query
+        description: Return subscriptions sorted by this field and direction Formatted as fieldName,direction - ex. sort=createdDate,desc
+        required: false
+        schema:
+          type: string
+          enum:
+          - quantity,asc
+          - quantity,desc
+          - startDate,asc
+          - startDate,desc
+          - endDate,asc
+          - endDate,desc
+          - createdDate,asc
+          - createdDate,desc
+          - billingStart,asc
+          - billingStart,desc
+          - price,asc
+          - price,desc
+      - name: status
+        in: query
+        description: Return only subscriptions matching this ```status``` value
+        required: false
+        schema:
+          type: string
+          enum:
+          - Active
+          - Cancelled
+          - PendingManual
+          - PendingAutomated
+          - PendingCancel
+          - WaitingForDetails
+          - Trial
+          - Converted
+          - PendingActivation
+          - Activated
+      - name: billingTerm
+        in: query
+        description: Return only subscriptions matching this ```billingTerm``` value
+        required: false
+        schema:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 2-Year
+          - 3-Year
+          - One-Time
+          - Trial
+          - Activation
+      - name: companyId
+        in: query
+        description: Return only subscriptions matching this ```companyId``` value
+        required: false
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      - name: productId
+        in: query
+        description: Return only subscriptions matching this ```productId``` value
+        required: false
+        schema:
+          type: string
+          format: uuid
+          example: aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+                  page:
+                    $ref: '#/components/schemas/Page'
+              examples:
+                subscriptions-paged:
+                  $ref: '#/components/examples/subscriptions-paged'
+        '403':
+          description: Invalid companyId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /subscriptions/{subscriptionId}:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get Subscription By ID
+      description: Returns the Subscription record specified by the subscriptionId
+      operationId: findSubscriptionBySubscriptionId
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 04814f37-bef0-48b7-b388-c04a1e31f889
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+              examples:
+                microsoft-office-365-e3-subscription:
+                  $ref: '#/components/examples/microsoft-office-365-e3-subscription'
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+      - Subscriptions
+      summary: Update Subscription
+      description: 'Updates a subscription. Currently NOT supported for subscriptions with a future date. At least one of the following fields are required: Price, BillingTerm, Quantity, StartDate'
+      operationId: updateSubscription
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: subscription to be updated
+        required: true
+        schema:
+          type: string
+          example: 04814f37-bef0-48b7-b388-c04a1e31f889
+      requestBody:
+        required: true
+        description: Updated Subscription
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Subscription'
+              - anyOf:
+                - type: object
+                  required:
+                  - price
+                  properties:
+                    price:
+                      description: The price for the customer.
+                      type: number
+                - type: object
+                  required:
+                  - billingTerm
+                  properties:
+                    billingTerm:
+                      type: string
+                      enum:
+                      - Monthly
+                      - Annual
+                      - 2-Year
+                      - 3-Year
+                      - One-Time
+                      - Trial
+                      - Activation
+                - type: object
+                  required:
+                  - quantity
+                  properties:
+                    quantity:
+                      type: number
+                - type: object
+                  required:
+                  - startDate
+                  properties:
+                    startDate:
+                      type: string
+                      format: date-time
+            examples:
+              subscription-update-example:
+                $ref: '#/components/examples/subscription-update-example'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid Subscription Update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+      - Subscriptions
+      summary: Cancel Subscription
+      description: Cancels the Subscription specified by subscriptionId
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: subscription to be updated
+        required: true
+        schema:
+          type: string
+          example: 04814f37-bef0-48b7-b388-c04a1e31f889
+      - name: cancelDate
+        in: query
+        description: The date to cancel the subscription on
+        required: false
+        schema:
+          type: string
+          format: date-time
+          example: '2000-10-31T01:30:00.000-05:00'
+      responses:
+        '204':
+          description: Successful operation
+          content: {}
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /subscriptions/{subscriptionId}/history:
+    get:
+      tags:
+      - Subscriptions
+      summary: Get Subscription History
+      description: Returns a list of changes for a subscription
+      operationId: findSubscriptionHistoryBySubscriptionId
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 04814f37-bef0-48b7-b388-c04a1e31f889
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+              examples:
+                subscriptions-history:
+                  $ref: '#/components/examples/subscription-history'
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        parentSubscriptionId:
+          type: string
+          format: uuid
+          readOnly: true
+        companyId:
+          type: string
+          format: uuid
+          readOnly: true
+        productId:
+          type: string
+          format: uuid
+          readOnly: true
+        vendorSubscriptionId:
+          type: string
+          readOnly: true
+          description: The vendor's unique identifier for this subscription
+        vendorSkuId:
+          type: string
+          readOnly: true
+          description: The vendor's unique identifier for the sku associated with this subscription
+        quantity:
+          type: number
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedDate:
+          type: string
+          format: date-time
+          readOnly: true
+        billingStart:
+          type: string
+          format: date
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+          enum:
+          - Active
+          - Cancelled
+          - PendingManual
+          - PendingAutomated
+          - PendingCancel
+          - WaitingForDetails
+          - Trial
+          - Converted
+          - PendingActivation
+          - Activated
+          description: "Subscription Status :\n * `Active` - Provisioning request complete\n * `Cancelled` - Deprovisioning request complete\n * `PendingManual` -  An associated manual provisioning task isn't started/completed\n * `PendingAutomated` - An associated automated provisioning task isn't started/completed\n * `PendingCancel` - Deprovisioning request pending\n * `WaitingForDetails` - Provisioning details are missing\n * `Trial` - Trial subscriptions offer free or discounted access for a limited time.\n * `Converted` - Converted from trial\n * `PendingActivation` - Requires Activation but has not yet been activated\n * `Activated` - Requires Activation and has been activated\n\nActivation is required for a small subset of products.  Billing services do not begin for these products until \"activation\" is complete.\n"
+        price:
+          description: The price for the customer.
+          type: number
+          example: 15.39
+        currencyCode:
+          description: The currency ISO 4217 code
+          type: string
+          example: USD
+        partnerCost:
+          description: The price for the Partner.
+          type: number
+          example: 11.39
+        productName:
+          description: The name of the product associated with this subscription
+          type: string
+          readOnly: true
+          example: Microsoft Office 365 E3
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 2-Year
+          - 3-Year
+          - One-Time
+          - Trial
+          - Activation
+        provisioningDetails:
+          writeOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisioningDetail'
+        commitmentTerm:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/SubscriptionCommitment'
+    ProvisioningDetail:
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          description: The label to display
+        key:
+          type: string
+          example: userEmailAddress
+          description: The key
+        values:
+          type: array
+          items:
+            type: string
+          description: A list of values based on the ```valuetype``` and ```possibleValues```
+          writeOnly: true
+        description:
+          type: string
+          example: Provide the user's email address
+          description: Instructions and context to help enter the required provisioning information
+          readOnly: true
+        valueType:
+          type: string
+          readOnly: true
+          enum:
+          - Input
+          - Single-Value
+          - Multi-Value
+          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
+        possibleValues:
+          type: array
+          readOnly: true
+          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    SubscriptionCommitment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the commitment record
+          format: uuid
+        term:
+          type: string
+          description: Duration of the commitment
+          example: 3-Year
+        endDate:
+          type: string
+          format: date-time
+  examples:
+    subscription-update-example:
+      summary: A Subscription update
+      description: A Subscription update example
+      value:
+        quantity: 11
+        startDate: '2000-10-31T01:30:00.000-05:00'
+        endDate: '2001-10-31T01:30:00.000-05:00'
+        price: 15.39
+        currencyCode: USD
+        billingTerm: Monthly
+        provisioningDetails:
+        - key: userEmailAddress
+          values:
+          - joeysherp@example.com
+    microsoft-office-365-e3-subscription:
+      summary: Subscription for `Microsoft Office 365 E3`
+      description: An example subscription for `Microsoft Office 365 E3`
+      value:
+        id: 05c587df-9e7d-4ef9-8218-0262198e36c9
+        companyId: fe7a2d5f-4a14-43ff-940e-a65cda66474a
+        productId: e91bba5e-a9a3-483f-b036-f80165d410e3
+        quantity: 5
+        startDate: '2021-01-01T08:30:00Z'
+        createdDate: '2020-12-01T08:30:00Z'
+        billingStart: '2021-01-01'
+        status: Active
+        price: 32.01
+        currencyCode: USD
+        productName: Microsoft Office 365 E3
+        billingTerm: Monthly
+    subscriptions-paged:
+      summary: A page of subscriptions
+      description: An example page of subscriptions
+      value:
+        content:
+        - id: 09ac6f1d-c30a-4d03-9882-145a4df71735
+          companyId: 19e83ea9-41a1-43fc-91a1-6fee03337d91
+          productId: 1810aea9-0c95-421d-a77a-7ebccdfa2f6c
+          quantity: 5
+          startDate: '2021-01-01T08:30:00Z'
+          createdDate: '2020-12-03'
+          billingStart: '2021-01-01'
+          status: PendingAutomated
+          price: 150
+          currencyCode: USD
+          productName: Microsoft 365 Business Standard
+          billingTerm: Monthly
+        - id: e8f372b6-e2aa-4f3c-9baa-b34f31c921e5
+          companyId: da300208-0c17-4b6f-ab82-e1e7c0b98362
+          productId: 5766ecd7-a0bf-4ee0-ba1d-bd3ca92ca555
+          quantity: 1
+          startDate: '2020-11-12T08:30:00Z'
+          endDate: '2020-11-18'
+          createdDate: '2020-11-11'
+          billingStart: '2020-11-12'
+          status: PendingCancel
+          price: 100
+          currencyCode: USD
+          productName: Proofpoint Essentials - Professional
+          billingTerm: Monthly
+        - id: d1758c49-f81c-48af-8f30-e7e93adf6acc
+          companyId: da300208-0c17-4b6f-ab82-e1e7c0b98362
+          productId: 7597a0fd-f0ec-4547-8a20-fd2d3f311a5c
+          quantity: 1
+          startDate: '2020-11-12T08:30:00Z'
+          endDate: '2020-11-12T08:30:00Z'
+          createdDate: '2020-11-11'
+          billingStart: '2020-11-12'
+          status: PendingCancel
+          price: 0
+          currencyCode: USD
+          productName: Adobe Creative Cloud
+          billingTerm: Monthly
+        - id: a95e2d7c-cdcf-4cf9-8c94-34ce71e06fa1
+          companyId: dbb4aa30-6b8b-425c-96c0-c72e570b28af
+          productId: 25d15d2e-b293-4393-9e16-e6890a6650b0
+          quantity: 1
+          startDate: '2020-11-11T08:30:00Z'
+          endDate: '2020-11-30T08:30:00Z'
+          createdDate: '2020-11-11'
+          billingStart: '2020-11-11'
+          status: PendingCancel
+          price: 250
+          currencyCode: USD
+          productName: Webroot SecureAnywhere Business Endpoint Protection
+          billingTerm: Monthly
+        - id: b010a5d2-d604-434d-b331-d1a3ae6e759e
+          companyId: 0c5bd95d-bd33-4bb0-8419-a821c00173dd
+          productId: 2d3432cb-5a61-4f87-a197-7ea8e2227aeb
+          quantity: 8
+          startDate: '2020-11-09T08:30:00Z'
+          createdDate: '2020-11-09'
+          billingStart: '2020-11-09'
+          status: Active
+          price: 6
+          currencyCode: USD
+          productName: Google Workspace Business Starter
+          billingTerm: Monthly
+        - id: e03daa96-2b4c-4925-a0aa-cb8061faf4ca
+          companyId: 78329722-82e9-42e4-b220-d8d4215217e5
+          productId: 8540387d-967b-4bba-9a5c-2c41e5769c6e
+          quantity: 7
+          startDate: '2020-09-21T08:30:00Z'
+          createdDate: '2020-09-21'
+          billingStart: '2020-09-21'
+          status: PendingManual
+          price: 77.77
+          currencyCode: USD
+          productName: Microsoft Defender for Business
+          billingTerm: Monthly
+        - id: ccfd1789-8f88-4c7c-9c10-d726f776c1dc
+          companyId: df71a444-a03b-4e49-85d3-223d63ed500a
+          productId: d0427628-5c3b-4258-b6f2-e6a3dfeb62ea
+          quantity: 1
+          startDate: '2020-09-21T08:30:00Z'
+          createdDate: '2020-09-21'
+          billingStart: '2020-09-21'
+          status: Active
+          price: 33
+          currencyCode: USD
+          productName: Dropbox Business Advanced
+          billingTerm: Monthly
+        - id: 4ad86d04-a5db-4934-be3e-b6f024123951
+          companyId: b900f223-baeb-4e0f-8a3f-f03fc1f207fd
+          productId: 887b69fd-0171-4ea7-bc51-6e5ee1fc59c8
+          quantity: 2
+          startDate: '2020-04-30T08:30:00Z'
+          createdDate: '2020-04-30'
+          billingStart: '2020-04-30'
+          status: Active
+          price: 1896
+          currencyCode: USD
+          productName: VMware vSphere Essentials Plus
+          billingTerm: Monthly
+        - id: d9b4705f-b316-4e2b-959e-c542e01b749f
+          companyId: 47228505-4813-4024-a1fd-666e8a5bbf82
+          productId: 5278429f-97ea-4473-a571-798a06d26948
+          quantity: 1
+          startDate: '2020-04-23T08:30:00Z'
+          createdDate: '2020-04-22'
+          billingStart: '2020-04-23'
+          status: PendingManual
+          price: 15
+          currencyCode: USD
+          productName: Zoom Meetings Pro
+          billingTerm: Monthly
+        - id: a7494751-4717-4fa6-a5fd-c817c3cf3b5c
+          companyId: 47228505-4813-4024-a1fd-666e8a5bbf82
+          productId: 887b69fd-0171-4ea7-bc51-6e5ee1fc59c8
+          quantity: 1
+          startDate: '2020-04-22T08:30:00Z'
+          createdDate: '2020-04-22'
+          billingStart: '2020-04-22'
+          status: Active
+          price: 110
+          currencyCode: USD
+          productName: Acronis Cyber Protect Cloud
+          billingTerm: Monthly
+        page:
+          size: 10
+          totalElements: 109
+          totalPages: 11
+          number: 0
+    subscription-history:
+      summary: A list of changes to a subscription
+      description: The history of a subscription
+      value:
+        content:
+        - id: 99b90e2e-cc01-4fb6-9dd2-3481196bfffe
+          companyId: 2aa4862a-9474-4138-9863-4f0a8e4cec74
+          productId: 4f76b357-9ac1-47fa-9369-feb80a32f87e
+          quantity: 5
+          startDate: '2021-01-01T08:30:00Z'
+          createdDate: 2020-12-01T13:20:13.153-0700
+          updatedDate: 2020-12-10T03:12:14.453-0300
+          billingStart: '2021-01-01'
+          status: PendingAutomated
+          price: 86
+          currencyCode: USD
+          productName: Microsoft Office 365 Business Premium
+          billingTerm: Monthly
+        - id: 99b90e2e-cc01-4fb6-9dd2-3481196bfffe
+          companyId: 2aa4862a-9474-4138-9863-4f0a8e4cec74
+          productId: 4f76b357-9ac1-47fa-9369-feb80a32f87e
+          quantity: 2
+          startDate: '2020-12-01T08:30:00Z'
+          createdDate: 2020-12-01T13:20:13.153-0700
+          billingStart: '2020-12-01'
+          status: Active
+          price: 86
+          currencyCode: USD
+          productName: Microsoft Office 365 Business Premium
+          billingTerm: Monthly
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

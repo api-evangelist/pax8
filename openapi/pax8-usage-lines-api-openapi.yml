@@ -1,0 +1,238 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Usage Lines API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Usage Lines
+paths:
+  /lines:
+    get:
+      tags:
+      - Usage Lines
+      summary: Get Usage Lines
+      description: A `subscriptionId` OR an `externalSubscriptionId` is required
+      operationId: getUsageLines
+      parameters:
+      - name: subscriptionId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: externalSubscriptionId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: billingPeriod
+        in: query
+        description: Billing period with format yyyy-MM
+        required: true
+        schema:
+          type: string
+      - name: summaryKey
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDTOUsageLine'
+    post:
+      tags:
+      - Usage Lines
+      summary: Save Usage Lines
+      description: A `subscriptionId` OR an `externalSubscriptionId` is required
+      operationId: saveUsageLines
+      parameters:
+      - name: subscriptionId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: externalSubscriptionId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: billingPeriod
+        in: query
+        description: Billing period with format yyyy-MM
+        required: true
+        schema:
+          type: string
+      - name: overwriteSameDayUsage
+        in: query
+        description: When set to false, usage lines for the same summary key will be appended instead of replacing existing same-day lines
+        required: false
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              description: '`summaryKey` and `summaryDisplayName` must be 255 characters or less.'
+              items:
+                $ref: '#/components/schemas/UsageLine'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDTOUsageLine'
+  /aggregate-lines:
+    post:
+      tags:
+      - Usage Lines
+      summary: Save Usage Lines with an Aggregate Partner Quantity
+      description: A `subscriptionId` OR an `externalSubscriptionId` is required
+      operationId: saveUsageLinesWithAggregate
+      parameters:
+      - name: subscriptionId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: externalSubscriptionId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: billingPeriod
+        in: query
+        description: Billing period with format yyyy-MM
+        required: true
+        schema:
+          type: string
+      - name: overwriteSameDayUsage
+        in: query
+        description: When set to false, usage lines for the same summary key will be appended instead of replacing existing same-day lines
+        required: false
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              description: '`summaryKey` and `summaryDisplayName` must be 255 characters or less.'
+              items:
+                $ref: '#/components/schemas/AggregateUsageLine'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDTOUsageLine'
+components:
+  schemas:
+    UsageLine:
+      required:
+      - productId
+      - quantity
+      - summaryDisplayName
+      - summaryKey
+      - unitOfMeasurement
+      type: object
+      properties:
+        summaryKey:
+          maxLength: 255
+          type: string
+        summaryDisplayName:
+          maxLength: 255
+          type: string
+        quantity:
+          minimum: 0
+          type: number
+        productId:
+          type: string
+          format: uuid
+        unitOfMeasurement:
+          type: string
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
+    AggregateUsageLine:
+      required:
+      - partnerAggregateQuantity
+      - productId
+      - quantity
+      - summaryDisplayName
+      - summaryKey
+      - unitOfMeasurement
+      type: object
+      description: Usage Line for Aggregate Pricing
+      allOf:
+      - $ref: '#/components/schemas/UsageLine'
+      - type: object
+        properties:
+          partnerAggregateQuantity:
+            minimum: 0
+            type: number
+            description: Partner aggregate quantity. Must be non-negative.
+          summaryKey:
+            type: string
+          summaryDisplayName:
+            type: string
+          quantity:
+            type: number
+          productId:
+            type: string
+            format: uuid
+          unitOfMeasurement:
+            type: string
+    PageDTOUsageLine:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageLine'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

@@ -1,0 +1,164 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Provision Attempts API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Provision Attempts
+paths:
+  /provision-requests/{provisionRequestId}/attempts:
+    get:
+      tags:
+      - Provision Attempts
+      summary: Get All Provision Attempts for a Provision Request
+      operationId: getAllProvisionAttempts
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisionDetailId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDTOProvisionAttempt'
+    post:
+      tags:
+      - Provision Attempts
+      summary: Create Provision Attempt for a Provision Request and Provision Detail
+      operationId: createAttemptForRequest
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionAttempt'
+  /provision-requests/{provisionRequestId}/attempts/{provisionAttemptId}:
+    get:
+      tags:
+      - Provision Attempts
+      summary: Get Provision Attempt by ID
+      operationId: getOneProvisionAttempt
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisionAttemptId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionAttempt'
+  /provision-requests/{provisionRequestId}/attempts/latest:
+    get:
+      tags:
+      - Provision Attempts
+      summary: Get Latest Provision Attempt for a Provision Request
+      operationId: getLatestProvisionAttempt
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionAttempt'
+components:
+  schemas:
+    PageDTOProvisionAttempt:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionAttempt'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
+    ProvisionAttempt:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        provisionDetailId:
+          type: string
+          format: uuid
+        webhookId:
+          type: string
+          format: uuid
+        status:
+          type: string
+        errorDetail:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

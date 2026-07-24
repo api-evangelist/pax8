@@ -1,0 +1,234 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Provisioning Simulations API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Provisioning Simulations
+paths:
+  /provision-simulations/order-events:
+    post:
+      tags:
+      - Provisioning Simulations
+      summary: Create Order Event
+      operationId: createOrderEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisionTestingOrderEvent'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionTestingOrderEvent'
+components:
+  schemas:
+    ProvisionRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        partnerId:
+          type: string
+          format: uuid
+        partnerName:
+          type: string
+        partnerDomain:
+          type: string
+        partnerAddress:
+          $ref: '#/components/schemas/Address'
+        partnerEnrollmentId:
+          type: string
+          format: uuid
+        companyId:
+          type: string
+          format: uuid
+        companyName:
+          type: string
+        companyDomain:
+          type: string
+        companyAddress:
+          $ref: '#/components/schemas/Address'
+        productId:
+          type: string
+          format: uuid
+        oldProductId:
+          type: string
+          format: uuid
+        productName:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        subscriptionId:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum:
+          - NetNew
+          - Update
+          - Deprovision
+          - TrialCreate
+          - TrialConvert
+          - ChangeProduct
+          - PartnerEnrollment
+          - Renewal
+        createdDate:
+          type: string
+          format: date-time
+        trialEndDate:
+          type: string
+          format: date-time
+        trialAutoConverts:
+          type: boolean
+        commitmentTermMonths:
+          type: integer
+          description: Deprecated. Use commitment.term.months instead
+          format: int32
+        commitmentTermEndDate:
+          type: string
+          description: Deprecated. Use commitment.term.endDate instead
+          format: date-time
+        commitment:
+          $ref: '#/components/schemas/Commitment'
+        billingTerm:
+          type: string
+          enum:
+          - 2 Year
+          - 3 Year
+          - Activation
+          - Annual
+          - Monthly
+          - One-Time
+          - Trial
+    VolumeCommitment:
+      type: object
+      properties:
+        minAmount:
+          type: number
+          description: Minimum commitment amount (must be less than maxAmount)
+        maxAmount:
+          type: number
+          description: Maximum commitment amount (must be greater than minAmount when present)
+        unitOfMeasure:
+          type: string
+          enum:
+          - Agents
+          - Devices
+          - Endpoints
+          - Environments
+          - Levels
+          - Points
+          - Users
+          - AUD
+          - CAD
+          - CHF
+          - DKK
+          - EUR
+          - GBP
+          - IDR
+          - MYR
+          - NOK
+          - NZD
+          - PHP
+          - SEK
+          - SGD
+          - THB
+          - USD
+          - VND
+        months:
+          type: integer
+          format: int32
+      description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
+    Commitment:
+      type: object
+      properties:
+        term:
+          $ref: '#/components/schemas/CommitmentTerm'
+        volume:
+          $ref: '#/components/schemas/VolumeCommitment'
+    ProvisionDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        provisionRequestId:
+          type: string
+          format: uuid
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        createdDate:
+          type: string
+          format: date-time
+    ProvisionAttempt:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        provisionDetailId:
+          type: string
+          format: uuid
+        webhookId:
+          type: string
+          format: uuid
+        status:
+          type: string
+        errorDetail:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+    CommitmentTerm:
+      type: object
+      properties:
+        months:
+          type: integer
+          format: int32
+        endDate:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        stateOrProvince:
+          type: string
+    ProvisionTestingOrderEvent:
+      type: object
+      properties:
+        provisionRequest:
+          $ref: '#/components/schemas/ProvisionRequest'
+        provisionDetail:
+          $ref: '#/components/schemas/ProvisionDetail'
+        provisionAttempt:
+          $ref: '#/components/schemas/ProvisionAttempt'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

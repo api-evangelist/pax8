@@ -1,0 +1,477 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Quote attachments API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Quote attachments
+paths:
+  /v2/quotes/{quoteId}/attachments:
+    get:
+      description: Downloads all quote attachments as a single zip file
+      operationId: downloadAllAttachmentsAsZip
+      parameters:
+      - description: Must be set to true to download the ZIP.
+        in: query
+        name: downloadZip
+        schema:
+          type: boolean
+          enum:
+          - 'true'
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+          description: Successful download of attachments as a ZIP file.
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+        '404':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+      summary: Download all quote attachments
+      tags:
+      - Quote attachments
+    post:
+      description: Uploads attachments to the specified quote.
+      operationId: uploadAttachmentToQuote
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+              required:
+              - attachments
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttachmentResponse'
+          description: Created
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+        '404':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+      summary: Upload attachments to quote
+      tags:
+      - Quote attachments
+    put:
+      description: Update attachments within a specified quote.
+      operationId: updateAttachmentsMetadata
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateAttachmentPayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttachmentResponse'
+          description: OK
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+      summary: Update attachments
+      tags:
+      - Quote attachments
+  /v2/quotes/{quoteId}/attachments/shared:
+    post:
+      description: Adds a copy of an existing library document as an attachment to the specified quote.
+      operationId: copyAttachmentsToQuoteFromLibrary
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CopyAttachmentPayload'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttachmentResponse'
+          description: Created
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+        '404':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+      summary: Copy attachment to quote from library
+      tags:
+      - Quote attachments
+  /v2/quotes/{quoteId}/attachments/{attachmentId}:
+    delete:
+      description: Delete an attachment from a specified quote.
+      operationId: deleteAttachment
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: attachmentId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: No Content
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+      summary: Delete attachment
+      tags:
+      - Quote attachments
+    get:
+      description: Downloads single attachment from a specified quote.
+      operationId: getAttachmentMetadata
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: attachmentId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - description: Must be set to true to download the file.
+        in: query
+        name: download
+        schema:
+          type: boolean
+          enum:
+          - 'true'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachmentResponse'
+            application/pdf:
+              schema:
+                format: binary
+          description: Returns attachment metadata as JSON. When 'download=true' is provided, returns the attachment file as PDF.
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+        '404':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+      summary: Download attachment
+      tags:
+      - Quote attachments
+components:
+  schemas:
+    ErrorDetails:
+      type: object
+      properties:
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+          - ACCESS_DENIED_IMPERSONATION
+          - ACCESS_DENIED_REQUESTED_RESOURCE
+          - ACCESS_LIST_LIMIT_EXCEEDED
+          - CLIENT_ACCESS_DENIED
+          - RESOURCE_NOT_FOUND
+          - BAD_REQUEST
+          - FAILED_ORDER_VALIDATION
+          - INVALID_REQUEST_FIELD
+          - QUOTE_NOT_FOUND
+          - QUOTE_INVALID_STATUS
+          - QUOTE_VALIDATION
+          - QUOTE_EMIT_FAILED
+          - CREATE_QUOTE_FAILED
+          - QUOTE_ALREADY_DELETED
+          - QUOTE_NOT_VALID
+          - QUOTE_UPSERT_FAILED
+          - QUOTE_COMPANY_PARTNER_COMPATIBILITY_CHECK_FAILED
+          - QUOTE_REQUEST_COMPANY_COMPATIBILITY_CHECK_FAILED
+          - QUOTE_ADD_LINE_ITEMS_FAILED
+          - USER_NOT_FOUND
+          - PARTNER_NOT_FOUND
+          - LINE_ITEM_NOT_FOUND
+          - QUOTE_LINE_ITEM_NOT_FOUND
+          - SAVE_LINE_ITEM_FAILED
+          - REQUEST_VALIDATION_FAILED
+          - UNAUTHORIZED_ERROR
+          - LINE_ITEM_LIMIT_EXCEEDED
+          - DUPLICATE_QUOTE_WITH_EMPTY_LINE_ITEMS
+          - DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED
+          - DUPLICATE_QUOTE_NO_PRODUCTS_ALLOWED
+          - QUOTE_VALIDATION_TRIAL_PARENT_RESTRICTION
+          - QUOTE_INVALID_RESPONSE
+          - COMPANY_NOT_PROVIDED
+          - COMPANY_PARTNER_COMPATIBILITY_MISMATCH
+          - USER_LEVEL_CHECK_FAILED
+          - QUOTE_REQUEST_NOT_FOUND
+          - QUOTE_ACCESS_EMAIL_EXISTS
+          - QUOTE_ACCESS_ENTRY_NOT_FOUND
+          - QUOTE_ACCESS_ENTRY_INVALID_QUOTE_ID
+          - USER_LEVEL_CHECK_FAILED_COMPANY
+          - INVALID_REQUEST_PARAMETER
+          - INVALID_USER_LEVEL
+          - INVALID_REQUEST_BODY
+          - BRANDING_NOT_FOUND
+          - VIEW_NOT_FOUND
+          - INTERNAL_EXCEPTION
+          - REFERENCE_CODE_GENERATION_EXCEPTION
+          - USAGE_BASED_PARAMETERS_MISCONFIGURATION
+          - UNKNOWN_CURRENCY
+          - UNKNOWN_ERROR
+          - UNPROCESSABLE_INPUT
+          - PAYLOAD_VALIDATION
+          - MAX_ATTACHMENTS_EXCEEDED
+          - LIBRARY_MAX_ATTACHMENTS_EXCEEDED
+          - PREFERENCE_MAX_ATTACHMENTS_EXCEEDED
+          - DUPLICATE_QUOTE_ATTACHMENT
+          - QUOTE_ATTACHMENT_NOT_FOUND
+          - LIBRARY_ATTACHMENT_NOT_FOUND
+          - PREFERENCE_ATTACHMENT_NOT_FOUND
+          - LIBRARY_ATTACHMENT_ALREADY_EXISTS
+          - ATTACHMENT_NOT_FOUND
+          - QUOTE_ATTACHMENT_UNSUPPORTED_ORDER_INDEX
+          - LIBRARY_ATTACHMENT_UNSUPPORTED_ORDER_INDEX
+          - PREFERENCE_ATTACHMENT_UNSUPPORTED_ORDER_INDEX
+          - DUPLICATE_PREFERENCE_ATTACHMENT
+          - QUOTE_ALREADY_OWNED
+          - EXECUTION_VALIDATION
+          - SHADOW_COMPANY_EXPECTED
+          - CUSTOMER_COMPANY_EXPECTED
+          - QUOTE_ACCESS_USERID_EXISTS
+      required:
+      - message
+      - type
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
+    AttachmentResponse:
+      type: object
+      properties:
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        createdOn:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        replacedOn:
+          type: string
+          format: date-time
+        type:
+          type: string
+        url:
+          type: string
+      required:
+      - createdBy
+      - createdOn
+      - id
+      - name
+      - order
+      - type
+      - url
+    UpdateAttachmentPayload:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+      required:
+      - id
+      - name
+      - order
+    CreatedBy:
+      type: object
+      properties:
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
+          type: string
+      required:
+      - fullName
+      - id
+      - role
+    CopyAttachmentPayload:
+      type: object
+      properties:
+        attachmentId:
+          type: string
+          format: uuid
+      required:
+      - attachmentId
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

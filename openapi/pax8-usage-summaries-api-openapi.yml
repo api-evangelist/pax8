@@ -1,0 +1,539 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Usage Summaries API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Usage Summaries
+paths:
+  /subscriptions/{subscriptionId}/usage-summaries:
+    get:
+      tags:
+      - Usage Summaries
+      summary: List Usage Summaries
+      description: Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200
+      operationId: findSubscriptionUsageSummaries
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 04814f37-bef0-48b7-b388-c04a1e31f889
+      - name: page
+        in: query
+        description: The page number to request in the usage summaries list
+        required: false
+        schema:
+          type: number
+          default: 0
+      - name: size
+        in: query
+        description: Returns _this_ number of usage summaries per page
+        required: false
+        schema:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+      - name: sort
+        in: query
+        description: Return usage summaries sorted by this field and direction Formatted as fieldName,direction - ex. sort=resourceGroup,desc
+        required: false
+        schema:
+          type: string
+          enum:
+          - resourceGroup
+          - currentCharges
+          - partnerTotal
+      - name: resourceGroup
+        in: query
+        description: Return only usage summaries matching this ```resourceGroup``` value
+        required: false
+        schema:
+          type: string
+          example: IronCloud Technologies
+      - name: companyId
+        in: query
+        description: Return only usage summaries with this ```companyId``` value
+        required: false
+        schema:
+          type: string
+          format: uuid
+          example: f7fc273a-8d86-45c9-a26f-ffd42416adda
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsageSummary'
+                  page:
+                    $ref: '#/components/schemas/Page'
+              examples:
+                usage-summaries-paged:
+                  $ref: '#/components/examples/usage-summaries-paged'
+        '404':
+          description: Invalid subscriptionId or companyId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /usage-summaries/{usageSummaryId}:
+    get:
+      tags:
+      - Usage Summaries
+      summary: Get Usage Summary By ID
+      description: Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200
+      operationId: findSubscriptionUsageSummary
+      parameters:
+      - name: usageSummaryId
+        in: path
+        description: The usage summary id
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: f5e4cefe-09ff-46a0-b3b0-4f392cfae44c
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageSummary'
+  /usage-summaries/{usageSummaryId}/usage-lines:
+    get:
+      tags:
+      - Usage Summaries
+      summary: List Usage Summary Lines
+      description: Fetch a paginated list of usage lines. Default page is 0 and default size is 10. The maximum page size is 200
+      operationId: findUsageLines
+      parameters:
+      - name: usageSummaryId
+        in: path
+        description: The usage summary id
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: f5e4cefe-09ff-46a0-b3b0-4f392cfae44c
+      - name: usageDate
+        in: query
+        description: The date usage was recorded
+        required: true
+        schema:
+          type: string
+          format: yyyy-MM-dd
+          example: '2020-01-01'
+      - name: productId
+        in: query
+        description: Return only usage summaries with this ```productId``` value
+        required: false
+        schema:
+          type: string
+          format: uuid
+          example: aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsageLine'
+                  page:
+                    $ref: '#/components/schemas/Page'
+              examples:
+                invoice-items:
+                  $ref: '#/components/examples/usage-lines-paged'
+        '404':
+          description: Invalid usage summary id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    UsageLine:
+      type: object
+      properties:
+        usageSummaryId:
+          type: string
+          format: uuid
+          description: The associated usage summary id
+        usageDate:
+          type: string
+          format: yyyy-MM-dd
+          description: The date the usage was recorded
+        productName:
+          type: string
+          description: The usage product name
+        productId:
+          type: string
+          format: uuid
+          description: The usage product id
+        unitOfMeasure:
+          type: string
+          description: The product unit of measure
+        quantity:
+          type: number
+          description: The usage quantity
+        currentCharges:
+          type: number
+          description: Charges for the usage line
+        currentProfit:
+          type: number
+          description: Profit for the usage line
+        partnerTotal:
+          type: number
+          description: The partner total for the usage line
+        unitPrice:
+          type: number
+          description: The unit price of the usage product
+        currencyCode:
+          type: string
+          description: The currency ISO 4217 code
+        isTrial:
+          type: boolean
+          description: Indicates if the usage line is for a trial
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    UsageSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The id
+        companyId:
+          type: string
+          format: uuid
+          description: The company id
+        productId:
+          type: string
+          format: uuid
+          description: The product id
+        resourceGroup:
+          type: string
+          description: Resource group assigned to the usage summary
+        vendorName:
+          type: string
+          description: Vendor Name
+        currentCharges:
+          type: number
+          description: Charges for the current month
+        currencyCode:
+          type: string
+          description: The currency ISO 4217 code
+        partnerTotal:
+          type: number
+          description: The partner total for the current month
+        isTrial:
+          type: boolean
+          description: Indicates whether the usage summary is for a trial
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+  examples:
+    usage-lines-paged:
+      summary: A page of usage lines
+      description: An example page of usage lines
+      value:
+        content:
+        - usageDate: '2020-01-14'
+          productName: Proofpoint Essentials - Professional
+          productId: 61bf3a55-f1da-4efd-88eb-bf362b0ad51e
+          unitOfMeasure: User
+          quantity: 3
+          currentCharges: 15.99
+          currentProfit: 5.61
+          partnerTotal: 10.38
+          unitPrice: 5.33
+          currencyCode: USD
+          isTrial: false
+        - usageDate: '2020-01-14'
+          productName: Proofpoint Essentials - Avdanced
+          productId: e73f3a55-f1da-4efd-88eb-bf3je60ad5lq
+          unitOfMeasure: User
+          quantity: 3
+          currentCharges: 15.99
+          currentProfit: 5.61
+          partnerTotal: 10.38
+          unitPrice: 5.33
+          currencyCode: USD
+          isTrial: false
+        - usageDate: '2020-01-14'
+          productName: Proofpoint Essentials - Enterprise
+          productId: ac6843db-abba-40a4-8130-8d33c374aecb
+          unitOfMeasure: Seat
+          quantity: 3
+          currentCharges: 13.99
+          currentProfit: 2.61
+          partnerTotal: 7.38
+          unitPrice: 2.33
+          currencyCode: USD
+          isTrial: true
+        - usageDate: '2020-01-14'
+          productName: Proofpoint VM's
+          productId: 620a63be-cb0c-4df9-9c7b-5517e84c3b98
+          unitOfMeasure: User
+          quantity: 4
+          currentCharges: 16
+          currentProfit: 6
+          partnerTotal: 10
+          unitPrice: 4
+          currencyCode: USD
+          isTrial: false
+        - usageDate: '2020-01-14'
+          productName: Proofpoint Servers
+          productId: bf2777cb-53f4-449e-a63a-914da4d4dbda
+          unitOfMeasure: User
+          quantity: 3
+          currentCharges: 15.99
+          currentProfit: 5.61
+          partnerTotal: 10.38
+          unitPrice: 5.33
+          currencyCode: USD
+          isTrial: false
+        - usageDate: '2020-01-14'
+          productName: Proofpoint Workstations
+          productId: 4cd5353e-b473-4ce4-a580-c6568d38aeb7
+          unitOfMeasure: Seat
+          quantity: 4
+          currentCharges: 19.99
+          currentProfit: 4.61
+          partnerTotal: 15.38
+          unitPrice: 5
+          currencyCode: USD
+          isTrial: false
+        - usageDate: '2020-01-14'
+          productName: Proofpoint Storage
+          productId: f7a5eaee-47bb-44f1-80b5-0e26898234db
+          unitOfMeasure: User
+          quantity: 3
+          currentCharges: 15.99
+          currentProfit: 5.61
+          partnerTotal: 10.38
+          unitPrice: 5.33
+          currencyCode: USD
+          isTrial: false
+        - usageDate: '2020-01-14'
+          productName: Proofpoint International
+          productId: 0ff7d338-d5c8-47ab-b091-d13037223014
+          unitOfMeasure: User
+          quantity: 3
+          currentCharges: 15.99
+          currentProfit: 5.61
+          partnerTotal: 10.38
+          unitPrice: 5.33
+          currencyCode: USD
+          isTrial: false
+        - usageDate: '2020-01-14'
+          productName: Proofpoint Domestic
+          productId: bb51e4ba-ba53-4958-b9ee-af67fa008ceb
+          unitOfMeasure: User
+          quantity: 3
+          currentCharges: 15.99
+          currentProfit: 5.61
+          partnerTotal: 10.38
+          unitPrice: 5.33
+          currencyCode: USD
+          isTrial: false
+        - usageDate: '2020-01-14'
+          productName: Proofpoint Express
+          productId: f0f2c7cc-4ae2-4a16-85ac-24fa19c03f27
+          unitOfMeasure: User
+          quantity: 3
+          currentCharges: 15.99
+          currentProfit: 5.61
+          partnerTotal: 10.38
+          unitPrice: 5.33
+          currencyCode: USD
+          isTrial: false
+        page:
+          size: 10
+          totalElements: 115
+          totalPages: 11
+          number: 0
+    usage-summaries-paged:
+      summary: A page of usage summaries
+      description: An example page of usage summaries
+      value:
+        content:
+        - id: 52d8d4bc-59db-48fe-9aa7-95bed562ff95
+          companyId: ede334e7-d1c7-4e0a-822d-dee891f6ce9a
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company 1
+          vendorName: Microsoft
+          currentCharges: 100.56
+          currencyCode: USD
+          partnerTotal: 86.456
+          isTrial: false
+        - id: 5df21356-eaef-4b04-935a-afd22c57a022
+          companyId: f594d111-4360-4061-8664-cde1c4e465e8
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company 2
+          vendorName: Microsoft
+          currentCharges: 46.56
+          currencyCode: USD
+          partnerTotal: 36.456
+          isTrial: false
+        - id: d9eccc77-36cb-4a57-b88b-410d8e4ea674
+          companyId: 5cb96b47-fc4f-4116-8603-0f0883781b94
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company 3
+          vendorName: Microsoft
+          currentCharges: 86.97
+          currencyCode: USD
+          partnerTotal: 57.246
+          isTrial: false
+        - id: fce41092-5317-4f9d-a6e0-6d3db34640c7
+          companyId: e4db6c63-bd19-4f31-b403-ece3e3a4d9e0
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company A
+          vendorName: Microsoft
+          currentCharges: 142.58
+          currencyCode: USD
+          partnerTotal: 113.546
+          isTrial: true
+        - id: 2371ffd6-51ba-4448-8b8e-1835ebe76e99
+          companyId: 5a69a819-3215-45e6-9178-3445bcfee15b
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company B
+          vendorName: Microsoft
+          currentCharges: 100.56
+          currencyCode: USD
+          partnerTotal: 86.456
+          isTrial: true
+        - id: f8c6618c-9453-4062-a628-50c4052cb52e
+          companyId: 8758d69f-81e3-4016-b42d-9b150bf415ad
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company C
+          vendorName: Microsoft
+          currentCharges: 452.86
+          currencyCode: USD
+          partnerTotal: 350.456
+          isTrial: false
+        - id: 96ac14ec-7e77-409f-a22e-a4ed4fc85b8e
+          companyId: 3474e746-42c9-4c4b-8ec2-77f4a087e8a7
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company D
+          vendorName: Microsoft
+          currentCharges: 99.45
+          currencyCode: USD
+          partnerTotal: 84.456
+          isTrial: false
+        - id: 72f8be97-7c39-477e-9feb-eba85b362d76
+          companyId: c16a440d-2aa5-4a53-853c-2d5f0b7ab37c
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company E
+          vendorName: Microsoft
+          currentCharges: 400.56
+          currencyCode: USD
+          partnerTotal: 386.456
+          isTrial: false
+        - id: 8f545a6f-a361-4b4d-a79d-a369b2716546
+          companyId: b5c951b8-9b11-4ff3-9964-d699382d8653
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company F
+          vendorName: Microsoft
+          currentCharges: 450.56
+          currencyCode: USD
+          partnerTotal: 350.456
+          isTrial: false
+        - id: 0224b429-7d6a-41ca-9137-2333b939a668
+          companyId: 7312984c-ef85-4f77-9dd6-3c6e637c6864
+          subscriptionId: 8d04ad8c-456a-4b1d-9abe-a42ae526f683
+          productId: b3bb9455-c454-4efa-9be8-15b86caf6933
+          resourceGroup: Company G
+          vendorName: Microsoft
+          currentCharges: 99.56
+          currencyCode: USD
+          partnerTotal: 71.456
+          isTrial: false
+        page:
+          size: 10
+          totalElements: 15
+          totalPages: 2
+          number: 0
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

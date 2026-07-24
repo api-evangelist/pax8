@@ -1,0 +1,136 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Provision Details API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Provision Details
+paths:
+  /provision-requests/{provisionRequestId}/details:
+    get:
+      tags:
+      - Provision Details
+      summary: Get All Provision Details for a Provision Request
+      operationId: getAllProvisionDetails
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDTOProvisionDetail'
+  /provision-requests/{provisionRequestId}/details/{provisionDetailId}:
+    get:
+      tags:
+      - Provision Details
+      summary: Get One Provision Detail by Provision Request ID
+      operationId: getOneProvisionDetail
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisionDetailId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionDetail'
+  /provision-requests/{provisionRequestId}/details/latest:
+    get:
+      tags:
+      - Provision Details
+      summary: Get Latest Provision Detail by Provision Request ID
+      operationId: getLatestProvisionDetail
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionDetail'
+components:
+  schemas:
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
+    PageDTOProvisionDetail:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionDetail'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+    ProvisionDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        provisionRequestId:
+          type: string
+          format: uuid
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        createdDate:
+          type: string
+          format: date-time
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

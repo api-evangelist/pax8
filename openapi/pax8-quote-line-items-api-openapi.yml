@@ -1,0 +1,721 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Quote line items API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Quote line items
+paths:
+  /v2/quotes/{quoteId}/line-items:
+    post:
+      description: Limited to 30 total line items. This api supports adding 1 or more at a time.Line items with required relationships must be added together.
+      operationId: addLineItems
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/components/schemas/AddCustomLineItemPayload'
+                - $ref: '#/components/schemas/AddStandardLineItemPayload'
+                - $ref: '#/components/schemas/AddUsageBasedLineItemPayload'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LineItemResponse'
+          description: Created
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+      summary: Add line items
+      tags:
+      - Quote line items
+    put:
+      description: Update line items within a specified quote.This api supports updating 1 or more at a time.Modifying relationships is not supported at this time. Delete and re-add instead.
+      operationId: updateLineItems
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                oneOf:
+                - $ref: '#/components/schemas/UpdateCustomLineItemPayload'
+                - $ref: '#/components/schemas/UpdateStandardLineItemPayload'
+                - $ref: '#/components/schemas/UpdateUsageBasedLineItemPayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LineItemResponse'
+          description: OK
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+      summary: Update line items
+      tags:
+      - Quote line items
+  /v2/quotes/{quoteId}/line-items/bulk-delete:
+    post:
+      description: Delete multiple line items from a quote in bulk.
+      operationId: bulkDeleteLineItems
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLineItemsPayload'
+        required: true
+      responses:
+        '204':
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: No Content
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+      summary: Delete line items
+      tags:
+      - Quote line items
+  /v2/quotes/{quoteId}/line-items/{lineItemId}:
+    delete:
+      description: Delete a line item by lineItemId from quote.
+      operationId: deleteLineItemById
+      parameters:
+      - in: path
+        name: quoteId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: lineItemId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: No Content
+        '400':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Authorization Error
+      summary: Delete line item by ID
+      tags:
+      - Quote line items
+components:
+  schemas:
+    UpdateStandardLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/UpdateLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - 1 Year
+            - 2 Year
+            - 3 Year
+            - Trial
+            - Activation
+            - One-Time
+          commitmentTermId:
+            type: string
+            format: uuid
+      required:
+      - billingTerm
+      - effectiveDate
+      - id
+      - price
+      - quantity
+      - type
+    ErrorDetails:
+      type: object
+      properties:
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+          - ACCESS_DENIED_IMPERSONATION
+          - ACCESS_DENIED_REQUESTED_RESOURCE
+          - ACCESS_LIST_LIMIT_EXCEEDED
+          - CLIENT_ACCESS_DENIED
+          - RESOURCE_NOT_FOUND
+          - BAD_REQUEST
+          - FAILED_ORDER_VALIDATION
+          - INVALID_REQUEST_FIELD
+          - QUOTE_NOT_FOUND
+          - QUOTE_INVALID_STATUS
+          - QUOTE_VALIDATION
+          - QUOTE_EMIT_FAILED
+          - CREATE_QUOTE_FAILED
+          - QUOTE_ALREADY_DELETED
+          - QUOTE_NOT_VALID
+          - QUOTE_UPSERT_FAILED
+          - QUOTE_COMPANY_PARTNER_COMPATIBILITY_CHECK_FAILED
+          - QUOTE_REQUEST_COMPANY_COMPATIBILITY_CHECK_FAILED
+          - QUOTE_ADD_LINE_ITEMS_FAILED
+          - USER_NOT_FOUND
+          - PARTNER_NOT_FOUND
+          - LINE_ITEM_NOT_FOUND
+          - QUOTE_LINE_ITEM_NOT_FOUND
+          - SAVE_LINE_ITEM_FAILED
+          - REQUEST_VALIDATION_FAILED
+          - UNAUTHORIZED_ERROR
+          - LINE_ITEM_LIMIT_EXCEEDED
+          - DUPLICATE_QUOTE_WITH_EMPTY_LINE_ITEMS
+          - DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED
+          - DUPLICATE_QUOTE_NO_PRODUCTS_ALLOWED
+          - QUOTE_VALIDATION_TRIAL_PARENT_RESTRICTION
+          - QUOTE_INVALID_RESPONSE
+          - COMPANY_NOT_PROVIDED
+          - COMPANY_PARTNER_COMPATIBILITY_MISMATCH
+          - USER_LEVEL_CHECK_FAILED
+          - QUOTE_REQUEST_NOT_FOUND
+          - QUOTE_ACCESS_EMAIL_EXISTS
+          - QUOTE_ACCESS_ENTRY_NOT_FOUND
+          - QUOTE_ACCESS_ENTRY_INVALID_QUOTE_ID
+          - USER_LEVEL_CHECK_FAILED_COMPANY
+          - INVALID_REQUEST_PARAMETER
+          - INVALID_USER_LEVEL
+          - INVALID_REQUEST_BODY
+          - BRANDING_NOT_FOUND
+          - VIEW_NOT_FOUND
+          - INTERNAL_EXCEPTION
+          - REFERENCE_CODE_GENERATION_EXCEPTION
+          - USAGE_BASED_PARAMETERS_MISCONFIGURATION
+          - UNKNOWN_CURRENCY
+          - UNKNOWN_ERROR
+          - UNPROCESSABLE_INPUT
+          - PAYLOAD_VALIDATION
+          - MAX_ATTACHMENTS_EXCEEDED
+          - LIBRARY_MAX_ATTACHMENTS_EXCEEDED
+          - PREFERENCE_MAX_ATTACHMENTS_EXCEEDED
+          - DUPLICATE_QUOTE_ATTACHMENT
+          - QUOTE_ATTACHMENT_NOT_FOUND
+          - LIBRARY_ATTACHMENT_NOT_FOUND
+          - PREFERENCE_ATTACHMENT_NOT_FOUND
+          - LIBRARY_ATTACHMENT_ALREADY_EXISTS
+          - ATTACHMENT_NOT_FOUND
+          - QUOTE_ATTACHMENT_UNSUPPORTED_ORDER_INDEX
+          - LIBRARY_ATTACHMENT_UNSUPPORTED_ORDER_INDEX
+          - PREFERENCE_ATTACHMENT_UNSUPPORTED_ORDER_INDEX
+          - DUPLICATE_PREFERENCE_ATTACHMENT
+          - QUOTE_ALREADY_OWNED
+          - EXECUTION_VALIDATION
+          - SHADOW_COMPANY_EXPECTED
+          - CUSTOMER_COMPANY_EXPECTED
+          - QUOTE_ACCESS_USERID_EXISTS
+      required:
+      - message
+      - type
+    AddStandardLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/AddLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - 1 Year
+            - 2 Year
+            - 3 Year
+            - Trial
+            - Activation
+            - One-Time
+          commitmentTermId:
+            type: string
+            format: uuid
+          productId:
+            type: string
+            format: uuid
+          requiredLineItemId:
+            type: string
+            format: uuid
+          requiredLineItemIndex:
+            type: integer
+            format: int32
+          requiredSubscriptionId:
+            type: string
+            format: uuid
+          subscriptionId:
+            type: string
+            format: uuid
+      required:
+      - billingTerm
+      - effectiveDate
+      - price
+      - productId
+      - quantity
+      - type
+    UpdateCustomLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/UpdateLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - Trial
+            - One-Time
+          cost:
+            type: number
+            format: double
+          initialTotal:
+            type: number
+            format: double
+          productName:
+            type: string
+          productSku:
+            type: string
+      required:
+      - billingTerm
+      - cost
+      - effectiveDate
+      - id
+      - initialTotal
+      - price
+      - productName
+      - quantity
+      - type
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        isMspOnly:
+          type: boolean
+        name:
+          type: string
+        sku:
+          type: string
+        type:
+          type: string
+          enum:
+          - Standalone
+          - Solution
+          - Custom
+      required:
+      - id
+      - isMspOnly
+      - name
+      - sku
+      - type
+    UpdateUsageBasedLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/UpdateLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - 1 Year
+            - 2 Year
+            - 3 Year
+            - Trial
+            - Activation
+            - One-Time
+          commitmentTermId:
+            type: string
+            format: uuid
+          cost:
+            type: number
+            format: double
+          usageBased:
+            $ref: '#/components/schemas/UsageBased'
+      required:
+      - billingTerm
+      - cost
+      - effectiveDate
+      - id
+      - price
+      - quantity
+      - type
+      - usageBased
+    UsageBased:
+      type: object
+      properties:
+        displayNote:
+          type: boolean
+        type:
+          type: string
+          enum:
+          - PRICE_FLAT
+          - PRICE_VARIES
+          - QTY_VARIES
+      required:
+      - displayNote
+      - type
+    LineItemResponse:
+      type: object
+      properties:
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 1 Year
+          - 2 Year
+          - 3 Year
+          - Trial
+          - Activation
+          - One-Time
+        commitmentTerm:
+          $ref: '#/components/schemas/CommitmentTerm'
+        cost:
+          $ref: '#/components/schemas/AmountCurrency'
+        effectiveDate:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        note:
+          type: string
+        price:
+          $ref: '#/components/schemas/AmountCurrency'
+        product:
+          $ref: '#/components/schemas/Product'
+        quantity:
+          type: integer
+          format: int64
+        relationship:
+          $ref: '#/components/schemas/LineItemRelationship'
+        subscriptionId:
+          type: string
+          format: uuid
+        totals:
+          $ref: '#/components/schemas/InvoiceTotals'
+        usageBased:
+          $ref: '#/components/schemas/UsageBased'
+      required:
+      - billingTerm
+      - cost
+      - effectiveDate
+      - id
+      - note
+      - price
+      - product
+      - quantity
+      - totals
+    AddCustomLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/AddLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - Trial
+            - One-Time
+          cost:
+            type: number
+            format: double
+          initialTotal:
+            type: number
+            format: double
+          productName:
+            type: string
+            description: Max length 255 characters. Only alpha numeric characters and spaces allowed.
+          productSku:
+            type: string
+            description: Max length 100 characters. Only alpha numeric characters, and dashes allowed.
+      required:
+      - billingTerm
+      - cost
+      - effectiveDate
+      - initialTotal
+      - price
+      - productName
+      - quantity
+      - type
+    AddUsageBasedLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/AddLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - 1 Year
+            - 2 Year
+            - 3 Year
+            - Trial
+            - Activation
+            - One-Time
+          commitmentTermId:
+            type: string
+            format: uuid
+          cost:
+            type: number
+            format: double
+          productId:
+            type: string
+            format: uuid
+          requiredLineItemId:
+            type: string
+            format: uuid
+          requiredLineItemIndex:
+            type: integer
+            format: int32
+          requiredSubscriptionId:
+            type: string
+            format: uuid
+          subscriptionId:
+            type: string
+            format: uuid
+          usageBased:
+            $ref: '#/components/schemas/UsageBased'
+      required:
+      - billingTerm
+      - cost
+      - effectiveDate
+      - price
+      - productId
+      - quantity
+      - type
+      - usageBased
+    AddLineItemBasePayload:
+      type: object
+      discriminator:
+        propertyName: type
+      properties:
+        effectiveDate:
+          type: string
+          format: date-time
+        note:
+          type: string
+          description: Max length 2000 characters.
+        price:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
+        type:
+          type: string
+          description: Type of line item
+          enum:
+          - Standard
+          - Custom
+          - UsageBased
+      required:
+      - effectiveDate
+      - price
+      - quantity
+      - type
+    AmountCurrency:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+      required:
+      - amount
+      - currency
+    CommitmentTerm:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        term:
+          type: string
+      required:
+      - id
+      - term
+    InvoiceTotals:
+      type: object
+      properties:
+        initialCost:
+          $ref: '#/components/schemas/AmountCurrency'
+        initialProfit:
+          $ref: '#/components/schemas/AmountCurrency'
+        initialTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringCost:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringProfit:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+      required:
+      - initialCost
+      - initialProfit
+      - initialTotal
+      - recurringCost
+      - recurringProfit
+      - recurringTotal
+    UpdateLineItemBasePayload:
+      type: object
+      discriminator:
+        propertyName: type
+      properties:
+        effectiveDate:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        note:
+          type: string
+        price:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
+        type:
+          type: string
+          description: Type of line item
+          enum:
+          - Standard
+          - Custom
+          - UsageBased
+      required:
+      - effectiveDate
+      - id
+      - price
+      - quantity
+      - type
+    DeleteLineItemsPayload:
+      type: object
+      properties:
+        lineItemIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+      - lineItemIds
+    LineItemRelationship:
+      type: object
+      properties:
+        requiredLineItemId:
+          type: string
+          format: uuid
+        requiredSubscriptionId:
+          type: string
+          format: uuid
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

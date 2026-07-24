@@ -1,0 +1,197 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token Provision Results API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Provision Results
+paths:
+  /provision-requests/{provisionRequestId}/results:
+    get:
+      tags:
+      - Provision Results
+      summary: Get All Provision Results for a Provision Request
+      operationId: getAllProvisionResults
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisionAttemptId
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDTOProvisionResult'
+    post:
+      tags:
+      - Provision Results
+      summary: Create Provision Result
+      operationId: createProvisionResult
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisionResult'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionResult'
+  /provision-requests/{provisionRequestId}/results/{provisionResultId}:
+    get:
+      tags:
+      - Provision Results
+      summary: Get One Provision Result
+      operationId: getOneProvisionResult
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisionResultId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionResult'
+  /provision-requests/{provisionRequestId}/results/latest:
+    get:
+      tags:
+      - Provision Results
+      summary: Get Latest Provision Result for an Order
+      operationId: getLatestProvisionResult
+      parameters:
+      - name: provisionRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisionResult'
+components:
+  schemas:
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
+    ProvisionResult:
+      required:
+      - status
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        provisionAttemptId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          description: The status of the provision result. Must be either `Success` or `Fail`. If `Fail` an `errorMessage` should be present.
+          enum:
+          - Success
+          - Fail
+        errorMessage:
+          maxLength: 500
+          type: string
+          description: When the status is Fail, the `errorMessage` field should contain relevant error information that a person can understand and action. The `errorMessage` input is truncated to 500 characters.
+          example: Unable to provision the subscription because the provided email domain is already in use.
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+        externalProvisionerSubscriptionId:
+          minLength: 1
+          pattern: ^[a-zA-Z0-9-_]+$
+          type: string
+          description: Cannot be empty and must only contain alphanumeric values, hyphens and underscores.
+        externalProvisionerPartnerId:
+          minLength: 1
+          pattern: ^[a-zA-Z0-9-_]+$
+          type: string
+          description: Cannot be empty and must only contain alphanumeric values, hyphens and underscores.
+        externalProvisionerCompanyId:
+          minLength: 1
+          pattern: ^[a-zA-Z0-9-_]+$
+          type: string
+          description: Cannot be empty and must only contain alphanumeric values, hyphens and underscores.
+        externalProvisionerPartnerEnrollmentId:
+          minLength: 1
+          pattern: ^[a-zA-Z0-9-_]+$
+          type: string
+          description: Cannot be empty and must only contain alphanumeric values, hyphens and underscores.
+    PageDTOProvisionResult:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionResult'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}

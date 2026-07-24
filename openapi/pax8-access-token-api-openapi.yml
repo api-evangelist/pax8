@@ -1,0 +1,122 @@
+openapi: 3.0.1
+info:
+  title: Authentication Access Token API
+  version: 1.0.0
+  termsOfService: https://usc.pax8.com/resource/display/65345
+  description: The Access Token that allows access to the Pax8 API
+servers:
+- url: https://api.pax8.com/v1
+security:
+- OAuth2: []
+tags:
+- name: Access Token
+  description: The Access Token that allows access to the Pax8 API
+paths:
+  /token:
+    post:
+      x-readme:
+        explorer-enabled: false
+      tags:
+      - Access Token
+      summary: Create a new Access Token
+      description: Create a new Access Token. Use the code examples to create an Access token on your local machine. Then copy the `access_token` into the Authorization header of any endpoint in the documentation to start making calls. The audience should be set to `https://api.pax8.com` for the partner endpoints.
+      operationId: createAccessToken
+      requestBody:
+        description: Token Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+            examples:
+              token-request-example:
+                $ref: '#/components/examples/token-request-example'
+      security:
+      - {}
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+              examples:
+                token-response-example:
+                  $ref: '#/components/examples/token-response-example'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                token-error-auth-example:
+                  $ref: '#/components/examples/token-error-auth-example'
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: The Access Token
+        expires_in:
+          type: number
+          description: The time to live of the Access Token in seconds
+          enum:
+          - 86400
+        token_type:
+          type: string
+          enum:
+          - Bearer
+    TokenRequest:
+      type: object
+      required:
+      - client_id
+      - client_secret
+      - audience
+      - grant_type
+      properties:
+        client_id:
+          type: string
+          description: The client id
+        client_secret:
+          type: string
+          description: The client secret
+        audience:
+          type: string
+          enum:
+          - https://api.pax8.com
+          - api://p8p.client
+          - api://provisioning
+          - api://usage
+        grant_type:
+          type: string
+          enum:
+          - client_credentials
+  examples:
+    token-error-auth-example:
+      summary: An Access Token Unauthorized error
+      description: An Access Token Unauthorized error
+      value:
+        error: access_denied
+        error_description: Unauthorized
+    token-request-example:
+      summary: An Access Token request headers
+      description: Header values used for an Access Token request
+      value:
+        client_id: <client-id>
+        client_secret: <client-secret>
+        audience: https://api.pax8.com
+        grant_type: client_credentials
+    token-response-example:
+      summary: An Access Token
+      description: An Access Token response example
+      value:
+        access_token: <access-token>
+        expires_in: 86400
+        token_type: Bearer
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://token-manager.pax8.com/oauth/token
+          scopes: {}
