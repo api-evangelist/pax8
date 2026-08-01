@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: https://devx.pax8.com/docs/, openapi/pax8-vendor-provisioning-endpoints-openapi.json
+summary: |-
+  Pax8 does not publish payment test cards. Its sandbox surface is vendor provisioning SIMULATION:
+  simulation credentials are separate from production credentials and are scoped differently, and a
+  dedicated simulation endpoint lets vendors drive order events without touching production.
+modes:
+- name: simulation (vendor provisioning)
+  distinction: audience `api://provisioning`; simulation credentials return scope
+    `vendorSimulation:provisioning` while production credentials return `vendor:provisioning`.
+  credentials: Obtained from the vendor's Pax8 contact; simulation vs production credentials are
+    distinct.
+simulation_endpoints:
+- operation: createOrderEvent
+  method: POST
+  path: /provision-simulations/order-events
+  spec: openapi/pax8-vendor-provisioning-endpoints-openapi.json
+  purpose: Emit simulated order events to exercise a provisioner's webhook + provision-request flow
+    without a real customer order.
+test_values:
+  notes: No published magic identifiers / test card numbers. Simulation is driven by posting
+    ProvisionTestingOrderEvent payloads to the simulation endpoint under simulation credentials.

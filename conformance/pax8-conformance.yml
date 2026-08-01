@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/*.json, https://devx.pax8.com/docs/
+standards:
+- id: oauth2
+  conforms: true
+  evidence: OpenAPI securitySchemes type oauth2 (clientCredentials) across all surfaces; token
+    endpoint https://api.pax8.com/v1/token.
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: RFC 6749 client-credentials grant with audience parameter.
+- id: bearer-jwt
+  conforms: true
+  evidence: Quoting API uses http bearer with bearerFormat JWT.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Custom JSON error envelope (type/message/instance/status/details) modeled on problem
+    details but not served as application/problem+json.
+- id: pagination
+  conforms: true
+  evidence: Page-number pagination (page/size, page/limit) with pageInfo response block.
+- id: webhooks
+  conforms: true
+  evidence: Dedicated Webhooks API with topic definitions, filter conditions, and delivery logs.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key contract documented.
+- id: openapi-3
+  conforms: true
+  evidence: Six OpenAPI 3.x documents published on the developer portal.
+compliance_programs:
+- SOC 2 Type 2
+- ISO/IEC 27001
+- PCI DSS
+- Cyber Essentials
+- HIPAA
+- GDPR
+compliance_source: https://trust.pax8.com/

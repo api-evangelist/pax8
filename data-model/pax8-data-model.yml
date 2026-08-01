@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/pax8-partner-endpoints-openapi.json, openapi/pax8-quoting-endpoints-openapi.json
+entities:
+- name: Company
+  description: A partner's end-customer account in the Pax8 marketplace.
+  relationships:
+  - {kind: has_many, target: Contact, via: companyId}
+  - {kind: has_many, target: Order, via: companyId}
+  - {kind: has_many, target: Subscription, via: companyId}
+  - {kind: has_many, target: Invoice, via: companyId}
+- name: Contact
+  description: A contact person on a Company.
+  relationships:
+  - {kind: belongs_to, target: Company, via: companyId}
+- name: Product
+  description: A catalog product/SKU sold on the marketplace.
+  relationships:
+  - {kind: has_one, target: ProductDetail, via: id}
+  - {kind: has_many, target: Pricing, via: productId}
+- name: Order
+  description: A placed order that provisions subscriptions.
+  relationships:
+  - {kind: belongs_to, target: Company, via: companyId}
+  - {kind: has_many, target: LineItem, via: orderId}
+- name: Subscription
+  description: An active subscription to a Product for a Company.
+  relationships:
+  - {kind: belongs_to, target: Company, via: companyId}
+  - {kind: belongs_to, target: Product, via: productId}
+  - {kind: has_one, target: Subscription, via: parentSubscriptionId}
+- name: LineItem
+  description: A line item on an order/subscription.
+  relationships:
+  - {kind: belongs_to, target: Product, via: productId}
+  - {kind: belongs_to, target: Subscription, via: subscriptionId}
+- name: Invoice
+  description: A billing invoice for a Company.
+  relationships:
+  - {kind: belongs_to, target: Company, via: companyId}
+  - {kind: has_many, target: InvoiceItem, via: invoiceId}
+- name: Quote
+  description: A CPQ quote (Quoting API) with sections and line items.
+  relationships:
+  - {kind: has_many, target: QuoteSection, via: quoteId}
+  - {kind: has_many, target: QuoteLineItem, via: sectionId}
+notes: |-
+  Derived from OpenAPI id-reference fields. Key foreign keys observed: Order.companyId,
+  Subscription.companyId/productId/parentSubscriptionId, LineItem.productId/subscriptionId,
+  Invoice.companyId. Ids are opaque strings (no documented type prefixes).

@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/pax8-partner-endpoints-openapi.json, openapi/pax8-webhooks-api-openapi.json
+skills:
+- file: pax8-order-a-product.md
+  name: Order a product for a company
+  api: openapi/pax8-partner-endpoints-openapi.json
+  operations: [findCompanies, createCompany, findAllProducts, findPricingByProductId, createOrder, findOrdersByOrderId]
+- file: pax8-manage-subscription.md
+  name: Manage a subscription
+  api: openapi/pax8-partner-endpoints-openapi.json
+  operations: [findSubscriptions, findSubscriptionBySubscriptionId, findSubscriptionHistoryBySubscriptionId, updateSubscription]
+- file: pax8-subscribe-to-events.md
+  name: Subscribe to Pax8 events
+  api: openapi/pax8-webhooks-api-openapi.json
+  operations: [getTopicDefinitions, Webhooks_create, addWebhookTopic, testWebhookTopic, WebhookLogs_query, retryWebhookDelivery]

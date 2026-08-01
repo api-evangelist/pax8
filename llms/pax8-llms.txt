@@ -1,0 +1,191 @@
+# Pax8 Public API Docs Documentation
+
+> Welcome to the Pax8 Public REST API docs. The API enables users to automate many manual tasks in the Pax8 Platform.
+
+## Guides
+- [Developer Platform Overview](https://devx.pax8.com/docs/introduction.md): Choose whether to discover pre-built apps or build a custom integration using the Pax8 Integrations Hub.
+- [Starter Workflows](https://devx.pax8.com/docs/leveraging-recipes.md): Start with Integration Guides for common Pax8 automation patterns, then use the technical docs and blueprint pages to implement APIs and events.
+- [Ordering Products](https://devx.pax8.com/docs/ordering-details.md): Use this blueprint to activate companies, validate order inputs, and submit robust product orders through the Pax8 API.
+- [Subscription Management](https://devx.pax8.com/docs/subscription-management.md): Use this blueprint to manage subscription lifecycle changes, account for timing and billing rules, and automate downstream subscription workflows.
+- [Invoice & Billing Integrations](https://devx.pax8.com/docs/invoice-billing-integrations.md): Use this blueprint to build billing integrations around approved invoices, line-item reconciliation, and downstream finance workflows.
+- [Understanding Usage Products](https://devx.pax8.com/docs/understanding-usage-products.md): Use this blueprint to identify usage-based products, map resource groups correctly, and choose the right Pax8 usage endpoint for monitoring or billing.
+- [Mapping Pax8 Identifiers to Microsoft Graph API](https://devx.pax8.com/docs/microsoft-subscription-reconciliation.md)
+- [Pax8 Glossary](https://devx.pax8.com/docs/glossary.md)
+- [Integrated MSP Apps](https://devx.pax8.com/docs/integrated-msp-apps.md): Find, evaluate, and connect pre-built apps in the Pax8 Integrations Hub, or start building a custom integration when you need more flexibility.
+- [Integrator Setup Guide](https://devx.pax8.com/docs/integrator-setup-guide.md)
+- [Pax8 Partner Authorization via OAuth2](https://devx.pax8.com/docs/developingdelegationapplications.md): This guide is recommended for 3rd party vendors & applications that are getting Pax8 partner authorization
+- [Using Pax8's APIs](https://devx.pax8.com/docs/public-api-details.md): Create API credentials in the Pax8 Integrations Hub and make your first authenticated Pax8 API request.
+- [Authentication](https://devx.pax8.com/docs/authentication.md)
+- [Response Codes](https://devx.pax8.com/docs/errors.md)
+- [CORS](https://devx.pax8.com/docs/cors.md)
+- [REST API Fundamentals](https://devx.pax8.com/docs/apisforbeginners.md)
+- [Subscribing to Events](https://devx.pax8.com/docs/subscribe-to-events.md)
+- [Subscription Events: Completed Line Items](https://devx.pax8.com/docs/subscription-events-completed-line-items.md)
+- [How to use Webhook APIs](https://devx.pax8.com/docs/how-to-use-webhook-apis.md): This guide is for users to create and manage their webhooks in Pax8 via api calls. See https://devx.pax8.com/reference/webhooks_query
+- [How To Use Webhooks As a 3rd Party Integrator](https://devx.pax8.com/docs/how-to-use-webhooks-as-a-3rd-party-integrator.md)
+- [Allowlisted IP Addresses for Outgoing Traffic](https://devx.pax8.com/docs/allowlisted-ip-addresses.md)
+- [MCP Server](https://devx.pax8.com/docs/mcp-server.md)
+- [MCP Setup Guide (Cursor)](https://devx.pax8.com/docs/mcp-setup-guide-cursor.md)
+- [MCP Setup Guide (Claude)](https://devx.pax8.com/docs/pax8-mcp-server-setup-guide-claude.md)
+- [MCP Setup Guide (Copilot)](https://devx.pax8.com/docs/mcp-setup-guide-copilot.md)
+- [MCP Setup Guide (VSCode)](https://devx.pax8.com/docs/mcp-setup-guide-vscode.md)
+- [MCP Setup Guide (n8n)](https://devx.pax8.com/docs/mcp-setup-guide-n8n.md)
+- [Using AI to Build Your Pax8 Integration](https://devx.pax8.com/docs/using-ai-to-build-your-integration.md)
+- [Building AI Agents for Pax8](https://devx.pax8.com/docs/ai-agents-for-pax8.md)
+- [Introduction for Marketplace Vendors](https://devx.pax8.com/docs/introduction-for-marketplace-vendors.md)
+- [Provisioning Overview](https://devx.pax8.com/docs/provisioning-overview.md)
+- [Provision Notification](https://devx.pax8.com/docs/provision-notification.md)
+- [Provisioning Scenarios](https://devx.pax8.com/docs/provisioning-scenarios.md)
+- [Provision Request](https://devx.pax8.com/docs/provision-request.md)
+- [Provision Detail](https://devx.pax8.com/docs/provision-detail.md)
+- [Provision Attempt](https://devx.pax8.com/docs/provision-attempt.md)
+- [Provision Result](https://devx.pax8.com/docs/provision-result.md)
+- [Provisioner and Webhooks](https://devx.pax8.com/docs/provisioner.md)
+- [Webhook Configuration](https://devx.pax8.com/docs/webhook-configuration.md)
+- [Provisioning Integration Testing](https://devx.pax8.com/docs/provisioning-integration-testing.md)
+- [Request and Response Examples](https://devx.pax8.com/docs/examples.md)
+- [Provisioning Simulation Scenarios](https://devx.pax8.com/docs/provision-simulation-example.md): An in-depth walkthrough of how one might use the simulations endpoint.
+- [Usage Overview](https://devx.pax8.com/docs/usage-overview.md)
+- [Usage Lines](https://devx.pax8.com/docs/usage-lines.md)
+- [Aggregate Usage Lines](https://devx.pax8.com/docs/aggregate-usage-line.md)
+- [Overwriting or Appending Same Day Usage](https://devx.pax8.com/docs/overwrite-same-day-usage.md)
+- [Usage Line Grouping Examples](https://devx.pax8.com/docs/usage-line-grouping-examples.md)
+- [Billing Scenarios](https://devx.pax8.com/docs/billing-usage-examples.md)
+
+## API Reference
+- [Create a new Access Token](https://devx.pax8.com/reference/createaccesstoken.md): Create a new Access Token. Use the code examples to create an Access token on your local machine. Then copy the `access_token` into the Authorization header of any endpoint in the documentation to start making calls. The audience should be set to `https://api.pax8.com` for the partner endpoints.
+- [List Companies](https://devx.pax8.com/reference/findcompanies.md): Returns a paginated list of all your companies filtered by optional parameters
+- [Get Company By ID](https://devx.pax8.com/reference/get_companies-companyid.md): Returns a single company record matching the ```companyId``` you specify
+- [Create Company](https://devx.pax8.com/reference/createcompany.md): Creates a new company. You can optionally include contacts in the request body to create the company with contacts in a single request. If no contacts are provided, the company will be placed in an "inactive" status until the [company has primary contacts added](#tag/Contacts). Once contacts are added, the company will move to "Active".
+- [Update Company](https://devx.pax8.com/reference/updatecompany.md): Updates an existing Company. ATTENTION - at least one parameter has to be modified.
+- [List Products](https://devx.pax8.com/reference/findallproducts.md): Returns a paginated list of Pax8 products filtered by optional query parameters
+- [Get Product By ID](https://devx.pax8.com/reference/findproductbyproductid.md): Returns only the product record for the productId you specify
+- [Get Provisioning Details](https://devx.pax8.com/reference/findprovisiondetailsbyproductid.md): Returns provisioning details for the specified productId. Provisioning details for a product are dynamic data.
+- [Get Product Dependencies](https://devx.pax8.com/reference/findproductdependenciesbyproductid.md): Returns associated dependencies for the specified ```productId```. A products dependencies are dynamic data.
+- [Get Pricing](https://devx.pax8.com/reference/findpricingbyproductid.md): Returns recommended pricing and partner cost for the specified productId. A products pricing is dynamic data.
+- [List Orders](https://devx.pax8.com/reference/findorders.md): Returns a paginated list of orders. Currently NOT supported for scheduled orders(orders with a future date).
+- [Get Order By ID](https://devx.pax8.com/reference/findordersbyorderid.md): Returns the Order record specified by OrderId. Currently NOT supported for scheduled orders
+- [Create Order](https://devx.pax8.com/reference/createorder.md): Create a new order. Currently NOT supported for scheduled orders(orders with a future date).
+- [List Subscriptions](https://devx.pax8.com/reference/findsubscriptions.md): Fetch a paginated list of subscriptions. Default page is 0 and default size is 10. The maximum page size is 200
+- [Get Subscription By ID](https://devx.pax8.com/reference/findsubscriptionbysubscriptionid.md): Returns the Subscription record specified by the subscriptionId
+- [Get Subscription History](https://devx.pax8.com/reference/findsubscriptionhistorybysubscriptionid.md): Returns a list of changes for a subscription
+- [Update Subscription](https://devx.pax8.com/reference/updatesubscription.md): Updates a subscription. Currently NOT supported for subscriptions with a future date. At least one of the following fields are required: Price, BillingTerm, Quantity, StartDate
+- [Cancel Subscription](https://devx.pax8.com/reference/delete_subscriptions-subscriptionid.md): Cancels the Subscription specified by subscriptionId
+- [List Contacts](https://devx.pax8.com/reference/get_companies-companyid-contacts.md): Returns a paginated list of contacts ordered by ```createDate``` descending
+- [Get Contact By ID](https://devx.pax8.com/reference/get_companies-companyid-contacts-contactid.md): Returns a contact
+- [Create Contact](https://devx.pax8.com/reference/post_companies-companyid-contacts.md): Creates a new Contact
+- [Update Contact](https://devx.pax8.com/reference/put_companies-companyid-contacts-contactid.md): Update a contacts information
+- [Delete Contact](https://devx.pax8.com/reference/delete_companies-companyid-contacts-contactid.md): Deletes a contact
+- [List Invoices](https://devx.pax8.com/reference/findpartnerinvoices.md): Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200
+- [Get Invoice By ID](https://devx.pax8.com/reference/getpartnerinvoice.md): Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200
+- [List Invoice Items](https://devx.pax8.com/reference/findpartnerinvoiceitems.md): Fetch a paginated list of invoice items. Default page is 0 and default size is 10. The maximum page size is 200
+- [List Draft Invoice Items](https://devx.pax8.com/reference/findpartnerdraftinvoiceitems.md): Fetch a paginated list of draft invoice items before they are finalized into invoices. Default page is 0 and default size is 10. The maximum page size is 200.  DISCLAIMER: For future-dated items, the data represents a snapshot of charges that will be applied to a future invoice as of the request date. This is not an actual invoice. Clients should be aware that the final invoice generated on the 5th of the month may differ. This endpoint does not include charges for usage-based products billed in arrears. Tax calculations are based on current account taxability status and current month tax rates, both of which are subject to change for future invoices.
+- [List Usage Summaries](https://devx.pax8.com/reference/findsubscriptionusagesummaries.md): Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200
+- [Get Usage Summary By ID](https://devx.pax8.com/reference/findsubscriptionusagesummary.md): Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200
+- [List Usage Summary Lines](https://devx.pax8.com/reference/findusagelines.md): Fetch a paginated list of usage lines. Default page is 0 and default size is 10. The maximum page size is 200
+- [Get attachments from the library](https://devx.pax8.com/reference/getlibraryattachmentsmetadata.md): Returns the attachment entries associated from the library.
+- [Upload attachments to library](https://devx.pax8.com/reference/uploadattachmenttolibrary.md): Uploads attachments to the library.
+- [Update library attachments](https://devx.pax8.com/reference/updatelibraryattachments.md): Update attachments from the library.
+- [Add quote attachments to library](https://devx.pax8.com/reference/addquoteattachmentstolibrary.md): Adds existing quote attachments to the library.
+- [Delete library attachment](https://devx.pax8.com/reference/deletesinglelibraryattachment.md): Deletes single attachment from the library.
+- [Download library attachment](https://devx.pax8.com/reference/getlibraryattachmentmetadata.md): Downloads single attachment from the library.
+- [Replace library attachment](https://devx.pax8.com/reference/replacelibraryattachment.md): Replace an existing library attachment with a new one.
+- [Get quote preferences](https://devx.pax8.com/reference/getquotepreferences.md): Returns quote preferences associated to the current user's partner account.
+- [Update quote preferences](https://devx.pax8.com/reference/persistquotepreferences.md): Create or update preferences for quotes.
+- [Upload preference attachments](https://devx.pax8.com/reference/uploadpreferencesattachments.md): Upload preference attachments based on library attachments.
+- [Delete preference attachment](https://devx.pax8.com/reference/deletepreferenceattachment.md): Deletes single attachment from the preferences.
+- [Get quotes list](https://devx.pax8.com/reference/getquoteslist.md): Fetches a paginated list of quotes with optional search and status filters.
+- [Get quote by ID](https://devx.pax8.com/reference/getquotebyid.md): Returns a single quote record matching the specified quoteId.
+- [Create quote](https://devx.pax8.com/reference/createquote.md): Creates a new quote for the specified clientId.
+- [Delete quote by ID](https://devx.pax8.com/reference/deletequotebyid.md): Deletes a quote by its quoteId.
+- [Update quote by ID](https://devx.pax8.com/reference/updatequote.md): Updates the details of an existing quote.
+- [Take quote ownership](https://devx.pax8.com/reference/takequoteownership.md): Takes ownership of a quote by the current partner user.
+- [Get quote access list](https://devx.pax8.com/reference/getquoteaccesslist.md): Returns the access list entries associated to the specified quoteId.
+- [Add access list entries](https://devx.pax8.com/reference/addquoteaccesslistentry.md): Share the quote by adding the emails of the intended recipients to this access list.
+- [Delete quote access list entry](https://devx.pax8.com/reference/deletequoteshareentry.md): Deletes a specific access list entry from a quote.
+- [Download all quote attachments](https://devx.pax8.com/reference/downloadallattachmentsaszip.md): Downloads all quote attachments as a single zip file
+- [Upload attachments to quote](https://devx.pax8.com/reference/uploadattachmenttoquote.md): Uploads attachments to the specified quote.
+- [Update attachments](https://devx.pax8.com/reference/updateattachmentsmetadata.md): Update attachments within a specified quote.
+- [Copy attachment to quote from library](https://devx.pax8.com/reference/copyattachmentstoquotefromlibrary.md): Adds a copy of an existing library document as an attachment to the specified quote.
+- [Delete attachment](https://devx.pax8.com/reference/deleteattachment.md): Delete an attachment from a specified quote.
+- [Download attachment](https://devx.pax8.com/reference/getattachmentmetadata.md): Downloads single attachment from a specified quote.
+- [Add line items](https://devx.pax8.com/reference/addlineitems.md): Limited to 30 total line items. This api supports adding 1 or more at a time.Line items with required relationships must be added together.
+- [Update line items](https://devx.pax8.com/reference/updatelineitems.md): Update line items within a specified quote.This api supports updating 1 or more at a time.Modifying relationships is not supported at this time. Delete and re-add instead.
+- [Delete line items](https://devx.pax8.com/reference/bulkdeletelineitems.md): Delete multiple line items from a quote in bulk.
+- [Delete line item by ID](https://devx.pax8.com/reference/deletelineitembyid.md): Delete a line item by lineItemId from quote.
+- [Get quote sections](https://devx.pax8.com/reference/getsections.md): Returns a list of sections associated to the specified quoteId.
+- [Create Section](https://devx.pax8.com/reference/createsection.md): Creates a new section within a specified quote to organize line items.
+- [Update Sections](https://devx.pax8.com/reference/updatesections.md): Update sections within a specified quote.
+- [Query webhooks](https://devx.pax8.com/reference/webhooks_query.md): Lists instances of WebhookView with the ability to query against fields in WebhookView.
+- [Create webhook](https://devx.pax8.com/reference/webhooks_create.md): Create an instance of WebhookView.
+- [Get webhook by ID](https://devx.pax8.com/reference/webhooks_get.md): Reads an instance of WebhookView.
+- [Delete webhook](https://devx.pax8.com/reference/webhooks_delete.md): Delete an instance of WebhookView.
+- [Update webhook configuration](https://devx.pax8.com/reference/updateconfiguration.md): Update a webhook's configuration. This will replace the configuration details
+- [Update webhook status](https://devx.pax8.com/reference/updatestatus.md): Update a webhook's active status
+- [Add webhook topic](https://devx.pax8.com/reference/addwebhooktopic.md): Add a topic to a webhook. This api only adds, does not replace topics or updates existing topics. Will throw if a topic type exists for this webhook already.
+- [Replace all webhook topics](https://devx.pax8.com/reference/replacewebhooktopics.md): Replace all webhook topics
+- [Remove webhook topic](https://devx.pax8.com/reference/removewebhooktopic.md): Remove a specific topic from a webhook
+- [Update topic configuration](https://devx.pax8.com/reference/updatewebhooktopicconfiguration.md): Update the configuration of a specific topic on a webhook
+- [Test webhook topic](https://devx.pax8.com/reference/testwebhooktopic.md): Test a webhook by sending a test event for a specific topic. This will send a example payload of what this topic provides.
+- [Get topic definitions](https://devx.pax8.com/reference/gettopicdefinitions.md): Get all available webhook subscription topic definitions and their filterable conditions
+- [Query webhook logs](https://devx.pax8.com/reference/webhooklogs_query.md): Lists instances of WebhookLogView with the ability to query against fields in WebhookLogView.
+- [Get webhook log by ID](https://devx.pax8.com/reference/webhooklogs_get.md): Reads an instance of WebhookLogView.
+- [Retry webhook delivery](https://devx.pax8.com/reference/retrywebhookdelivery.md): Retry sending a webhook that previously failed
+- [Get Usage Lines](https://devx.pax8.com/reference/getusagelines.md): A `subscriptionId` OR an `externalSubscriptionId` is required
+- [Save Usage Lines](https://devx.pax8.com/reference/saveusagelines.md): A `subscriptionId` OR an `externalSubscriptionId` is required
+- [Save Usage Lines with an Aggregate Partner Quantity](https://devx.pax8.com/reference/saveusagelineswithaggregate.md): A `subscriptionId` OR an `externalSubscriptionId` is required
+- [Get All Webhook Configurations for a Provisioner](https://devx.pax8.com/reference/getallwebhooksforprovisioner.md)
+- [Create a Webhook Configuration for a Provisioner](https://devx.pax8.com/reference/createwebhookforprovisioner.md)
+- [Get All Provisioners](https://devx.pax8.com/reference/getallprovisioners.md)
+- [Get One Provisioner by ID](https://devx.pax8.com/reference/getoneprovisioner.md)
+- [Get One Webhook for a Provisioner](https://devx.pax8.com/reference/getonewebhookforprovisioner.md)
+- [Get Latest Webhook for a Provisioner](https://devx.pax8.com/reference/getlatestwebhookforprovisioner.md)
+- [Create Order Event](https://devx.pax8.com/reference/createorderevent.md)
+- [Get All Provision Results for a Provision Request](https://devx.pax8.com/reference/getallprovisionresults.md)
+- [Create Provision Result](https://devx.pax8.com/reference/createprovisionresult.md)
+- [Get One Provision Result](https://devx.pax8.com/reference/getoneprovisionresult.md)
+- [Get Latest Provision Result for an Order](https://devx.pax8.com/reference/getlatestprovisionresult.md)
+- [Get All Provision Attempts for a Provision Request](https://devx.pax8.com/reference/getallprovisionattempts.md)
+- [Create Provision Attempt for a Provision Request and Provision Detail](https://devx.pax8.com/reference/createattemptforrequest.md)
+- [Get Provision Attempt by ID](https://devx.pax8.com/reference/getoneprovisionattempt.md)
+- [Get Latest Provision Attempt for a Provision Request](https://devx.pax8.com/reference/getlatestprovisionattempt.md)
+- [Get All Provision Requests](https://devx.pax8.com/reference/getallprovisionrequests.md)
+- [Get One Provision Request](https://devx.pax8.com/reference/getoneprovisionrequest.md)
+- [Get All Unfulfilled Provision Requests](https://devx.pax8.com/reference/getallunfulfilledprovisionrequests.md)
+- [Get All Provision Details for a Provision Request](https://devx.pax8.com/reference/getallprovisiondetails.md)
+- [Get One Provision Detail by Provision Request ID](https://devx.pax8.com/reference/getoneprovisiondetail.md)
+- [Get Latest Provision Detail by Provision Request ID](https://devx.pax8.com/reference/getlatestprovisiondetail.md)
+
+## Recipes
+- [Automated Environment Documentation](https://devx.pax8.com/recipes/10a-automated-environment-documentation.md)
+- [Compare Subscription Quantities - Pax8 vs. PSA](https://devx.pax8.com/recipes/11a-compare-subscription-quantities-pax8-vs-psa.md)
+- [User Offboarding License Reclamation](https://devx.pax8.com/recipes/12a-user-offboarding-license-reclamation.md)
+- [Automated Subscription Cancellation Workflow](https://devx.pax8.com/recipes/13-automated-subscription-cancellation-workflow.md)
+- [Monitoring Mid-Month Azure/AWS Usage](https://devx.pax8.com/recipes/15-monitoring-mid-month-azureaws-usage.md)
+- [End-of-Month Invoice Reconciliation](https://devx.pax8.com/recipes/16-end-of-month-invoice-reconciliation.md)
+- [AI-Powered Invoice Discrepancy Monitoring](https://devx.pax8.com/recipes/17a-ai-powered-invoice-discrepancy-monitoring.md)
+- [Automated Quoting and Sales Cycle](https://devx.pax8.com/recipes/1a-automated-quoting-and-sales-cycle.md)
+- [API-Driven Customer Storefront](https://devx.pax8.com/recipes/2a-api-driven-customer-storefront.md)
+- [Intelligent Cross-Sell and Up-Sell Automation](https://devx.pax8.com/recipes/3a-intelligent-cross-sell-and-up-sell-automation.md)
+- [Automated QBR Data Pull](https://devx.pax8.com/recipes/4a-automated-qbr-data-pull.md)
+- [Onboarding a New Company](https://devx.pax8.com/recipes/5-onboarding-a-new-company.md)
+- [Placing a New Order](https://devx.pax8.com/recipes/6a-placing-a-new-order.md)
+- [New Sale Provisioning Kick-off](https://devx.pax8.com/recipes/7a-new-sale-provisioning-kick-off.md)
+- [New User Onboarding and License Assignment](https://devx.pax8.com/recipes/8a-new-user-onboarding-and-license-assignment.md)
+- [Real-time Team Notifications for High-Value Sales](https://devx.pax8.com/recipes/9a-real-time-team-notifications-for-high-value-sales.md)
+- [Actionable Alert Routing & Ticket Enrichment](https://devx.pax8.com/recipes/actionable-alert-routing-ticket-enrichment.md)
+- [Client Onboarding & Catalog Eligibility Gate](https://devx.pax8.com/recipes/client-onboarding-catalog-eligibility-gate.md)
+- [Maintain Catalog Margins with External System](https://devx.pax8.com/recipes/maintain-catalog-margins-with-external-system.md)
+- [Maintain Subscription Margins with External System](https://devx.pax8.com/recipes/maintain-subscription-margins-with-external-system.md)
+- [Pax8 ↔ PSA Company & Subscription ID Sync](https://devx.pax8.com/recipes/pax8-psa-company-subscription-id-sync.md)
+- [SKU Bundle & Dependency Advisor](https://devx.pax8.com/recipes/sku-bundle-dependency-advisor.md)
+- [Spend & Usage Transparency Widgets](https://devx.pax8.com/recipes/spend-usage-transparency-widgets.md)
+- [Subscription Changelog Creation](https://devx.pax8.com/recipes/subscription-changelog-creation.md)
+- [Trial-to-Paid Lifecycle Orchestration](https://devx.pax8.com/recipes/trial-to-paid-lifecycle-orchestration.md)
+
+## Changelog
+- [[Partner] New vendorSkuId field on Get Subscription By ID](https://devx.pax8.com/changelog/partner-new-vendorskuid-field-on-get-subscription-by-id.md)
+- [[Partner] New Webhook topic - Provisioning](https://devx.pax8.com/changelog/partner-new-webhook-topic-provisioning.md)
+- [[Partner] Take Ownership Quoting API added](https://devx.pax8.com/changelog/quoting-take-ownership-api-added.md)
+- [[Partner] Quoting Attachment APIs added](https://devx.pax8.com/changelog/quoting-attachment-apis-added.md)
+- [[Partner] Subscription API Doc Updated](https://devx.pax8.com/changelog/subscription-api-doc-updated.md)

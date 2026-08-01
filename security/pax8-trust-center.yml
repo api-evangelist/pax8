@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: searched
+source: https://trust.pax8.com/
+url: https://trust.pax8.com/
+also: https://www.pax8.com/en-us/about/trust-security/
+certifications:
+- SOC 2 Type 2
+- ISO/IEC 27001
+- PCI DSS
+- Cyber Essentials
+- HIPAA
+- GDPR
+notes: |-
+  Pax8 operates a public Trust Center at https://trust.pax8.com/ listing security certifications and
+  compliance documentation (SOC 2 Type 2, ISO/IEC 27001, PCI DSS, Cyber Essentials), plus a HIPAA
+  report, UK ICO Data Protection Registration and Data Processing Agreement (GDPR). Certification
+  names captured verbatim from the Trust Center Compliance section.

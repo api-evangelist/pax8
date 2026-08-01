@@ -1,0 +1,68 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/pax8-authentication-openapi.json, openapi/pax8-partner-endpoints-openapi.json,
+  openapi/pax8-vendor-provisioning-endpoints-openapi.json, openapi/pax8-vendor-usage-endpoints-openapi.json,
+  openapi/pax8-webhooks-api-openapi.json
+docs: https://devx.pax8.com/docs/authentication
+notes: |-
+  Pax8 uses OAuth2 client-credentials. The `audience` parameter in the token request selects the
+  surface and the returned scope: `https://api.pax8.com` (partner/quoting/webhooks), `api://provisioning`
+  (vendor provisioning), `api://usage` (vendor usage). Simulation vs production credentials return
+  `vendorSimulation:provisioning` vs `vendor:provisioning`.
+schemes:
+- name: OAuth2
+  source: openapi/pax8-authentication-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://token-manager.pax8.com/oauth/token
+- name: OAuth2
+  source: openapi/pax8-partner-endpoints-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://token-manager.pax8.com/oauth/token
+- name: OAuth2
+  source: openapi/pax8-vendor-provisioning-endpoints-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.pax8.com/v1/token
+  description: |-
+    Requires 'audience' parameter in token request: `api://provisioning`.
+
+    Simulation credentials will return `vendorSimulation:provisioning` scope.
+    Production credentials will return `vendor:provisioning` scope.
+- name: OAuth2
+  source: openapi/pax8-vendor-usage-endpoints-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.pax8.com/v1/token
+  description: 'Requires ''audience'' parameter in token request: `api://usage`.'
+- name: OAuth2
+  source: openapi/pax8-webhooks-api-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://token-manager.pax8.com/oauth/token
+scopes:
+- scope: read:usageLine
+  description: Grants read access for usage
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/pax8-vendor-usage-endpoints-openapi.json
+- scope: vendor:provisioning
+  description: Access to production provisioning endpoints
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/pax8-vendor-provisioning-endpoints-openapi.json
+- scope: vendorSimulation:provisioning
+  description: Access to simulation provisioning endpoints
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/pax8-vendor-provisioning-endpoints-openapi.json
+- scope: write:usageLine
+  description: Grants write access for usage
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/pax8-vendor-usage-endpoints-openapi.json

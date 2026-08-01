@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/pax8-authentication-openapi.json, openapi/pax8-partner-endpoints-openapi.json,
+  openapi/pax8-quoting-endpoints-openapi.json, openapi/pax8-vendor-provisioning-endpoints-openapi.json,
+  openapi/pax8-vendor-usage-endpoints-openapi.json, openapi/pax8-webhooks-api-openapi.json
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://token-manager.pax8.com/oauth/token
+    scopes: 0
+  sources:
+  - openapi/pax8-authentication-openapi.json
+  - openapi/pax8-partner-endpoints-openapi.json
+  - openapi/pax8-vendor-provisioning-endpoints-openapi.json
+  - openapi/pax8-vendor-usage-endpoints-openapi.json
+  - openapi/pax8-webhooks-api-openapi.json
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/pax8-quoting-endpoints-openapi.json

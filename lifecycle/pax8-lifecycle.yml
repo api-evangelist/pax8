@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: searched
+source: https://devx.pax8.com/, https://status.pax8.com/, https://devx.pax8.com/changelog
+versioning:
+  scheme: uri-path
+  current: v1 (partner/authentication), v2 (vendor provisioning/usage, webhooks), v2 (quoting)
+  notes: |-
+    Pax8 versions via URI path. Partner and authentication endpoints run under /v1 on
+    api.pax8.com; vendor provisioning and usage under /v2; webhooks under /api/v2; quoting under /v2
+    on api.pax8.com. Multiple product surfaces version independently.
+status_page: https://status.pax8.com/
+changelog: https://devx.pax8.com/changelog
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No formal deprecation/Sunset (RFC 8594) policy is published on the developer portal; changes
+    are announced through the dated changelog.
+sla:
+  url: null
+  notes: No public developer SLA/uptime target published; operational status is tracked on
+    status.pax8.com.
+deprecated_operations: []

@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Vendor Provisioning Endpoints
+  version: 1.0.0
+extends: openapi/pax8-vendor-provisioning-endpoints-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: pax8
+    x-apievangelist-artifacts:
+      authentication: authentication/pax8-authentication.yml
+      scopes: scopes/pax8-scopes.yml
+      conventions: conventions/pax8-conventions.yml
+      errors: errors/pax8-problem-types.yml
+      lifecycle: lifecycle/pax8-lifecycle.yml
+      data_model: data-model/pax8-data-model.yml
+    x-apievangelist-notes: >-
+      Enhancements captured as a non-mutating overlay. Auth is OAuth2 client-credentials
+      (Bearer JWT); errors use a custom type/message/instance/status/details envelope; no
+      idempotency contract; page-number pagination.

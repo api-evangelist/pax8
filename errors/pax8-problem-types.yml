@@ -1,0 +1,41 @@
+generated: '2026-07-20'
+method: searched
+source: https://devx.pax8.com/docs/errors, openapi/*.json
+format: custom-envelope
+envelope:
+  fields:
+  - {name: type, description: Type of error (e.g. NOT_FOUND, BAD_REQUEST, FORBIDDEN)}
+  - {name: message, description: Detailed message about the error and possible resolution}
+  - {name: instance, description: The request path that was called}
+  - {name: status, description: HTTP status code}
+  - {name: details, description: Array of nested error detail objects (type/status/message/instance);
+      vendor endpoints may include a supportId}
+  notes: |-
+    Pax8 does NOT use RFC 9457 application/problem+json; it uses a custom JSON error envelope shaped
+    like problem-details (type/message/instance/status/details[]). The webhooks API constrains `type`
+    to an enum: NOT_FOUND, UNAUTHORIZED, FORBIDDEN, BAD_REQUEST, INTERNAL_SERVER_ERROR, INVALID_PARAM.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: The request was unacceptable / bad syntax and could not be processed.
+- status: 401
+  title: Unauthorized
+  meaning: No valid API key / access token provided.
+- status: 403
+  title: Forbidden
+  meaning: The credentials do not have permission to perform the request.
+- status: 404
+  title: Not Found
+  meaning: The requested resource does not exist.
+- status: 408
+  title: Request Timeout
+  meaning: The request timed out (observed on partner endpoints).
+- status: 422
+  title: Unprocessable Entity
+  meaning: Syntax was correct but an exception was caught in processing.
+- status: 429
+  title: Too Many Requests
+  meaning: Too many requests hit the API in a short window (rate limited).
+- status: 500
+  title: Internal Server Error
+  meaning: Something went wrong on the Pax8 server (rare).

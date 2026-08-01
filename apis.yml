@@ -1,8 +1,14 @@
 aid: pax8
 name: Pax8
-description: 'Pax8 is a company surfaced as a portfolio company of softbank-vision-fund and added to the
-  API Evangelist network as a stub for enrichment. Sector: enterprise. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: 'Pax8 is a cloud commerce marketplace that lets managed service providers (MSPs), managed
+  IT providers, and software vendors discover, buy, sell, provision, and manage cloud software and
+  subscriptions for small and midsize businesses. The Pax8 Public API automates the full commerce
+  lifecycle: creating and managing partner companies and contacts, browsing the product catalog,
+  placing and updating orders, managing subscription lifecycle changes, billing and invoice
+  reconciliation, quoting (CPQ), vendor provisioning and usage reporting, and event-driven webhooks.
+  APIs authenticate with OAuth2 client-credentials over api.pax8.com, and an official hosted MCP
+  server exposes the marketplace to AI agents. Pax8 connects 47,000+ partners with hundreds of
+  vendors serving 800,000+ SMBs. Backed by SoftBank Vision Fund.'
 url: https://raw.githubusercontent.com/api-evangelist/pax8/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,15 +16,366 @@ x-backed-by:
 - softbank-vision-fund
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://www.pax8.com/favicon.ico
 tags:
 - Company
 - Enterprise
-apis: []
+- Cloud Marketplace
+- MSP
+- Distribution
+- Provisioning
+- Billing
+- Quoting
+- Subscriptions
+- Webhooks
+apis:
+- aid: pax8:pax8-access-token-api
+  name: Pax8 Access Token API
+  description: The Access Token that allows access to the Pax8 API
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Access Token
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-access-token-api-openapi.yml
+- aid: pax8:pax8-companies-api
+  name: Pax8 Companies API
+  description: >-
+    Companies represent the customers your organization serves through the Pax8 platform. Fetch a list
+    of your company records, or a specific company by its companyId
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-companies-api-openapi.yml
+- aid: pax8:pax8-contacts-api
+  name: Pax8 Contacts API
+  description: >-
+    Contacts represent the people who should be provided visibility into events such as provisioning
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-contacts-api-openapi.yml
+- aid: pax8:pax8-invoices-api
+  name: Pax8 Invoices API
+  description: The Invoices API from Pax8 — 4 operation(s) for invoices.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-invoices-api-openapi.yml
+- aid: pax8:pax8-library-attachments-api
+  name: Pax8 Library attachments API
+  description: The Library attachments API from Pax8 — 3 operation(s) for library attachments.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Library attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-library-attachments-api-openapi.yml
+- aid: pax8:pax8-orders-api
+  name: Pax8 Orders API
+  description: >-
+    Orders describe your purchases of Pax8 products. Endpoints let you create new product orders and query
+    past purchases
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-orders-api-openapi.yml
+- aid: pax8:pax8-preference-attachments-api
+  name: Pax8 Preference attachments API
+  description: The Preference attachments API from Pax8 — 2 operation(s) for preference attachments.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Preference attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-preference-attachments-api-openapi.yml
+- aid: pax8:pax8-products-api
+  name: Pax8 Products API
+  description: >-
+    The Products resource lets you fetch all the information required to complete an Order -- product
+    descriptions, pricing, provisioning details, and the dependencies associated with each product
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-products-api-openapi.yml
+- aid: pax8:pax8-provision-attempts-api
+  name: Pax8 Provision Attempts API
+  description: The Provision Attempts API from Pax8 — 3 operation(s) for provision attempts.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Provision Attempts
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-provision-attempts-api-openapi.yml
+- aid: pax8:pax8-provision-details-api
+  name: Pax8 Provision Details API
+  description: The Provision Details API from Pax8 — 3 operation(s) for provision details.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Provision Details
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-provision-details-api-openapi.yml
+- aid: pax8:pax8-provision-requests-api
+  name: Pax8 Provision Requests API
+  description: The Provision Requests API from Pax8 — 3 operation(s) for provision requests.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Provision Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-provision-requests-api-openapi.yml
+- aid: pax8:pax8-provision-results-api
+  name: Pax8 Provision Results API
+  description: The Provision Results API from Pax8 — 3 operation(s) for provision results.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Provision Results
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-provision-results-api-openapi.yml
+- aid: pax8:pax8-provisioners-api
+  name: Pax8 Provisioners API
+  description: The Provisioners API from Pax8 — 5 operation(s) for provisioners.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Provisioners
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-provisioners-api-openapi.yml
+- aid: pax8:pax8-provisioning-simulations-api
+  name: Pax8 Provisioning Simulations API
+  description: >-
+    The Provisioning Simulations API from Pax8 — 1 operation(s) for provisioning simulations.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Provisioning Simulations
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-provisioning-simulations-api-openapi.yml
+- aid: pax8:pax8-quote-access-list-api
+  name: Pax8 Quote access list API
+  description: The Quote access list API from Pax8 — 2 operation(s) for quote access list.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Quote access list
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-quote-access-list-api-openapi.yml
+- aid: pax8:pax8-quote-attachments-api
+  name: Pax8 Quote attachments API
+  description: The Quote attachments API from Pax8 — 3 operation(s) for quote attachments.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Quote attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-quote-attachments-api-openapi.yml
+- aid: pax8:pax8-quote-line-items-api
+  name: Pax8 Quote line items API
+  description: The Quote line items API from Pax8 — 3 operation(s) for quote line items.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Quote line items
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-quote-line-items-api-openapi.yml
+- aid: pax8:pax8-quote-preferences-api
+  name: Pax8 Quote preferences API
+  description: The Quote preferences API from Pax8 — 1 operation(s) for quote preferences.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Quote preferences
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-quote-preferences-api-openapi.yml
+- aid: pax8:pax8-quote-sections-api
+  name: Pax8 Quote sections API
+  description: The Quote sections API from Pax8 — 1 operation(s) for quote sections.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Quote sections
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-quote-sections-api-openapi.yml
+- aid: pax8:pax8-quotes-api
+  name: Pax8 Quotes API
+  description: The Quotes API from Pax8 — 3 operation(s) for quotes.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-quotes-api-openapi.yml
+- aid: pax8:pax8-subscriptions-api
+  name: Pax8 Subscriptions API
+  description: >-
+    Subscriptions describe terms of service, including price and the billing start/end dates for a specified
+    product/company combination. Resources let you update, cancel, and fetch details of existing subscriptions
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-subscriptions-api-openapi.yml
+- aid: pax8:pax8-topic-definitions-api
+  name: Pax8 Topic Definitions API
+  description: The Topic Definitions API from Pax8 — 1 operation(s) for topic definitions.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Topic Definitions
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-topic-definitions-api-openapi.yml
+- aid: pax8:pax8-usage-lines-api
+  name: Pax8 Usage Lines API
+  description: The Usage Lines API from Pax8 — 2 operation(s) for usage lines.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Usage Lines
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-usage-lines-api-openapi.yml
+- aid: pax8:pax8-usage-summaries-api
+  name: Pax8 Usage Summaries API
+  description: The Usage Summaries API from Pax8 — 3 operation(s) for usage summaries.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Usage Summaries
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-usage-summaries-api-openapi.yml
+- aid: pax8:pax8-webhook-logs-api
+  name: Pax8 Webhook Logs API
+  description: The Webhook Logs API from Pax8 — 3 operation(s) for webhook logs.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Webhook Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-webhook-logs-api-openapi.yml
+- aid: pax8:pax8-webhooks-api
+  name: Pax8 Webhooks API
+  description: The Webhooks API from Pax8 — 8 operation(s) for webhooks.
+  humanURL: https://devx.pax8.com/docs/authentication
+  baseURL: https://api.pax8.com/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/pax8-webhooks-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: DeveloperPortal
+  url: https://devx.pax8.com/
+- type: Documentation
+  url: https://devx.pax8.com/docs/introduction
+- type: APIReference
+  url: https://devx.pax8.com/reference
+- type: GettingStarted
+  url: https://devx.pax8.com/docs/public-api-details
+- type: Authentication
+  url: authentication/pax8-authentication.yml
+- type: OAuthScopes
+  url: scopes/pax8-scopes.yml
+- type: DomainSecurity
+  url: security/pax8-domain-security.yml
+- type: TrustCenter
+  url: security/pax8-trust-center.yml
+- type: Compliance
+  url: https://trust.pax8.com/
+- type: ChangeLog
+  url: changelog/pax8-changelog.yml
+- type: StatusPage
+  url: https://status.pax8.com/
+- type: Lifecycle
+  url: lifecycle/pax8-lifecycle.yml
+- type: LLMsTxt
+  url: llms/pax8-llms.txt
+- type: MCPServer
+  url: mcp/pax8-mcp.yml
+- type: ErrorCatalog
+  url: errors/pax8-problem-types.yml
+- type: Conventions
+  url: conventions/pax8-conventions.yml
+- type: Conformance
+  url: conformance/pax8-conformance.yml
+- type: DataModel
+  url: data-model/pax8-data-model.yml
+- type: Sandbox
+  url: sandbox/pax8-sandbox.yml
+- type: AgenticAccess
+  url: agentic-access/pax8-agentic-access.yml
+- type: Webhooks
+  url: asyncapi/pax8-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/pax8-partner-endpoints-overlay.yaml
+- type: Blog
+  url: https://www.pax8.com/blog
+- type: Support
+  url: https://www.pax8.com/en-us/support/
+- type: SignUp
+  url: https://pages.pax8.com/signup
+- type: Login
+  url: https://app.pax8.com/
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 31
+  pass: local-v1

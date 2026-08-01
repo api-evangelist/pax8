@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: searched
+type: Webhooks
+source: https://devx.pax8.com/docs/how-to-use-webhook-apis, openapi/pax8-webhooks-api-openapi.json
+spec_type: null
+summary: |-
+  Pax8 publishes a dedicated Webhooks API (no AsyncAPI document) for event-driven integration.
+  Consumers create webhook subscriptions, attach topics, apply filter conditions, and query/retry
+  delivery logs. Topic definitions (topic, name, description, availableFilters, samplePayload) are
+  discoverable at runtime via GET /webhooks/topic-definitions. Provisioners have their own webhook
+  registration on the vendor provisioning API.
+management_api:
+  base_url: https://api.pax8.com/api/v2
+  operations:
+  - {op: Webhooks_create, method: POST, path: '/webhooks'}
+  - {op: Webhooks_query, method: GET, path: '/webhooks'}
+  - {op: getTopicDefinitions, method: GET, path: '/webhooks/topic-definitions'}
+  - {op: Webhooks_get, method: GET, path: '/webhooks/{id}'}
+  - {op: Webhooks_delete, method: DELETE, path: '/webhooks/{id}'}
+  - {op: updateConfiguration, method: POST, path: '/webhooks/{id}/configuration'}
+  docs: https://devx.pax8.com/reference/webhooks_query
+event_topics:
+  discovery: GET https://api.pax8.com/api/v2/webhooks/topic-definitions
+  known_families:
+  - Subscription events (incl. completed line items) — https://devx.pax8.com/docs/subscription-events-completed-line-items
+  - Provisioning events (added ~3 months prior to capture)
+  notes: Topics carry availableFilters (FilterCondition/FilterOperator) so subscribers can scope
+    deliveries; the full authoritative topic list is served by the topic-definitions endpoint.
+delivery:
+  logs: Webhook delivery logs are queryable with a last-delivery status filter and support retry.
+  signature: Not documented on the webhooks docs page reviewed.
+  provisioner_webhooks: openapi/pax8-vendor-provisioning-endpoints-openapi.json (getAllWebhooksForProvisioner,
+    createWebhookForProvisioner) with shared-secret registration.

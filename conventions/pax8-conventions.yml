@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: searched
+source: https://devx.pax8.com/docs/, openapi/*.json
+authentication:
+  style: OAuth2 client-credentials (Bearer JWT)
+  header: 'Authorization: Bearer <token>'
+  token_endpoint: https://api.pax8.com/v1/token
+  token_ttl_seconds: 86400
+  audience_selects_surface: true
+  ref: authentication/pax8-authentication.yml
+idempotency:
+  supported: false
+  notes: No Idempotency-Key header or idempotency contract is documented in the specs or docs; writes
+    are not documented as idempotent.
+pagination:
+  style: page-number
+  params:
+    partner_and_webhooks: {page: page, size: size}
+    quoting: {page: page, size: limit}
+  response_fields: [content, pageInfo (page, size, totalPages, totalRecords)]
+  notes: Paged responses wrap results in a PageDTO/Page with a pageInfo block.
+versioning:
+  style: uri-path
+  ref: lifecycle/pax8-lifecycle.yml
+error_envelope:
+  shape: 'type, message, instance, status, details[]'
+  media_type: application/json
+  rfc9457: false
+  ref: errors/pax8-problem-types.yml
+rate_limiting:
+  signaled_via: HTTP 429 (Too Many Requests)
+  headers_documented: false
+  notes: A 429 status is documented; no X-RateLimit-* or Retry-After headers are documented.
+transport:
+  https_required: true
+  cors: documented at https://devx.pax8.com/docs/cors
+  allowlisted_egress_ips: https://devx.pax8.com/docs/allowlisted-ip-addresses
+cross_links:
+  authentication: authentication/pax8-authentication.yml
+  scopes: scopes/pax8-scopes.yml
+  errors: errors/pax8-problem-types.yml
+  lifecycle: lifecycle/pax8-lifecycle.yml
+  webhooks: asyncapi/pax8-webhooks.yml

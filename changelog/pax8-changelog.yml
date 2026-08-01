@@ -1,0 +1,39 @@
+generated: '2026-07-20'
+method: searched
+source: https://devx.pax8.com/changelog
+scheme: dated
+notes: |-
+  Pax8 publishes a dated changelog on the developer portal. Dates below are relative windows as shown
+  on the changelog page at capture time (2026-07-20); no explicit calendar dates are published per
+  entry. None are marked as breaking, though the granular webhook-filtering change reduced default
+  subscription event scope.
+entries:
+- title: New vendorSkuId field on Get Subscription By ID
+  window: ~1 month ago
+  kind: addition
+  highlights: Adds vendorSkuId to subscription-by-id responses.
+- title: New Webhook topic - Provisioning
+  window: ~3 months ago
+  kind: addition
+  highlights: Adds provisioning as a webhook event topic.
+- title: Take Ownership Quoting API added
+  window: ~4 months ago
+  kind: addition
+  highlights: Quote ownership-transfer capability added to the Quoting API.
+- title: Quoting Attachment APIs added
+  window: ~6 months ago
+  kind: addition
+  highlights: New endpoints for managing quote attachments.
+- title: Subscription API Doc Updated
+  window: ~8 months ago
+  kind: docs
+  highlights: Documentation improvements for subscription endpoints.
+- title: VendorName Added to Invoice Items Endpoint
+  window: ~8 months ago
+  kind: addition
+  highlights: Adds vendor name to invoice item responses.
+- title: Granular Webhook Filtering for Subscription Events
+  window: ~8 months ago
+  kind: change
+  highlights: Introduced granular filtering that narrows default subscription webhook notifications;
+    subscribers relying on all events may need to adjust filters.
