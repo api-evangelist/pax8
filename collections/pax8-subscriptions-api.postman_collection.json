@@ -1,0 +1,964 @@
+{
+  "item": [
+    {
+      "id": "de4e75c2-2904-458d-ae0c-004e2676006d",
+      "name": "Subscriptions",
+      "description": {
+        "content": "Subscriptions describe terms of service, including price and the billing start/end dates for a specified product/company combination. Resources let you update, cancel, and fetch details of existing subscriptions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2cd32d83-44a6-493d-ba5e-0a4cf46aba14",
+          "name": "List Subscriptions",
+          "request": {
+            "name": "List Subscriptions",
+            "description": {
+              "content": "Fetch a paginated list of subscriptions. Default page is 0 and default size is 10. The maximum page size is 200",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "The page number to request in the subscriptions list"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Returns _this_ number of subscriptions per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Return subscriptions sorted by this field and direction Formatted as fieldName,direction - ex. sort=createdDate,desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Return only subscriptions matching this ```status``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "billingTerm",
+                  "value": "<string>",
+                  "description": "Return only subscriptions matching this ```billingTerm``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyId",
+                  "value": "<uuid>",
+                  "description": "Return only subscriptions matching this ```companyId``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<uuid>",
+                  "description": "Return only subscriptions matching this ```productId``` value"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95e7634f-93cc-41c5-bfe5-8fbe824a22da",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billingTerm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"09ac6f1d-c30a-4d03-9882-145a4df71735\",\n      \"companyId\": \"19e83ea9-41a1-43fc-91a1-6fee03337d91\",\n      \"productId\": \"1810aea9-0c95-421d-a77a-7ebccdfa2f6c\",\n      \"quantity\": 5,\n      \"startDate\": \"2021-01-01T08:30:00Z\",\n      \"createdDate\": \"2020-12-03\",\n      \"billingStart\": \"2021-01-01\",\n      \"status\": \"PendingAutomated\",\n      \"price\": 150,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Microsoft 365 Business Standard\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"e8f372b6-e2aa-4f3c-9baa-b34f31c921e5\",\n      \"companyId\": \"da300208-0c17-4b6f-ab82-e1e7c0b98362\",\n      \"productId\": \"5766ecd7-a0bf-4ee0-ba1d-bd3ca92ca555\",\n      \"quantity\": 1,\n      \"startDate\": \"2020-11-12T08:30:00Z\",\n      \"endDate\": \"2020-11-18\",\n      \"createdDate\": \"2020-11-11\",\n      \"billingStart\": \"2020-11-12\",\n      \"status\": \"PendingCancel\",\n      \"price\": 100,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Proofpoint Essentials - Professional\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"d1758c49-f81c-48af-8f30-e7e93adf6acc\",\n      \"companyId\": \"da300208-0c17-4b6f-ab82-e1e7c0b98362\",\n      \"productId\": \"7597a0fd-f0ec-4547-8a20-fd2d3f311a5c\",\n      \"quantity\": 1,\n      \"startDate\": \"2020-11-12T08:30:00Z\",\n      \"endDate\": \"2020-11-12T08:30:00Z\",\n      \"createdDate\": \"2020-11-11\",\n      \"billingStart\": \"2020-11-12\",\n      \"status\": \"PendingCancel\",\n      \"price\": 0,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Adobe Creative Cloud\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"a95e2d7c-cdcf-4cf9-8c94-34ce71e06fa1\",\n      \"companyId\": \"dbb4aa30-6b8b-425c-96c0-c72e570b28af\",\n      \"productId\": \"25d15d2e-b293-4393-9e16-e6890a6650b0\",\n      \"quantity\": 1,\n      \"startDate\": \"2020-11-11T08:30:00Z\",\n      \"endDate\": \"2020-11-30T08:30:00Z\",\n      \"createdDate\": \"2020-11-11\",\n      \"billingStart\": \"2020-11-11\",\n      \"status\": \"PendingCancel\",\n      \"price\": 250,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Webroot SecureAnywhere Business Endpoint Protection\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"b010a5d2-d604-434d-b331-d1a3ae6e759e\",\n      \"companyId\": \"0c5bd95d-bd33-4bb0-8419-a821c00173dd\",\n      \"productId\": \"2d3432cb-5a61-4f87-a197-7ea8e2227aeb\",\n      \"quantity\": 8,\n      \"startDate\": \"2020-11-09T08:30:00Z\",\n      \"createdDate\": \"2020-11-09\",\n      \"billingStart\": \"2020-11-09\",\n      \"status\": \"Active\",\n      \"price\": 6,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Google Workspace Business Starter\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"e03daa96-2b4c-4925-a0aa-cb8061faf4ca\",\n      \"companyId\": \"78329722-82e9-42e4-b220-d8d4215217e5\",\n      \"productId\": \"8540387d-967b-4bba-9a5c-2c41e5769c6e\",\n      \"quantity\": 7,\n      \"startDate\": \"2020-09-21T08:30:00Z\",\n      \"createdDate\": \"2020-09-21\",\n      \"billingStart\": \"2020-09-21\",\n      \"status\": \"PendingManual\",\n      \"price\": 77.77,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Microsoft Defender for Business\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"ccfd1789-8f88-4c7c-9c10-d726f776c1dc\",\n      \"companyId\": \"df71a444-a03b-4e49-85d3-223d63ed500a\",\n      \"productId\": \"d0427628-5c3b-4258-b6f2-e6a3dfeb62ea\",\n      \"quantity\": 1,\n      \"startDate\": \"2020-09-21T08:30:00Z\",\n      \"createdDate\": \"2020-09-21\",\n      \"billingStart\": \"2020-09-21\",\n      \"status\": \"Active\",\n      \"price\": 33,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Dropbox Business Advanced\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"4ad86d04-a5db-4934-be3e-b6f024123951\",\n      \"companyId\": \"b900f223-baeb-4e0f-8a3f-f03fc1f207fd\",\n      \"productId\": \"887b69fd-0171-4ea7-bc51-6e5ee1fc59c8\",\n      \"quantity\": 2,\n      \"startDate\": \"2020-04-30T08:30:00Z\",\n      \"createdDate\": \"2020-04-30\",\n      \"billingStart\": \"2020-04-30\",\n      \"status\": \"Active\",\n      \"price\": 1896,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"VMware vSphere Essentials Plus\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"d9b4705f-b316-4e2b-959e-c542e01b749f\",\n      \"companyId\": \"47228505-4813-4024-a1fd-666e8a5bbf82\",\n      \"productId\": \"5278429f-97ea-4473-a571-798a06d26948\",\n      \"quantity\": 1,\n      \"startDate\": \"2020-04-23T08:30:00Z\",\n      \"createdDate\": \"2020-04-22\",\n      \"billingStart\": \"2020-04-23\",\n      \"status\": \"PendingManual\",\n      \"price\": 15,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Zoom Meetings Pro\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"a7494751-4717-4fa6-a5fd-c817c3cf3b5c\",\n      \"companyId\": \"47228505-4813-4024-a1fd-666e8a5bbf82\",\n      \"productId\": \"887b69fd-0171-4ea7-bc51-6e5ee1fc59c8\",\n      \"quantity\": 1,\n      \"startDate\": \"2020-04-22T08:30:00Z\",\n      \"createdDate\": \"2020-04-22\",\n      \"billingStart\": \"2020-04-22\",\n      \"status\": \"Active\",\n      \"price\": 110,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Acronis Cyber Protect Cloud\",\n      \"billingTerm\": \"Monthly\"\n    }\n  ],\n  \"page\": {\n    \"size\": 10,\n    \"totalElements\": 109,\n    \"totalPages\": 11,\n    \"number\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79ccf666-1835-43a5-8126-3ac8c35e842b",
+              "name": "Invalid companyId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billingTerm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 9520,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8075\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 5179\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad920d79-f343-485c-9775-b2d7d2e899cb",
+          "name": "Get Subscription By ID",
+          "request": {
+            "name": "Get Subscription By ID",
+            "description": {
+              "content": "Returns the Subscription record specified by the subscriptionId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26de8892-1465-4b4e-ae71-6619c25431f5",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"05c587df-9e7d-4ef9-8218-0262198e36c9\",\n  \"companyId\": \"fe7a2d5f-4a14-43ff-940e-a65cda66474a\",\n  \"productId\": \"e91bba5e-a9a3-483f-b036-f80165d410e3\",\n  \"quantity\": 5,\n  \"startDate\": \"2021-01-01T08:30:00Z\",\n  \"createdDate\": \"2020-12-01T08:30:00Z\",\n  \"billingStart\": \"2021-01-01\",\n  \"status\": \"Active\",\n  \"price\": 32.01,\n  \"currencyCode\": \"USD\",\n  \"productName\": \"Microsoft Office 365 E3\",\n  \"billingTerm\": \"Monthly\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4da4068f-66b7-4d8b-aa99-c49964e1564f",
+              "name": "Subscription not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 5942,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6609\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 648\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16d98954-7f29-4866-bb4f-3858eb739fcb",
+          "name": "Update Subscription",
+          "request": {
+            "name": "Update Subscription",
+            "description": {
+              "content": "Updates a subscription. Currently NOT supported for subscriptions with a future date. At least one of the following fields are required: Price, BillingTerm, Quantity, StartDate",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) subscription to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": \"<number>\",\n  \"quantity\": \"<number>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"currencyCode\": \"<string>\",\n  \"partnerCost\": \"<number>\",\n  \"billingTerm\": \"<string>\",\n  \"provisioningDetails\": [\n    {\n      \"key\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"key\": \"<string>\",\n      \"values\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "72c86f5d-897c-4950-9557-ce63824b0bf6",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) subscription to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": 11,\n  \"startDate\": \"2000-10-31T01:30:00.000-05:00\",\n  \"endDate\": \"2001-10-31T01:30:00.000-05:00\",\n  \"price\": 15.39,\n  \"currencyCode\": \"USD\",\n  \"billingTerm\": \"Monthly\",\n  \"provisioningDetails\": [\n    {\n      \"key\": \"userEmailAddress\",\n      \"values\": [\n        \"joeysherp@example.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"78ab7535-2546-2505-fe2b-8763c20d8e1c\",\n  \"parentSubscriptionId\": \"145ec9b4-dd79-986a-d1df-a1f23b728e4f\",\n  \"companyId\": \"2b5222f1-5e60-7ad9-b1d4-b459f7a5b3d7\",\n  \"productId\": \"9a5e22bd-310f-3036-a440-3e6acc0cbc3c\",\n  \"vendorSubscriptionId\": \"string\",\n  \"vendorSkuId\": \"string\",\n  \"quantity\": \"<number>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"createdDate\": \"1968-12-15T19:24:28.606Z\",\n  \"updatedDate\": \"2025-06-15T16:54:14.768Z\",\n  \"billingStart\": \"1954-03-05\",\n  \"status\": \"PendingManual\",\n  \"price\": 15.39,\n  \"currencyCode\": \"USD\",\n  \"partnerCost\": 11.39,\n  \"productName\": \"Microsoft Office 365 E3\",\n  \"billingTerm\": \"<string>\",\n  \"commitmentTerm\": {\n    \"id\": \"73376122-d958-af77-50b4-0057305f4c35\",\n    \"term\": \"3-Year\",\n    \"endDate\": \"2007-04-17T13:46:24.776Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c802425-03a4-4add-b175-4710f87f867a",
+              "name": "Subscription not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) subscription to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": 11,\n  \"startDate\": \"2000-10-31T01:30:00.000-05:00\",\n  \"endDate\": \"2001-10-31T01:30:00.000-05:00\",\n  \"price\": 15.39,\n  \"currencyCode\": \"USD\",\n  \"billingTerm\": \"Monthly\",\n  \"provisioningDetails\": [\n    {\n      \"key\": \"userEmailAddress\",\n      \"values\": [\n        \"joeysherp@example.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 5942,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6609\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 648\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97caedf8-62ee-40f5-adfd-fe5949fce539",
+              "name": "Invalid Subscription Update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) subscription to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quantity\": 11,\n  \"startDate\": \"2000-10-31T01:30:00.000-05:00\",\n  \"endDate\": \"2001-10-31T01:30:00.000-05:00\",\n  \"price\": 15.39,\n  \"currencyCode\": \"USD\",\n  \"billingTerm\": \"Monthly\",\n  \"provisioningDetails\": [\n    {\n      \"key\": \"userEmailAddress\",\n      \"values\": [\n        \"joeysherp@example.com\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 5942,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6609\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 648\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91e756c6-6bac-4aa6-a885-40d54e452606",
+          "name": "Cancel Subscription",
+          "request": {
+            "name": "Cancel Subscription",
+            "description": {
+              "content": "Cancels the Subscription specified by subscriptionId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cancelDate",
+                  "value": "<dateTime>",
+                  "description": "The date to cancel the subscription on"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) subscription to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "346f2e84-d977-4009-8348-1e573dacdc32",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cancelDate",
+                      "value": "2000-10-31T01:30:00.000-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) subscription to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a7317ea-b3ab-4582-9089-98750a4c56b6",
+              "name": "Subscription not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cancelDate",
+                      "value": "2000-10-31T01:30:00.000-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) subscription to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 5942,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6609\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 648\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d17340ca-ff00-436b-b6c5-d89897ac7ee2",
+          "name": "Get Subscription History",
+          "request": {
+            "name": "Get Subscription History",
+            "description": {
+              "content": "Returns a list of changes for a subscription",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "914bf8bb-d448-4fc2-a400-320a88815b6d",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"99b90e2e-cc01-4fb6-9dd2-3481196bfffe\",\n      \"companyId\": \"2aa4862a-9474-4138-9863-4f0a8e4cec74\",\n      \"productId\": \"4f76b357-9ac1-47fa-9369-feb80a32f87e\",\n      \"quantity\": 5,\n      \"startDate\": \"2021-01-01T08:30:00Z\",\n      \"createdDate\": \"2020-12-01T13:20:13.153-0700\",\n      \"updatedDate\": \"2020-12-10T03:12:14.453-0300\",\n      \"billingStart\": \"2021-01-01\",\n      \"status\": \"PendingAutomated\",\n      \"price\": 86,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Microsoft Office 365 Business Premium\",\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"99b90e2e-cc01-4fb6-9dd2-3481196bfffe\",\n      \"companyId\": \"2aa4862a-9474-4138-9863-4f0a8e4cec74\",\n      \"productId\": \"4f76b357-9ac1-47fa-9369-feb80a32f87e\",\n      \"quantity\": 2,\n      \"startDate\": \"2020-12-01T08:30:00Z\",\n      \"createdDate\": \"2020-12-01T13:20:13.153-0700\",\n      \"billingStart\": \"2020-12-01\",\n      \"status\": \"Active\",\n      \"price\": 86,\n      \"currencyCode\": \"USD\",\n      \"productName\": \"Microsoft Office 365 Business Premium\",\n      \"billingTerm\": \"Monthly\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c15191e-6c14-42dc-9c94-2a44c2cd236d",
+              "name": "Subscription not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 5942,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6609\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 648\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1949b1fb-70f8-448b-9af1-ba60a436f805",
+    "name": "Authentication Access Token Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

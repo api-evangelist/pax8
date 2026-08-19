@@ -1,0 +1,475 @@
+{
+  "item": [
+    {
+      "id": "40598dd8-6e8e-4658-9206-b1616de18487",
+      "name": "Provision Results",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9add989-ea76-4907-b268-d0b4d849355a",
+          "name": "Get All Provision Results for a Provision Request",
+          "request": {
+            "name": "Get All Provision Results for a Provision Request",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                ":provisionRequestId",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provisionAttemptId",
+                  "value": "<uuid>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionRequestId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74af3e0a-dd4b-4d11-9243-e94463aba0bf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    ":provisionRequestId",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provisionAttemptId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionRequestId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"status\": \"Fail\",\n      \"id\": \"663731c7-ae03-d6d6-427b-797e8bbf3f71\",\n      \"provisionAttemptId\": \"7299b659-2ddb-96fe-f2e6-2b226e2cd631\",\n      \"errorMessage\": \"Unable to provision the subscription because the provided email domain is already in use.\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"externalProvisionerSubscriptionId\": \"EcWB\",\n      \"externalProvisionerPartnerId\": \"k\",\n      \"externalProvisionerCompanyId\": \"Y1NGC4_kr02\",\n      \"externalProvisionerPartnerEnrollmentId\": \"N6\"\n    },\n    {\n      \"status\": \"Success\",\n      \"id\": \"b2be9483-2c4e-52b8-f84f-d364e683d3a9\",\n      \"provisionAttemptId\": \"8e930f3b-a37e-9661-bd76-0bcb27248503\",\n      \"errorMessage\": \"Unable to provision the subscription because the provided email domain is already in use.\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"externalProvisionerSubscriptionId\": \"AS5_ny7P\",\n      \"externalProvisionerPartnerId\": \"fIg5D\",\n      \"externalProvisionerCompanyId\": \"RzJ\",\n      \"externalProvisionerPartnerEnrollmentId\": \"SNgq7_\"\n    }\n  ],\n  \"page\": {\n    \"number\": 2179,\n    \"size\": 1442,\n    \"totalElements\": 7073,\n    \"totalPages\": 5941\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68f64ad7-3ecf-4157-8939-4cc5be19a597",
+          "name": "Create Provision Result",
+          "request": {
+            "name": "Create Provision Result",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                ":provisionRequestId",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionRequestId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"provisionAttemptId\": \"<uuid>\",\n  \"errorMessage\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<object>\"\n  },\n  \"externalProvisionerSubscriptionId\": \"<string>\",\n  \"externalProvisionerPartnerId\": \"<string>\",\n  \"externalProvisionerCompanyId\": \"<string>\",\n  \"externalProvisionerPartnerEnrollmentId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a73da77-ec28-4ba8-abd8-67c4f680e5b1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    ":provisionRequestId",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionRequestId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"provisionAttemptId\": \"<uuid>\",\n  \"errorMessage\": \"Unable to provision the subscription because the provided email domain is already in use.\",\n  \"metadata\": {\n    \"key_0\": \"<object>\",\n    \"key_1\": \"<object>\",\n    \"key_2\": \"<object>\",\n    \"key_3\": \"<object>\"\n  },\n  \"externalProvisionerSubscriptionId\": \"<string>\",\n  \"externalProvisionerPartnerId\": \"<string>\",\n  \"externalProvisionerCompanyId\": \"<string>\",\n  \"externalProvisionerPartnerEnrollmentId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"provisionAttemptId\": \"<uuid>\",\n  \"errorMessage\": \"Unable to provision the subscription because the provided email domain is already in use.\",\n  \"metadata\": {\n    \"key_0\": \"<object>\",\n    \"key_1\": \"<object>\",\n    \"key_2\": \"<object>\",\n    \"key_3\": \"<object>\"\n  },\n  \"externalProvisionerSubscriptionId\": \"<string>\",\n  \"externalProvisionerPartnerId\": \"<string>\",\n  \"externalProvisionerCompanyId\": \"<string>\",\n  \"externalProvisionerPartnerEnrollmentId\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79f7bc86-2648-4db1-95b0-3f9b4b505ad9",
+          "name": "Get One Provision Result",
+          "request": {
+            "name": "Get One Provision Result",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                ":provisionRequestId",
+                "results",
+                ":provisionResultId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionRequestId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionResultId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44c14cb6-feb3-40d2-9585-efa069d646c8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    ":provisionRequestId",
+                    "results",
+                    ":provisionResultId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionRequestId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionResultId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"provisionAttemptId\": \"<uuid>\",\n  \"errorMessage\": \"Unable to provision the subscription because the provided email domain is already in use.\",\n  \"metadata\": {\n    \"key_0\": \"<object>\",\n    \"key_1\": \"<object>\",\n    \"key_2\": \"<object>\",\n    \"key_3\": \"<object>\"\n  },\n  \"externalProvisionerSubscriptionId\": \"<string>\",\n  \"externalProvisionerPartnerId\": \"<string>\",\n  \"externalProvisionerCompanyId\": \"<string>\",\n  \"externalProvisionerPartnerEnrollmentId\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d28b0dfd-237e-4c62-8e8b-2c31b8f40249",
+          "name": "Get Latest Provision Result for an Order",
+          "request": {
+            "name": "Get Latest Provision Result for an Order",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                ":provisionRequestId",
+                "results",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionRequestId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fac0a68-14ad-4621-87db-a5fb2dcd6b8e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    ":provisionRequestId",
+                    "results",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionRequestId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"status\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"provisionAttemptId\": \"<uuid>\",\n  \"errorMessage\": \"Unable to provision the subscription because the provided email domain is already in use.\",\n  \"metadata\": {\n    \"key_0\": \"<object>\",\n    \"key_1\": \"<object>\",\n    \"key_2\": \"<object>\",\n    \"key_3\": \"<object>\"\n  },\n  \"externalProvisionerSubscriptionId\": \"<string>\",\n  \"externalProvisionerPartnerId\": \"<string>\",\n  \"externalProvisionerCompanyId\": \"<string>\",\n  \"externalProvisionerPartnerEnrollmentId\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "72efb290-53db-4086-b977-1a82e7e934d0",
+    "name": "Authentication Access Token Provision Results API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

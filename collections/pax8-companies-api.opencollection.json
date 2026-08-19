@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Companies API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/companies",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to request for in the companies list"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Return this number of company records per page"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return companies sorted by this field and direction. Formatted as fieldName,direction - ex. sort=name,desc"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Return only companies matching this ```city``` value"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Return only companies matching this ```country``` value"
+              },
+              {
+                "name": "stateOrProvince",
+                "value": "",
+                "type": "query",
+                "description": "Return only companies matching this ```stateOrProvince``` value"
+              },
+              {
+                "name": "postalCode",
+                "value": "",
+                "type": "query",
+                "description": "Return only companies matching this ```postalCode``` value"
+              },
+              {
+                "name": "selfServiceAllowed",
+                "value": "",
+                "type": "query",
+                "description": "Return only companies matching this ```selfServiceAllowed``` value"
+              },
+              {
+                "name": "billOnBehalfOfEnabled",
+                "value": "",
+                "type": "query",
+                "description": "Return only companies matching this ```billOnBehalfOfEnabled``` value"
+              },
+              {
+                "name": "orderApprovalRequired",
+                "value": "",
+                "type": "query",
+                "description": "Return only companies matching this ```orderApprovalRequired``` value"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Return only companies matching this ```status``` value"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all your companies filtered by optional parameters"
+        },
+        {
+          "info": {
+            "name": "Create Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new company. You can optionally include contacts in the request body to create the company with contacts in a single request. If no contacts are provided, the company will be placed in an \"inactive\" status until the [company has primary contacts added](#tag/Contacts). Once contacts are added, the company will move to \"Active\"."
+        },
+        {
+          "info": {
+            "name": "Get Company By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single company record matching the ```companyId``` you specify"
+        },
+        {
+          "info": {
+            "name": "Update Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.pax8.com/v1/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Company. ATTENTION - at least one parameter has to be modified."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

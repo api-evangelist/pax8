@@ -1,0 +1,297 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Webhooks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/webhooks",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "String value to query webhooks."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "topic",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort field and order, format: field:asc/desc"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter value for the last delivery status of the webhook"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists instances of WebhookView with the ability to query against fields in WebhookView."
+        },
+        {
+          "info": {
+            "name": "Create webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an instance of WebhookView."
+        },
+        {
+          "info": {
+            "name": "Get webhook by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reads an instance of WebhookView."
+        },
+        {
+          "info": {
+            "name": "Delete webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pax8.com/v1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an instance of WebhookView."
+        },
+        {
+          "info": {
+            "name": "Update webhook configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/webhooks/:id/configuration",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a webhook's configuration. This will replace the configuration details"
+        },
+        {
+          "info": {
+            "name": "Update webhook status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/webhooks/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a webhook's active status"
+        },
+        {
+          "info": {
+            "name": "Add webhook topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/webhooks/:id/topics",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a topic to a webhook. This api only adds, does not replace topics or updates existing topics. Will throw if a topic type exists for this webhook already."
+        },
+        {
+          "info": {
+            "name": "Replace all webhook topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pax8.com/v1/webhooks/:id/topics",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace all webhook topics"
+        },
+        {
+          "info": {
+            "name": "Remove webhook topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pax8.com/v1/webhooks/:id/topics/:topicId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topicId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove a specific topic from a webhook"
+        },
+        {
+          "info": {
+            "name": "Update topic configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/webhooks/:id/topics/:topicId/configuration",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topicId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the configuration of a specific topic on a webhook"
+        },
+        {
+          "info": {
+            "name": "Test webhook topic",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/webhooks/:id/topics/:topic/test",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "topic",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Test a webhook by sending a test event for a specific topic. This will send a example payload of what this topic provides."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

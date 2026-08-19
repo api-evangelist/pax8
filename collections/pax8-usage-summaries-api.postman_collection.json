@@ -1,0 +1,547 @@
+{
+  "item": [
+    {
+      "id": "6f111955-f3c2-46d3-a9ea-6d43b4c2e668",
+      "name": "Usage Summaries",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b05caa61-0db0-4224-8f50-592231231a55",
+          "name": "List Usage Summaries",
+          "request": {
+            "name": "List Usage Summaries",
+            "description": {
+              "content": "Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId",
+                "usage-summaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "The page number to request in the usage summaries list"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Returns _this_ number of usage summaries per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Return usage summaries sorted by this field and direction Formatted as fieldName,direction - ex. sort=resourceGroup,desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "resourceGroup",
+                  "value": "<string>",
+                  "description": "Return only usage summaries matching this ```resourceGroup``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyId",
+                  "value": "<uuid>",
+                  "description": "Return only usage summaries with this ```companyId``` value"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "subscriptionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5937b604-9870-4a6d-8fea-7362a1414c74",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "usage-summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceGroup",
+                      "value": "IronCloud Technologies"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"52d8d4bc-59db-48fe-9aa7-95bed562ff95\",\n      \"companyId\": \"ede334e7-d1c7-4e0a-822d-dee891f6ce9a\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company 1\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 100.56,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 86.456,\n      \"isTrial\": false\n    },\n    {\n      \"id\": \"5df21356-eaef-4b04-935a-afd22c57a022\",\n      \"companyId\": \"f594d111-4360-4061-8664-cde1c4e465e8\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company 2\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 46.56,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 36.456,\n      \"isTrial\": false\n    },\n    {\n      \"id\": \"d9eccc77-36cb-4a57-b88b-410d8e4ea674\",\n      \"companyId\": \"5cb96b47-fc4f-4116-8603-0f0883781b94\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company 3\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 86.97,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 57.246,\n      \"isTrial\": false\n    },\n    {\n      \"id\": \"fce41092-5317-4f9d-a6e0-6d3db34640c7\",\n      \"companyId\": \"e4db6c63-bd19-4f31-b403-ece3e3a4d9e0\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company A\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 142.58,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 113.546,\n      \"isTrial\": true\n    },\n    {\n      \"id\": \"2371ffd6-51ba-4448-8b8e-1835ebe76e99\",\n      \"companyId\": \"5a69a819-3215-45e6-9178-3445bcfee15b\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company B\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 100.56,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 86.456,\n      \"isTrial\": true\n    },\n    {\n      \"id\": \"f8c6618c-9453-4062-a628-50c4052cb52e\",\n      \"companyId\": \"8758d69f-81e3-4016-b42d-9b150bf415ad\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company C\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 452.86,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 350.456,\n      \"isTrial\": false\n    },\n    {\n      \"id\": \"96ac14ec-7e77-409f-a22e-a4ed4fc85b8e\",\n      \"companyId\": \"3474e746-42c9-4c4b-8ec2-77f4a087e8a7\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company D\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 99.45,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 84.456,\n      \"isTrial\": false\n    },\n    {\n      \"id\": \"72f8be97-7c39-477e-9feb-eba85b362d76\",\n      \"companyId\": \"c16a440d-2aa5-4a53-853c-2d5f0b7ab37c\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company E\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 400.56,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 386.456,\n      \"isTrial\": false\n    },\n    {\n      \"id\": \"8f545a6f-a361-4b4d-a79d-a369b2716546\",\n      \"companyId\": \"b5c951b8-9b11-4ff3-9964-d699382d8653\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company F\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 450.56,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 350.456,\n      \"isTrial\": false\n    },\n    {\n      \"id\": \"0224b429-7d6a-41ca-9137-2333b939a668\",\n      \"companyId\": \"7312984c-ef85-4f77-9dd6-3c6e637c6864\",\n      \"subscriptionId\": \"8d04ad8c-456a-4b1d-9abe-a42ae526f683\",\n      \"productId\": \"b3bb9455-c454-4efa-9be8-15b86caf6933\",\n      \"resourceGroup\": \"Company G\",\n      \"vendorName\": \"Microsoft\",\n      \"currentCharges\": 99.56,\n      \"currencyCode\": \"USD\",\n      \"partnerTotal\": 71.456,\n      \"isTrial\": false\n    }\n  ],\n  \"page\": {\n    \"size\": 10,\n    \"totalElements\": 15,\n    \"totalPages\": 2,\n    \"number\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3718a5b-bdef-46c3-b33c-bc10ae68983e",
+              "name": "Invalid subscriptionId or companyId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "usage-summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceGroup",
+                      "value": "IronCloud Technologies"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 2092,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8579\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 4565\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23e817e2-2085-41ef-ac13-70b625337b7d",
+          "name": "Get Usage Summary By ID",
+          "request": {
+            "name": "Get Usage Summary By ID",
+            "description": {
+              "content": "Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usage-summaries",
+                ":usageSummaryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "usageSummaryId",
+                  "description": "(Required) The usage summary id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a0f5cff-0a54-4fdf-9e9d-ebe493516f9c",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage-summaries",
+                    ":usageSummaryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "usageSummaryId",
+                      "description": "(Required) The usage summary id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"d1947ad1-4e90-4aaa-0789-37757cad663a\",\n  \"companyId\": \"09141ff3-fdfe-f122-62a7-224f4a735d0f\",\n  \"productId\": \"b22d21ea-3b04-091c-8b94-3e82d04d8920\",\n  \"resourceGroup\": \"string\",\n  \"vendorName\": \"string\",\n  \"currentCharges\": 89.92783072023225,\n  \"currencyCode\": \"string\",\n  \"partnerTotal\": 7060.750742186365,\n  \"isTrial\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a44c50b3-2101-4343-9570-4910ca35f4fe",
+          "name": "List Usage Summary Lines",
+          "request": {
+            "name": "List Usage Summary Lines",
+            "description": {
+              "content": "Fetch a paginated list of usage lines. Default page is 0 and default size is 10. The maximum page size is 200",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "usage-summaries",
+                ":usageSummaryId",
+                "usage-lines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "usageDate",
+                  "value": "<yyyy-MM-dd>",
+                  "description": "(Required) The date usage was recorded"
+                },
+                {
+                  "disabled": false,
+                  "key": "productId",
+                  "value": "<uuid>",
+                  "description": "Return only usage summaries with this ```productId``` value"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "usageSummaryId",
+                  "description": "(Required) The usage summary id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03d6a82f-4391-4b10-9ec1-f84361f0a9e9",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage-summaries",
+                    ":usageSummaryId",
+                    "usage-lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usageDate",
+                      "value": "2020-01-01"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "usageSummaryId",
+                      "description": "(Required) The usage summary id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint Essentials - Professional\",\n      \"productId\": \"61bf3a55-f1da-4efd-88eb-bf362b0ad51e\",\n      \"unitOfMeasure\": \"User\",\n      \"quantity\": 3,\n      \"currentCharges\": 15.99,\n      \"currentProfit\": 5.61,\n      \"partnerTotal\": 10.38,\n      \"unitPrice\": 5.33,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint Essentials - Avdanced\",\n      \"productId\": \"e73f3a55-f1da-4efd-88eb-bf3je60ad5lq\",\n      \"unitOfMeasure\": \"User\",\n      \"quantity\": 3,\n      \"currentCharges\": 15.99,\n      \"currentProfit\": 5.61,\n      \"partnerTotal\": 10.38,\n      \"unitPrice\": 5.33,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint Essentials - Enterprise\",\n      \"productId\": \"ac6843db-abba-40a4-8130-8d33c374aecb\",\n      \"unitOfMeasure\": \"Seat\",\n      \"quantity\": 3,\n      \"currentCharges\": 13.99,\n      \"currentProfit\": 2.61,\n      \"partnerTotal\": 7.38,\n      \"unitPrice\": 2.33,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": true\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint VM's\",\n      \"productId\": \"620a63be-cb0c-4df9-9c7b-5517e84c3b98\",\n      \"unitOfMeasure\": \"User\",\n      \"quantity\": 4,\n      \"currentCharges\": 16,\n      \"currentProfit\": 6,\n      \"partnerTotal\": 10,\n      \"unitPrice\": 4,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint Servers\",\n      \"productId\": \"bf2777cb-53f4-449e-a63a-914da4d4dbda\",\n      \"unitOfMeasure\": \"User\",\n      \"quantity\": 3,\n      \"currentCharges\": 15.99,\n      \"currentProfit\": 5.61,\n      \"partnerTotal\": 10.38,\n      \"unitPrice\": 5.33,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint Workstations\",\n      \"productId\": \"4cd5353e-b473-4ce4-a580-c6568d38aeb7\",\n      \"unitOfMeasure\": \"Seat\",\n      \"quantity\": 4,\n      \"currentCharges\": 19.99,\n      \"currentProfit\": 4.61,\n      \"partnerTotal\": 15.38,\n      \"unitPrice\": 5,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint Storage\",\n      \"productId\": \"f7a5eaee-47bb-44f1-80b5-0e26898234db\",\n      \"unitOfMeasure\": \"User\",\n      \"quantity\": 3,\n      \"currentCharges\": 15.99,\n      \"currentProfit\": 5.61,\n      \"partnerTotal\": 10.38,\n      \"unitPrice\": 5.33,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint International\",\n      \"productId\": \"0ff7d338-d5c8-47ab-b091-d13037223014\",\n      \"unitOfMeasure\": \"User\",\n      \"quantity\": 3,\n      \"currentCharges\": 15.99,\n      \"currentProfit\": 5.61,\n      \"partnerTotal\": 10.38,\n      \"unitPrice\": 5.33,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint Domestic\",\n      \"productId\": \"bb51e4ba-ba53-4958-b9ee-af67fa008ceb\",\n      \"unitOfMeasure\": \"User\",\n      \"quantity\": 3,\n      \"currentCharges\": 15.99,\n      \"currentProfit\": 5.61,\n      \"partnerTotal\": 10.38,\n      \"unitPrice\": 5.33,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    },\n    {\n      \"usageDate\": \"2020-01-14\",\n      \"productName\": \"Proofpoint Express\",\n      \"productId\": \"f0f2c7cc-4ae2-4a16-85ac-24fa19c03f27\",\n      \"unitOfMeasure\": \"User\",\n      \"quantity\": 3,\n      \"currentCharges\": 15.99,\n      \"currentProfit\": 5.61,\n      \"partnerTotal\": 10.38,\n      \"unitPrice\": 5.33,\n      \"currencyCode\": \"USD\",\n      \"isTrial\": false\n    }\n  ],\n  \"page\": {\n    \"size\": 10,\n    \"totalElements\": 115,\n    \"totalPages\": 11,\n    \"number\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d8e2f77-d51b-470d-958e-1585e775188c",
+              "name": "Invalid usage summary id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "usage-summaries",
+                    ":usageSummaryId",
+                    "usage-lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "usageDate",
+                      "value": "2020-01-01"
+                    },
+                    {
+                      "key": "productId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "usageSummaryId",
+                      "description": "(Required) The usage summary id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 6356,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 7292\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 7463\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e5d65154-3a87-4677-8ed9-ea209c0dbbbd",
+    "name": "Authentication Access Token Usage Summaries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

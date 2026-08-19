@@ -1,0 +1,441 @@
+{
+  "item": [
+    {
+      "id": "865aaca6-09f0-4c96-8959-36039a5c775a",
+      "name": "Usage Lines",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf70267c-8827-464e-8309-99ca2e23e4ac",
+          "name": "Get Usage Lines",
+          "request": {
+            "name": "Get Usage Lines",
+            "description": {
+              "content": "A `subscriptionId` OR an `externalSubscriptionId` is required",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "subscriptionId",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalSubscriptionId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "billingPeriod",
+                  "value": "<string>",
+                  "description": "(Required) Billing period with format yyyy-MM"
+                },
+                {
+                  "disabled": false,
+                  "key": "summaryKey",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "003deac2-813b-4037-82c4-67d34d25dee1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "subscriptionId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "externalSubscriptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billingPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summaryKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"productId\": \"4cc50690-5ece-7f4a-2ce1-bef595945b45\",\n      \"quantity\": 6940.898174551986,\n      \"summaryDisplayName\": \"string\",\n      \"summaryKey\": \"string\",\n      \"unitOfMeasurement\": \"string\"\n    },\n    {\n      \"productId\": \"53b901a4-1fbf-7edd-8273-93c8f7c73d85\",\n      \"quantity\": 484.93627385886475,\n      \"summaryDisplayName\": \"string\",\n      \"summaryKey\": \"string\",\n      \"unitOfMeasurement\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"number\": 184,\n    \"size\": 68,\n    \"totalElements\": 6762,\n    \"totalPages\": 1478\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb7f02a4-9bc0-4096-b1f5-62ac36f7df55",
+          "name": "Save Usage Lines",
+          "request": {
+            "name": "Save Usage Lines",
+            "description": {
+              "content": "A `subscriptionId` OR an `externalSubscriptionId` is required",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "subscriptionId",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalSubscriptionId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "billingPeriod",
+                  "value": "<string>",
+                  "description": "(Required) Billing period with format yyyy-MM"
+                },
+                {
+                  "disabled": false,
+                  "key": "overwriteSameDayUsage",
+                  "value": "true",
+                  "description": "When set to false, usage lines for the same summary key will be appended instead of replacing existing same-day lines"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"productId\": \"<uuid>\",\n    \"quantity\": \"<number>\",\n    \"summaryDisplayName\": \"<string>\",\n    \"summaryKey\": \"<string>\",\n    \"unitOfMeasurement\": \"<string>\"\n  },\n  {\n    \"productId\": \"<uuid>\",\n    \"quantity\": \"<number>\",\n    \"summaryDisplayName\": \"<string>\",\n    \"summaryKey\": \"<string>\",\n    \"unitOfMeasurement\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52ad6b21-49e1-400e-8009-f37a6c9f386c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "subscriptionId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "externalSubscriptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billingPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "overwriteSameDayUsage",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"productId\": \"<uuid>\",\n    \"quantity\": \"<number>\",\n    \"summaryDisplayName\": \"<string>\",\n    \"summaryKey\": \"<string>\",\n    \"unitOfMeasurement\": \"<string>\"\n  },\n  {\n    \"productId\": \"<uuid>\",\n    \"quantity\": \"<number>\",\n    \"summaryDisplayName\": \"<string>\",\n    \"summaryKey\": \"<string>\",\n    \"unitOfMeasurement\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"productId\": \"<uuid>\",\n      \"quantity\": \"<number>\",\n      \"summaryDisplayName\": \"<string>\",\n      \"summaryKey\": \"<string>\",\n      \"unitOfMeasurement\": \"<string>\"\n    },\n    {\n      \"productId\": \"<uuid>\",\n      \"quantity\": \"<number>\",\n      \"summaryDisplayName\": \"<string>\",\n      \"summaryKey\": \"<string>\",\n      \"unitOfMeasurement\": \"<string>\"\n    }\n  ],\n  \"page\": {\n    \"number\": 9172,\n    \"size\": 8003,\n    \"totalElements\": 6854,\n    \"totalPages\": 5532\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8632696f-ebba-4242-ae36-cd745cbad952",
+          "name": "Save Usage Lines with an Aggregate Partner Quantity",
+          "request": {
+            "name": "Save Usage Lines with an Aggregate Partner Quantity",
+            "description": {
+              "content": "A `subscriptionId` OR an `externalSubscriptionId` is required",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "aggregate-lines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "subscriptionId",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalSubscriptionId",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "billingPeriod",
+                  "value": "<string>",
+                  "description": "(Required) Billing period with format yyyy-MM"
+                },
+                {
+                  "disabled": false,
+                  "key": "overwriteSameDayUsage",
+                  "value": "true",
+                  "description": "When set to false, usage lines for the same summary key will be appended instead of replacing existing same-day lines"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<object>\",\n  \"<object>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f6a3189-3f01-4487-b7b8-56a9a8a7c440",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "aggregate-lines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "subscriptionId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "externalSubscriptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billingPeriod",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "overwriteSameDayUsage",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"partnerAggregateQuantity\": \"<number>\",\n    \"productId\": \"<uuid>\",\n    \"quantity\": \"<number>\",\n    \"summaryDisplayName\": \"<string>\",\n    \"summaryKey\": \"<string>\",\n    \"unitOfMeasurement\": \"<string>\"\n  },\n  {\n    \"partnerAggregateQuantity\": \"<number>\",\n    \"productId\": \"<uuid>\",\n    \"quantity\": \"<number>\",\n    \"summaryDisplayName\": \"<string>\",\n    \"summaryKey\": \"<string>\",\n    \"unitOfMeasurement\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"productId\": \"<uuid>\",\n      \"quantity\": \"<number>\",\n      \"summaryDisplayName\": \"<string>\",\n      \"summaryKey\": \"<string>\",\n      \"unitOfMeasurement\": \"<string>\"\n    },\n    {\n      \"productId\": \"<uuid>\",\n      \"quantity\": \"<number>\",\n      \"summaryDisplayName\": \"<string>\",\n      \"summaryKey\": \"<string>\",\n      \"unitOfMeasurement\": \"<string>\"\n    }\n  ],\n  \"page\": {\n    \"number\": 9172,\n    \"size\": 8003,\n    \"totalElements\": 6854,\n    \"totalPages\": 5532\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b872bfb7-bea4-49de-a7c3-a7053bdcaf41",
+    "name": "Authentication Access Token Usage Lines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

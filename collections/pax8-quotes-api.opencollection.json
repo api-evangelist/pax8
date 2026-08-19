@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Quotes API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get quotes list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/v2/quotes",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return quotes sorted by fieldName,direction (e.g. sort=status,desc)."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search on fields like client name, reference code, created by user name, and invoice totals."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status. Multiple values can be provided as a comma-separated list."
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "partnerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "intentType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Fetches a paginated list of quotes with optional search and status filters."
+        },
+        {
+          "info": {
+            "name": "Create quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/v2/quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new quote for the specified clientId."
+        },
+        {
+          "info": {
+            "name": "Get quote by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/v2/quotes/:quoteId",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single quote record matching the specified quoteId."
+        },
+        {
+          "info": {
+            "name": "Update quote by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pax8.com/v1/v2/quotes/:quoteId",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of an existing quote."
+        },
+        {
+          "info": {
+            "name": "Delete quote by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pax8.com/v1/v2/quotes/:quoteId",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a quote by its quoteId."
+        },
+        {
+          "info": {
+            "name": "Take quote ownership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/v2/quotes/:quoteId/take-ownership",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Takes ownership of a quote by the current partner user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

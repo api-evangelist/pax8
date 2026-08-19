@@ -1,0 +1,1472 @@
+{
+  "item": [
+    {
+      "id": "626ce0a2-c1a7-4776-a3e3-01a3feb91c80",
+      "name": "Quotes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "56390136-dc21-45de-b75e-59966cbb8af4",
+          "name": "Get quotes list",
+          "request": {
+            "name": "Get quotes list",
+            "description": {
+              "content": "Fetches a paginated list of quotes with optional search and status filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Return quotes sorted by fieldName,direction (e.g. sort=status,desc)."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search on fields like client name, reference code, created by user name, and invoice totals."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by status. Multiple values can be provided as a comma-separated list."
+                },
+                {
+                  "disabled": false,
+                  "key": "account",
+                  "value": "user"
+                },
+                {
+                  "disabled": false,
+                  "key": "partnerId",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "intentType",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f1ac3ea-2e6a-448e-8eda-0de9189b23a4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account",
+                      "value": "user"
+                    },
+                    {
+                      "key": "partnerId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "intentType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"client\": {\n        \"id\": \"fe6c9770-7f90-ee16-4471-957cd25a9a39\",\n        \"isShadowCompany\": false,\n        \"name\": \"string\"\n      },\n      \"createdBy\": \"string\",\n      \"createdOn\": \"2021-09-22T01:56:53.650Z\",\n      \"id\": \"994ddb61-b921-6a0d-63ae-741c5b4a636a\",\n      \"lineItemCounts\": {\n        \"custom\": 9951,\n        \"msp\": 2411,\n        \"total\": 4257\n      },\n      \"published\": true,\n      \"referenceCode\": \"string\",\n      \"status\": \"declined\",\n      \"totals\": {\n        \"initialTotal\": {\n          \"amount\": 5993.182180805018,\n          \"currency\": \"string\"\n        },\n        \"recurringTotal\": {\n          \"amount\": 3188.8764616272947,\n          \"currency\": \"string\"\n        }\n      },\n      \"updatedOn\": \"1961-01-20T01:22:41.749Z\",\n      \"intentType\": \"PAX8_TO_PARTNER\",\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"fullName\": \"string\",\n        \"id\": \"98727d50-190d-7f92-f44c-4bd3029e728e\",\n        \"role\": \"string\"\n      },\n      \"partner\": {\n        \"id\": \"621b96d1-01f6-a1f2-3b3f-1a397e47e79f\",\n        \"name\": \"string\",\n        \"parentPartner\": {\n          \"parentPartnerId\": \"571e02ea-977d-3f59-0db4-62ad0ae7b483\",\n          \"parentPartnerName\": \"string\"\n        }\n      },\n      \"publishedOn\": \"2006-08-13T11:48:56.511Z\"\n    },\n    {\n      \"client\": {\n        \"id\": \"25c472c5-da64-f270-48ec-217b95fae7cb\",\n        \"isShadowCompany\": false,\n        \"name\": \"string\"\n      },\n      \"createdBy\": \"string\",\n      \"createdOn\": \"2019-06-06T15:39:26.688Z\",\n      \"id\": \"42bb0adb-8e66-6848-0130-26cbd9647b73\",\n      \"lineItemCounts\": {\n        \"custom\": 2988,\n        \"msp\": 142,\n        \"total\": 8650\n      },\n      \"published\": false,\n      \"referenceCode\": \"string\",\n      \"status\": \"assigned\",\n      \"totals\": {\n        \"initialTotal\": {\n          \"amount\": 4480.621762732583,\n          \"currency\": \"string\"\n        },\n        \"recurringTotal\": {\n          \"amount\": 7599.01048397275,\n          \"currency\": \"string\"\n        }\n      },\n      \"updatedOn\": \"1980-08-07T18:43:34.203Z\",\n      \"intentType\": \"PAX8_TO_PARTNER\",\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"fullName\": \"string\",\n        \"id\": \"bd0ecc30-7ff9-4d70-0a92-1da242b82d1b\",\n        \"role\": \"string\"\n      },\n      \"partner\": {\n        \"id\": \"d42af999-07d8-6f94-7c94-decdc3bc5ac7\",\n        \"name\": \"string\",\n        \"parentPartner\": {\n          \"parentPartnerId\": \"975d6274-7283-026f-f457-02cc4659afa4\",\n          \"parentPartnerName\": \"string\"\n        }\n      },\n      \"publishedOn\": \"2017-02-05T06:40:03.728Z\"\n    }\n  ],\n  \"page\": {\n    \"number\": 9025,\n    \"size\": 6300,\n    \"totalElements\": 1486,\n    \"totalPages\": 3050\n  },\n  \"statusCounts\": {\n    \"accepted\": 191,\n    \"closed\": 1039,\n    \"declined\": 6479,\n    \"draft\": 5282,\n    \"expired\": 4041,\n    \"sent\": 6802,\n    \"pending\": 3932\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9174c839-906c-4063-9171-7c515bce3a65",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account",
+                      "value": "user"
+                    },
+                    {
+                      "key": "partnerId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "intentType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"INVALID_REQUEST_FIELD\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"INVALID_USER_LEVEL\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8424,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bda2cb9-20ca-4d6e-a9c1-6f896db03877",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account",
+                      "value": "user"
+                    },
+                    {
+                      "key": "partnerId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "intentType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9332ebc1-760e-4c32-b326-34e40f15d446",
+          "name": "Create quote",
+          "request": {
+            "name": "Create quote",
+            "description": {
+              "content": "Creates a new quote for the specified clientId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": \"<uuid>\",\n  \"quoteRequestId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f25192f-983e-4103-a727-0ce1cac9537f",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"<uuid>\",\n  \"quoteRequestId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"attachments\": [\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"5c58ad21-df64-d328-aeb3-6fa5c1d84131\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"2007-07-15T20:40:14.438Z\",\n      \"id\": \"832dc644-c49c-33e8-2ab1-453665de894f\",\n      \"name\": \"string\",\n      \"order\": 315,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"1967-08-01T23:46:02.792Z\"\n    },\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"799f44f2-ca39-0b27-eac3-24c64018ca2c\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"2004-01-27T16:01:09.627Z\",\n      \"id\": \"9d08d429-2d75-99a3-d2d4-effeece098e6\",\n      \"name\": \"string\",\n      \"order\": 3389,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"1979-01-13T08:55:04.330Z\"\n    }\n  ],\n  \"client\": {\n    \"id\": \"e744d6a8-8e15-f62d-26a2-6915433ade21\",\n    \"isShadowCompany\": false,\n    \"name\": \"string\"\n  },\n  \"createdBy\": \"string\",\n  \"createdByEmail\": \"string\",\n  \"createdOn\": \"2017-01-29T19:38:23.307Z\",\n  \"expiresOn\": \"1967-08-20T05:31:59.333Z\",\n  \"id\": \"8cd3696d-38c1-518b-3287-2857c3f55c1f\",\n  \"introMessage\": \"string\",\n  \"lineItems\": {\n    \"billingTerm\": \"Annual\",\n    \"cost\": {\n      \"amount\": 7709.797480002688,\n      \"currency\": \"string\"\n    },\n    \"effectiveDate\": \"1949-01-06T13:48:26.473Z\",\n    \"id\": \"48fbb5a0-ab4e-a815-7f44-74a589b4e820\",\n    \"note\": \"string\",\n    \"price\": {\n      \"amount\": 6277.202165528247,\n      \"currency\": \"string\"\n    },\n    \"product\": {\n      \"id\": \"d7720a09-1d0e-466e-7c66-3c58991ee77a\",\n      \"isMspOnly\": true,\n      \"name\": \"string\",\n      \"sku\": \"string\",\n      \"type\": \"Standalone\"\n    },\n    \"quantity\": 9659,\n    \"totals\": {\n      \"initialCost\": {\n        \"amount\": 7358.233371820569,\n        \"currency\": \"string\"\n      },\n      \"initialProfit\": {\n        \"amount\": 8444.70496169645,\n        \"currency\": \"string\"\n      },\n      \"initialTotal\": {\n        \"amount\": 3141.7423098747745,\n        \"currency\": \"string\"\n      },\n      \"recurringCost\": {\n        \"amount\": 6357.118092646041,\n        \"currency\": \"string\"\n      },\n      \"recurringProfit\": {\n        \"amount\": 1796.3980987481266,\n        \"currency\": \"string\"\n      },\n      \"recurringTotal\": {\n        \"amount\": 9975.867827228747,\n        \"currency\": \"string\"\n      }\n    },\n    \"commitmentTerm\": {\n      \"id\": \"6e2bd468-c895-3df3-bdda-d46d54c6d50a\",\n      \"term\": \"string\"\n    },\n    \"relationship\": {\n      \"requiredLineItemId\": \"5ec0ca35-fecb-5ee7-a5af-201628dcd8fc\",\n      \"requiredSubscriptionId\": \"605c5f37-b04c-1816-d478-e9ebfd3d91a6\"\n    },\n    \"subscriptionId\": \"f9043242-1125-d6c0-5897-db0345716905\",\n    \"usageBased\": {\n      \"displayNote\": false,\n      \"type\": \"PRICE_FLAT\"\n    }\n  },\n  \"partner\": {\n    \"city\": \"string\",\n    \"id\": \"4ec91e32-4f63-72cc-6515-44e1965ee429\",\n    \"name\": \"string\",\n    \"postcode\": \"string\",\n    \"stateOrProvinceCode\": \"string\",\n    \"street\": \"string\",\n    \"country\": \"string\",\n    \"parentPartner\": {\n      \"parentPartnerId\": \"9132642f-c2ac-ca71-91b4-dc28637a8042\",\n      \"parentPartnerName\": \"string\"\n    },\n    \"street2\": \"string\"\n  },\n  \"published\": true,\n  \"referenceCode\": \"string\",\n  \"status\": \"expired\",\n  \"termsAndDisclaimers\": \"string\",\n  \"totals\": {\n    \"initialCost\": {\n      \"amount\": 7346.029366691944,\n      \"currency\": \"string\"\n    },\n    \"initialProfit\": {\n      \"amount\": 2255.800889243309,\n      \"currency\": \"string\"\n    },\n    \"initialTotal\": {\n      \"amount\": 7361.191929845715,\n      \"currency\": \"string\"\n    },\n    \"recurringCost\": {\n      \"amount\": 6491.630540465768,\n      \"currency\": \"string\"\n    },\n    \"recurringProfit\": {\n      \"amount\": 4768.987962323355,\n      \"currency\": \"string\"\n    },\n    \"recurringTotal\": {\n      \"amount\": 9869.113898996658,\n      \"currency\": \"string\"\n    }\n  },\n  \"acceptedBy\": {\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"ipAddress\": \"string\"\n  },\n  \"declinedBy\": {\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"ipAddress\": \"string\"\n  },\n  \"intentType\": \"PAX8_TO_PARTNER\",\n  \"ownedBy\": {\n    \"displayName\": \"string\",\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"id\": \"bc80b9a3-dc5c-1c17-e7d5-42bec6fdcf2c\",\n    \"ipAddress\": \"string\",\n    \"quoteAcceptedByName\": \"string\",\n    \"userRole\": \"string\"\n  },\n  \"publishedOn\": \"1987-01-13T11:51:03.828Z\",\n  \"quoteRequestId\": \"7a303574-8ffc-61f2-d17d-7f66f0a11352\",\n  \"respondedOn\": \"2023-03-16T20:01:32.075Z\",\n  \"revokedOn\": \"1964-04-30T20:24:34.265Z\",\n  \"salesMarginPercentage\": 1821.3726580512202\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef62428f-421a-46a4-b26e-3bcd64513320",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"<uuid>\",\n  \"quoteRequestId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "618a3194-7388-48c2-b9f1-9fa4ef76b861",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clientId\": \"<uuid>\",\n  \"quoteRequestId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f4594b5-6c03-48a3-903b-c7e23570b25e",
+          "name": "Delete quote by ID",
+          "request": {
+            "name": "Delete quote by ID",
+            "description": {
+              "content": "Deletes a quote by its quoteId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "385fed12-81d7-4bc5-942a-39da02fd5cd2",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09fe3c48-6ac0-4dfb-8be7-0c3bdd3e5280",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90b8abea-ee29-4015-a9cf-8e4ffa2921a8",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25a30ee1-2f61-4c62-881f-a26fdeb088ea",
+          "name": "Get quote by ID",
+          "request": {
+            "name": "Get quote by ID",
+            "description": {
+              "content": "Returns a single quote record matching the specified quoteId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70e1f740-93f0-407d-b673-0bb70492d650",
+              "name": "OK - Returns the quote details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"attachments\": [\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"e0b64b8f-fb2b-3502-db93-5a5b2ee0ab37\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"1958-08-25T17:41:58.305Z\",\n      \"id\": \"6d3aa459-8243-4740-6fa4-96368282b1a6\",\n      \"name\": \"string\",\n      \"order\": 9130,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"2020-01-03T17:44:09.356Z\"\n    },\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"7a814a8d-c5e4-70e6-761e-2e3ffa664ac1\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"1969-01-10T03:55:04.773Z\",\n      \"id\": \"9c6f3c9f-9b93-68d2-31db-1f289f362808\",\n      \"name\": \"string\",\n      \"order\": 7669,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"2025-08-05T03:46:27.928Z\"\n    }\n  ],\n  \"client\": {\n    \"id\": \"df6c6864-3b95-a1ea-8d1c-10abe8ed914d\",\n    \"isShadowCompany\": true,\n    \"name\": \"string\"\n  },\n  \"createdBy\": \"string\",\n  \"createdByEmail\": \"string\",\n  \"createdOn\": \"2017-07-12T20:02:37.969Z\",\n  \"expiresOn\": \"2000-01-27T19:11:35.205Z\",\n  \"id\": \"0b60504a-80e9-03fc-f1c9-3e9896cfb1c1\",\n  \"introMessage\": \"string\",\n  \"lineItems\": {\n    \"billingTerm\": \"3 Year\",\n    \"cost\": {\n      \"amount\": 202.4650977964382,\n      \"currency\": \"string\"\n    },\n    \"effectiveDate\": \"2026-07-11T13:06:06.068Z\",\n    \"id\": \"7fbb7e69-7da2-4be0-3c4f-4fe077438de7\",\n    \"note\": \"string\",\n    \"price\": {\n      \"amount\": 1.2361631270918494,\n      \"currency\": \"string\"\n    },\n    \"product\": {\n      \"id\": \"d5f287c0-c1b6-004b-3d7f-727705c3de34\",\n      \"isMspOnly\": false,\n      \"name\": \"string\",\n      \"sku\": \"string\",\n      \"type\": \"Solution\"\n    },\n    \"quantity\": 7992,\n    \"totals\": {\n      \"initialCost\": {\n        \"amount\": 1865.9369895289879,\n        \"currency\": \"string\"\n      },\n      \"initialProfit\": {\n        \"amount\": 2464.6488206842687,\n        \"currency\": \"string\"\n      },\n      \"initialTotal\": {\n        \"amount\": 990.5152843527254,\n        \"currency\": \"string\"\n      },\n      \"recurringCost\": {\n        \"amount\": 2554.2576431214247,\n        \"currency\": \"string\"\n      },\n      \"recurringProfit\": {\n        \"amount\": 8402.584467921763,\n        \"currency\": \"string\"\n      },\n      \"recurringTotal\": {\n        \"amount\": 3711.455314034344,\n        \"currency\": \"string\"\n      }\n    },\n    \"commitmentTerm\": {\n      \"id\": \"0439d2a6-68b2-e18c-2793-50a50c203c6b\",\n      \"term\": \"string\"\n    },\n    \"relationship\": {\n      \"requiredLineItemId\": \"422be36c-e8db-8163-3fe8-a55909984e02\",\n      \"requiredSubscriptionId\": \"51c62ea8-d5fe-b84b-e609-75fbbdcfa4aa\"\n    },\n    \"subscriptionId\": \"dffb42b7-29eb-d8a8-0c0e-4e087d42a06b\",\n    \"usageBased\": {\n      \"displayNote\": true,\n      \"type\": \"PRICE_FLAT\"\n    }\n  },\n  \"partner\": {\n    \"city\": \"string\",\n    \"id\": \"cb2be420-66d2-90bb-dac4-84fe78520724\",\n    \"name\": \"string\",\n    \"postcode\": \"string\",\n    \"stateOrProvinceCode\": \"string\",\n    \"street\": \"string\",\n    \"country\": \"string\",\n    \"parentPartner\": {\n      \"parentPartnerId\": \"433ddcd1-a315-83b4-2b34-92d295c5b754\",\n      \"parentPartnerName\": \"string\"\n    },\n    \"street2\": \"string\"\n  },\n  \"published\": false,\n  \"referenceCode\": \"string\",\n  \"status\": \"accepted\",\n  \"termsAndDisclaimers\": \"string\",\n  \"totals\": {\n    \"initialCost\": {\n      \"amount\": 3585.274968386347,\n      \"currency\": \"string\"\n    },\n    \"initialProfit\": {\n      \"amount\": 9167.070884372537,\n      \"currency\": \"string\"\n    },\n    \"initialTotal\": {\n      \"amount\": 2009.0998239666424,\n      \"currency\": \"string\"\n    },\n    \"recurringCost\": {\n      \"amount\": 6165.350159847788,\n      \"currency\": \"string\"\n    },\n    \"recurringProfit\": {\n      \"amount\": 4342.393778930843,\n      \"currency\": \"string\"\n    },\n    \"recurringTotal\": {\n      \"amount\": 6369.192174153007,\n      \"currency\": \"string\"\n    }\n  },\n  \"acceptedBy\": {\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"ipAddress\": \"string\"\n  },\n  \"declinedBy\": {\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"ipAddress\": \"string\"\n  },\n  \"intentType\": \"PARTNER_TO_CLIENT\",\n  \"ownedBy\": {\n    \"displayName\": \"string\",\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"id\": \"ba3c6096-79fe-729c-ba74-0b397ddaab9e\",\n    \"ipAddress\": \"string\",\n    \"quoteAcceptedByName\": \"string\",\n    \"userRole\": \"string\"\n  },\n  \"publishedOn\": \"1966-07-12T05:34:05.267Z\",\n  \"quoteRequestId\": \"8b8dbbb7-e5f2-bd64-2458-5419fb853205\",\n  \"respondedOn\": \"1967-03-05T09:42:28.562Z\",\n  \"revokedOn\": \"1996-06-11T06:30:23.752Z\",\n  \"salesMarginPercentage\": 3133.795099673733\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "292ec85b-71e9-420f-9959-e41b0fcd53a3",
+              "name": "Bad Request - Invalid quote ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64807baa-2563-400a-a251-00344a4132f3",
+              "name": "Authorization Error - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d681f77-a0a7-438c-a17b-78e9b495bd85",
+          "name": "Update quote by ID",
+          "request": {
+            "name": "Update quote by ID",
+            "description": {
+              "content": "Updates the details of an existing quote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expiresOn\": \"<dateTime>\",\n  \"introMessage\": \"<string>\",\n  \"published\": \"<boolean>\",\n  \"status\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16a40de3-fa8c-4490-9484-3329c3dde51d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expiresOn\": \"<dateTime>\",\n  \"introMessage\": \"<string>\",\n  \"published\": \"<boolean>\",\n  \"status\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"attachments\": [\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"e0b64b8f-fb2b-3502-db93-5a5b2ee0ab37\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"1958-08-25T17:41:58.305Z\",\n      \"id\": \"6d3aa459-8243-4740-6fa4-96368282b1a6\",\n      \"name\": \"string\",\n      \"order\": 9130,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"2020-01-03T17:44:09.356Z\"\n    },\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"7a814a8d-c5e4-70e6-761e-2e3ffa664ac1\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"1969-01-10T03:55:04.773Z\",\n      \"id\": \"9c6f3c9f-9b93-68d2-31db-1f289f362808\",\n      \"name\": \"string\",\n      \"order\": 7669,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"2025-08-05T03:46:27.928Z\"\n    }\n  ],\n  \"client\": {\n    \"id\": \"df6c6864-3b95-a1ea-8d1c-10abe8ed914d\",\n    \"isShadowCompany\": true,\n    \"name\": \"string\"\n  },\n  \"createdBy\": \"string\",\n  \"createdByEmail\": \"string\",\n  \"createdOn\": \"2017-07-12T20:02:37.969Z\",\n  \"expiresOn\": \"2000-01-27T19:11:35.205Z\",\n  \"id\": \"0b60504a-80e9-03fc-f1c9-3e9896cfb1c1\",\n  \"introMessage\": \"string\",\n  \"lineItems\": {\n    \"billingTerm\": \"3 Year\",\n    \"cost\": {\n      \"amount\": 202.4650977964382,\n      \"currency\": \"string\"\n    },\n    \"effectiveDate\": \"2026-07-11T13:06:06.068Z\",\n    \"id\": \"7fbb7e69-7da2-4be0-3c4f-4fe077438de7\",\n    \"note\": \"string\",\n    \"price\": {\n      \"amount\": 1.2361631270918494,\n      \"currency\": \"string\"\n    },\n    \"product\": {\n      \"id\": \"d5f287c0-c1b6-004b-3d7f-727705c3de34\",\n      \"isMspOnly\": false,\n      \"name\": \"string\",\n      \"sku\": \"string\",\n      \"type\": \"Solution\"\n    },\n    \"quantity\": 7992,\n    \"totals\": {\n      \"initialCost\": {\n        \"amount\": 1865.9369895289879,\n        \"currency\": \"string\"\n      },\n      \"initialProfit\": {\n        \"amount\": 2464.6488206842687,\n        \"currency\": \"string\"\n      },\n      \"initialTotal\": {\n        \"amount\": 990.5152843527254,\n        \"currency\": \"string\"\n      },\n      \"recurringCost\": {\n        \"amount\": 2554.2576431214247,\n        \"currency\": \"string\"\n      },\n      \"recurringProfit\": {\n        \"amount\": 8402.584467921763,\n        \"currency\": \"string\"\n      },\n      \"recurringTotal\": {\n        \"amount\": 3711.455314034344,\n        \"currency\": \"string\"\n      }\n    },\n    \"commitmentTerm\": {\n      \"id\": \"0439d2a6-68b2-e18c-2793-50a50c203c6b\",\n      \"term\": \"string\"\n    },\n    \"relationship\": {\n      \"requiredLineItemId\": \"422be36c-e8db-8163-3fe8-a55909984e02\",\n      \"requiredSubscriptionId\": \"51c62ea8-d5fe-b84b-e609-75fbbdcfa4aa\"\n    },\n    \"subscriptionId\": \"dffb42b7-29eb-d8a8-0c0e-4e087d42a06b\",\n    \"usageBased\": {\n      \"displayNote\": true,\n      \"type\": \"PRICE_FLAT\"\n    }\n  },\n  \"partner\": {\n    \"city\": \"string\",\n    \"id\": \"cb2be420-66d2-90bb-dac4-84fe78520724\",\n    \"name\": \"string\",\n    \"postcode\": \"string\",\n    \"stateOrProvinceCode\": \"string\",\n    \"street\": \"string\",\n    \"country\": \"string\",\n    \"parentPartner\": {\n      \"parentPartnerId\": \"433ddcd1-a315-83b4-2b34-92d295c5b754\",\n      \"parentPartnerName\": \"string\"\n    },\n    \"street2\": \"string\"\n  },\n  \"published\": false,\n  \"referenceCode\": \"string\",\n  \"status\": \"accepted\",\n  \"termsAndDisclaimers\": \"string\",\n  \"totals\": {\n    \"initialCost\": {\n      \"amount\": 3585.274968386347,\n      \"currency\": \"string\"\n    },\n    \"initialProfit\": {\n      \"amount\": 9167.070884372537,\n      \"currency\": \"string\"\n    },\n    \"initialTotal\": {\n      \"amount\": 2009.0998239666424,\n      \"currency\": \"string\"\n    },\n    \"recurringCost\": {\n      \"amount\": 6165.350159847788,\n      \"currency\": \"string\"\n    },\n    \"recurringProfit\": {\n      \"amount\": 4342.393778930843,\n      \"currency\": \"string\"\n    },\n    \"recurringTotal\": {\n      \"amount\": 6369.192174153007,\n      \"currency\": \"string\"\n    }\n  },\n  \"acceptedBy\": {\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"ipAddress\": \"string\"\n  },\n  \"declinedBy\": {\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"ipAddress\": \"string\"\n  },\n  \"intentType\": \"PARTNER_TO_CLIENT\",\n  \"ownedBy\": {\n    \"displayName\": \"string\",\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"id\": \"ba3c6096-79fe-729c-ba74-0b397ddaab9e\",\n    \"ipAddress\": \"string\",\n    \"quoteAcceptedByName\": \"string\",\n    \"userRole\": \"string\"\n  },\n  \"publishedOn\": \"1966-07-12T05:34:05.267Z\",\n  \"quoteRequestId\": \"8b8dbbb7-e5f2-bd64-2458-5419fb853205\",\n  \"respondedOn\": \"1967-03-05T09:42:28.562Z\",\n  \"revokedOn\": \"1996-06-11T06:30:23.752Z\",\n  \"salesMarginPercentage\": 3133.795099673733\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05c4e00c-9e06-457d-84c4-0527786dd65e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expiresOn\": \"<dateTime>\",\n  \"introMessage\": \"<string>\",\n  \"published\": \"<boolean>\",\n  \"status\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f828767-f2a9-4455-973c-7e1d8428aab7",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expiresOn\": \"<dateTime>\",\n  \"introMessage\": \"<string>\",\n  \"published\": \"<boolean>\",\n  \"status\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4b08632-2a6e-4691-9e96-3112ab8bf4f7",
+          "name": "Take quote ownership",
+          "request": {
+            "name": "Take quote ownership",
+            "description": {
+              "content": "Takes ownership of a quote by the current partner user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "take-ownership"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46872684-38b5-48bb-89f8-3776c1d215b6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "take-ownership"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"attachments\": [\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"e0b64b8f-fb2b-3502-db93-5a5b2ee0ab37\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"1958-08-25T17:41:58.305Z\",\n      \"id\": \"6d3aa459-8243-4740-6fa4-96368282b1a6\",\n      \"name\": \"string\",\n      \"order\": 9130,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"2020-01-03T17:44:09.356Z\"\n    },\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"7a814a8d-c5e4-70e6-761e-2e3ffa664ac1\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"1969-01-10T03:55:04.773Z\",\n      \"id\": \"9c6f3c9f-9b93-68d2-31db-1f289f362808\",\n      \"name\": \"string\",\n      \"order\": 7669,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"2025-08-05T03:46:27.928Z\"\n    }\n  ],\n  \"client\": {\n    \"id\": \"df6c6864-3b95-a1ea-8d1c-10abe8ed914d\",\n    \"isShadowCompany\": true,\n    \"name\": \"string\"\n  },\n  \"createdBy\": \"string\",\n  \"createdByEmail\": \"string\",\n  \"createdOn\": \"2017-07-12T20:02:37.969Z\",\n  \"expiresOn\": \"2000-01-27T19:11:35.205Z\",\n  \"id\": \"0b60504a-80e9-03fc-f1c9-3e9896cfb1c1\",\n  \"introMessage\": \"string\",\n  \"lineItems\": {\n    \"billingTerm\": \"3 Year\",\n    \"cost\": {\n      \"amount\": 202.4650977964382,\n      \"currency\": \"string\"\n    },\n    \"effectiveDate\": \"2026-07-11T13:06:06.068Z\",\n    \"id\": \"7fbb7e69-7da2-4be0-3c4f-4fe077438de7\",\n    \"note\": \"string\",\n    \"price\": {\n      \"amount\": 1.2361631270918494,\n      \"currency\": \"string\"\n    },\n    \"product\": {\n      \"id\": \"d5f287c0-c1b6-004b-3d7f-727705c3de34\",\n      \"isMspOnly\": false,\n      \"name\": \"string\",\n      \"sku\": \"string\",\n      \"type\": \"Solution\"\n    },\n    \"quantity\": 7992,\n    \"totals\": {\n      \"initialCost\": {\n        \"amount\": 1865.9369895289879,\n        \"currency\": \"string\"\n      },\n      \"initialProfit\": {\n        \"amount\": 2464.6488206842687,\n        \"currency\": \"string\"\n      },\n      \"initialTotal\": {\n        \"amount\": 990.5152843527254,\n        \"currency\": \"string\"\n      },\n      \"recurringCost\": {\n        \"amount\": 2554.2576431214247,\n        \"currency\": \"string\"\n      },\n      \"recurringProfit\": {\n        \"amount\": 8402.584467921763,\n        \"currency\": \"string\"\n      },\n      \"recurringTotal\": {\n        \"amount\": 3711.455314034344,\n        \"currency\": \"string\"\n      }\n    },\n    \"commitmentTerm\": {\n      \"id\": \"0439d2a6-68b2-e18c-2793-50a50c203c6b\",\n      \"term\": \"string\"\n    },\n    \"relationship\": {\n      \"requiredLineItemId\": \"422be36c-e8db-8163-3fe8-a55909984e02\",\n      \"requiredSubscriptionId\": \"51c62ea8-d5fe-b84b-e609-75fbbdcfa4aa\"\n    },\n    \"subscriptionId\": \"dffb42b7-29eb-d8a8-0c0e-4e087d42a06b\",\n    \"usageBased\": {\n      \"displayNote\": true,\n      \"type\": \"PRICE_FLAT\"\n    }\n  },\n  \"partner\": {\n    \"city\": \"string\",\n    \"id\": \"cb2be420-66d2-90bb-dac4-84fe78520724\",\n    \"name\": \"string\",\n    \"postcode\": \"string\",\n    \"stateOrProvinceCode\": \"string\",\n    \"street\": \"string\",\n    \"country\": \"string\",\n    \"parentPartner\": {\n      \"parentPartnerId\": \"433ddcd1-a315-83b4-2b34-92d295c5b754\",\n      \"parentPartnerName\": \"string\"\n    },\n    \"street2\": \"string\"\n  },\n  \"published\": false,\n  \"referenceCode\": \"string\",\n  \"status\": \"accepted\",\n  \"termsAndDisclaimers\": \"string\",\n  \"totals\": {\n    \"initialCost\": {\n      \"amount\": 3585.274968386347,\n      \"currency\": \"string\"\n    },\n    \"initialProfit\": {\n      \"amount\": 9167.070884372537,\n      \"currency\": \"string\"\n    },\n    \"initialTotal\": {\n      \"amount\": 2009.0998239666424,\n      \"currency\": \"string\"\n    },\n    \"recurringCost\": {\n      \"amount\": 6165.350159847788,\n      \"currency\": \"string\"\n    },\n    \"recurringProfit\": {\n      \"amount\": 4342.393778930843,\n      \"currency\": \"string\"\n    },\n    \"recurringTotal\": {\n      \"amount\": 6369.192174153007,\n      \"currency\": \"string\"\n    }\n  },\n  \"acceptedBy\": {\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"ipAddress\": \"string\"\n  },\n  \"declinedBy\": {\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"ipAddress\": \"string\"\n  },\n  \"intentType\": \"PARTNER_TO_CLIENT\",\n  \"ownedBy\": {\n    \"displayName\": \"string\",\n    \"email\": \"string\",\n    \"fullName\": \"string\",\n    \"id\": \"ba3c6096-79fe-729c-ba74-0b397ddaab9e\",\n    \"ipAddress\": \"string\",\n    \"quoteAcceptedByName\": \"string\",\n    \"userRole\": \"string\"\n  },\n  \"publishedOn\": \"1966-07-12T05:34:05.267Z\",\n  \"quoteRequestId\": \"8b8dbbb7-e5f2-bd64-2458-5419fb853205\",\n  \"respondedOn\": \"1967-03-05T09:42:28.562Z\",\n  \"revokedOn\": \"1996-06-11T06:30:23.752Z\",\n  \"salesMarginPercentage\": 3133.795099673733\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acb5d261-be48-44b2-9c56-a59f96804e9b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "take-ownership"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b2f6bc7-790b-45c4-9a67-2ef9f45197d9",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "take-ownership"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "622306bd-e3c6-42b3-beb6-37bfe7ccab7f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "take-ownership"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_QUOTE_VALIDATE_ALLOWED_PRODUCTS_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"FAILED_ORDER_VALIDATION\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3844,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8cd0bfb9-9353-4037-87b6-19150f19cae8",
+    "name": "Authentication Access Token Quotes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

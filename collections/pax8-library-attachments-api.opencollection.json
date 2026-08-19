@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Library attachments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Library attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get attachments from the library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/v2/quote-attachments"
+          },
+          "docs": "Returns the attachment entries associated from the library."
+        },
+        {
+          "info": {
+            "name": "Upload attachments to library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/v2/quote-attachments",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "attachments",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads attachments to the library."
+        },
+        {
+          "info": {
+            "name": "Update library attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pax8.com/v1/v2/quote-attachments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update attachments from the library."
+        },
+        {
+          "info": {
+            "name": "Add quote attachments to library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/v2/quote-attachments/shared",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds existing quote attachments to the library."
+        },
+        {
+          "info": {
+            "name": "Download library attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/v2/quote-attachments/:attachmentId",
+            "params": [
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "download",
+                "value": "",
+                "type": "query",
+                "description": "Must be set to true to download the file."
+              }
+            ]
+          },
+          "docs": "Downloads single attachment from the library."
+        },
+        {
+          "info": {
+            "name": "Replace library attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.pax8.com/v1/v2/quote-attachments/:attachmentId",
+            "params": [
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "attachment",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace an existing library attachment with a new one."
+        },
+        {
+          "info": {
+            "name": "Delete library attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pax8.com/v1/v2/quote-attachments/:attachmentId",
+            "params": [
+              {
+                "name": "attachmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes single attachment from the library."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

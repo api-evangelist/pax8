@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Provision Details API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Provision Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Provision Details for a Provision Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/details",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get All Provision Details for a Provision Request"
+        },
+        {
+          "info": {
+            "name": "Get One Provision Detail by Provision Request ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/details/:provisionDetailId",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provisionDetailId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get One Provision Detail by Provision Request ID"
+        },
+        {
+          "info": {
+            "name": "Get Latest Provision Detail by Provision Request ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/details/latest",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Latest Provision Detail by Provision Request ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

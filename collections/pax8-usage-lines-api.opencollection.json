@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Usage Lines API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage Lines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Usage Lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/lines",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "externalSubscriptionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "billingPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Billing period with format yyyy-MM"
+              },
+              {
+                "name": "summaryKey",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "A `subscriptionId` OR an `externalSubscriptionId` is required"
+        },
+        {
+          "info": {
+            "name": "Save Usage Lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/lines",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "externalSubscriptionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "billingPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Billing period with format yyyy-MM"
+              },
+              {
+                "name": "overwriteSameDayUsage",
+                "value": "",
+                "type": "query",
+                "description": "When set to false, usage lines for the same summary key will be appended instead of replacing existing same-day lines"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `subscriptionId` OR an `externalSubscriptionId` is required"
+        },
+        {
+          "info": {
+            "name": "Save Usage Lines with an Aggregate Partner Quantity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/aggregate-lines",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "externalSubscriptionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "billingPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Billing period with format yyyy-MM"
+              },
+              {
+                "name": "overwriteSameDayUsage",
+                "value": "",
+                "type": "query",
+                "description": "When set to false, usage lines for the same summary key will be appended instead of replacing existing same-day lines"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A `subscriptionId` OR an `externalSubscriptionId` is required"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

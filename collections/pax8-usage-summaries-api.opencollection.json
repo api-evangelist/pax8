@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Usage Summaries API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Usage Summaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Usage Summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/subscriptions/:subscriptionId/usage-summaries",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to request in the usage summaries list"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Returns _this_ number of usage summaries per page"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return usage summaries sorted by this field and direction Formatted as fieldName,direction - ex. sort=resourceGroup,desc"
+              },
+              {
+                "name": "resourceGroup",
+                "value": "",
+                "type": "query",
+                "description": "Return only usage summaries matching this ```resourceGroup``` value"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "Return only usage summaries with this ```companyId``` value"
+              }
+            ]
+          },
+          "docs": "Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200"
+        },
+        {
+          "info": {
+            "name": "Get Usage Summary By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/usage-summaries/:usageSummaryId",
+            "params": [
+              {
+                "name": "usageSummaryId",
+                "value": "",
+                "type": "path",
+                "description": "The usage summary id"
+              }
+            ]
+          },
+          "docs": "Fetch a paginated list of usage summaries. Default page is 0 and default size is 10. The maximum page size is 200"
+        },
+        {
+          "info": {
+            "name": "List Usage Summary Lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/usage-summaries/:usageSummaryId/usage-lines",
+            "params": [
+              {
+                "name": "usageSummaryId",
+                "value": "",
+                "type": "path",
+                "description": "The usage summary id"
+              },
+              {
+                "name": "usageDate",
+                "value": "",
+                "type": "query",
+                "description": "The date usage was recorded"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Return only usage summaries with this ```productId``` value"
+              }
+            ]
+          },
+          "docs": "Fetch a paginated list of usage lines. Default page is 0 and default size is 10. The maximum page size is 200"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

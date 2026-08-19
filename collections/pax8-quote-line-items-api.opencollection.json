@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Quote line items API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quote line items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add line items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/v2/quotes/:quoteId/line-items",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Limited to 30 total line items. This api supports adding 1 or more at a time.Line items with required relationships must be added together."
+        },
+        {
+          "info": {
+            "name": "Update line items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pax8.com/v1/v2/quotes/:quoteId/line-items",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update line items within a specified quote.This api supports updating 1 or more at a time.Modifying relationships is not supported at this time. Delete and re-add instead."
+        },
+        {
+          "info": {
+            "name": "Delete line items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/v2/quotes/:quoteId/line-items/bulk-delete",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete multiple line items from a quote in bulk."
+        },
+        {
+          "info": {
+            "name": "Delete line item by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pax8.com/v1/v2/quotes/:quoteId/line-items/:lineItemId",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lineItemId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a line item by lineItemId from quote."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

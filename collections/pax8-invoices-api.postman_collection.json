@@ -1,0 +1,981 @@
+{
+  "item": [
+    {
+      "id": "f8e91f3c-495c-4b8e-a08a-dfb957f8ab14",
+      "name": "Invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "76dea3c3-ffda-458a-ba3e-5215c706a9db",
+          "name": "List Invoices",
+          "request": {
+            "name": "List Invoices",
+            "description": {
+              "content": "Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "The page number to request in the invoices list"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Returns _this_ number of invoices per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Return invoices sorted by this field and direction Formatted as fieldName,direction - ex. sort=invoiceDate,desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Return only invoices matching this ```status``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "invoiceDate",
+                  "value": "<yyyy-MM-dd>",
+                  "description": "Return only invoices matching this ```invoiceDate``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "invoiceDateRangeStart",
+                  "value": "<yyyy-MM-dd>",
+                  "description": "Return only invoices with an ```invoiceDate``` greater than or equal to this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "invoiceDateRangeEnd",
+                  "value": "<yyyy-MM-dd>",
+                  "description": "Return only invoices with an ```invoiceDate``` less than or equal to this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "dueDate",
+                  "value": "<yyyy-MM-dd>",
+                  "description": "Return only invoices matching this ```dueDate``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "total",
+                  "value": "<number>",
+                  "description": "Return only invoices matching this ```total``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "balance",
+                  "value": "<number>",
+                  "description": "Return only invoices matching this ```balance``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "carriedBalance",
+                  "value": "<number>",
+                  "description": "Return only invoices matching this ```carriedBalance``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyId",
+                  "value": "<uuid>",
+                  "description": "Return only invoices matching this ```companyId``` value"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14f648df-06d0-491d-bac8-0cdddf6b5423",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceDate",
+                      "value": "2000-10-31"
+                    },
+                    {
+                      "key": "invoiceDateRangeStart",
+                      "value": "2000-10-31"
+                    },
+                    {
+                      "key": "invoiceDateRangeEnd",
+                      "value": "2001-10-31"
+                    },
+                    {
+                      "key": "dueDate",
+                      "value": "2000-10-31"
+                    },
+                    {
+                      "key": "total",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "balance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "carriedBalance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"0b157f32-a423-4fc4-bed0-82ef2f913ab2\",\n      \"total\": 9985.96,\n      \"currencyCode\": \"USD\",\n      \"balance\": 729.22,\n      \"carriedBalance\": 9801.13,\n      \"status\": \"Unpaid\",\n      \"invoiceDate\": \"2021-01-01\",\n      \"dueDate\": \"2021-01-15\",\n      \"partnerName\": \"A Child Partner Name\"\n    },\n    {\n      \"id\": \"909f2b60-d3e6-4488-9224-5f4788aa7128\",\n      \"total\": 19796231.89,\n      \"currencyCode\": \"USD\",\n      \"balance\": 562939.58,\n      \"carriedBalance\": 19565889.67,\n      \"status\": \"Unpaid\",\n      \"invoiceDate\": \"2021-01-01\",\n      \"dueDate\": \"2021-01-15\",\n      \"partnerName\": \"My Partner Name\"\n    },\n    {\n      \"id\": \"94444ad7-1237-4dcf-a391-ccf201b4151f\",\n      \"total\": 19228924.94,\n      \"currencyCode\": \"USD\",\n      \"balance\": 620266.05,\n      \"carriedBalance\": 18939345.97,\n      \"status\": \"Carried\",\n      \"invoiceDate\": \"2020-12-01\",\n      \"dueDate\": \"2020-12-15\",\n      \"partnerName\": \"My Partner Name\"\n    },\n    {\n      \"id\": \"0adfca6c-8c5c-4de2-922c-331271d20aa7\",\n      \"total\": 9256.74,\n      \"currencyCode\": \"USD\",\n      \"balance\": 957.55,\n      \"carriedBalance\": 8843.58,\n      \"status\": \"Carried\",\n      \"invoiceDate\": \"2020-12-01\",\n      \"dueDate\": \"2020-12-15\",\n      \"partnerName\": \"A Child Partner Name\"\n    },\n    {\n      \"id\": \"62631fa6-b44a-466d-b6f5-ea2bd320cf3d\",\n      \"total\": 8299.19,\n      \"currencyCode\": \"USD\",\n      \"balance\": 729.22,\n      \"carriedBalance\": 8114.36,\n      \"status\": \"Carried\",\n      \"invoiceDate\": \"2020-11-01\",\n      \"dueDate\": \"2020-11-15\",\n      \"partnerName\": \"A Child Partner\"\n    },\n    {\n      \"id\": \"06053601-a52e-4751-b90e-cc46ab466e96\",\n      \"total\": 18601239.24,\n      \"currencyCode\": \"USD\",\n      \"balance\": 560669.68,\n      \"carriedBalance\": 18373057.17,\n      \"status\": \"Carried\",\n      \"invoiceDate\": \"2020-11-01\",\n      \"dueDate\": \"2020-11-15\",\n      \"partnerName\": \"My Partner Name\"\n    },\n    {\n      \"id\": \"d5129fb2-7adf-4829-a3a7-d6def853e067\",\n      \"total\": 7429.99,\n      \"currencyCode\": \"USD\",\n      \"balance\": 815.42,\n      \"carriedBalance\": 7298.94,\n      \"status\": \"Carried\",\n      \"invoiceDate\": \"2020-10-01\",\n      \"dueDate\": \"2020-10-15\",\n      \"partnerName\": \"A Child Partner\"\n    },\n    {\n      \"id\": \"7a390f4e-67dc-4ea7-80a5-0f058998c646\",\n      \"total\": 18036312.44,\n      \"currencyCode\": \"USD\",\n      \"balance\": 597022.66,\n      \"carriedBalance\": 17770441.73,\n      \"status\": \"Carried\",\n      \"invoiceDate\": \"2020-10-01\",\n      \"dueDate\": \"2020-10-15\",\n      \"partnerName\": \"My Partner Name\"\n    },\n    {\n      \"id\": \"be1ede52-31e2-4091-97c8-629a09f3293d\",\n      \"total\": 7210.94,\n      \"currencyCode\": \"USD\",\n      \"balance\": 442.4,\n      \"carriedBalance\": 6856.54,\n      \"status\": \"Carried\",\n      \"invoiceDate\": \"2020-09-01\",\n      \"dueDate\": \"2020-09-15\",\n      \"partnerName\": \"A Child Partner\"\n    },\n    {\n      \"id\": \"17029935-36b0-4f0f-9d5e-c8af04f7b57a\",\n      \"total\": 17432960,\n      \"currencyCode\": \"USD\",\n      \"balance\": 560470.66,\n      \"carriedBalance\": 17204372.33,\n      \"status\": \"Void\",\n      \"invoiceDate\": \"2020-09-01\",\n      \"dueDate\": \"2020-09-15\",\n      \"partnerName\": \"My Partner Name\"\n    }\n  ],\n  \"page\": {\n    \"size\": 10,\n    \"totalElements\": 204,\n    \"totalPages\": 21,\n    \"number\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a765834-2bac-48ce-a6c8-cd458b21a807",
+              "name": "Invalid companyId or productId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "invoiceDate",
+                      "value": "2000-10-31"
+                    },
+                    {
+                      "key": "invoiceDateRangeStart",
+                      "value": "2000-10-31"
+                    },
+                    {
+                      "key": "invoiceDateRangeEnd",
+                      "value": "2001-10-31"
+                    },
+                    {
+                      "key": "dueDate",
+                      "value": "2000-10-31"
+                    },
+                    {
+                      "key": "total",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "balance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "carriedBalance",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 7998,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 7276\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8042\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e16e38f-4713-4878-8b71-77f89290a032",
+          "name": "Get Invoice By ID",
+          "request": {
+            "name": "Get Invoice By ID",
+            "description": {
+              "content": "Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ":invoiceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "invoiceId",
+                  "description": "(Required) The invoice id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e82e935-5a0a-4521-b895-2f630f503b11",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":invoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "invoiceId",
+                      "description": "(Required) The invoice id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"17029935-36b0-4f0f-9d5e-c8af04f7b57a\",\n  \"total\": 17432960,\n  \"currencyCode\": \"USD\",\n  \"balance\": 560470.66,\n  \"carriedBalance\": 17204372.33,\n  \"status\": \"Paid\",\n  \"invoiceDate\": \"2020-09-01\",\n  \"dueDate\": \"2020-09-15\",\n  \"partnerName\": \"My Partner Name\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f673ef8e-c2d2-4f9c-934d-55a4ce2c2d26",
+          "name": "List Invoice Items",
+          "request": {
+            "name": "List Invoice Items",
+            "description": {
+              "content": "Fetch a paginated list of invoice items. Default page is 0 and default size is 10. The maximum page size is 200",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ":invoiceId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "The page number to request in the invoices items list"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Returns _this_ number of invoices items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "invoiceId",
+                  "description": "(Required) The invoice id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07ca6374-7199-459e-907f-82e5f9947528",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":invoiceId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "invoiceId",
+                      "description": "(Required) The invoice id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"type\": \"subscription\",\n      \"purchaseOrderNumber\": \"N/A\",\n      \"companyId\": \"cc0ac255-7c0b-4123-ac8d-a6c280b85eae\",\n      \"companyName\": \"Brick and Mortar Tech\",\n      \"startPeriod\": \"2019-04-01\",\n      \"endPeriod\": \"2019-05-01\",\n      \"quantity\": 11,\n      \"unitOfMeasure\": \"User\",\n      \"term\": \"Monthly\",\n      \"sku\": \"PAX-233-ukw0-9092\",\n      \"description\": \"Microsoft Office E3\",\n      \"rateType\": \"single\",\n      \"chargeType\": \"per\",\n      \"price\": 50000,\n      \"subTotal\": 27500,\n      \"cost\": 2500,\n      \"costTotal\": 27500,\n      \"offeredBy\": \"Pax8\",\n      \"billedByPax8\": false,\n      \"total\": 550000,\n      \"productId\": \"de4ff8a5-e836-4412-89e7-03236c0641c4\",\n      \"productName\": \"Microsoft Office E3\",\n      \"billingFee\": 0,\n      \"billingFeeRate\": 0,\n      \"amountDue\": 27500,\n      \"currencyCode\": \"USD\",\n      \"salesTax\": 2200,\n      \"subscriptionId\": \"f6b60139-8ab6-45f4-b808-354ebbe53070\"\n    }\n  ],\n  \"page\": {\n    \"size\": 1,\n    \"totalElements\": 762,\n    \"totalPages\": 762,\n    \"number\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12abce14-385e-4388-b1cb-10e1feb62251",
+              "name": "Invalid invoice id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":invoiceId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "invoiceId",
+                      "description": "(Required) The invoice id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 3058,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6917\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8096\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5cc8870-662a-494d-a693-789e54e833db",
+          "name": "List Draft Invoice Items",
+          "request": {
+            "name": "List Draft Invoice Items",
+            "description": {
+              "content": "Fetch a paginated list of draft invoice items before they are finalized into invoices. Default page is 0 and default size is 10. The maximum page size is 200.\n\nDISCLAIMER: For future-dated items, the data represents a snapshot of charges that will be applied to a future invoice as of the request date. This is not an actual invoice. Clients should be aware that the final invoice generated on the 5th of the month may differ. This endpoint does not include charges for usage-based products billed in arrears. Tax calculations are based on current account taxability status and current month tax rates, both of which are subject to change for future invoices.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                "draftItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "The page number to request in the draft invoice items list"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Returns _this_ number of draft invoice items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "monthOffset",
+                  "value": "1",
+                  "description": "Number of months from current to return draft items for. 0 = current month, 1 = next month. Only values 0 and 1 are currently supported. If omitted, defaults to 1 (next month).\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyId",
+                  "value": "<uuid>",
+                  "description": "Filter draft items to a specific company.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3563230c-8871-4b39-8bb2-81a5280ca97b",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    "draftItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "monthOffset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "7e338a9b-7bf5-4489-ad0a-59f5e664be19"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"type\": \"subscription\",\n      \"companyId\": \"7e338a9b-7bf5-4489-ad0a-59f5e664be19\",\n      \"companyName\": \"09/19 Ben\",\n      \"startPeriod\": \"2025-02-01\",\n      \"endPeriod\": \"2025-02-28\",\n      \"quantity\": 1,\n      \"unitOfMeasure\": \"User\",\n      \"term\": \"Monthly\",\n      \"sku\": \"LIG-HTN-ING-BLT2\",\n      \"description\": \"Lightning Bolt 2\",\n      \"rateType\": \"single\",\n      \"chargeType\": \"per\",\n      \"price\": 120,\n      \"subTotal\": 120,\n      \"cost\": 100,\n      \"costTotal\": 100,\n      \"offeredBy\": \"Pax8\",\n      \"billedByPax8\": false,\n      \"total\": 120,\n      \"productId\": \"fd8ec391-b6c0-4895-9dc6-74b7e8494ee3\",\n      \"productName\": \"Lightning Bolt 2\",\n      \"billingFee\": 0,\n      \"billingFeeRate\": 0,\n      \"amountDue\": 120,\n      \"currencyCode\": \"USD\",\n      \"salesTax\": 8,\n      \"subscriptionId\": \"b2c47da5-d16e-4fcb-98d7-6e97b3c8f11a\"\n    },\n    {\n      \"type\": \"subscription\",\n      \"companyId\": \"7e338a9b-7bf5-4489-ad0a-59f5e664be19\",\n      \"companyName\": \"09/19 Ben\",\n      \"startPeriod\": \"2024-07-01\",\n      \"endPeriod\": \"2024-07-31\",\n      \"quantity\": 5,\n      \"unitOfMeasure\": \"User\",\n      \"term\": \"Monthly\",\n      \"sku\": \"MS-OFF-EXC-PRO\",\n      \"description\": \"Microsoft Office Excel Pro\",\n      \"rateType\": \"single\",\n      \"chargeType\": \"per\",\n      \"price\": 85,\n      \"subTotal\": 425,\n      \"cost\": 75,\n      \"costTotal\": 375,\n      \"offeredBy\": \"Pax8\",\n      \"billedByPax8\": false,\n      \"total\": 425,\n      \"productId\": \"a34eef76-8c9b-4521-9c7c-bf5417a8e123\",\n      \"productName\": \"Microsoft Office Excel Pro\",\n      \"billingFee\": 0,\n      \"billingFeeRate\": 0,\n      \"amountDue\": 425,\n      \"currencyCode\": \"USD\",\n      \"salesTax\": 30,\n      \"subscriptionId\": \"c5e82a19-d738-48f9-a1b3-9c6f4e7d3210\"\n    }\n  ],\n  \"page\": {\n    \"size\": 10,\n    \"totalElements\": 115,\n    \"totalPages\": 12,\n    \"number\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11fdc4cd-6e4c-41a5-b894-2b68c178e23d",
+              "name": "Access denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    "draftItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "monthOffset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "7e338a9b-7bf5-4489-ad0a-59f5e664be19"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 3058,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6917\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8096\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4d8922a-5904-4051-9c98-a69086681a3a",
+              "name": "Company not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    "draftItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "monthOffset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "7e338a9b-7bf5-4489-ad0a-59f5e664be19"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 3058,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6917\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8096\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c1a9c84-d92c-4c85-a3d0-ef4eb602082b",
+              "name": "Request timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    "draftItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "monthOffset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "7e338a9b-7bf5-4489-ad0a-59f5e664be19"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 3058,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6917\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8096\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ca956fd-2ee0-41b8-9ad5-df0502f0ac90",
+              "name": "Invalid monthOffset value",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    "draftItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "monthOffset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "7e338a9b-7bf5-4489-ad0a-59f5e664be19"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 3058,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 6917\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8096\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7623a6a3-fd56-4473-b715-3029b0bc7b82",
+    "name": "Authentication Access Token Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

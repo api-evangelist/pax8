@@ -1,0 +1,290 @@
+{
+  "item": [
+    {
+      "id": "c4eff447-1a73-4736-8921-e4f25fdd37ee",
+      "name": "Provision Requests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "14816671-dc3b-48fc-a79a-4118f542f3b1",
+          "name": "Get All Provision Requests",
+          "request": {
+            "name": "Get All Provision Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c0bb73b-78d8-404b-a1d0-591c2fb99649",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"ba3b2894-e1ce-ea4c-035c-1a4a8508d129\",\n      \"partnerId\": \"cce419f5-9dbb-af29-d039-e159b71b32ac\",\n      \"partnerName\": \"string\",\n      \"partnerDomain\": \"string\",\n      \"partnerAddress\": {\n        \"street\": \"string\",\n        \"street2\": \"string\",\n        \"city\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\",\n        \"stateOrProvince\": \"string\"\n      },\n      \"partnerEnrollmentId\": \"ea324447-f3ef-9aad-3021-0fd0ec3316d9\",\n      \"companyId\": \"27309253-93eb-7e55-4abf-3258691d1799\",\n      \"companyName\": \"string\",\n      \"companyDomain\": \"string\",\n      \"companyAddress\": {\n        \"street\": \"string\",\n        \"street2\": \"string\",\n        \"city\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\",\n        \"stateOrProvince\": \"string\"\n      },\n      \"productId\": \"898e7808-fc63-786e-9687-c677cdea149d\",\n      \"oldProductId\": \"3b68f398-1765-52b4-e953-720e0f994596\",\n      \"productName\": \"string\",\n      \"quantity\": 4937,\n      \"subscriptionId\": \"b159138b-b1fb-7f75-174c-407407232c35\",\n      \"type\": \"TrialCreate\",\n      \"createdDate\": \"1978-11-14T10:12:27.343Z\",\n      \"trialEndDate\": \"2005-11-03T13:08:56.919Z\",\n      \"trialAutoConverts\": false,\n      \"commitmentTermMonths\": 4072,\n      \"commitmentTermEndDate\": \"1982-01-03T15:24:20.119Z\",\n      \"commitment\": {\n        \"term\": {\n          \"months\": 417,\n          \"endDate\": \"1947-06-10T10:54:17.271Z\"\n        },\n        \"volume\": {\n          \"minAmount\": 6303.614560040842,\n          \"maxAmount\": 2227.4046220050413,\n          \"unitOfMeasure\": \"SEK\",\n          \"months\": 405\n        }\n      },\n      \"billingTerm\": \"Monthly\"\n    },\n    {\n      \"id\": \"4c8a8ca3-0a9d-e08f-31bb-1c97d8157a5d\",\n      \"partnerId\": \"b5d2a9f9-69d0-8a88-4370-4837b277e85b\",\n      \"partnerName\": \"string\",\n      \"partnerDomain\": \"string\",\n      \"partnerAddress\": {\n        \"street\": \"string\",\n        \"street2\": \"string\",\n        \"city\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\",\n        \"stateOrProvince\": \"string\"\n      },\n      \"partnerEnrollmentId\": \"48d58043-3561-af6d-262a-8854fe3c4ec7\",\n      \"companyId\": \"c7912565-be64-6530-dce6-6b5a3ec1c916\",\n      \"companyName\": \"string\",\n      \"companyDomain\": \"string\",\n      \"companyAddress\": {\n        \"street\": \"string\",\n        \"street2\": \"string\",\n        \"city\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\",\n        \"stateOrProvince\": \"string\"\n      },\n      \"productId\": \"1142de0f-705b-20ce-7a90-892f8237e056\",\n      \"oldProductId\": \"85ae4d0d-41e0-1856-0668-75b12cc998af\",\n      \"productName\": \"string\",\n      \"quantity\": 2331,\n      \"subscriptionId\": \"85bbd2a3-c077-547a-f014-a33edf97d3e5\",\n      \"type\": \"TrialConvert\",\n      \"createdDate\": \"2023-05-03T10:55:47.649Z\",\n      \"trialEndDate\": \"2001-03-08T03:19:53.301Z\",\n      \"trialAutoConverts\": true,\n      \"commitmentTermMonths\": 1543,\n      \"commitmentTermEndDate\": \"1989-12-25T15:44:21.048Z\",\n      \"commitment\": {\n        \"term\": {\n          \"months\": 137,\n          \"endDate\": \"2019-12-27T08:34:53.570Z\"\n        },\n        \"volume\": {\n          \"minAmount\": 9970.226528227882,\n          \"maxAmount\": 2515.9753022115206,\n          \"unitOfMeasure\": \"Levels\",\n          \"months\": 5556\n        }\n      },\n      \"billingTerm\": \"2 Year\"\n    }\n  ],\n  \"page\": {\n    \"number\": 254,\n    \"size\": 4764,\n    \"totalElements\": 2926,\n    \"totalPages\": 1919\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6439b484-7f5f-454f-9422-ccce3df572fc",
+          "name": "Get One Provision Request",
+          "request": {
+            "name": "Get One Provision Request",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                ":provisionRequestId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionRequestId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c6b5b16-0b3c-4d95-ac80-ee33f6d8245e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    ":provisionRequestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionRequestId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"id\": \"f4a9eace-a488-f90e-7da2-952fa949677b\",\n  \"partnerId\": \"e9a3ba30-b6cf-d50f-db10-eedbd68f4799\",\n  \"partnerName\": \"string\",\n  \"partnerDomain\": \"string\",\n  \"partnerAddress\": {\n    \"street\": \"string\",\n    \"street2\": \"string\",\n    \"city\": \"string\",\n    \"postcode\": \"string\",\n    \"country\": \"string\",\n    \"stateOrProvince\": \"string\"\n  },\n  \"partnerEnrollmentId\": \"714495af-2fcb-86d3-b5fa-d1853ccaf261\",\n  \"companyId\": \"1aa2f86a-8796-ed29-5fbb-13466eb345f5\",\n  \"companyName\": \"string\",\n  \"companyDomain\": \"string\",\n  \"companyAddress\": {\n    \"street\": \"string\",\n    \"street2\": \"string\",\n    \"city\": \"string\",\n    \"postcode\": \"string\",\n    \"country\": \"string\",\n    \"stateOrProvince\": \"string\"\n  },\n  \"productId\": \"ea3ef483-2b00-5b1b-28ef-3113679041a0\",\n  \"oldProductId\": \"a5a7d02b-0a37-492b-3081-9d71c97f83e8\",\n  \"productName\": \"string\",\n  \"quantity\": 4551,\n  \"subscriptionId\": \"537ab933-c5f1-cec7-0fac-f134d8f420bc\",\n  \"type\": \"TrialCreate\",\n  \"createdDate\": \"2008-02-19T06:00:41.688Z\",\n  \"trialEndDate\": \"1986-11-02T16:02:30.586Z\",\n  \"trialAutoConverts\": true,\n  \"commitmentTermMonths\": 6818,\n  \"commitmentTermEndDate\": \"1972-09-26T02:37:20.233Z\",\n  \"commitment\": {\n    \"term\": {\n      \"months\": 2002,\n      \"endDate\": \"1987-07-09T05:46:43.030Z\"\n    },\n    \"volume\": {\n      \"minAmount\": 8887.719314295375,\n      \"maxAmount\": 1556.0570620849278,\n      \"unitOfMeasure\": \"Levels\",\n      \"months\": 1445\n    }\n  },\n  \"billingTerm\": \"Annual\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "694ab174-3b84-4e72-8183-b37ec37dc3a2",
+          "name": "Get All Unfulfilled Provision Requests",
+          "request": {
+            "name": "Get All Unfulfilled Provision Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                "unfulfilled"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49c72689-4b75-4933-b630-fb3be99d610c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    "unfulfilled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"01ad2a62-bfff-a461-4242-922485c85dac\",\n      \"partnerId\": \"88bad923-d581-4282-7fd2-25d005c4c134\",\n      \"partnerName\": \"string\",\n      \"partnerDomain\": \"string\",\n      \"partnerAddress\": {\n        \"street\": \"string\",\n        \"street2\": \"string\",\n        \"city\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\",\n        \"stateOrProvince\": \"string\"\n      },\n      \"partnerEnrollmentId\": \"9e44c79b-727a-6563-5309-6a92628dd232\",\n      \"companyId\": \"c7e01e75-3dff-4b96-3bc8-a0ae141a5dfb\",\n      \"companyName\": \"string\",\n      \"companyDomain\": \"string\",\n      \"companyAddress\": {\n        \"street\": \"string\",\n        \"street2\": \"string\",\n        \"city\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\",\n        \"stateOrProvince\": \"string\"\n      },\n      \"productId\": \"2c6f4b49-7d1b-e8fb-4c91-60c96c10812c\",\n      \"oldProductId\": \"4e766795-91e4-d4a7-1fe9-516107057684\",\n      \"productName\": \"string\",\n      \"quantity\": 3452,\n      \"subscriptionId\": \"16b5bc0c-26af-fd57-f2c1-3575a05cf3c5\",\n      \"type\": \"TrialCreate\",\n      \"createdDate\": \"1984-09-04T13:52:53.590Z\",\n      \"trialEndDate\": \"2018-09-11T02:05:32.392Z\",\n      \"trialAutoConverts\": true,\n      \"commitmentTermMonths\": 3671,\n      \"commitmentTermEndDate\": \"2019-10-24T14:13:27.086Z\",\n      \"commitment\": {\n        \"term\": {\n          \"months\": 2551,\n          \"endDate\": \"2000-09-06T09:07:03.183Z\"\n        },\n        \"volume\": {\n          \"minAmount\": 4039.4708012880365,\n          \"maxAmount\": 9584.855373814758,\n          \"unitOfMeasure\": \"CHF\",\n          \"months\": 7335\n        }\n      },\n      \"billingTerm\": \"Annual\"\n    },\n    {\n      \"id\": \"2e7610a2-ddbc-5406-7b42-3889e2b6ae73\",\n      \"partnerId\": \"c8ab206a-51a0-1e69-4ea5-c81d810c9611\",\n      \"partnerName\": \"string\",\n      \"partnerDomain\": \"string\",\n      \"partnerAddress\": {\n        \"street\": \"string\",\n        \"street2\": \"string\",\n        \"city\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\",\n        \"stateOrProvince\": \"string\"\n      },\n      \"partnerEnrollmentId\": \"20262998-ae29-6e0b-1494-6e05c2317792\",\n      \"companyId\": \"4b712417-3610-2e90-ff97-a397bce13f03\",\n      \"companyName\": \"string\",\n      \"companyDomain\": \"string\",\n      \"companyAddress\": {\n        \"street\": \"string\",\n        \"street2\": \"string\",\n        \"city\": \"string\",\n        \"postcode\": \"string\",\n        \"country\": \"string\",\n        \"stateOrProvince\": \"string\"\n      },\n      \"productId\": \"314e5d09-fa57-757c-823d-0cfbad746d6d\",\n      \"oldProductId\": \"501e0bd5-1570-a638-67c1-d20a301e5d14\",\n      \"productName\": \"string\",\n      \"quantity\": 9645,\n      \"subscriptionId\": \"238c65e4-2284-548f-c658-588d0b7dc1e9\",\n      \"type\": \"Renewal\",\n      \"createdDate\": \"1955-01-12T02:58:58.400Z\",\n      \"trialEndDate\": \"1964-04-06T08:28:44.857Z\",\n      \"trialAutoConverts\": true,\n      \"commitmentTermMonths\": 4985,\n      \"commitmentTermEndDate\": \"1979-02-19T08:43:06.138Z\",\n      \"commitment\": {\n        \"term\": {\n          \"months\": 9621,\n          \"endDate\": \"2013-05-14T23:59:23.036Z\"\n        },\n        \"volume\": {\n          \"minAmount\": 2578.9832855019745,\n          \"maxAmount\": 5428.6095003861965,\n          \"unitOfMeasure\": \"Environments\",\n          \"months\": 2315\n        }\n      },\n      \"billingTerm\": \"Trial\"\n    }\n  ],\n  \"page\": {\n    \"number\": 5499,\n    \"size\": 1076,\n    \"totalElements\": 7897,\n    \"totalPages\": 7615\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e69e217b-b160-4190-a0d7-0a4a550fdc92",
+    "name": "Authentication Access Token Provision Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

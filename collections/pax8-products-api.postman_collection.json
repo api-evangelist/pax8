@@ -1,0 +1,793 @@
+{
+  "item": [
+    {
+      "id": "5019ecd2-90a6-4bef-83bd-b20cc68a0f34",
+      "name": "Products",
+      "description": {
+        "content": "The Products resource lets you fetch all the information required to complete an Order -- product descriptions, pricing, provisioning details, and the dependencies associated with each product",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1904f547-a2ef-4557-a886-83e239039783",
+          "name": "List Products",
+          "request": {
+            "name": "List Products",
+            "description": {
+              "content": "Returns a paginated list of Pax8 products filtered by optional query parameters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "The page number to request for in the products list"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Return this number of products per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search on fields like name, vendor, SKU and ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "vendorName",
+                  "value": "<string>",
+                  "description": "Return only products matching the specified vendor name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48afa90c-d5d3-4b9e-9ded-8cc2e19d427c",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Office 365"
+                    },
+                    {
+                      "key": "vendorName",
+                      "value": "Microsoft"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"5ac530e4-cb5b-3648-1adf-cba39ef4ec4b\",\n      \"name\": \"Acme Corps Productivity Suite\",\n      \"vendorName\": \"Acme Corps\",\n      \"shortDescription\": \"Short description about the product to sell\",\n      \"sku\": \"4225-776-3234\",\n      \"vendorSku\": \"12345-AA-XYZ\",\n      \"altVendorSku\": \"c9286318-abc8-41d8-9bfb-3f8b20675956\",\n      \"requiresCommitment\": false\n    },\n    {\n      \"id\": \"290a03cd-9569-92de-6762-6db0b50860e7\",\n      \"name\": \"Acme Corps Productivity Suite\",\n      \"vendorName\": \"Acme Corps\",\n      \"shortDescription\": \"Short description about the product to sell\",\n      \"sku\": \"4225-776-3234\",\n      \"vendorSku\": \"12345-AA-XYZ\",\n      \"altVendorSku\": \"cf606b30-9208-3e5e-bd4d-3413452ffe81\",\n      \"requiresCommitment\": false\n    }\n  ],\n  \"page\": {\n    \"size\": 50,\n    \"totalElements\": {},\n    \"totalPages\": {},\n    \"number\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4d68a6f-a737-4b0f-86c3-5bda8183cdcf",
+          "name": "Get Product By ID",
+          "request": {
+            "name": "Get Product By ID",
+            "description": {
+              "content": "Returns only the product record for the productId you specify",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":productId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02fbfb4e-5bf4-4e57-a051-4b4bd9f654d2",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e91bba5e-a9a3-483f-b036-f80165d410e3\",\n  \"name\": \"Microsoft Office 365 E3\",\n  \"vendorName\": \"Microsoft\",\n  \"shortDescription\": \"Microsoft Office 365 E3 includes fully installed Office applications across multiple devices, email hosting, HD video conferencing, and features to support compliance.\",\n  \"description\": \"Microsoft 365 E3 is part of a new lineup of M365 and O365 suites that don't include Teams. Microsoft 365 E3 is designed for large organizations and integrates Office 365 Enterprise E3, Windows 10 Enterprise, and Enterprise Mobility + Security to empower employees to be creative and work together, securely. The comprehensive set of services range from Office apps like Word and Excel, to video conferencing apps, to robust security, mobile device management, and identity and access management. This solution lets you improve productivity and foster a culture of collaboration with connected experiences and transform how you manage your business and enhance customer relationships with integrated workflows. Plus, you can proactively protect your employees, data, and customer information with intelligent security. \",\n  \"sku\": \"MST-OFC-EE3-C100\",\n  \"vendorSku\": \"796B6B5F-613C-4E24-A17C-EBA730D49C02\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e3c4af7-ae82-472a-8b5f-accc6ecb9fa2",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 7590,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 2894\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8406\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "037a8709-a130-497a-b342-f710a4dcbc75",
+          "name": "Get Provisioning Details",
+          "request": {
+            "name": "Get Provisioning Details",
+            "description": {
+              "content": "Returns provisioning details for the specified productId. Provisioning details for a product are dynamic data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":productId",
+                "provision-details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6455f9c-9f0f-4850-afc3-b7719023385a",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId",
+                    "provision-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"label\": \"Does the customer have an existing Microsoft account and can they log into https://login.microsoftonline.com?\",\n      \"key\": \"msCustExists\",\n      \"valueType\": \"Single-Value\",\n      \"possibleValues\": [\n        \"No, the customer does not have a Microsoft account\",\n        \"Yes, the customer has and can log into their Microsoft account\"\n      ]\n    },\n    {\n      \"label\": \"Desired .onmicrosoft.com Customer Domain Prefix\",\n      \"key\": \"msDomain\",\n      \"valueType\": \"Input\",\n      \"description\": \"Do not include the TLD when entering your domain (e.g. mydomain.onmicrosoft.com should be entered as mydomain\"\n    },\n    {\n      \"label\": \"Contact First Name\",\n      \"key\": \"arrowContactFirstName\",\n      \"valueType\": \"Input\"\n    },\n    {\n      \"label\": \"Contact Last Name\",\n      \"key\": \"arrowContactLastName\",\n      \"valueType\": \"Input\"\n    },\n    {\n      \"label\": \"Contact Email\",\n      \"key\": \"arrowContactEmail\",\n      \"valueType\": \"Input\"\n    },\n    {\n      \"label\": \"Microsoft Customer Tenant ID\",\n      \"key\": \"msTenantId\",\n      \"valueType\": \"Input\"\n    },\n    {\n      \"label\": \"First Name\",\n      \"key\": \"mca2020FirstName\",\n      \"valueType\": \"Input\"\n    },\n    {\n      \"label\": \"Last Name\",\n      \"key\": \"mca2020LastName\",\n      \"valueType\": \"Input\"\n    },\n    {\n      \"label\": \"Email Address\",\n      \"key\": \"mca2020Email\",\n      \"valueType\": \"Input\"\n    },\n    {\n      \"label\": \"Date of Acceptance\",\n      \"key\": \"mca2020EffectiveDate\",\n      \"valueType\": \"Input\",\n      \"description\": \"(YYYY-MM-DD)\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c89f8a3-c24f-4657-ada0-39893de700e4",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId",
+                    "provision-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 1731,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 3634\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 2682\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6be89ed5-8d39-4da7-9af9-34f7946599de",
+          "name": "Get Product Dependencies",
+          "request": {
+            "name": "Get Product Dependencies",
+            "description": {
+              "content": "Returns associated dependencies for the specified ```productId```. A products dependencies are dynamic data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":productId",
+                "dependencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "561a6fd7-ada3-404e-8cb8-f059edfacc28",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"commitmentDependencies\": [\n    {\n      \"id\": \"497f6eca-6276-4993-bfeb-53cbbbba6f08\",\n      \"term\": \"3-Year\",\n      \"autoRenew\": true,\n      \"renewalWindowDaysBeforeTermEnd\": 0,\n      \"renewalWindowDaysAfterTermEnd\": 0,\n      \"allowForQuantityIncrease\": true,\n      \"allowForQuantityDecrease\": true,\n      \"allowForEarlyCancellation\": true,\n      \"cancellationFeeApplied\": true,\n      \"isTransferable\": true\n    }\n  ],\n  \"productDependencies\": [\n    {\n      \"name\": \"Requires\",\n      \"products\": [\n        {\n          \"id\": \"497f6eca-6276-4993-bfeb-53cbbbba6f08\",\n          \"name\": \"Acme Corps Productivity Suite\",\n          \"vendorName\": \"Acme Corps\",\n          \"shortDescription\": \"Short description about the product to sell\",\n          \"sku\": \"4225-776-3234\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f05bc7db-6a59-4b25-bbd1-1f170427b610",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId",
+                    "dependencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 1731,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 3634\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 2682\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed539877-008a-475d-8985-a64f9784e97c",
+          "name": "Get Pricing",
+          "request": {
+            "name": "Get Pricing",
+            "description": {
+              "content": "Returns recommended pricing and partner cost for the specified productId. A products pricing is dynamic data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":productId",
+                "pricing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "companyId",
+                  "value": "<uuid>",
+                  "description": "Use the companyId in the query to see company-specific pricing"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productId",
+                  "description": "(Required) The product id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a049107b-9bb6-4191-ad5e-3cbce16dc86f",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) The product id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"productId\": \"85d4b838-4de4-034b-4868-c1e38da83f47\",\n      \"productName\": \"Acme Corps Productivity Suite\",\n      \"billingTerm\": \"Monthly\",\n      \"commitmentTerm\": \"3-Year\",\n      \"commitmentTermInMonths\": 36,\n      \"type\": \"Flat\",\n      \"unitOfMeasurement\": \"Each\",\n      \"rates\": {}\n    },\n    {\n      \"productId\": \"4b7181e6-b362-7789-2c5e-4f0f5a280fe6\",\n      \"productName\": \"Acme Corps Productivity Suite\",\n      \"billingTerm\": \"2-Year\",\n      \"commitmentTerm\": \"3-Year\",\n      \"commitmentTermInMonths\": 36,\n      \"type\": \"Flat\",\n      \"unitOfMeasurement\": \"Each\",\n      \"rates\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e336d385-7c39-411a-9c76-3fa058ec22a5",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":productId",
+                    "pricing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productId",
+                      "description": "(Required) The product id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 1731,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 3634\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 2682\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "90b18af2-2b53-48b0-bdd0-97fc0076bc51",
+    "name": "Authentication Access Token Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

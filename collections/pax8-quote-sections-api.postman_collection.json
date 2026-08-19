@@ -1,0 +1,743 @@
+{
+  "item": [
+    {
+      "id": "b7eaa702-9645-4559-a0f8-48c83f04aa96",
+      "name": "Quote sections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82f442f0-0cd3-469d-b74d-df1f220f5d41",
+          "name": "Get quote sections",
+          "request": {
+            "name": "Get quote sections",
+            "description": {
+              "content": "Returns a list of sections associated to the specified quoteId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "sections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af86d516-13cc-4a58-8f1b-61ab8b06901d",
+              "name": "OK - Returns the sections of the quote.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sections\": [\n    {\n      \"id\": \"333553fb-81e4-df5f-5fdf-2dd68f0f7d0c\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"56c499af-3ca5-ae06-37c6-83222b1e2705\",\n          \"order\": 6538\n        },\n        {\n          \"lineItemId\": \"a61af34e-112f-057d-4267-43b93ad2b36c\",\n          \"order\": 4905\n        }\n      ],\n      \"name\": \"string\",\n      \"order\": 96\n    },\n    {\n      \"id\": \"3a5edf8d-e7ff-faba-f5c9-c51c45a7d3ae\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"be17fb0c-781e-153a-42b4-4e4db9680559\",\n          \"order\": 1391\n        },\n        {\n          \"lineItemId\": \"a96e4a70-826b-b4b1-7767-4ff840d35420\",\n          \"order\": 8848\n        }\n      ],\n      \"name\": \"string\",\n      \"order\": 7554\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c53b7142-9a6a-4aa6-899c-843effe9d1ab",
+              "name": "Bad Request - Invalid quote ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_INVALID_RESPONSE\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 1327,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5d8d63d-f7b8-418c-9a67-6586569c1c77",
+              "name": "Authorization Error - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_NOT_VALID\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"INVALID_USER_LEVEL\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6221,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1adc894b-a7e1-49e6-a246-340c40a94918",
+          "name": "Create Section",
+          "request": {
+            "name": "Create Section",
+            "description": {
+              "content": "Creates a new section within a specified quote to organize line items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "sections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8495ecc-95f6-4dee-95f2-dfd7d6a85dd8",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"sections\": [\n    {\n      \"id\": \"fe562a54-a304-1fa1-3d52-c27e54817047\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"10a9f201-76e5-78c7-d9ef-69ce055cc4d5\",\n          \"order\": 4682\n        },\n        {\n          \"lineItemId\": \"2c78122b-c859-a44d-8aad-64d80f9b4824\",\n          \"order\": 9887\n        }\n      ],\n      \"name\": \"string\",\n      \"order\": 6171\n    },\n    {\n      \"id\": \"106704e7-f730-1341-4c42-2edd13ad8b44\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"1e14c79d-e4de-4a7c-5d6f-d6dfb224ee67\",\n          \"order\": 4672\n        },\n        {\n          \"lineItemId\": \"56435e24-db68-ccc2-d6ca-5d5d63b37ef6\",\n          \"order\": 6460\n        }\n      ],\n      \"name\": \"string\",\n      \"order\": 4726\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a5d959f-f579-401a-86ce-b5584f3d4673",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_NOT_VALID\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"INVALID_USER_LEVEL\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6221,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6b29176-ff74-4c52-b167-7919cba0506d",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_NOT_VALID\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"INVALID_USER_LEVEL\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6221,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c52cb9ec-de91-4454-8f23-af2bd07b5ed2",
+          "name": "Update Sections",
+          "request": {
+            "name": "Update Sections",
+            "description": {
+              "content": "Update sections within a specified quote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "sections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sections\": [\n    {\n      \"id\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"order\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cdf5354c-d960-4455-aee8-772f391204de",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sections\": [\n    {\n      \"id\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"order\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"sections\": [\n    {\n      \"id\": \"b0369258-1fa7-1732-f0dd-91f723e0743e\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"string\",\n      \"order\": 1219\n    },\n    {\n      \"id\": \"8e1d5971-7f71-5a4c-9ba7-aed83a636567\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"string\",\n      \"order\": 9386\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6e9a0f5-b625-4ac5-8dcc-bed7bf86ab88",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sections\": [\n    {\n      \"id\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"order\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_NOT_VALID\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"INVALID_USER_LEVEL\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6221,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7dd0d4f-078c-4eb9-8fef-da48df3a2d65",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "sections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sections\": [\n    {\n      \"id\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"order\": \"<integer>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"lineItems\": [\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        },\n        {\n          \"lineItemId\": \"<uuid>\",\n          \"order\": \"<integer>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"order\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_NOT_VALID\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"INVALID_USER_LEVEL\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6221,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bd42018e-ceb9-4127-b77c-9422116781e5",
+    "name": "Authentication Access Token Quote sections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

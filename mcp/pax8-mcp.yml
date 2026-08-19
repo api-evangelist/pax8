@@ -7,13 +7,21 @@ server:
   transport: http
   auth: OAuth 2.0 (preferred) or legacy token
   token_setup: https://app.pax8.com/integrations/mcp
-  clients: [Claude, Cursor, Copilot, VSCode, n8n]
-  notes: |-
-    Pax8 ships an official hosted MCP server exposing the marketplace to AI agents. Tokens are
+  clients:
+  - Claude
+  - Cursor
+  - Copilot
+  - VSCode
+  - n8n
+  notes: 'Pax8 ships an official hosted MCP server exposing the marketplace to AI agents. Tokens are
+
     generated in the Pax8 Marketplace Integrations Hub (https://app.pax8.com/integrations/mcp).
+
     Clients authenticate via OAuth 2.0 (n8n requires OAuth 2.0) or a legacy token. A complete tool
+
     list and example prompts live in the Integrations Hub. Setup guides are published per client
-    (Cursor / Claude / Copilot / VSCode) on the developer portal.
+
+    (Cursor / Claude / Copilot / VSCode) on the developer portal.'
 tool_categories:
 - Company & contact management
 - Invoicing
@@ -26,3 +34,12 @@ docs:
 - https://devx.pax8.com/docs/mcp-setup-guide-cursor
 - https://devx.pax8.com/docs/pax8-mcp-server-setup-guide-claude
 - https://devx.pax8.com/docs/mcp-setup-guide-copilot
+deployment:
+  mode: none
+  endpoint: https://app.pax8.com/integrations/mcp
+  verified: probed
+  probe: dead
+  note: the endpoint this manifest claimed did not answer; recorded as none rather than deleted so the
+    claim stays auditable
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,1722 @@
+{
+  "item": [
+    {
+      "id": "99e0f386-e5fe-43d8-84d5-d9e7ee390387",
+      "name": "Library attachments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "247e4977-aaa9-47b2-87ad-abaadd68f8a9",
+          "name": "Get attachments from the library",
+          "request": {
+            "name": "Get attachments from the library",
+            "description": {
+              "content": "Returns the attachment entries associated from the library.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6c9270e-bd3f-43e8-bbb2-0fbbe754a08f",
+              "name": "OK - Returns the list of attachments entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"createdBy\": {\n      \"fullName\": \"string\",\n      \"id\": \"ac1cda57-4458-5654-247e-1a97e01d0512\",\n      \"role\": \"string\"\n    },\n    \"createdOn\": \"1972-12-21T18:50:52.841Z\",\n    \"id\": \"ef896a27-c3f4-c073-db86-da56e87a93e7\",\n    \"name\": \"string\",\n    \"order\": 414,\n    \"type\": \"string\",\n    \"url\": \"string\",\n    \"replacedOn\": \"2000-01-16T03:48:26.885Z\"\n  },\n  {\n    \"createdBy\": {\n      \"fullName\": \"string\",\n      \"id\": \"72690464-4ec3-8b36-bec3-2e998d188c8f\",\n      \"role\": \"string\"\n    },\n    \"createdOn\": \"1976-12-21T19:20:12.153Z\",\n    \"id\": \"b8e5f5ed-3260-08ab-408f-fd27fa0c4288\",\n    \"name\": \"string\",\n    \"order\": 4379,\n    \"type\": \"string\",\n    \"url\": \"string\",\n    \"replacedOn\": \"2010-04-20T04:28:50.035Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0d4f267-8d04-447a-b5fc-18b540f0c1d0",
+              "name": "Authorization Error - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_UPSERT_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"BRANDING_NOT_FOUND\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 5719,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1616ddb-a121-4af1-a7c6-a82874aef8ea",
+          "name": "Upload attachments to library",
+          "request": {
+            "name": "Upload attachments to library",
+            "description": {
+              "content": "Uploads attachments to the library.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "attachments",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7fd07d7-4ffe-4855-aacb-a3c598f66ede",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "attachments",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"createdBy\": {\n      \"fullName\": \"string\",\n      \"id\": \"ac1cda57-4458-5654-247e-1a97e01d0512\",\n      \"role\": \"string\"\n    },\n    \"createdOn\": \"1972-12-21T18:50:52.841Z\",\n    \"id\": \"ef896a27-c3f4-c073-db86-da56e87a93e7\",\n    \"name\": \"string\",\n    \"order\": 414,\n    \"type\": \"string\",\n    \"url\": \"string\",\n    \"replacedOn\": \"2000-01-16T03:48:26.885Z\"\n  },\n  {\n    \"createdBy\": {\n      \"fullName\": \"string\",\n      \"id\": \"72690464-4ec3-8b36-bec3-2e998d188c8f\",\n      \"role\": \"string\"\n    },\n    \"createdOn\": \"1976-12-21T19:20:12.153Z\",\n    \"id\": \"b8e5f5ed-3260-08ab-408f-fd27fa0c4288\",\n    \"name\": \"string\",\n    \"order\": 4379,\n    \"type\": \"string\",\n    \"url\": \"string\",\n    \"replacedOn\": \"2010-04-20T04:28:50.035Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "050e0792-d317-4a38-a641-03045af24d54",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "attachments",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9334241-cf93-4900-8fe1-6ec546a568d0",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "attachments",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2741e08e-06e2-4c55-bad3-20fdc983093d",
+          "name": "Update library attachments",
+          "request": {
+            "name": "Update library attachments",
+            "description": {
+              "content": "Update attachments from the library.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"order\": \"<integer>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"order\": \"<integer>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e8c73680-02e8-4d21-b47c-67741a5bd321",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"order\": \"<integer>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"order\": \"<integer>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"createdBy\": {\n      \"fullName\": \"string\",\n      \"id\": \"ac1cda57-4458-5654-247e-1a97e01d0512\",\n      \"role\": \"string\"\n    },\n    \"createdOn\": \"1972-12-21T18:50:52.841Z\",\n    \"id\": \"ef896a27-c3f4-c073-db86-da56e87a93e7\",\n    \"name\": \"string\",\n    \"order\": 414,\n    \"type\": \"string\",\n    \"url\": \"string\",\n    \"replacedOn\": \"2000-01-16T03:48:26.885Z\"\n  },\n  {\n    \"createdBy\": {\n      \"fullName\": \"string\",\n      \"id\": \"72690464-4ec3-8b36-bec3-2e998d188c8f\",\n      \"role\": \"string\"\n    },\n    \"createdOn\": \"1976-12-21T19:20:12.153Z\",\n    \"id\": \"b8e5f5ed-3260-08ab-408f-fd27fa0c4288\",\n    \"name\": \"string\",\n    \"order\": 4379,\n    \"type\": \"string\",\n    \"url\": \"string\",\n    \"replacedOn\": \"2010-04-20T04:28:50.035Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09baa45d-35e8-42c3-880c-21c4e51cacf4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"order\": \"<integer>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"order\": \"<integer>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f571569-43c6-4bb4-93f2-bc6e2dd217bc",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"order\": \"<integer>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"order\": \"<integer>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cb671ad-405c-496d-8431-31dc37fcf493",
+          "name": "Add quote attachments to library",
+          "request": {
+            "name": "Add quote attachments to library",
+            "description": {
+              "content": "Adds existing quote attachments to the library.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-attachments",
+                "shared"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"attachmentId\": \"<uuid>\"\n  },\n  {\n    \"attachmentId\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6eab84da-f61f-4bf6-b7d6-9b221822bb4a",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    "shared"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"attachmentId\": \"<uuid>\"\n  },\n  {\n    \"attachmentId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"createdBy\": {\n      \"fullName\": \"string\",\n      \"id\": \"ac1cda57-4458-5654-247e-1a97e01d0512\",\n      \"role\": \"string\"\n    },\n    \"createdOn\": \"1972-12-21T18:50:52.841Z\",\n    \"id\": \"ef896a27-c3f4-c073-db86-da56e87a93e7\",\n    \"name\": \"string\",\n    \"order\": 414,\n    \"type\": \"string\",\n    \"url\": \"string\",\n    \"replacedOn\": \"2000-01-16T03:48:26.885Z\"\n  },\n  {\n    \"createdBy\": {\n      \"fullName\": \"string\",\n      \"id\": \"72690464-4ec3-8b36-bec3-2e998d188c8f\",\n      \"role\": \"string\"\n    },\n    \"createdOn\": \"1976-12-21T19:20:12.153Z\",\n    \"id\": \"b8e5f5ed-3260-08ab-408f-fd27fa0c4288\",\n    \"name\": \"string\",\n    \"order\": 4379,\n    \"type\": \"string\",\n    \"url\": \"string\",\n    \"replacedOn\": \"2010-04-20T04:28:50.035Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09bb15d1-9595-4063-bcdc-865bfe163ecd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    "shared"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"attachmentId\": \"<uuid>\"\n  },\n  {\n    \"attachmentId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d847ab25-283e-4797-9055-6ee9e6800b69",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    "shared"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"attachmentId\": \"<uuid>\"\n  },\n  {\n    \"attachmentId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50448138-ee1c-45e7-b021-e2eaaf16df18",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    "shared"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"attachmentId\": \"<uuid>\"\n  },\n  {\n    \"attachmentId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc618ea2-e311-4b50-bd03-a7c8fce5a1d2",
+          "name": "Delete library attachment",
+          "request": {
+            "name": "Delete library attachment",
+            "description": {
+              "content": "Deletes single attachment from the library.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-attachments",
+                ":attachmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "attachmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f7384ee-60d2-4a19-a2f1-fa1b42f52c21",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "66507335-837a-4be6-827f-ae3408d55f47",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40fc198c-2849-46a5-8b83-dd52b1e1c97f",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82ff9858-a2d5-4e77-8b6a-f42c9d7e2d94",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a98c165-15b7-447a-8e81-7cdf9babcc53",
+          "name": "Download library attachment",
+          "request": {
+            "name": "Download library attachment",
+            "description": {
+              "content": "Downloads single attachment from the library.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-attachments",
+                ":attachmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "download",
+                  "value": "<boolean>",
+                  "description": "Must be set to true to download the file."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "attachmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4a3e202-e59b-49e9-84e4-d341f14d7783",
+              "name": "Returns attachment metadata as JSON. When 'download=true' is provided, returns the attachment file as PDF.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "download",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdBy\": {\n    \"fullName\": \"string\",\n    \"id\": \"32459779-1621-1330-dec4-6dd00e96ce1d\",\n    \"role\": \"string\"\n  },\n  \"createdOn\": \"2003-06-13T05:23:14.466Z\",\n  \"id\": \"24019a56-ea34-760e-8ffa-1e0c9db5a432\",\n  \"name\": \"string\",\n  \"order\": 6007,\n  \"type\": \"string\",\n  \"url\": \"string\",\n  \"replacedOn\": \"1970-03-29T04:47:26.055Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b2cfbee-7fbc-40fd-b210-193b0181e138",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "download",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "268f21c9-7731-49e9-b63c-ac6794dc74f6",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "download",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4efc3f33-8ad4-49c5-b30c-462f7da5e8a7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "download",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ffd9ba0-6dd9-4e6a-a4b2-c98d13dc0cde",
+          "name": "Replace library attachment",
+          "request": {
+            "name": "Replace library attachment",
+            "description": {
+              "content": "Replace an existing library attachment with a new one.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-attachments",
+                ":attachmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "attachmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "attachment",
+                  "type": "file",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8af95131-dcc3-46a7-90c1-4f14e165bf58",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"createdBy\": {\n    \"fullName\": \"string\",\n    \"id\": \"32459779-1621-1330-dec4-6dd00e96ce1d\",\n    \"role\": \"string\"\n  },\n  \"createdOn\": \"2003-06-13T05:23:14.466Z\",\n  \"id\": \"24019a56-ea34-760e-8ffa-1e0c9db5a432\",\n  \"name\": \"string\",\n  \"order\": 6007,\n  \"type\": \"string\",\n  \"url\": \"string\",\n  \"replacedOn\": \"1970-03-29T04:47:26.055Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b67d74b-a890-4d00-bc8b-ffd96f2517f1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12d59c89-08d5-4cbd-92c1-1e52f5f9d5b3",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ed82a7f-89bf-40eb-9b63-f1eddf78ec8b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-attachments",
+                    ":attachmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "attachmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"REFERENCE_CODE_GENERATION_EXCEPTION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"PREFERENCE_MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8460,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ca1cdbca-97f3-4136-970c-dfd7d54b8aa6",
+    "name": "Authentication Access Token Library attachments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

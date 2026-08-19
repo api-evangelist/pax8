@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Subscriptions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/subscriptions",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to request in the subscriptions list"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Returns _this_ number of subscriptions per page"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return subscriptions sorted by this field and direction Formatted as fieldName,direction - ex. sort=createdDate,desc"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Return only subscriptions matching this ```status``` value"
+              },
+              {
+                "name": "billingTerm",
+                "value": "",
+                "type": "query",
+                "description": "Return only subscriptions matching this ```billingTerm``` value"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "Return only subscriptions matching this ```companyId``` value"
+              },
+              {
+                "name": "productId",
+                "value": "",
+                "type": "query",
+                "description": "Return only subscriptions matching this ```productId``` value"
+              }
+            ]
+          },
+          "docs": "Fetch a paginated list of subscriptions. Default page is 0 and default size is 10. The maximum page size is 200"
+        },
+        {
+          "info": {
+            "name": "Get Subscription By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Subscription record specified by the subscriptionId"
+        },
+        {
+          "info": {
+            "name": "Update Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.pax8.com/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "subscription to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a subscription. Currently NOT supported for subscriptions with a future date. At least one of the following fields are required: Price, BillingTerm, Quantity, StartDate"
+        },
+        {
+          "info": {
+            "name": "Cancel Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.pax8.com/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "subscription to be updated"
+              },
+              {
+                "name": "cancelDate",
+                "value": "",
+                "type": "query",
+                "description": "The date to cancel the subscription on"
+              }
+            ]
+          },
+          "docs": "Cancels the Subscription specified by subscriptionId"
+        },
+        {
+          "info": {
+            "name": "Get Subscription History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/subscriptions/:subscriptionId/history",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a list of changes for a subscription"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

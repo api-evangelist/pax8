@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Provision Results API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Provision Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Provision Results for a Provision Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/results",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provisionAttemptId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get All Provision Results for a Provision Request"
+        },
+        {
+          "info": {
+            "name": "Create Provision Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/results",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Provision Result"
+        },
+        {
+          "info": {
+            "name": "Get One Provision Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/results/:provisionResultId",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provisionResultId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get One Provision Result"
+        },
+        {
+          "info": {
+            "name": "Get Latest Provision Result for an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/results/latest",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Latest Provision Result for an Order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Invoices API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/invoices",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to request in the invoices list"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Returns _this_ number of invoices per page"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return invoices sorted by this field and direction Formatted as fieldName,direction - ex. sort=invoiceDate,desc"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices matching this ```status``` value"
+              },
+              {
+                "name": "invoiceDate",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices matching this ```invoiceDate``` value"
+              },
+              {
+                "name": "invoiceDateRangeStart",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices with an ```invoiceDate``` greater than or equal to this date"
+              },
+              {
+                "name": "invoiceDateRangeEnd",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices with an ```invoiceDate``` less than or equal to this date"
+              },
+              {
+                "name": "dueDate",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices matching this ```dueDate``` value"
+              },
+              {
+                "name": "total",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices matching this ```total``` value"
+              },
+              {
+                "name": "balance",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices matching this ```balance``` value"
+              },
+              {
+                "name": "carriedBalance",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices matching this ```carriedBalance``` value"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "Return only invoices matching this ```companyId``` value"
+              }
+            ]
+          },
+          "docs": "Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200"
+        },
+        {
+          "info": {
+            "name": "Get Invoice By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The invoice id"
+              }
+            ]
+          },
+          "docs": "Fetch a paginated list of invoices. Default page is 0 and default size is 10. The maximum page size is 200"
+        },
+        {
+          "info": {
+            "name": "List Invoice Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/invoices/:invoiceId/items",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The invoice id"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to request in the invoices items list"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Returns _this_ number of invoices items per page"
+              }
+            ]
+          },
+          "docs": "Fetch a paginated list of invoice items. Default page is 0 and default size is 10. The maximum page size is 200"
+        },
+        {
+          "info": {
+            "name": "List Draft Invoice Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/invoices/draftItems",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to request in the draft invoice items list"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Returns _this_ number of draft invoice items per page"
+              },
+              {
+                "name": "monthOffset",
+                "value": "",
+                "type": "query",
+                "description": "Number of months from current to return draft items for. 0 = current month, 1 = next month. Only values 0 and 1 are currently supported. If omitted, defaults to 1 (next month).\n"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "Filter draft items to a specific company.\n"
+              }
+            ]
+          },
+          "docs": "Fetch a paginated list of draft invoice items before they are finalized into invoices. Default page is 0 and default size is 10. The maximum page size is 200.\n\nDISCLAIMER: For future-dated items, the data represents a snapshot of charges that will be applied to a future invoice as of the request date. This is not an actual invoice. Clients should be aware that the final invoice generated on the 5th of the month may differ. This endpoint does not include charges for usage-based products billed in"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

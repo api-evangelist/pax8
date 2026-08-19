@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Provision Attempts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Provision Attempts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Provision Attempts for a Provision Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/attempts",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provisionDetailId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get All Provision Attempts for a Provision Request"
+        },
+        {
+          "info": {
+            "name": "Create Provision Attempt for a Provision Request and Provision Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/attempts",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create Provision Attempt for a Provision Request and Provision Detail"
+        },
+        {
+          "info": {
+            "name": "Get Provision Attempt by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/attempts/:provisionAttemptId",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provisionAttemptId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Provision Attempt by ID"
+        },
+        {
+          "info": {
+            "name": "Get Latest Provision Attempt for a Provision Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/provision-requests/:provisionRequestId/attempts/latest",
+            "params": [
+              {
+                "name": "provisionRequestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Latest Provision Attempt for a Provision Request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

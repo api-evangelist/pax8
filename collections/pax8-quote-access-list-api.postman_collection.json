@@ -1,0 +1,738 @@
+{
+  "item": [
+    {
+      "id": "d3eaefd8-8d5f-47b7-822d-a28284a9feda",
+      "name": "Quote access list",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3f48fd12-1f2f-4579-bf1d-48d2c1bda92c",
+          "name": "Get quote access list",
+          "request": {
+            "name": "Get quote access list",
+            "description": {
+              "content": "Returns the access list entries associated to the specified quoteId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "access-list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c48b0be-9bb7-4c70-aff7-126f5e1323e5",
+              "name": "OK - Returns the access list entries of the quote.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accessList\": [\n    {\n      \"accountType\": \"user\",\n      \"email\": \"string\",\n      \"id\": \"cb5013a7-408f-493e-dafa-67ab469ba7cf\",\n      \"link\": \"string\",\n      \"accountName\": \"string\",\n      \"accountRole\": \"string\",\n      \"userId\": \"e5f8b9e3-01b0-24ba-dc11-a759eca94360\"\n    },\n    {\n      \"accountType\": \"contact\",\n      \"email\": \"string\",\n      \"id\": \"0e3c0ccf-c9d8-0038-aac3-51c8a4923742\",\n      \"link\": \"string\",\n      \"accountName\": \"string\",\n      \"accountRole\": \"string\",\n      \"userId\": \"de7a5952-7c06-53e3-5f56-870ba9108e7d\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03c98b24-59a9-49a5-b7b3-4649d9ac2400",
+              "name": "Bad Request - Invalid quote ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"VIEW_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"MAX_ATTACHMENTS_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 3905,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e2dd309-8174-49fd-9126-2bc9ee3b3ac6",
+              "name": "Authorization Error - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_REQUEST_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_INVALID_STATUS\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6821,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c69beeb-2c0d-48aa-a6c8-8c56d0efbc6e",
+          "name": "Add access list entries",
+          "request": {
+            "name": "Add access list entries",
+            "description": {
+              "content": "Share the quote by adding the emails of the intended recipients to this access list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "access-list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"email\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"accountRole\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"userId\": \"<uuid>\"\n  },\n  {\n    \"email\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"accountRole\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"userId\": \"<uuid>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da06a0b8-6e5c-473b-b11c-5b28057bddf9",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"email\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"accountRole\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"userId\": \"<uuid>\"\n  },\n  {\n    \"email\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"accountRole\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"userId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accountType\": \"contact\",\n    \"email\": \"string\",\n    \"id\": \"f7bcab7c-eb57-75cf-4d52-487265aa9ecd\",\n    \"link\": \"string\",\n    \"accountName\": \"string\",\n    \"accountRole\": \"string\",\n    \"userId\": \"a60d37bf-d84b-accd-e1d3-5e8e8663b6f1\"\n  },\n  {\n    \"accountType\": \"user\",\n    \"email\": \"string\",\n    \"id\": \"5d678c19-9031-5648-9ef0-58e92fb0c5e0\",\n    \"link\": \"string\",\n    \"accountName\": \"string\",\n    \"accountRole\": \"string\",\n    \"userId\": \"b1486eef-818c-6884-46ef-9b26b133cefd\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ca1fc13-baad-4a42-8ac7-cdf6f62fb0b5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"email\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"accountRole\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"userId\": \"<uuid>\"\n  },\n  {\n    \"email\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"accountRole\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"userId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_REQUEST_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_INVALID_STATUS\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6821,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23344fbb-e90d-4529-a311-bcbe689bc59a",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"email\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"accountRole\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"userId\": \"<uuid>\"\n  },\n  {\n    \"email\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"accountRole\": \"<string>\",\n    \"accountType\": \"<string>\",\n    \"userId\": \"<uuid>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_REQUEST_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_INVALID_STATUS\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6821,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8454c65-34cd-466b-878e-9088339374df",
+          "name": "Delete quote access list entry",
+          "request": {
+            "name": "Delete quote access list entry",
+            "description": {
+              "content": "Deletes a specific access list entry from a quote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "access-list",
+                ":accessListEntryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "accessListEntryId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ecbded3-d0e5-47dc-89f7-8e7d20ce947f",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list",
+                    ":accessListEntryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accessListEntryId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dbc85136-4b5d-4e19-aa57-864aebfadd88",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list",
+                    ":accessListEntryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accessListEntryId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_REQUEST_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_INVALID_STATUS\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6821,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b1c23c0-f12d-4736-9733-e1c6c0806de9",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "access-list",
+                    ":accessListEntryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "accessListEntryId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_REQUEST_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_INVALID_STATUS\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 6821,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "27c1bd95-0552-4998-a599-198d333b2615",
+    "name": "Authentication Access Token Quote access list API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

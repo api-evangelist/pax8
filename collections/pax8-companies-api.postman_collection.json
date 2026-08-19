@@ -1,0 +1,710 @@
+{
+  "item": [
+    {
+      "id": "907227e2-583d-4817-ad67-3ae4c45d4baa",
+      "name": "Companies",
+      "description": {
+        "content": "Companies represent the customers your organization serves through the Pax8 platform. Fetch a list of your company records, or a specific company by its companyId",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79a21bf8-cf6b-4557-ad8c-92078e357bbc",
+          "name": "Create Company",
+          "request": {
+            "name": "Create Company",
+            "description": {
+              "content": "Creates a new company. You can optionally include contacts in the request body to create the company with contacts in a single request. If no contacts are provided, the company will be placed in an \"inactive\" status until the [company has primary contacts added](#tag/Contacts). Once contacts are added, the company will move to \"Active\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": {\n    \"street\": \"<string>\",\n    \"street2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"stateOrProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"phone\": \"<string>\",\n  \"website\": \"<string>\",\n  \"billOnBehalfOfEnabled\": \"<boolean>\",\n  \"selfServiceAllowed\": \"<boolean>\",\n  \"orderApprovalRequired\": \"<boolean>\",\n  \"externalId\": \"<string>\",\n  \"contacts\": [\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<phone>\",\n      \"types\": [\n        {\n          \"type\": \"<string>\",\n          \"primary\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"primary\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone\": \"<phone>\",\n      \"types\": [\n        {\n          \"type\": \"<string>\",\n          \"primary\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"primary\": \"<boolean>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e21f2a9-2485-43d3-855c-a2f460bfc9c9",
+              "name": "Successful Company create",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"VFC Network, Inc\",\n  \"address\": {\n    \"street\": \"48918 Liberty Lane Ave\",\n    \"city\": \"Denver\",\n    \"postalCode\": \"80210\",\n    \"country\": \"US\",\n    \"stateOrProvince\": \"Colorado\"\n  },\n  \"phone\": \"123-456-5555\",\n  \"website\": \"vfc-network-inc-liberty.com\",\n  \"externalId\": \"A123\",\n  \"selfServiceAllowed\": false,\n  \"billOnBehalfOfEnabled\": false,\n  \"orderApprovalRequired\": false,\n  \"contacts\": [\n    {\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\",\n      \"email\": \"john.doe@vfc-network-inc-liberty.com\",\n      \"phone\": \"555-555-5555\",\n      \"types\": [\n        {\n          \"type\": \"Admin\",\n          \"primary\": true\n        },\n        {\n          \"type\": \"Billing\",\n          \"primary\": true\n        },\n        {\n          \"type\": \"Technical\",\n          \"primary\": true\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a\",\n  \"name\": \"VFC Network, Inc\",\n  \"address\": {\n    \"street\": \"48918 Liberty Lane Ave\",\n    \"city\": \"Denver\",\n    \"postalCode\": \"80210\",\n    \"country\": \"US\",\n    \"stateOrProvince\": \"Colorado\"\n  },\n  \"phone\": \"123-456-5555\",\n  \"website\": \"vfc-network-inc-liberty.com\",\n  \"status\": \"Active\",\n  \"externalId\": \"A123\",\n  \"selfServiceAllowed\": false,\n  \"billOnBehalfOfEnabled\": false,\n  \"orderApprovalRequired\": false,\n  \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10839a76-154b-4d08-8953-07fc198359bb",
+              "name": "Invalid Company",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"VFC Network, Inc\",\n  \"address\": {\n    \"street\": \"48918 Liberty Lane Ave\",\n    \"city\": \"Denver\",\n    \"postalCode\": \"80210\",\n    \"country\": \"US\",\n    \"stateOrProvince\": \"Colorado\"\n  },\n  \"phone\": \"123-456-5555\",\n  \"website\": \"vfc-network-inc-liberty.com\",\n  \"externalId\": \"A123\",\n  \"selfServiceAllowed\": false,\n  \"billOnBehalfOfEnabled\": false,\n  \"orderApprovalRequired\": false,\n  \"contacts\": [\n    {\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\",\n      \"email\": \"john.doe@vfc-network-inc-liberty.com\",\n      \"phone\": \"555-555-5555\",\n      \"types\": [\n        {\n          \"type\": \"Admin\",\n          \"primary\": true\n        },\n        {\n          \"type\": \"Billing\",\n          \"primary\": true\n        },\n        {\n          \"type\": \"Technical\",\n          \"primary\": true\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 6725,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 8285\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 1484\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0caa556a-dd6f-4cfd-9081-807657534e5d",
+          "name": "List Companies",
+          "request": {
+            "name": "List Companies",
+            "description": {
+              "content": "Returns a paginated list of all your companies filtered by optional parameters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "The page number to request for in the companies list"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Return this number of company records per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Return companies sorted by this field and direction. Formatted as fieldName,direction - ex. sort=name,desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "Return only companies matching this ```city``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Return only companies matching this ```country``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "stateOrProvince",
+                  "value": "<string>",
+                  "description": "Return only companies matching this ```stateOrProvince``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "postalCode",
+                  "value": "<string>",
+                  "description": "Return only companies matching this ```postalCode``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "selfServiceAllowed",
+                  "value": "<boolean>",
+                  "description": "Return only companies matching this ```selfServiceAllowed``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "billOnBehalfOfEnabled",
+                  "value": "<boolean>",
+                  "description": "Return only companies matching this ```billOnBehalfOfEnabled``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderApprovalRequired",
+                  "value": "<boolean>",
+                  "description": "Return only companies matching this ```orderApprovalRequired``` value"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Return only companies matching this ```status``` value"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4b70b3e-4808-48ae-8e79-a97bb5a31e03",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "Greenwood Village"
+                    },
+                    {
+                      "key": "country",
+                      "value": "United States"
+                    },
+                    {
+                      "key": "stateOrProvince",
+                      "value": "Colorado"
+                    },
+                    {
+                      "key": "postalCode",
+                      "value": "80111"
+                    },
+                    {
+                      "key": "selfServiceAllowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "billOnBehalfOfEnabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderApprovalRequired",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"9ba32659-d339-4539-be21-1f461dc1a415\",\n      \"name\": \"112 Cloud Communications Backup\",\n      \"address\": {\n        \"street\": \"6905 N Winterhold Drive\",\n        \"city\": \"Dayton\",\n        \"postalCode\": \"82691\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"Utah\"\n      },\n      \"website\": \"cloud-communications-backup.com\",\n      \"status\": \"Active\",\n      \"externalId\": \"A123\",\n      \"selfServiceAllowed\": true,\n      \"billOnBehalfOfEnabled\": true,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"0d3f48ae-9764-4b3a-9554-d28fe345230c\",\n      \"name\": \"021 Modern Executive\",\n      \"address\": {\n        \"street\": \"15320 Pipeline St\",\n        \"city\": \"Tacoma\",\n        \"postalCode\": \"50921\",\n        \"country\": \"CA\",\n        \"stateOrProvince\": \"Ontario\"\n      },\n      \"website\": \"021-modern-executive.com\",\n      \"status\": \"Active\",\n      \"externalId\": \"B123\",\n      \"selfServiceAllowed\": true,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"d904c896-e19e-4daa-9b73-c992a000ad8a\",\n      \"name\": \"047 Acupuncture Search, Inc.\",\n      \"address\": {\n        \"street\": \"asdasdasd4 Commerce Ave\",\n        \"city\": \"Centennial\",\n        \"postalCode\": \"92426\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"Colorado\"\n      },\n      \"website\": \"32peakviewave.com\",\n      \"status\": \"Active\",\n      \"externalId\": \"C123\",\n      \"selfServiceAllowed\": false,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"e74bc79a-71ce-414e-a8e9-d6a155933f86\",\n      \"name\": \"0633 - Citizens State Bank\",\n      \"address\": {\n        \"street\": \"2445 South West Ski Rd\",\n        \"city\": \"Salt Lake City\",\n        \"postalCode\": \"79510\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"Texas\"\n      },\n      \"website\": \"sout-west-ski-2.com\",\n      \"status\": \"Inactive\",\n      \"externalId\": \"D123\",\n      \"selfServiceAllowed\": false,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"9ebc4a03-1c08-4c8b-9cc7-f5eb0b686cc4\",\n      \"name\": \"0671 - Motivational County Bank Systems\",\n      \"address\": {\n        \"street\": \"10191 King Zane Ave N\",\n        \"city\": \"Buffalo Grove\",\n        \"postalCode\": \"61079\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"Connecticut\"\n      },\n      \"website\": \"motivational-county-bank-systems.com\",\n      \"status\": \"Active\",\n      \"externalId\": \"E123\",\n      \"selfServiceAllowed\": false,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"81bfe305-e56c-483e-ba4f-943c3e31411a\",\n      \"name\": \"0721 - Bank of Physicians\",\n      \"address\": {\n        \"street\": \"7589 W. Bahia Rd Suite 300\",\n        \"city\": \"Scottsdale\",\n        \"postalCode\": \"52322\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"Indiana\"\n      },\n      \"website\": \"bank-of-physicians.net\",\n      \"status\": \"Active\",\n      \"externalId\": \"F123\",\n      \"selfServiceAllowed\": false,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"20497fca-e228-44ae-8f2d-08296d7e0e4d\",\n      \"name\": \"072 - New Sharpco Veterinary Printing\",\n      \"address\": {\n        \"street\": \"Inks Greensboro Drive, Suite 200\",\n        \"city\": \"Winchester\",\n        \"postalCode\": \"61289\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"Arizona\"\n      },\n      \"website\": \"new-sharpco-veterinary-printing.com\",\n      \"status\": \"Active\",\n      \"externalId\": \"G123\",\n      \"selfServiceAllowed\": false,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"eeb7763f-0d25-49a1-a3f6-842631abe0ff\",\n      \"name\": \"0841 - Precision Community Insurance\",\n      \"address\": {\n        \"street\": \"40915 Sorrento Mask Blvd.\",\n        \"city\": \"Gotham\",\n        \"postalCode\": \"89258\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"New Jersey\"\n      },\n      \"website\": \"precision-community-insurance.com\",\n      \"status\": \"Active\",\n      \"externalId\": \"H123\",\n      \"selfServiceAllowed\": false,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"3953a817-c9b5-46bf-9002-8ba8648cd9a4\",\n      \"name\": \"0I-Ride Powersports\",\n      \"address\": {\n        \"street\": \"East Camelback Hwy, Suite 6711\",\n        \"city\": \"New Britain\",\n        \"postalCode\": \"55446-2800\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"North Carolina\"\n      },\n      \"website\": \"0i-ride-powersports.com\",\n      \"status\": \"Active\",\n      \"externalId\": \"J123\",\n      \"selfServiceAllowed\": false,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    },\n    {\n      \"id\": \"a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a\",\n      \"name\": \"100 Smith Avenue Condos\",\n      \"address\": {\n        \"street\": \"2677 Carlson Willis Pkwy 618, Suite 1197\",\n        \"city\": \"Spring Park\",\n        \"postalCode\": \"85158\",\n        \"country\": \"US\",\n        \"stateOrProvince\": \"Arizona\"\n      },\n      \"website\": \"100-smith-avenue-condos.com\",\n      \"status\": \"Active\",\n      \"externalId\": \"K123\",\n      \"selfServiceAllowed\": false,\n      \"billOnBehalfOfEnabled\": false,\n      \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n    }\n  ],\n  \"page\": {\n    \"size\": 10,\n    \"totalElements\": 65,\n    \"totalPages\": 7,\n    \"number\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f475f4bc-589d-4a4c-9660-7f85049c2dfd",
+          "name": "Get Company By ID",
+          "request": {
+            "name": "Get Company By ID",
+            "description": {
+              "content": "Returns a single company record matching the ```companyId``` you specify",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cad8b24-6145-4535-bf40-3ee5a8a4a639",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a\",\n  \"name\": \"VFC Network, Inc\",\n  \"address\": {\n    \"street\": \"48918 Liberty Lane Ave\",\n    \"city\": \"Denver\",\n    \"postalCode\": \"80210\",\n    \"country\": \"US\",\n    \"stateOrProvince\": \"Colorado\"\n  },\n  \"phone\": \"123-456-5555\",\n  \"website\": \"vfc-network-inc-liberty.com\",\n  \"status\": \"Active\",\n  \"externalId\": \"A123\",\n  \"selfServiceAllowed\": false,\n  \"billOnBehalfOfEnabled\": false,\n  \"orderApprovalRequired\": false,\n  \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d58f9e4-220e-48b6-a2ed-0dda577ebd23",
+              "name": "Company not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 9447,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 10\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 3018\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "287d7dc4-bfca-4d4c-befc-9b44e9dbc868",
+          "name": "Update Company",
+          "request": {
+            "name": "Update Company",
+            "description": {
+              "content": "Updates an existing Company. ATTENTION - at least one parameter has to be modified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": {\n    \"street\": \"<string>\",\n    \"street2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"stateOrProvince\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"phone\": \"<string>\",\n  \"website\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"billOnBehalfOfEnabled\": \"<boolean>\",\n  \"selfServiceAllowed\": \"<boolean>\",\n  \"orderApprovalRequired\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b21170d-a54e-4f03-bc3c-c48b501632ca",
+              "name": "Successful Company update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a\",\n  \"name\": \"VFC Network, Inc\",\n  \"address\": {\n    \"street\": \"48918 Liberty Lane Ave\",\n    \"city\": \"Denver\",\n    \"postalCode\": \"80210\",\n    \"country\": \"US\",\n    \"stateOrProvince\": \"Colorado\"\n  },\n  \"phone\": \"123-456-5555\",\n  \"website\": \"vfc-network-inc-liberty.com\",\n  \"status\": \"Active\",\n  \"externalId\": \"A123\",\n  \"selfServiceAllowed\": false,\n  \"billOnBehalfOfEnabled\": false,\n  \"orderApprovalRequired\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a\",\n  \"name\": \"VFC Network, Inc\",\n  \"address\": {\n    \"street\": \"48918 Liberty Lane Ave\",\n    \"city\": \"Denver\",\n    \"postalCode\": \"80210\",\n    \"country\": \"US\",\n    \"stateOrProvince\": \"Colorado\"\n  },\n  \"phone\": \"123-456-5555\",\n  \"website\": \"vfc-network-inc-liberty.com\",\n  \"status\": \"Active\",\n  \"externalId\": \"A123\",\n  \"selfServiceAllowed\": false,\n  \"billOnBehalfOfEnabled\": false,\n  \"orderApprovalRequired\": false,\n  \"updatedDate\": \"2023-08-11T11:33:12.314-0600\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab018db2-cdf2-4076-a0e8-e8653c54c9c0",
+              "name": "Invalid Company",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a\",\n  \"name\": \"VFC Network, Inc\",\n  \"address\": {\n    \"street\": \"48918 Liberty Lane Ave\",\n    \"city\": \"Denver\",\n    \"postalCode\": \"80210\",\n    \"country\": \"US\",\n    \"stateOrProvince\": \"Colorado\"\n  },\n  \"phone\": \"123-456-5555\",\n  \"website\": \"vfc-network-inc-liberty.com\",\n  \"status\": \"Active\",\n  \"externalId\": \"A123\",\n  \"selfServiceAllowed\": false,\n  \"billOnBehalfOfEnabled\": false,\n  \"orderApprovalRequired\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 9447,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 10\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 3018\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "edb4f789-704f-444a-be41-a8d097fd2780",
+    "name": "Authentication Access Token Companies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

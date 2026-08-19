@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authentication Access Token Products API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://token-manager.pax8.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/products",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to request for in the products list"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Return this number of products per page"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Return products sorted by the field and direction specified. Formatted as fieldName, direction - ex. sort=name,desc"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search on fields like name, vendor, SKU and ID."
+              },
+              {
+                "name": "vendorName",
+                "value": "",
+                "type": "query",
+                "description": "Return only products matching the specified vendor name"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of Pax8 products filtered by optional query parameters"
+        },
+        {
+          "info": {
+            "name": "Get Product By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/products/:productId",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns only the product record for the productId you specify"
+        },
+        {
+          "info": {
+            "name": "Get Provisioning Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/products/:productId/provision-details",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns provisioning details for the specified productId. Provisioning details for a product are dynamic data."
+        },
+        {
+          "info": {
+            "name": "Get Product Dependencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/products/:productId/dependencies",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns associated dependencies for the specified ```productId```. A products dependencies are dynamic data."
+        },
+        {
+          "info": {
+            "name": "Get Pricing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pax8.com/v1/products/:productId/pricing",
+            "params": [
+              {
+                "name": "productId",
+                "value": "",
+                "type": "path",
+                "description": "The product id"
+              },
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "query",
+                "description": "Use the companyId in the query to see company-specific pricing"
+              }
+            ]
+          },
+          "docs": "Returns recommended pricing and partner cost for the specified productId. A products pricing is dynamic data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

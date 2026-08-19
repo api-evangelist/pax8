@@ -1,0 +1,470 @@
+{
+  "item": [
+    {
+      "id": "592334ea-d236-4b21-868a-9180be0e3d9b",
+      "name": "Quote preferences",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8769c364-cd4b-45d8-87ac-c2f1079190ef",
+          "name": "Get quote preferences",
+          "request": {
+            "name": "Get quote preferences",
+            "description": {
+              "content": "Returns quote preferences associated to the current user's partner account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7cb4d70-e682-4128-a255-77383269a1ee",
+              "name": "OK - Returns the quote preferences.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"attachments\": [\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"4d562738-9b8a-2ce0-c24e-d646fbe7ec10\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"2011-09-19T02:20:33.511Z\",\n      \"id\": \"fb642e59-145d-0803-8750-c73e1f4c2c47\",\n      \"name\": \"string\",\n      \"order\": 4912,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"2005-10-03T23:55:10.756Z\"\n    },\n    {\n      \"createdBy\": {\n        \"fullName\": \"string\",\n        \"id\": \"76c87ca2-0269-f323-5c08-6bf2004e4b45\",\n        \"role\": \"string\"\n      },\n      \"createdOn\": \"2013-07-25T07:49:50.792Z\",\n      \"id\": \"d14bccd8-9442-d5e2-1b97-d8ed3a2b0c9b\",\n      \"name\": \"string\",\n      \"order\": 9231,\n      \"type\": \"string\",\n      \"url\": \"string\",\n      \"replacedOn\": \"1967-10-01T17:02:28.900Z\"\n    }\n  ],\n  \"daysToExpire\": 2224,\n  \"introMessage\": \"string\",\n  \"salesMarginPercentage\": 6141.995789088433,\n  \"termsAndDisclaimers\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "242e58d6-2c76-4fcb-840d-49fab30b28ff",
+              "name": "Bad Request - Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_COMPANY_PARTNER_COMPATIBILITY_CHECK_FAILED\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"BRANDING_NOT_FOUND\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 8612,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "164232e8-4c34-453e-b99b-99cbab8e0eaf",
+              "name": "Authorization Error - Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"PARTNER_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"LINE_ITEM_LIMIT_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 9201,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df46e4c9-1cbe-4081-9908-10b2347688c6",
+          "name": "Update quote preferences",
+          "request": {
+            "name": "Update quote preferences",
+            "description": {
+              "content": "Create or update preferences for quotes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quote-preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"daysToExpire\": \"<integer>\",\n  \"introMessage\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\",\n  \"salesMarginPercentage\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "563320a5-d222-4138-aa16-675ed7713b95",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"daysToExpire\": \"<integer>\",\n  \"introMessage\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\",\n  \"salesMarginPercentage\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"daysToExpire\": 82,\n  \"introMessage\": \"string\",\n  \"salesMarginPercentage\": 1831.5568074606326,\n  \"termsAndDisclaimers\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61328e57-4946-467c-b981-396258ac9c78",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"daysToExpire\": \"<integer>\",\n  \"introMessage\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\",\n  \"salesMarginPercentage\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"daysToExpire\": 82,\n  \"introMessage\": \"string\",\n  \"salesMarginPercentage\": 1831.5568074606326,\n  \"termsAndDisclaimers\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ebaf2ad-893b-4951-881f-d0e4b2666241",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"daysToExpire\": \"<integer>\",\n  \"introMessage\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\",\n  \"salesMarginPercentage\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"PARTNER_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"LINE_ITEM_LIMIT_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 9201,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cef2401-5911-418c-b42c-5cba1ad9878d",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quote-preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"daysToExpire\": \"<integer>\",\n  \"introMessage\": \"<string>\",\n  \"termsAndDisclaimers\": \"<string>\",\n  \"salesMarginPercentage\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"PARTNER_NOT_FOUND\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"LINE_ITEM_LIMIT_EXCEEDED\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 9201,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "866abaef-0f4a-40a6-9cc5-225399c9c211",
+    "name": "Authentication Access Token Quote preferences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "item": [
+    {
+      "id": "491081f0-d80a-4d2c-86a8-26af0f8f197f",
+      "name": "Provision Details",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0d3f91e6-f5c4-4b66-a893-d3e1a5f73296",
+          "name": "Get All Provision Details for a Provision Request",
+          "request": {
+            "name": "Get All Provision Details for a Provision Request",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                ":provisionRequestId",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionRequestId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "892c74f1-8c62-4f01-9094-d2f76d0de2ad",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    ":provisionRequestId",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionRequestId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"b1391f30-f123-7477-1e20-23aeb9d47536\",\n      \"provisionRequestId\": \"91d1c27c-9a1e-3d8f-6583-d8b9b5cb8da6\",\n      \"details\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"createdDate\": \"2020-01-19T05:34:17.419Z\"\n    },\n    {\n      \"id\": \"8d516362-0df5-a7ed-e484-8026644669dd\",\n      \"provisionRequestId\": \"7d47489d-e462-313b-4de2-003b82e05806\",\n      \"details\": {\n        \"key_0\": {}\n      },\n      \"createdDate\": \"2024-03-20T13:27:06.511Z\"\n    }\n  ],\n  \"page\": {\n    \"number\": 2460,\n    \"size\": 2519,\n    \"totalElements\": 4392,\n    \"totalPages\": 2903\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "058c4b57-b761-4b91-bff6-6bc4b6812c27",
+          "name": "Get One Provision Detail by Provision Request ID",
+          "request": {
+            "name": "Get One Provision Detail by Provision Request ID",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                ":provisionRequestId",
+                "details",
+                ":provisionDetailId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionRequestId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionDetailId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0957da7d-4b0c-4edf-8ef7-e8710c9cf372",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    ":provisionRequestId",
+                    "details",
+                    ":provisionDetailId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionRequestId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionDetailId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"id\": \"ed42016e-9cb7-1422-3f9c-6c0c6adf811d\",\n  \"provisionRequestId\": \"fe935027-1dbe-c659-b335-395edf6133b2\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"createdDate\": \"1978-03-02T09:20:08.318Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59f4d111-0ad9-4ab9-9fea-a4f5faef010e",
+          "name": "Get Latest Provision Detail by Provision Request ID",
+          "request": {
+            "name": "Get Latest Provision Detail by Provision Request ID",
+            "description": {},
+            "url": {
+              "path": [
+                "provision-requests",
+                ":provisionRequestId",
+                "details",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "provisionRequestId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb6791dd-9ab6-4fbc-95c6-773dba496999",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "provision-requests",
+                    ":provisionRequestId",
+                    "details",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "provisionRequestId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"id\": \"ed42016e-9cb7-1422-3f9c-6c0c6adf811d\",\n  \"provisionRequestId\": \"fe935027-1dbe-c659-b335-395edf6133b2\",\n  \"details\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"createdDate\": \"1978-03-02T09:20:08.318Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9c0515db-d6ab-48b4-8333-c41b0458bc18",
+    "name": "Authentication Access Token Provision Details API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,525 @@
+{
+  "item": [
+    {
+      "id": "c6e7dcb1-0506-450b-8072-790a2fd7af78",
+      "name": "Orders",
+      "description": {
+        "content": "Orders describe your purchases of Pax8 products. Endpoints let you create new product orders and query past purchases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c02e5e2-6629-47f0-b13a-262cc302451e",
+          "name": "List Orders",
+          "request": {
+            "name": "List Orders",
+            "description": {
+              "content": "Returns a paginated list of orders. Currently NOT supported for scheduled orders(orders with a future date).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "The page number to request for in the orders list"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "companyId",
+                  "value": "<uuid>",
+                  "description": "The company id to filter on"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f12e99f5-4fa3-431d-bb73-0ed822aca056",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"companyId\": \"dd041a44-9091-3897-425d-f1cdacc2a73e\",\n      \"lineItems\": [\n        {\n          \"productId\": \"a1e35a7f-00b8-fdb7-f990-8b7c85b4fd53\",\n          \"quantity\": 45,\n          \"id\": \"4c7b0bfd-896b-1e4a-2cac-df0194f5530f\",\n          \"subscriptionId\": \"06b15daf-7cbc-522a-12bb-1b769e94eba2\",\n          \"commitmentTermId\": \"46a53819-607f-4004-7e19-fa3902f6d86c\",\n          \"provisionStartDate\": \"1997-02-07T17:09:53.587Z\",\n          \"billingTerm\": \"2-Year\"\n        },\n        {\n          \"productId\": \"0e361ebe-3c7f-3aa4-0bfe-2186d7e79a07\",\n          \"quantity\": 45,\n          \"id\": \"37eb11c4-48ec-4aa2-05c1-47210a8a09b8\",\n          \"subscriptionId\": \"489c6659-9d2b-a293-197b-4dea14e49c62\",\n          \"commitmentTermId\": \"8518ca8f-1c16-5eec-bd11-9700fbb9eb31\",\n          \"provisionStartDate\": \"2019-12-14T00:11:50.542Z\",\n          \"billingTerm\": \"2-Year\"\n        }\n      ],\n      \"id\": \"cc2787f8-1706-3a15-4b2a-0d8cb45daeaa\",\n      \"createdDate\": \"1980-10-12\",\n      \"orderedBy\": \"Pax8\",\n      \"orderedByUserId\": \"1e7d9898-07a4-80d6-7b48-c8892acbd1a7\",\n      \"orderedByUserEmail\": \"john@doe.com\",\n      \"isScheduled\": true\n    },\n    {\n      \"companyId\": \"ad2a5a44-a8b3-ea9f-a3e9-3cd72d69b5b9\",\n      \"lineItems\": [\n        {\n          \"productId\": \"cbfde468-a862-ca87-7a48-0f9b7b6b4fb3\",\n          \"quantity\": 45,\n          \"id\": \"44268e7f-20b3-e3e6-047f-d09b3c7f243e\",\n          \"subscriptionId\": \"07e8abc2-d263-4110-cc70-cb06457d0113\",\n          \"commitmentTermId\": \"33fb467b-4fd8-a786-df31-0e3e9f2b106d\",\n          \"provisionStartDate\": \"2008-10-19T17:16:34.254Z\",\n          \"billingTerm\": \"Trial\"\n        },\n        {\n          \"productId\": \"c417bcc8-b9b1-e387-655a-01045ce6d63a\",\n          \"quantity\": 45,\n          \"id\": \"532f970a-30c1-4350-5117-a1adbc6abfb7\",\n          \"subscriptionId\": \"5e7317ba-217e-2fe7-146f-7e6c3ed04672\",\n          \"commitmentTermId\": \"98bf3731-82f5-fd25-ddbb-66ff25d6963b\",\n          \"provisionStartDate\": \"1979-02-01T03:49:52.267Z\",\n          \"billingTerm\": \"One-Time\"\n        }\n      ],\n      \"id\": \"d858d1c8-e246-9d23-7717-5bff8d7146a9\",\n      \"createdDate\": \"1985-09-03\",\n      \"orderedBy\": \"Pax8\",\n      \"orderedByUserId\": \"63db7d44-1cbd-2ade-000c-e6491efa7f17\",\n      \"orderedByUserEmail\": \"john@doe.com\",\n      \"isScheduled\": true\n    }\n  ],\n  \"page\": {\n    \"size\": 50,\n    \"totalElements\": {},\n    \"totalPages\": {},\n    \"number\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2724f5d5-9098-43e9-8a9a-4442f43bda80",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "companyId",
+                      "value": "f7fc273a-8d86-45c9-a26f-ffd42416adda"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 3118,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 4833\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 3085\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07d72f28-5fa2-4860-91d7-a99447a2f094",
+          "name": "Create Order",
+          "request": {
+            "name": "Create Order",
+            "description": {
+              "content": "Create a new order. Currently NOT supported for scheduled orders(orders with a future date).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "isMock",
+                  "value": "<boolean>",
+                  "description": "Perform validations only. Skip any interactions with the database."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companyId\": \"<uuid>\",\n  \"lineItems\": [\n    {\n      \"productId\": \"<uuid>\",\n      \"lineItemNumber\": \"<number>\",\n      \"quantity\": \"<number>\",\n      \"billingTerm\": \"<string>\",\n      \"commitmentTermId\": \"<uuid>\",\n      \"provisionStartDate\": \"<dateTime>\",\n      \"parentSubscriptionId\": \"<uuid>\",\n      \"parentLineItemNumber\": \"<number>\",\n      \"provisioningDetails\": [\n        {\n          \"key\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"key\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    },\n    {\n      \"productId\": \"<uuid>\",\n      \"lineItemNumber\": \"<number>\",\n      \"quantity\": \"<number>\",\n      \"billingTerm\": \"<string>\",\n      \"commitmentTermId\": \"<uuid>\",\n      \"provisionStartDate\": \"<dateTime>\",\n      \"parentSubscriptionId\": \"<uuid>\",\n      \"parentLineItemNumber\": \"<number>\",\n      \"provisioningDetails\": [\n        {\n          \"key\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"key\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"orderedBy\": \"<string>\",\n  \"orderedByUserEmail\": \"<email>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f23fb2b2-4a5f-44fb-9ac7-20fab5b12f68",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isMock",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyId\": \"f7fc273a-8d86-45c9-a26f-ffd42416adda\",\n  \"lineItems\": [\n    {\n      \"productId\": \"aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7\",\n      \"subscriptionId\": \"04814f37-bef0-48b7-b388-c04a1e31f889\",\n      \"commitmentTermID\": \"c000effb-98c9-4ea0-bf00-f6112c6d7649\",\n      \"provisionStartDate\": \"2000-10-31T01:30:00.000-05:00\",\n      \"billingTerm\": \"Monthly\",\n      \"parentSubscriptionId\": \"78e6c85e-71b6-412c-8a59-d1b75072cd22\",\n      \"quantity\": 5,\n      \"provisioningDetails\": [\n        {\n          \"key\": \"msCustExists\",\n          \"values\": [\n            \"No, the customer does not have a Microsoft account\"\n          ]\n        },\n        {\n          \"key\": \"msDomain\",\n          \"values\": [\n            \"vfc-network-inc-liberty\"\n          ]\n        },\n        {\n          \"key\": \"arrowContactFirstName\",\n          \"values\": [\n            \"Oliver\"\n          ]\n        },\n        {\n          \"key\": \"arrowContactLastName\",\n          \"values\": [\n            \"Harrison\"\n          ]\n        },\n        {\n          \"key\": \"arrowContactEmail\",\n          \"values\": [\n            \"oharrison@vfc-network-inc-liberty.com\"\n          ]\n        },\n        {\n          \"key\": \"mca2020FirstName\",\n          \"values\": [\n            \"Oliver\"\n          ]\n        },\n        {\n          \"key\": \"mca2020LastName\",\n          \"values\": [\n            \"Harrison\"\n          ]\n        },\n        {\n          \"key\": \"mca2020Email\",\n          \"values\": [\n            \"oharrison@vfc-network-inc-liberty.com\"\n          ]\n        },\n        {\n          \"key\": \"mca2020EffectiveDate\",\n          \"values\": [\n            \"2020-02-01\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"8e42de97-6bfe-4db5-864b-d2e4b18c71e2\",\n  \"companyId\": \"fe7a2d5f-4a14-43ff-940e-a65cda66474a\",\n  \"createdDate\": \"2020-12-01\",\n  \"isScheduled\": false,\n  \"lineItems\": [\n    {\n      \"id\": \"4915142b-1b3f-4488-9e68-e979dc661130\",\n      \"productId\": \"e91bba5e-a9a3-483f-b036-f80165d410e3\",\n      \"subscriptionId\": \"efcf8cb8-63fc-4dc4-8caa-6d6810ee8a97\",\n      \"provisionStartDate\": \"2021-01-01T08:30:00Z\",\n      \"billingTerm\": \"Monthly\",\n      \"quantity\": 5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acf7e391-ac78-4fdf-ba27-10d61b3550a1",
+              "name": "Invalid order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "isMock",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyId\": \"f7fc273a-8d86-45c9-a26f-ffd42416adda\",\n  \"lineItems\": [\n    {\n      \"productId\": \"aaaee3f-262c-47a4-b0e6-f9ce8b54fcd7\",\n      \"subscriptionId\": \"04814f37-bef0-48b7-b388-c04a1e31f889\",\n      \"commitmentTermID\": \"c000effb-98c9-4ea0-bf00-f6112c6d7649\",\n      \"provisionStartDate\": \"2000-10-31T01:30:00.000-05:00\",\n      \"billingTerm\": \"Monthly\",\n      \"parentSubscriptionId\": \"78e6c85e-71b6-412c-8a59-d1b75072cd22\",\n      \"quantity\": 5,\n      \"provisioningDetails\": [\n        {\n          \"key\": \"msCustExists\",\n          \"values\": [\n            \"No, the customer does not have a Microsoft account\"\n          ]\n        },\n        {\n          \"key\": \"msDomain\",\n          \"values\": [\n            \"vfc-network-inc-liberty\"\n          ]\n        },\n        {\n          \"key\": \"arrowContactFirstName\",\n          \"values\": [\n            \"Oliver\"\n          ]\n        },\n        {\n          \"key\": \"arrowContactLastName\",\n          \"values\": [\n            \"Harrison\"\n          ]\n        },\n        {\n          \"key\": \"arrowContactEmail\",\n          \"values\": [\n            \"oharrison@vfc-network-inc-liberty.com\"\n          ]\n        },\n        {\n          \"key\": \"mca2020FirstName\",\n          \"values\": [\n            \"Oliver\"\n          ]\n        },\n        {\n          \"key\": \"mca2020LastName\",\n          \"values\": [\n            \"Harrison\"\n          ]\n        },\n        {\n          \"key\": \"mca2020Email\",\n          \"values\": [\n            \"oharrison@vfc-network-inc-liberty.com\"\n          ]\n        },\n        {\n          \"key\": \"mca2020EffectiveDate\",\n          \"values\": [\n            \"2020-02-01\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 7700,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 54\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 135\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bfe23c8-4810-4ff7-afd3-56e42430cb5e",
+          "name": "Get Order By ID",
+          "request": {
+            "name": "Get Order By ID",
+            "description": {
+              "content": "Returns the Order record specified by OrderId. Currently NOT supported for scheduled orders",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The unique identifier for an order record"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6235b454-313c-46fb-8376-f66028583dc8",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier for an order record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"8e42de97-6bfe-4db5-864b-d2e4b18c71e2\",\n  \"companyId\": \"fe7a2d5f-4a14-43ff-940e-a65cda66474a\",\n  \"createdDate\": \"2020-12-01\",\n  \"orderedBy\": \"Pax8 Partner\",\n  \"orderedByUserId\": \"c1eb37ba-9515-4f1b-9d42-b1d7cc3b23f5\",\n  \"orderedByUserEmail\": \"john@doe.com\",\n  \"isScheduled\": false,\n  \"lineItems\": [\n    {\n      \"id\": \"4915142b-1b3f-4488-9e68-e979dc661130\",\n      \"productId\": \"e91bba5e-a9a3-483f-b036-f80165d410e3\",\n      \"subscriptionId\": \"efcf8cb8-63fc-4dc4-8caa-6d6810ee8a97\",\n      \"provisionStartDate\": \"2021-01-01T08:30:00Z\",\n      \"billingTerm\": \"Monthly\",\n      \"quantity\": 5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31c0b81f-efb9-4992-844f-f41968616da7",
+              "name": "Invalid order id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique identifier for an order record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"status\": 7700,\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 54\n    },\n    {\n      \"type\": \"string\",\n      \"message\": \"string\",\n      \"instance\": \"string\",\n      \"status\": 135\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8bd8b062-818d-4e44-99ac-859ed2aa3688",
+    "name": "Authentication Access Token Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}

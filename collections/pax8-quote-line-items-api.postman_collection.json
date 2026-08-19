@@ -1,0 +1,1024 @@
+{
+  "item": [
+    {
+      "id": "bcb9d230-aaaa-4439-909d-66abf6bb31f7",
+      "name": "Quote line items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43723634-6af4-41c1-a24a-a17baaf5edc9",
+          "name": "Add line items",
+          "request": {
+            "name": "Add line items",
+            "description": {
+              "content": "Limited to 30 total line items. This api supports adding 1 or more at a time.Line items with required relationships must be added together.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "line-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  },\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58662322-2555-4d50-891e-04a5e9b36e2b",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  },\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billingTerm\": \"Activation\",\n    \"cost\": {\n      \"amount\": 8678.747908765863,\n      \"currency\": \"string\"\n    },\n    \"effectiveDate\": \"2013-10-07T12:56:13.484Z\",\n    \"id\": \"f0d06133-10ee-2d9b-3e02-7521e840937d\",\n    \"note\": \"string\",\n    \"price\": {\n      \"amount\": 586.3902766488627,\n      \"currency\": \"string\"\n    },\n    \"product\": {\n      \"id\": \"98d51154-6608-601e-6ec2-2c5834143382\",\n      \"isMspOnly\": true,\n      \"name\": \"string\",\n      \"sku\": \"string\",\n      \"type\": \"Standalone\"\n    },\n    \"quantity\": 2328,\n    \"totals\": {\n      \"initialCost\": {\n        \"amount\": 9693.400779801734,\n        \"currency\": \"string\"\n      },\n      \"initialProfit\": {\n        \"amount\": 1264.770832325468,\n        \"currency\": \"string\"\n      },\n      \"initialTotal\": {\n        \"amount\": 3852.8313606082174,\n        \"currency\": \"string\"\n      },\n      \"recurringCost\": {\n        \"amount\": 8966.21030513929,\n        \"currency\": \"string\"\n      },\n      \"recurringProfit\": {\n        \"amount\": 375.72494296341574,\n        \"currency\": \"string\"\n      },\n      \"recurringTotal\": {\n        \"amount\": 4062.661865627033,\n        \"currency\": \"string\"\n      }\n    },\n    \"commitmentTerm\": {\n      \"id\": \"15271378-09cd-3e83-d96f-c1760c30c528\",\n      \"term\": \"string\"\n    },\n    \"relationship\": {\n      \"requiredLineItemId\": \"65b40e68-8d72-5f40-77cd-492e43d89154\",\n      \"requiredSubscriptionId\": \"4b4d9c83-5c11-7858-6bc9-c5fdb0f4e49c\"\n    },\n    \"subscriptionId\": \"f7dbc050-3028-5d73-c9cb-b972e5bf5eb7\",\n    \"usageBased\": {\n      \"displayNote\": true,\n      \"type\": \"QTY_VARIES\"\n    }\n  },\n  {\n    \"billingTerm\": \"Annual\",\n    \"cost\": {\n      \"amount\": 1041.3115697428077,\n      \"currency\": \"string\"\n    },\n    \"effectiveDate\": \"1993-06-26T23:30:16.168Z\",\n    \"id\": \"f0b41d2f-8126-143b-56da-d0a1256b5cf6\",\n    \"note\": \"string\",\n    \"price\": {\n      \"amount\": 9337.978594258186,\n      \"currency\": \"string\"\n    },\n    \"product\": {\n      \"id\": \"cc62ec5b-43c7-f469-6219-76229214eae9\",\n      \"isMspOnly\": true,\n      \"name\": \"string\",\n      \"sku\": \"string\",\n      \"type\": \"Custom\"\n    },\n    \"quantity\": 1900,\n    \"totals\": {\n      \"initialCost\": {\n        \"amount\": 6952.679152410504,\n        \"currency\": \"string\"\n      },\n      \"initialProfit\": {\n        \"amount\": 8405.250198961396,\n        \"currency\": \"string\"\n      },\n      \"initialTotal\": {\n        \"amount\": 1819.136666602219,\n        \"currency\": \"string\"\n      },\n      \"recurringCost\": {\n        \"amount\": 8880.762622771248,\n        \"currency\": \"string\"\n      },\n      \"recurringProfit\": {\n        \"amount\": 3389.786419904125,\n        \"currency\": \"string\"\n      },\n      \"recurringTotal\": {\n        \"amount\": 1429.3620394630025,\n        \"currency\": \"string\"\n      }\n    },\n    \"commitmentTerm\": {\n      \"id\": \"41b27aed-24b1-5e0b-0cef-bd47b5c734bd\",\n      \"term\": \"string\"\n    },\n    \"relationship\": {\n      \"requiredLineItemId\": \"77ba7273-329b-b4d2-c7a6-88afa156cd23\",\n      \"requiredSubscriptionId\": \"8d291198-9f4b-ddfb-d5b2-1e480ec82acd\"\n    },\n    \"subscriptionId\": \"9b3fa9a0-d07f-64cf-33d2-3f27c330f975\",\n    \"usageBased\": {\n      \"displayNote\": false,\n      \"type\": \"PRICE_VARIES\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15693e52-dbda-4e41-9163-8870fdf16531",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  },\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"ACCESS_DENIED_REQUESTED_RESOURCE\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"DUPLICATE_PREFERENCE_ATTACHMENT\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 7241,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "690dc9c8-5c95-422a-b146-d4175ac27948",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  },\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_VALIDATION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"UNAUTHORIZED_ERROR\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 168,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b70aa35-9e45-4bc1-91d4-b255538bd786",
+          "name": "Update line items",
+          "request": {
+            "name": "Update line items",
+            "description": {
+              "content": "Update line items within a specified quote.This api supports updating 1 or more at a time.Modifying relationships is not supported at this time. Delete and re-add instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "line-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  },\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0eaa579-bed6-43a1-b1e4-7281d89bcc5b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  },\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"billingTerm\": \"Activation\",\n    \"cost\": {\n      \"amount\": 8678.747908765863,\n      \"currency\": \"string\"\n    },\n    \"effectiveDate\": \"2013-10-07T12:56:13.484Z\",\n    \"id\": \"f0d06133-10ee-2d9b-3e02-7521e840937d\",\n    \"note\": \"string\",\n    \"price\": {\n      \"amount\": 586.3902766488627,\n      \"currency\": \"string\"\n    },\n    \"product\": {\n      \"id\": \"98d51154-6608-601e-6ec2-2c5834143382\",\n      \"isMspOnly\": true,\n      \"name\": \"string\",\n      \"sku\": \"string\",\n      \"type\": \"Standalone\"\n    },\n    \"quantity\": 2328,\n    \"totals\": {\n      \"initialCost\": {\n        \"amount\": 9693.400779801734,\n        \"currency\": \"string\"\n      },\n      \"initialProfit\": {\n        \"amount\": 1264.770832325468,\n        \"currency\": \"string\"\n      },\n      \"initialTotal\": {\n        \"amount\": 3852.8313606082174,\n        \"currency\": \"string\"\n      },\n      \"recurringCost\": {\n        \"amount\": 8966.21030513929,\n        \"currency\": \"string\"\n      },\n      \"recurringProfit\": {\n        \"amount\": 375.72494296341574,\n        \"currency\": \"string\"\n      },\n      \"recurringTotal\": {\n        \"amount\": 4062.661865627033,\n        \"currency\": \"string\"\n      }\n    },\n    \"commitmentTerm\": {\n      \"id\": \"15271378-09cd-3e83-d96f-c1760c30c528\",\n      \"term\": \"string\"\n    },\n    \"relationship\": {\n      \"requiredLineItemId\": \"65b40e68-8d72-5f40-77cd-492e43d89154\",\n      \"requiredSubscriptionId\": \"4b4d9c83-5c11-7858-6bc9-c5fdb0f4e49c\"\n    },\n    \"subscriptionId\": \"f7dbc050-3028-5d73-c9cb-b972e5bf5eb7\",\n    \"usageBased\": {\n      \"displayNote\": true,\n      \"type\": \"QTY_VARIES\"\n    }\n  },\n  {\n    \"billingTerm\": \"Annual\",\n    \"cost\": {\n      \"amount\": 1041.3115697428077,\n      \"currency\": \"string\"\n    },\n    \"effectiveDate\": \"1993-06-26T23:30:16.168Z\",\n    \"id\": \"f0b41d2f-8126-143b-56da-d0a1256b5cf6\",\n    \"note\": \"string\",\n    \"price\": {\n      \"amount\": 9337.978594258186,\n      \"currency\": \"string\"\n    },\n    \"product\": {\n      \"id\": \"cc62ec5b-43c7-f469-6219-76229214eae9\",\n      \"isMspOnly\": true,\n      \"name\": \"string\",\n      \"sku\": \"string\",\n      \"type\": \"Custom\"\n    },\n    \"quantity\": 1900,\n    \"totals\": {\n      \"initialCost\": {\n        \"amount\": 6952.679152410504,\n        \"currency\": \"string\"\n      },\n      \"initialProfit\": {\n        \"amount\": 8405.250198961396,\n        \"currency\": \"string\"\n      },\n      \"initialTotal\": {\n        \"amount\": 1819.136666602219,\n        \"currency\": \"string\"\n      },\n      \"recurringCost\": {\n        \"amount\": 8880.762622771248,\n        \"currency\": \"string\"\n      },\n      \"recurringProfit\": {\n        \"amount\": 3389.786419904125,\n        \"currency\": \"string\"\n      },\n      \"recurringTotal\": {\n        \"amount\": 1429.3620394630025,\n        \"currency\": \"string\"\n      }\n    },\n    \"commitmentTerm\": {\n      \"id\": \"41b27aed-24b1-5e0b-0cef-bd47b5c734bd\",\n      \"term\": \"string\"\n    },\n    \"relationship\": {\n      \"requiredLineItemId\": \"77ba7273-329b-b4d2-c7a6-88afa156cd23\",\n      \"requiredSubscriptionId\": \"8d291198-9f4b-ddfb-d5b2-1e480ec82acd\"\n    },\n    \"subscriptionId\": \"9b3fa9a0-d07f-64cf-33d2-3f27c330f975\",\n    \"usageBased\": {\n      \"displayNote\": false,\n      \"type\": \"PRICE_VARIES\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70bcdd14-4ed8-4e5c-b633-a5f4d2f764a2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  },\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_VALIDATION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"UNAUTHORIZED_ERROR\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 168,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b667e1c-32f7-467e-a8f6-a9f9c5f38c7a",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  },\n  {\n    \"billingTerm\": \"<string>\",\n    \"cost\": \"<double>\",\n    \"effectiveDate\": \"<dateTime>\",\n    \"id\": \"<uuid>\",\n    \"initialTotal\": \"<double>\",\n    \"price\": \"<double>\",\n    \"productName\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"note\": \"<string>\",\n    \"productSku\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_VALIDATION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"UNAUTHORIZED_ERROR\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 168,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f53d4b6-58ff-47fa-b62d-e91961966bf6",
+          "name": "Delete line items",
+          "request": {
+            "name": "Delete line items",
+            "description": {
+              "content": "Delete multiple line items from a quote in bulk.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "line-items",
+                "bulk-delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lineItemIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5fcdc30-57e4-4723-b608-106c1d6b8a6c",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b547338-1cce-420e-83c0-8c2f077ddb1b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_VALIDATION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"UNAUTHORIZED_ERROR\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 168,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de427ae0-30d5-4c4f-99b1-522effa62fb0",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items",
+                    "bulk-delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineItemIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_VALIDATION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"UNAUTHORIZED_ERROR\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 168,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f1970f3-a79b-4d22-923e-caa8d57b81f1",
+          "name": "Delete line item by ID",
+          "request": {
+            "name": "Delete line item by ID",
+            "description": {
+              "content": "Delete a line item by lineItemId from quote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "quotes",
+                ":quoteId",
+                "line-items",
+                ":lineItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "quoteId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lineItemId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3fc4e04f-fc14-4641-844b-b6e8ecf57097",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57c2dd74-11d6-4711-a87d-fd627021000a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_VALIDATION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"UNAUTHORIZED_ERROR\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 168,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "772120c6-ec60-4a3c-9d14-519da40d5cc3",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "quotes",
+                    ":quoteId",
+                    "line-items",
+                    ":lineItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "quoteId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lineItemId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"message\": \"string\",\n      \"type\": \"QUOTE_VALIDATION\"\n    },\n    {\n      \"message\": \"string\",\n      \"type\": \"UNAUTHORIZED_ERROR\"\n    }\n  ],\n  \"instance\": \"string\",\n  \"message\": \"string\",\n  \"status\": 168,\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pax8.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://token-manager.pax8.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2a3194fe-48a6-480b-a88d-7b2117522202",
+    "name": "Authentication Access Token Quote line items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Access Token that allows access to the Pax8 API",
+      "type": "text/plain"
+    }
+  }
+}
