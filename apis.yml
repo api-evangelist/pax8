@@ -41,6 +41,17 @@ tags:
 - Provisioning
 - Billing
 - Quoting
+- Subscription
+- Webhook
+tags_raw:
+- Company
+- Enterprise
+- Cloud Marketplace
+- MSP
+- Distribution
+- Provisioning
+- Billing
+- Quoting
 - Subscriptions
 - Webhooks
 apis:
@@ -105,6 +116,8 @@ apis:
   humanURL: https://devx.pax8.com/docs/authentication
   baseURL: https://api.pax8.com/v1
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -127,6 +140,8 @@ apis:
   humanURL: https://devx.pax8.com/docs/authentication
   baseURL: https://api.pax8.com/v1
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -260,6 +275,8 @@ apis:
   humanURL: https://devx.pax8.com/docs/authentication
   baseURL: https://api.pax8.com/v1
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -310,6 +327,8 @@ apis:
   humanURL: https://devx.pax8.com/docs/authentication
   baseURL: https://api.pax8.com/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
