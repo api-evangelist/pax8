@@ -351,6 +351,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Website
+  url: https://www.pax8.com/
 - type: CapabilityMap
   url: capabilities/pax8-capability-edges.yml
   name: Pax8 Business Capability Map
