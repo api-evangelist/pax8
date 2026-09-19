@@ -245,6 +245,8 @@ apis:
   humanURL: https://devx.pax8.com/docs/authentication
   baseURL: https://api.pax8.com/v1
   tags:
+  - Quote Line Items
+  tags_raw:
   - Quote line items
   properties:
   - type: OpenAPI
