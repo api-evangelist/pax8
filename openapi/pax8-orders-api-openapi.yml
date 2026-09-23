@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Orders API
+  title: PARTNER ENDPOINTS Orders API
   version: 1.0.0
   termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  description: Orders describe your purchases of Pax8 products. Endpoints let you create new product orders and query past purchases
 servers:
 - url: https://api.pax8.com/v1
 security:
@@ -149,6 +149,24 @@ components:
           provisionStartDate: '2021-01-01T08:30:00Z'
           billingTerm: Monthly
           quantity: 5
+    microsoft-office-365-e3-order-get-response:
+      summary: Response from Ordering `Microsoft Office 365 E3`
+      description: An example response from ordering `Microsoft Office 365 E3`
+      value:
+        id: 8e42de97-6bfe-4db5-864b-d2e4b18c71e2
+        companyId: fe7a2d5f-4a14-43ff-940e-a65cda66474a
+        createdDate: '2020-12-01'
+        orderedBy: Pax8 Partner
+        orderedByUserId: c1eb37ba-9515-4f1b-9d42-b1d7cc3b23f5
+        orderedByUserEmail: john@doe.com
+        isScheduled: false
+        lineItems:
+        - id: 4915142b-1b3f-4488-9e68-e979dc661130
+          productId: e91bba5e-a9a3-483f-b036-f80165d410e3
+          subscriptionId: efcf8cb8-63fc-4dc4-8caa-6d6810ee8a97
+          provisionStartDate: '2021-01-01T08:30:00Z'
+          billingTerm: Monthly
+          quantity: 5
     microsoft-office-365-e3-order:
       summary: Order for `Microsoft Office 365 E3`
       description: An example request body to order `Microsoft Office 365 E3`
@@ -190,40 +208,161 @@ components:
           - key: mca2020EffectiveDate
             values:
             - '2020-02-01'
-    microsoft-office-365-e3-order-get-response:
-      summary: Response from Ordering `Microsoft Office 365 E3`
-      description: An example response from ordering `Microsoft Office 365 E3`
-      value:
-        id: 8e42de97-6bfe-4db5-864b-d2e4b18c71e2
-        companyId: fe7a2d5f-4a14-43ff-940e-a65cda66474a
-        createdDate: '2020-12-01'
-        orderedBy: Pax8 Partner
-        orderedByUserId: c1eb37ba-9515-4f1b-9d42-b1d7cc3b23f5
-        orderedByUserEmail: john@doe.com
-        isScheduled: false
-        lineItems:
-        - id: 4915142b-1b3f-4488-9e68-e979dc661130
-          productId: e91bba5e-a9a3-483f-b036-f80165d410e3
-          subscriptionId: efcf8cb8-63fc-4dc4-8caa-6d6810ee8a97
-          provisionStartDate: '2021-01-01T08:30:00Z'
-          billingTerm: Monthly
-          quantity: 5
   schemas:
-    ErrorDetail:
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    LineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        productId:
+          type: string
+          format: uuid
+        subscriptionId:
+          type: string
+          format: uuid
+        commitmentTermId:
+          type: string
+          format: uuid
+        provisionStartDate:
+          type: string
+          format: date-time
+        lineItemNumber:
+          writeOnly: true
+          type: number
+          example: 1
+          description: Required. Number used as a reference to the line item for parent line items
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 2-Year
+          - 3-Year
+          - One-Time
+          - Trial
+          - Activation
+        parentSubscriptionId:
+          writeOnly: true
+          type: string
+          format: uuid
+          description: Reference to the subscription this item depends on
+        parentLineItemNumber:
+          writeOnly: true
+          type: number
+          example: 1
+          description: Reference to the required parent line item in this same order
+        quantity:
+          type: number
+          example: 45
+          description: Whole Number
+        provisioningDetails:
+          writeOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisioningDetail'
+      required:
+      - productId
+      - companyId
+      - lineItemNumber
+      - quantity
+    CreateLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        productId:
+          type: string
+          format: uuid
+        commitmentTermId:
+          type: string
+          format: uuid
+          description: This field is required when the product associated with the order has requiresCommitment field set to true. To pick the correct commitment term, use the https://devx.pax8.com/reference/findproductdependenciesbyproductid endpoint and chose a commitment term whose term field represents an equal or greater time than the desired billingTerm. For example, when the order billingTerm is annual, pass the identifier of the commitment term that matches an annual commitment, or if desired and available, pass a commitment term id of 2-year, or 3-year
+        provisionStartDate:
+          type: string
+          format: date-time
+        lineItemNumber:
+          writeOnly: true
+          type: number
+          example: 1
+          description: Required. Number used as a reference to the line item for parent line items
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 2-Year
+          - 3-Year
+          - One-Time
+          - Trial
+          - Activation
+        parentSubscriptionId:
+          writeOnly: true
+          type: string
+          format: uuid
+          description: Reference to the subscription this item depends on
+        parentLineItemNumber:
+          writeOnly: true
+          type: number
+          example: 1
+          description: Reference to the required parent line item in this same order
+        quantity:
+          type: number
+          example: 45
+          description: Whole Number
+        provisioningDetails:
+          writeOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisioningDetail'
+      required:
+      - productId
+      - companyId
+      - lineItemNumber
+      - quantity
+      - billingTerm
+    Error:
       type: object
       properties:
         type:
           type: string
-          description: optional
+          description: Type of HTTP error
         message:
           type: string
-          description: required
+          description: Error message
         instance:
           type: string
-          description: optional
+          description: The path called
         status:
           type: integer
-          description: optional
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
     Order:
       type: object
       required:
@@ -305,6 +444,21 @@ components:
           description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
           items:
             type: string
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
     CreateOrder:
       type: object
       required:
@@ -350,160 +504,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CreateLineItem'
-    Error:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of HTTP error
-        message:
-          type: string
-          description: Error message
-        instance:
-          type: string
-          description: The path called
-        status:
-          type: integer
-          description: HTTP error code
-        details:
-          type: array
-          description: Additional API failures
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-    LineItem:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        productId:
-          type: string
-          format: uuid
-        subscriptionId:
-          type: string
-          format: uuid
-        commitmentTermId:
-          type: string
-          format: uuid
-        provisionStartDate:
-          type: string
-          format: date-time
-        lineItemNumber:
-          writeOnly: true
-          type: number
-          example: 1
-          description: Required. Number used as a reference to the line item for parent line items
-        billingTerm:
-          type: string
-          enum:
-          - Monthly
-          - Annual
-          - 2-Year
-          - 3-Year
-          - One-Time
-          - Trial
-          - Activation
-        parentSubscriptionId:
-          writeOnly: true
-          type: string
-          format: uuid
-          description: Reference to the subscription this item depends on
-        parentLineItemNumber:
-          writeOnly: true
-          type: number
-          example: 1
-          description: Reference to the required parent line item in this same order
-        quantity:
-          type: number
-          example: 45
-          description: Whole Number
-        provisioningDetails:
-          writeOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisioningDetail'
-      required:
-      - productId
-      - companyId
-      - lineItemNumber
-      - quantity
-    Page:
-      type: object
-      properties:
-        size:
-          type: number
-          default: 10
-          minimum: 1
-          maximum: 200
-          description: The size of the page
-          example: 50
-        totalElements:
-          description: The total number of elements able to be paged over
-          example: 237
-        totalPages:
-          description: The total number of pages based on the ```size``` and ```totalElements```
-          example: 5
-        number:
-          description: The current page
-          example: 1
-    CreateLineItem:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        productId:
-          type: string
-          format: uuid
-        commitmentTermId:
-          type: string
-          format: uuid
-          description: This field is required when the product associated with the order has requiresCommitment field set to true. To pick the correct commitment term, use the https://devx.pax8.com/reference/findproductdependenciesbyproductid endpoint and chose a commitment term whose term field represents an equal or greater time than the desired billingTerm. For example, when the order billingTerm is annual, pass the identifier of the commitment term that matches an annual commitment, or if desired and available, pass a commitment term id of 2-year, or 3-year
-        provisionStartDate:
-          type: string
-          format: date-time
-        lineItemNumber:
-          writeOnly: true
-          type: number
-          example: 1
-          description: Required. Number used as a reference to the line item for parent line items
-        billingTerm:
-          type: string
-          enum:
-          - Monthly
-          - Annual
-          - 2-Year
-          - 3-Year
-          - One-Time
-          - Trial
-          - Activation
-        parentSubscriptionId:
-          writeOnly: true
-          type: string
-          format: uuid
-          description: Reference to the subscription this item depends on
-        parentLineItemNumber:
-          writeOnly: true
-          type: number
-          example: 1
-          description: Reference to the required parent line item in this same order
-        quantity:
-          type: number
-          example: 45
-          description: Whole Number
-        provisioningDetails:
-          writeOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisioningDetail'
-      required:
-      - productId
-      - companyId
-      - lineItemNumber
-      - quantity
-      - billingTerm
   securitySchemes:
     OAuth2:
       type: oauth2

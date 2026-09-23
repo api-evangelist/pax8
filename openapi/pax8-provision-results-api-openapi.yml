@@ -1,11 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Provision Results API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: Vendor Provisioning Endpoints Provision Results API
+  description: Vendor Provisioning Endpoints
+  version: v0
 servers:
-- url: https://api.pax8.com/v1
+- url: https://api.pax8.com/v2
+  description: Pax8 API
 security:
 - OAuth2: []
 tags:
@@ -110,26 +110,6 @@ paths:
                 $ref: '#/components/schemas/ProvisionResult'
 components:
   schemas:
-    PageInfo:
-      required:
-      - number
-      - size
-      - totalElements
-      - totalPages
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-        number:
-          type: integer
-          format: int32
     ProvisionResult:
       required:
       - status
@@ -188,10 +168,41 @@ components:
             $ref: '#/components/schemas/ProvisionResult'
         page:
           $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
   securitySchemes:
     OAuth2:
       type: oauth2
+      description: 'Requires ''audience'' parameter in token request: `api://provisioning`.
+
+
+        Simulation credentials will return `vendorSimulation:provisioning` scope.
+
+        Production credentials will return `vendor:provisioning` scope.'
       flows:
         clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+          tokenUrl: https://api.pax8.com/v1/token
+          scopes:
+            vendorSimulation:provisioning: Access to simulation provisioning endpoints
+            vendor:provisioning: Access to production provisioning endpoints
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

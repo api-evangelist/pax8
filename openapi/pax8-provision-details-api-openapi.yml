@@ -1,11 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Provision Details API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: Vendor Provisioning Endpoints Provision Details API
+  description: Vendor Provisioning Endpoints
+  version: v0
 servers:
-- url: https://api.pax8.com/v1
+- url: https://api.pax8.com/v2
+  description: Pax8 API
 security:
 - OAuth2: []
 tags:
@@ -79,6 +79,22 @@ paths:
                 $ref: '#/components/schemas/ProvisionDetail'
 components:
   schemas:
+    ProvisionDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        provisionRequestId:
+          type: string
+          format: uuid
+        details:
+          type: object
+          additionalProperties:
+            type: object
+        createdDate:
+          type: string
+          format: date-time
     PageInfo:
       required:
       - number
@@ -111,26 +127,21 @@ components:
             $ref: '#/components/schemas/ProvisionDetail'
         page:
           $ref: '#/components/schemas/PageInfo'
-    ProvisionDetail:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        provisionRequestId:
-          type: string
-          format: uuid
-        details:
-          type: object
-          additionalProperties:
-            type: object
-        createdDate:
-          type: string
-          format: date-time
   securitySchemes:
     OAuth2:
       type: oauth2
+      description: 'Requires ''audience'' parameter in token request: `api://provisioning`.
+
+
+        Simulation credentials will return `vendorSimulation:provisioning` scope.
+
+        Production credentials will return `vendor:provisioning` scope.'
       flows:
         clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+          tokenUrl: https://api.pax8.com/v1/token
+          scopes:
+            vendorSimulation:provisioning: Access to simulation provisioning endpoints
+            vendor:provisioning: Access to production provisioning endpoints
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

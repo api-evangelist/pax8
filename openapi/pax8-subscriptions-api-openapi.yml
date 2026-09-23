@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Subscriptions API
+  title: PARTNER ENDPOINTS Subscriptions API
   version: 1.0.0
   termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  description: Subscriptions describe terms of service, including price and the billing start/end dates for a specified product/company combination. Resources let you update, cancel, and fetch details of existing subscriptions
 servers:
 - url: https://api.pax8.com/v1
 security:
@@ -265,6 +265,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: deleteSubscriptionsBySubscriptionId
+      x-operation-id-source: derived
   /subscriptions/{subscriptionId}/history:
     get:
       tags:
@@ -301,240 +303,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  schemas:
-    ErrorDetail:
-      type: object
-      properties:
-        type:
-          type: string
-          description: optional
-        message:
-          type: string
-          description: required
-        instance:
-          type: string
-          description: optional
-        status:
-          type: integer
-          description: optional
-    Subscription:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        parentSubscriptionId:
-          type: string
-          format: uuid
-          readOnly: true
-        companyId:
-          type: string
-          format: uuid
-          readOnly: true
-        productId:
-          type: string
-          format: uuid
-          readOnly: true
-        vendorSubscriptionId:
-          type: string
-          readOnly: true
-          description: The vendor's unique identifier for this subscription
-        vendorSkuId:
-          type: string
-          readOnly: true
-          description: The vendor's unique identifier for the sku associated with this subscription
-        quantity:
-          type: number
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        createdDate:
-          type: string
-          format: date-time
-          readOnly: true
-        updatedDate:
-          type: string
-          format: date-time
-          readOnly: true
-        billingStart:
-          type: string
-          format: date
-          readOnly: true
-        status:
-          type: string
-          readOnly: true
-          enum:
-          - Active
-          - Cancelled
-          - PendingManual
-          - PendingAutomated
-          - PendingCancel
-          - WaitingForDetails
-          - Trial
-          - Converted
-          - PendingActivation
-          - Activated
-          description: "Subscription Status :\n * `Active` - Provisioning request complete\n * `Cancelled` - Deprovisioning request complete\n * `PendingManual` -  An associated manual provisioning task isn't started/completed\n * `PendingAutomated` - An associated automated provisioning task isn't started/completed\n * `PendingCancel` - Deprovisioning request pending\n * `WaitingForDetails` - Provisioning details are missing\n * `Trial` - Trial subscriptions offer free or discounted access for a limited time.\n * `Converted` - Converted from trial\n * `PendingActivation` - Requires Activation but has not yet been activated\n * `Activated` - Requires Activation and has been activated\n\nActivation is required for a small subset of products.  Billing services do not begin for these products until \"activation\" is complete.\n"
-        price:
-          description: The price for the customer.
-          type: number
-          example: 15.39
-        currencyCode:
-          description: The currency ISO 4217 code
-          type: string
-          example: USD
-        partnerCost:
-          description: The price for the Partner.
-          type: number
-          example: 11.39
-        productName:
-          description: The name of the product associated with this subscription
-          type: string
-          readOnly: true
-          example: Microsoft Office 365 E3
-        billingTerm:
-          type: string
-          enum:
-          - Monthly
-          - Annual
-          - 2-Year
-          - 3-Year
-          - One-Time
-          - Trial
-          - Activation
-        provisioningDetails:
-          writeOnly: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisioningDetail'
-        commitmentTerm:
-          readOnly: true
-          allOf:
-          - $ref: '#/components/schemas/SubscriptionCommitment'
-    ProvisioningDetail:
-      type: object
-      properties:
-        label:
-          type: string
-          readOnly: true
-          description: The label to display
-        key:
-          type: string
-          example: userEmailAddress
-          description: The key
-        values:
-          type: array
-          items:
-            type: string
-          description: A list of values based on the ```valuetype``` and ```possibleValues```
-          writeOnly: true
-        description:
-          type: string
-          example: Provide the user's email address
-          description: Instructions and context to help enter the required provisioning information
-          readOnly: true
-        valueType:
-          type: string
-          readOnly: true
-          enum:
-          - Input
-          - Single-Value
-          - Multi-Value
-          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
-        possibleValues:
-          type: array
-          readOnly: true
-          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
-          items:
-            type: string
-    Error:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of HTTP error
-        message:
-          type: string
-          description: Error message
-        instance:
-          type: string
-          description: The path called
-        status:
-          type: integer
-          description: HTTP error code
-        details:
-          type: array
-          description: Additional API failures
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-    Page:
-      type: object
-      properties:
-        size:
-          type: number
-          default: 10
-          minimum: 1
-          maximum: 200
-          description: The size of the page
-          example: 50
-        totalElements:
-          description: The total number of elements able to be paged over
-          example: 237
-        totalPages:
-          description: The total number of pages based on the ```size``` and ```totalElements```
-          example: 5
-        number:
-          description: The current page
-          example: 1
-    SubscriptionCommitment:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the commitment record
-          format: uuid
-        term:
-          type: string
-          description: Duration of the commitment
-          example: 3-Year
-        endDate:
-          type: string
-          format: date-time
   examples:
-    subscription-update-example:
-      summary: A Subscription update
-      description: A Subscription update example
-      value:
-        quantity: 11
-        startDate: '2000-10-31T01:30:00.000-05:00'
-        endDate: '2001-10-31T01:30:00.000-05:00'
-        price: 15.39
-        currencyCode: USD
-        billingTerm: Monthly
-        provisioningDetails:
-        - key: userEmailAddress
-          values:
-          - joeysherp@example.com
-    microsoft-office-365-e3-subscription:
-      summary: Subscription for `Microsoft Office 365 E3`
-      description: An example subscription for `Microsoft Office 365 E3`
-      value:
-        id: 05c587df-9e7d-4ef9-8218-0262198e36c9
-        companyId: fe7a2d5f-4a14-43ff-940e-a65cda66474a
-        productId: e91bba5e-a9a3-483f-b036-f80165d410e3
-        quantity: 5
-        startDate: '2021-01-01T08:30:00Z'
-        createdDate: '2020-12-01T08:30:00Z'
-        billingStart: '2021-01-01'
-        status: Active
-        price: 32.01
-        currencyCode: USD
-        productName: Microsoft Office 365 E3
-        billingTerm: Monthly
     subscriptions-paged:
       summary: A page of subscriptions
       description: An example page of subscriptions
@@ -668,6 +437,22 @@ components:
           totalElements: 109
           totalPages: 11
           number: 0
+    microsoft-office-365-e3-subscription:
+      summary: Subscription for `Microsoft Office 365 E3`
+      description: An example subscription for `Microsoft Office 365 E3`
+      value:
+        id: 05c587df-9e7d-4ef9-8218-0262198e36c9
+        companyId: fe7a2d5f-4a14-43ff-940e-a65cda66474a
+        productId: e91bba5e-a9a3-483f-b036-f80165d410e3
+        quantity: 5
+        startDate: '2021-01-01T08:30:00Z'
+        createdDate: '2020-12-01T08:30:00Z'
+        billingStart: '2021-01-01'
+        status: Active
+        price: 32.01
+        currencyCode: USD
+        productName: Microsoft Office 365 E3
+        billingTerm: Monthly
     subscription-history:
       summary: A list of changes to a subscription
       description: The history of a subscription
@@ -698,6 +483,223 @@ components:
           currencyCode: USD
           productName: Microsoft Office 365 Business Premium
           billingTerm: Monthly
+    subscription-update-example:
+      summary: A Subscription update
+      description: A Subscription update example
+      value:
+        quantity: 11
+        startDate: '2000-10-31T01:30:00.000-05:00'
+        endDate: '2001-10-31T01:30:00.000-05:00'
+        price: 15.39
+        currencyCode: USD
+        billingTerm: Monthly
+        provisioningDetails:
+        - key: userEmailAddress
+          values:
+          - joeysherp@example.com
+  schemas:
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        parentSubscriptionId:
+          type: string
+          format: uuid
+          readOnly: true
+        companyId:
+          type: string
+          format: uuid
+          readOnly: true
+        productId:
+          type: string
+          format: uuid
+          readOnly: true
+        vendorSubscriptionId:
+          type: string
+          readOnly: true
+          description: The vendor's unique identifier for this subscription
+        vendorSkuId:
+          type: string
+          readOnly: true
+          description: The vendor's unique identifier for the sku associated with this subscription
+        quantity:
+          type: number
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        createdDate:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedDate:
+          type: string
+          format: date-time
+          readOnly: true
+        billingStart:
+          type: string
+          format: date
+          readOnly: true
+        status:
+          type: string
+          readOnly: true
+          enum:
+          - Active
+          - Cancelled
+          - PendingManual
+          - PendingAutomated
+          - PendingCancel
+          - WaitingForDetails
+          - Trial
+          - Converted
+          - PendingActivation
+          - Activated
+          description: "Subscription Status :\n * `Active` - Provisioning request complete\n * `Cancelled` - Deprovisioning request complete\n * `PendingManual` -  An associated manual provisioning task isn't started/completed\n * `PendingAutomated` - An associated automated provisioning task isn't started/completed\n * `PendingCancel` - Deprovisioning request pending\n * `WaitingForDetails` - Provisioning details are missing\n * `Trial` - Trial subscriptions offer free or discounted access for a limited time.\n * `Converted` - Converted from trial\n * `PendingActivation` - Requires Activation but has not yet been activated\n * `Activated` - Requires Activation and has been activated\n\nActivation is required for a small subset of products.  Billing services do not begin for these products until \"activation\" is complete.\n"
+        price:
+          description: The price for the customer.
+          type: number
+          example: 15.39
+        currencyCode:
+          description: The currency ISO 4217 code
+          type: string
+          example: USD
+        partnerCost:
+          description: The price for the Partner.
+          type: number
+          example: 11.39
+        productName:
+          description: The name of the product associated with this subscription
+          type: string
+          readOnly: true
+          example: Microsoft Office 365 E3
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 2-Year
+          - 3-Year
+          - One-Time
+          - Trial
+          - Activation
+        provisioningDetails:
+          writeOnly: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisioningDetail'
+        commitmentTerm:
+          readOnly: true
+          allOf:
+          - $ref: '#/components/schemas/SubscriptionCommitment'
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    SubscriptionCommitment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the commitment record
+          format: uuid
+        term:
+          type: string
+          description: Duration of the commitment
+          example: 3-Year
+        endDate:
+          type: string
+          format: date-time
+    ProvisioningDetail:
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          description: The label to display
+        key:
+          type: string
+          example: userEmailAddress
+          description: The key
+        values:
+          type: array
+          items:
+            type: string
+          description: A list of values based on the ```valuetype``` and ```possibleValues```
+          writeOnly: true
+        description:
+          type: string
+          example: Provide the user's email address
+          description: Instructions and context to help enter the required provisioning information
+          readOnly: true
+        valueType:
+          type: string
+          readOnly: true
+          enum:
+          - Input
+          - Single-Value
+          - Multi-Value
+          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
+        possibleValues:
+          type: array
+          readOnly: true
+          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
+          items:
+            type: string
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
   securitySchemes:
     OAuth2:
       type: oauth2

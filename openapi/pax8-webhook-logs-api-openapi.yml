@@ -1,13 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Webhook Logs API
+  title: Webhooks Webhook Logs API
   version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
 servers:
-- url: https://api.pax8.com/v1
-security:
-- OAuth2: []
+- url: https://api.pax8.com/api/v2
 tags:
 - name: Webhook Logs
 paths:
@@ -711,61 +707,6 @@ paths:
       - Webhook Logs
 components:
   schemas:
-    WebhookLog:
-      type: object
-      required:
-      - id
-      - webhookId
-      - webhookName
-      - finalStatus
-      - callHistory
-      - createdAt
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the log entry
-          readOnly: true
-        webhookId:
-          type: string
-          format: uuid
-          description: ID of the webhook this log belongs to
-        webhookName:
-          type: string
-          description: Display name of the webhook
-        finalStatus:
-          allOf:
-          - $ref: '#/components/schemas/WebhookDeliveryStatus'
-          description: Final status of the webhook delivery
-        callHistory:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookCall'
-          description: History of delivery attempts
-        createdAt:
-          type: string
-          format: date-time
-          description: Timestamp when the log was created
-          readOnly: true
-      description: Webhook log information
-    ErrorType:
-      type: string
-      enum:
-      - NOT_FOUND
-      - UNAUTHORIZED
-      - FORBIDDEN
-      - BAD_REQUEST
-      - INTERNAL_SERVER_ERROR
-      - INVALID_PARAM
-      description: The type of error that occurred
-    WebhookDeliveryStatus:
-      type: string
-      enum:
-      - PENDING
-      - SUCCESS
-      - FAILED
-      - RETRYING
-      description: Status of webhook delivery
     WebhookLogPagedResult:
       type: object
       required:
@@ -806,6 +747,51 @@ components:
           type: integer
           format: int32
           default: 0
+    WebhookLog:
+      type: object
+      required:
+      - id
+      - webhookId
+      - webhookName
+      - finalStatus
+      - callHistory
+      - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the log entry
+          readOnly: true
+        webhookId:
+          type: string
+          format: uuid
+          description: ID of the webhook this log belongs to
+        webhookName:
+          type: string
+          description: Display name of the webhook
+        finalStatus:
+          allOf:
+          - $ref: '#/components/schemas/WebhookDeliveryStatus'
+          description: Final status of the webhook delivery
+        callHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookCall'
+          description: History of delivery attempts
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the log was created
+          readOnly: true
+      description: Webhook log information
+    WebhookDeliveryStatus:
+      type: string
+      enum:
+      - PENDING
+      - SUCCESS
+      - FAILED
+      - RETRYING
+      description: Status of webhook delivery
     WebhookCall:
       type: object
       required:
@@ -838,6 +824,16 @@ components:
           additionalProperties: {}
           description: The payload that was sent in the webhook
       description: Individual webhook call attempt
+    ErrorType:
+      type: string
+      enum:
+      - NOT_FOUND
+      - UNAUTHORIZED
+      - FORBIDDEN
+      - BAD_REQUEST
+      - INTERNAL_SERVER_ERROR
+      - INVALID_PARAM
+      description: The type of error that occurred
   securitySchemes:
     OAuth2:
       type: oauth2

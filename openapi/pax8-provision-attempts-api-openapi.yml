@@ -1,11 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Provision Attempts API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: Vendor Provisioning Endpoints Provision Attempts API
+  description: Vendor Provisioning Endpoints
+  version: v0
 servers:
-- url: https://api.pax8.com/v1
+- url: https://api.pax8.com/v2
+  description: Pax8 API
 security:
 - OAuth2: []
 tags:
@@ -104,18 +104,25 @@ paths:
                 $ref: '#/components/schemas/ProvisionAttempt'
 components:
   schemas:
-    PageDTOProvisionAttempt:
-      required:
-      - content
-      - page
+    ProvisionAttempt:
       type: object
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionAttempt'
-        page:
-          $ref: '#/components/schemas/PageInfo'
+        id:
+          type: string
+          format: uuid
+        provisionDetailId:
+          type: string
+          format: uuid
+        webhookId:
+          type: string
+          format: uuid
+        status:
+          type: string
+        errorDetail:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
     PageInfo:
       required:
       - number
@@ -136,29 +143,33 @@ components:
         number:
           type: integer
           format: int32
-    ProvisionAttempt:
+    PageDTOProvisionAttempt:
+      required:
+      - content
+      - page
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        provisionDetailId:
-          type: string
-          format: uuid
-        webhookId:
-          type: string
-          format: uuid
-        status:
-          type: string
-        errorDetail:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionAttempt'
+        page:
+          $ref: '#/components/schemas/PageInfo'
   securitySchemes:
     OAuth2:
       type: oauth2
+      description: 'Requires ''audience'' parameter in token request: `api://provisioning`.
+
+
+        Simulation credentials will return `vendorSimulation:provisioning` scope.
+
+        Production credentials will return `vendor:provisioning` scope.'
       flows:
         clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+          tokenUrl: https://api.pax8.com/v1/token
+          scopes:
+            vendorSimulation:provisioning: Access to simulation provisioning endpoints
+            vendor:provisioning: Access to production provisioning endpoints
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

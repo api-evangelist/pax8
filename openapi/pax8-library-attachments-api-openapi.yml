@@ -1,13 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Library attachments API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: QUOTING ENDPOINTS Library attachments API
+  version: 2.0.0
 servers:
-- url: https://api.pax8.com/v1
+- description: Public Apis
+  url: https://api.pax8.com
 security:
-- OAuth2: []
+- bearerAuth: []
 tags:
 - name: Library attachments
 paths:
@@ -391,6 +390,21 @@ components:
       - message
       - status
       - type
+    UpdateAttachmentPayload:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+      required:
+      - id
+      - name
+      - order
     AttachmentResponse:
       type: object
       properties:
@@ -422,21 +436,14 @@ components:
       - order
       - type
       - url
-    UpdateAttachmentPayload:
+    CopyAttachmentPayload:
       type: object
       properties:
-        id:
+        attachmentId:
           type: string
           format: uuid
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
       required:
-      - id
-      - name
-      - order
+      - attachmentId
     CreatedBy:
       type: object
       properties:
@@ -451,18 +458,14 @@ components:
       - fullName
       - id
       - role
-    CopyAttachmentPayload:
-      type: object
-      properties:
-        attachmentId:
-          type: string
-          format: uuid
-      required:
-      - attachmentId
   securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+externalDocs:
+  description: Quoting Github docs
+  url: https://github.com/pax8/Quoting#readme
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Companies API
+  title: PARTNER ENDPOINTS Companies API
   version: 1.0.0
   termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  description: Companies represent the customers your organization serves through the Pax8 platform. Fetch a list of your company records, or a specific company by its companyId
 servers:
 - url: https://api.pax8.com/v1
 security:
@@ -17,7 +17,7 @@ paths:
       tags:
       - Companies
       summary: Create Company
-      description: Creates a new company. You can optionally include contacts in the request body to create the company with contacts in a single request. If no contacts are provided, the company will be placed in an "inactive" status until the [company has primary contacts added](#tag/Contacts). Once contacts are added, the company will move to "Active".
+      description: Creates a new company. You can optionally include contacts in the request body to create the company with contacts in a single request. If no contacts are provided, the company will be placed in an "inactive" status until the company has primary contacts added. Once contacts are added, the company will move to "Active".
       operationId: createCompany
       requestBody:
         description: Company object
@@ -181,6 +181,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: getCompaniesByCompanyId
+      x-operation-id-source: derived
     patch:
       tags:
       - Companies
@@ -222,6 +224,127 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          description: The primary street information
+          example: 5500 S Quebec St
+        street2:
+          type: string
+          description: The secondary street information
+          example: Ste. 350
+        city:
+          type: string
+          description: The city
+          example: Greenwood Village
+        stateOrProvince:
+          type: string
+          description: The state or province
+          example: CO
+        postalCode:
+          type: string
+          description: The postal code
+          example: '80111'
+        country:
+          type: string
+          description: The ISO 3166-1 alpha-2 code for the country
+          pattern: ^[A-Z]{2}$
+          example: US
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    ContactType:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Admin
+          - Billing
+          - Technical
+          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
+        primary:
+          type: boolean
+          description: Is this contact the primary contact for this Contact Type
+    Contact:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - email
+      - phone
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: The id
+          example: 18d6329e-93f9-46a5-9df7-37e4c29d2840
+        firstName:
+          type: string
+          description: The first name
+          example: John
+        lastName:
+          type: string
+          description: The last name
+          example: Doe
+        email:
+          type: string
+          format: email
+          description: The email
+          example: john@doe.com
+        phone:
+          type: string
+          format: phone
+          description: The phone number
+          example: 555-555-5555
+        createdDate:
+          readOnly: true
+          type: string
+          description: The created date
+          example: '2020-05-12'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactType'
     ErrorDetail:
       type: object
       properties:
@@ -279,127 +402,6 @@ components:
           - Inactive
           - Deleted
           description: "Company Status:\n  * `Active` - The company is active\n  * `Inactive` - The company is inactive due to missing contacts\n  * `Deleted` - The company has been deleted\n"
-    Error:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of HTTP error
-        message:
-          type: string
-          description: Error message
-        instance:
-          type: string
-          description: The path called
-        status:
-          type: integer
-          description: HTTP error code
-        details:
-          type: array
-          description: Additional API failures
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-    Contact:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - email
-      - phone
-      properties:
-        id:
-          readOnly: true
-          type: string
-          format: uuid
-          description: The id
-          example: 18d6329e-93f9-46a5-9df7-37e4c29d2840
-        firstName:
-          type: string
-          description: The first name
-          example: John
-        lastName:
-          type: string
-          description: The last name
-          example: Doe
-        email:
-          type: string
-          format: email
-          description: The email
-          example: john@doe.com
-        phone:
-          type: string
-          format: phone
-          description: The phone number
-          example: 555-555-5555
-        createdDate:
-          readOnly: true
-          type: string
-          description: The created date
-          example: '2020-05-12'
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactType'
-    Page:
-      type: object
-      properties:
-        size:
-          type: number
-          default: 10
-          minimum: 1
-          maximum: 200
-          description: The size of the page
-          example: 50
-        totalElements:
-          description: The total number of elements able to be paged over
-          example: 237
-        totalPages:
-          description: The total number of pages based on the ```size``` and ```totalElements```
-          example: 5
-        number:
-          description: The current page
-          example: 1
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-          description: The primary street information
-          example: 5500 S Quebec St
-        street2:
-          type: string
-          description: The secondary street information
-          example: Ste. 350
-        city:
-          type: string
-          description: The city
-          example: Greenwood Village
-        stateOrProvince:
-          type: string
-          description: The state or province
-          example: CO
-        postalCode:
-          type: string
-          description: The postal code
-          example: '80111'
-        country:
-          type: string
-          description: The ISO 3166-1 alpha-2 code for the country
-          pattern: ^[A-Z]{2}$
-          example: US
-    ContactType:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Admin
-          - Billing
-          - Technical
-          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
-        primary:
-          type: boolean
-          description: Is this contact the primary contact for this Contact Type
     Company:
       type: object
       required:
@@ -461,6 +463,74 @@ components:
           items:
             $ref: '#/components/schemas/Contact'
   examples:
+    company-update-post:
+      summary: An example company
+      description: An example response for a company
+      value:
+        id: a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a
+        name: VFC Network, Inc
+        address:
+          street: 48918 Liberty Lane Ave
+          city: Denver
+          postalCode: '80210'
+          country: US
+          stateOrProvince: Colorado
+        phone: 123-456-5555
+        website: vfc-network-inc-liberty.com
+        status: Active
+        externalId: A123
+        selfServiceAllowed: false
+        billOnBehalfOfEnabled: false
+        orderApprovalRequired: false
+    company-0:
+      summary: An example company
+      description: An example response for a company
+      value:
+        id: a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a
+        name: VFC Network, Inc
+        address:
+          street: 48918 Liberty Lane Ave
+          city: Denver
+          postalCode: '80210'
+          country: US
+          stateOrProvince: Colorado
+        phone: 123-456-5555
+        website: vfc-network-inc-liberty.com
+        status: Active
+        externalId: A123
+        selfServiceAllowed: false
+        billOnBehalfOfEnabled: false
+        orderApprovalRequired: false
+        updatedDate: 2023-08-11T11:33:12.314-0600
+    company-post:
+      summary: An example company with contacts
+      description: An example request for creating a company with contacts
+      value:
+        name: VFC Network, Inc
+        address:
+          street: 48918 Liberty Lane Ave
+          city: Denver
+          postalCode: '80210'
+          country: US
+          stateOrProvince: Colorado
+        phone: 123-456-5555
+        website: vfc-network-inc-liberty.com
+        externalId: A123
+        selfServiceAllowed: false
+        billOnBehalfOfEnabled: false
+        orderApprovalRequired: false
+        contacts:
+        - firstName: John
+          lastName: Doe
+          email: john.doe@vfc-network-inc-liberty.com
+          phone: 555-555-5555
+          types:
+          - type: Admin
+            primary: true
+          - type: Billing
+            primary: true
+          - type: Technical
+            primary: true
     companies-paged:
       summary: A page of companies
       description: An example page of companies
@@ -611,74 +681,6 @@ components:
           totalElements: 65
           totalPages: 7
           number: 0
-    company-post:
-      summary: An example company with contacts
-      description: An example request for creating a company with contacts
-      value:
-        name: VFC Network, Inc
-        address:
-          street: 48918 Liberty Lane Ave
-          city: Denver
-          postalCode: '80210'
-          country: US
-          stateOrProvince: Colorado
-        phone: 123-456-5555
-        website: vfc-network-inc-liberty.com
-        externalId: A123
-        selfServiceAllowed: false
-        billOnBehalfOfEnabled: false
-        orderApprovalRequired: false
-        contacts:
-        - firstName: John
-          lastName: Doe
-          email: john.doe@vfc-network-inc-liberty.com
-          phone: 555-555-5555
-          types:
-          - type: Admin
-            primary: true
-          - type: Billing
-            primary: true
-          - type: Technical
-            primary: true
-    company-update-post:
-      summary: An example company
-      description: An example response for a company
-      value:
-        id: a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a
-        name: VFC Network, Inc
-        address:
-          street: 48918 Liberty Lane Ave
-          city: Denver
-          postalCode: '80210'
-          country: US
-          stateOrProvince: Colorado
-        phone: 123-456-5555
-        website: vfc-network-inc-liberty.com
-        status: Active
-        externalId: A123
-        selfServiceAllowed: false
-        billOnBehalfOfEnabled: false
-        orderApprovalRequired: false
-    company-0:
-      summary: An example company
-      description: An example response for a company
-      value:
-        id: a4dfc6bf-f02e-4a79-9844-66ba6c02ec3a
-        name: VFC Network, Inc
-        address:
-          street: 48918 Liberty Lane Ave
-          city: Denver
-          postalCode: '80210'
-          country: US
-          stateOrProvince: Colorado
-        phone: 123-456-5555
-        website: vfc-network-inc-liberty.com
-        status: Active
-        externalId: A123
-        selfServiceAllowed: false
-        billOnBehalfOfEnabled: false
-        orderApprovalRequired: false
-        updatedDate: 2023-08-11T11:33:12.314-0600
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Authentication Access Token API
   version: 1.0.0
@@ -50,22 +50,29 @@ paths:
                 token-error-auth-example:
                   $ref: '#/components/examples/token-error-auth-example'
 components:
+  examples:
+    token-response-example:
+      summary: An Access Token
+      description: An Access Token response example
+      value:
+        access_token: <access-token>
+        expires_in: 86400
+        token_type: Bearer
+    token-error-auth-example:
+      summary: An Access Token Unauthorized error
+      description: An Access Token Unauthorized error
+      value:
+        error: access_denied
+        error_description: Unauthorized
+    token-request-example:
+      summary: An Access Token request headers
+      description: Header values used for an Access Token request
+      value:
+        client_id: <client-id>
+        client_secret: <client-secret>
+        audience: https://api.pax8.com
+        grant_type: client_credentials
   schemas:
-    TokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-          description: The Access Token
-        expires_in:
-          type: number
-          description: The time to live of the Access Token in seconds
-          enum:
-          - 86400
-        token_type:
-          type: string
-          enum:
-          - Bearer
     TokenRequest:
       type: object
       required:
@@ -91,28 +98,21 @@ components:
           type: string
           enum:
           - client_credentials
-  examples:
-    token-error-auth-example:
-      summary: An Access Token Unauthorized error
-      description: An Access Token Unauthorized error
-      value:
-        error: access_denied
-        error_description: Unauthorized
-    token-request-example:
-      summary: An Access Token request headers
-      description: Header values used for an Access Token request
-      value:
-        client_id: <client-id>
-        client_secret: <client-secret>
-        audience: https://api.pax8.com
-        grant_type: client_credentials
-    token-response-example:
-      summary: An Access Token
-      description: An Access Token response example
-      value:
-        access_token: <access-token>
-        expires_in: 86400
-        token_type: Bearer
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: The Access Token
+        expires_in:
+          type: number
+          description: The time to live of the Access Token in seconds
+          enum:
+          - 86400
+        token_type:
+          type: string
+          enum:
+          - Bearer
   securitySchemes:
     OAuth2:
       type: oauth2

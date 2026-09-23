@@ -1,11 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Provision Requests API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: Vendor Provisioning Endpoints Provision Requests API
+  description: Vendor Provisioning Endpoints
+  version: v0
 servers:
-- url: https://api.pax8.com/v1
+- url: https://api.pax8.com/v2
+  description: Pax8 API
 security:
 - OAuth2: []
 tags:
@@ -59,6 +59,76 @@ paths:
                 $ref: '#/components/schemas/PageDTOProvisionRequest'
 components:
   schemas:
+    VolumeCommitment:
+      type: object
+      properties:
+        minAmount:
+          type: number
+          description: Minimum commitment amount (must be less than maxAmount)
+        maxAmount:
+          type: number
+          description: Maximum commitment amount (must be greater than minAmount when present)
+        unitOfMeasure:
+          type: string
+          enum:
+          - Agents
+          - Devices
+          - Endpoints
+          - Environments
+          - Levels
+          - Points
+          - Users
+          - AUD
+          - CAD
+          - CHF
+          - DKK
+          - EUR
+          - GBP
+          - IDR
+          - MYR
+          - NOK
+          - NZD
+          - PHP
+          - SEK
+          - SGD
+          - THB
+          - USD
+          - VND
+        months:
+          type: integer
+          format: int32
+      description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
+    Commitment:
+      type: object
+      properties:
+        term:
+          $ref: '#/components/schemas/CommitmentTerm'
+        volume:
+          $ref: '#/components/schemas/VolumeCommitment'
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        stateOrProvince:
+          type: string
+    CommitmentTerm:
+      type: object
+      properties:
+        months:
+          type: integer
+          format: int32
+        endDate:
+          type: string
+          format: date-time
     ProvisionRequest:
       type: object
       properties:
@@ -139,52 +209,18 @@ components:
           - Monthly
           - One-Time
           - Trial
-    VolumeCommitment:
+    PageDTOProvisionRequest:
+      required:
+      - content
+      - page
       type: object
       properties:
-        minAmount:
-          type: number
-          description: Minimum commitment amount (must be less than maxAmount)
-        maxAmount:
-          type: number
-          description: Maximum commitment amount (must be greater than minAmount when present)
-        unitOfMeasure:
-          type: string
-          enum:
-          - Agents
-          - Devices
-          - Endpoints
-          - Environments
-          - Levels
-          - Points
-          - Users
-          - AUD
-          - CAD
-          - CHF
-          - DKK
-          - EUR
-          - GBP
-          - IDR
-          - MYR
-          - NOK
-          - NZD
-          - PHP
-          - SEK
-          - SGD
-          - THB
-          - USD
-          - VND
-        months:
-          type: integer
-          format: int32
-      description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
-    Commitment:
-      type: object
-      properties:
-        term:
-          $ref: '#/components/schemas/CommitmentTerm'
-        volume:
-          $ref: '#/components/schemas/VolumeCommitment'
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionRequest'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     PageInfo:
       required:
       - number
@@ -205,46 +241,21 @@ components:
         number:
           type: integer
           format: int32
-    CommitmentTerm:
-      type: object
-      properties:
-        months:
-          type: integer
-          format: int32
-        endDate:
-          type: string
-          format: date-time
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        postcode:
-          type: string
-        country:
-          type: string
-        stateOrProvince:
-          type: string
-    PageDTOProvisionRequest:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionRequest'
-        page:
-          $ref: '#/components/schemas/PageInfo'
   securitySchemes:
     OAuth2:
       type: oauth2
+      description: 'Requires ''audience'' parameter in token request: `api://provisioning`.
+
+
+        Simulation credentials will return `vendorSimulation:provisioning` scope.
+
+        Production credentials will return `vendor:provisioning` scope.'
       flows:
         clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+          tokenUrl: https://api.pax8.com/v1/token
+          scopes:
+            vendorSimulation:provisioning: Access to simulation provisioning endpoints
+            vendor:provisioning: Access to production provisioning endpoints
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

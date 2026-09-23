@@ -1,13 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Quote sections API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: QUOTING ENDPOINTS Quote sections API
+  version: 2.0.0
 servers:
-- url: https://api.pax8.com/v1
+- description: Public Apis
+  url: https://api.pax8.com
 security:
-- OAuth2: []
+- bearerAuth: []
 tags:
 - name: Quote sections
 paths:
@@ -122,6 +121,27 @@ paths:
       - Quote sections
 components:
   schemas:
+    SectionLineItem:
+      type: object
+      properties:
+        lineItemId:
+          type: string
+          format: uuid
+        order:
+          type: integer
+          format: int32
+      required:
+      - lineItemId
+      - order
+    SectionsPayload:
+      type: object
+      properties:
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectionPayload'
+      required:
+      - sections
     ErrorDetails:
       type: object
       properties:
@@ -203,15 +223,6 @@ components:
       required:
       - message
       - type
-    SectionsPayload:
-      type: object
-      properties:
-        sections:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectionPayload'
-      required:
-      - sections
     ErrorResponse:
       type: object
       properties:
@@ -241,27 +252,6 @@ components:
           type: string
       required:
       - name
-    SectionLineItem:
-      type: object
-      properties:
-        lineItemId:
-          type: string
-          format: uuid
-        order:
-          type: integer
-          format: int32
-      required:
-      - lineItemId
-      - order
-    SectionsResponse:
-      type: object
-      properties:
-        sections:
-          type: array
-          items:
-            $ref: '#/components/schemas/Section'
-      required:
-      - sections
     Section:
       type: object
       properties:
@@ -282,6 +272,15 @@ components:
       - lineItems
       - name
       - order
+    SectionsResponse:
+      type: object
+      properties:
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+      required:
+      - sections
     SectionPayload:
       type: object
       properties:
@@ -303,9 +302,13 @@ components:
       - name
       - order
   securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+externalDocs:
+  description: Quoting Github docs
+  url: https://github.com/pax8/Quoting#readme
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

@@ -1,13 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Quote preferences API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: QUOTING ENDPOINTS Quote preferences API
+  version: 2.0.0
 servers:
-- url: https://api.pax8.com/v1
+- description: Public Apis
+  url: https://api.pax8.com
 security:
-- OAuth2: []
+- bearerAuth: []
 tags:
 - name: Quote preferences
 paths:
@@ -157,6 +156,24 @@ components:
       required:
       - message
       - type
+    QuotePreferencesResult:
+      type: object
+      properties:
+        daysToExpire:
+          type: integer
+          format: int32
+        introMessage:
+          type: string
+        salesMarginPercentage:
+          type: number
+          format: double
+        termsAndDisclaimers:
+          type: string
+      required:
+      - daysToExpire
+      - introMessage
+      - salesMarginPercentage
+      - termsAndDisclaimers
     ErrorResponse:
       type: object
       properties:
@@ -179,6 +196,23 @@ components:
       - message
       - status
       - type
+    PreferencesPayload:
+      type: object
+      properties:
+        daysToExpire:
+          type: integer
+          format: int32
+        introMessage:
+          type: string
+        salesMarginPercentage:
+          type: number
+          format: double
+        termsAndDisclaimers:
+          type: string
+      required:
+      - daysToExpire
+      - introMessage
+      - termsAndDisclaimers
     AttachmentResponse:
       type: object
       properties:
@@ -210,20 +244,6 @@ components:
       - order
       - type
       - url
-    CreatedBy:
-      type: object
-      properties:
-        fullName:
-          type: string
-        id:
-          type: string
-          format: uuid
-        role:
-          type: string
-      required:
-      - fullName
-      - id
-      - role
     PreferencesResponse:
       type: object
       properties:
@@ -247,45 +267,28 @@ components:
       - introMessage
       - salesMarginPercentage
       - termsAndDisclaimers
-    PreferencesPayload:
+    CreatedBy:
       type: object
       properties:
-        daysToExpire:
-          type: integer
-          format: int32
-        introMessage:
+        fullName:
           type: string
-        salesMarginPercentage:
-          type: number
-          format: double
-        termsAndDisclaimers:
+        id:
+          type: string
+          format: uuid
+        role:
           type: string
       required:
-      - daysToExpire
-      - introMessage
-      - termsAndDisclaimers
-    QuotePreferencesResult:
-      type: object
-      properties:
-        daysToExpire:
-          type: integer
-          format: int32
-        introMessage:
-          type: string
-        salesMarginPercentage:
-          type: number
-          format: double
-        termsAndDisclaimers:
-          type: string
-      required:
-      - daysToExpire
-      - introMessage
-      - salesMarginPercentage
-      - termsAndDisclaimers
+      - fullName
+      - id
+      - role
   securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+externalDocs:
+  description: Quoting Github docs
+  url: https://github.com/pax8/Quoting#readme
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

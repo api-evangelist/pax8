@@ -1,13 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Quotes API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: QUOTING ENDPOINTS Quotes API
+  version: 2.0.0
 servers:
-- url: https://api.pax8.com/v1
+- description: Public Apis
+  url: https://api.pax8.com
 security:
-- OAuth2: []
+- bearerAuth: []
 tags:
 - name: Quotes
 paths:
@@ -283,99 +282,174 @@ paths:
       - Quotes
 components:
   schemas:
-    ListQuotesViewV2: {}
-    ListContent:
-      allOf:
-      - $ref: '#/components/schemas/ListQuotesViewV2'
-      - type: object
-        properties:
-          client:
-            $ref: '#/components/schemas/ClientDetails'
-          createdBy:
-            type: string
-          createdOn:
-            type: string
-            format: date-time
-          id:
-            type: string
-            format: uuid
-          intentType:
-            type: string
-            enum:
-            - PARTNER_TO_CLIENT
-            - PAX8_TO_PARTNER
-            - PAX8_TO_PARTNER_CLIENT
-          lineItemCounts:
-            $ref: '#/components/schemas/ListLineItemCounts'
-          ownedBy:
-            $ref: '#/components/schemas/OwnedByDetails'
-          partner:
-            $ref: '#/components/schemas/QuoteListPartnerDetails'
-          published:
-            type: boolean
-          publishedOn:
-            type: string
-            format: date-time
-          referenceCode:
-            type: string
-          status:
-            type: string
-            enum:
-            - draft
-            - assigned
-            - sent
-            - closed
-            - declined
-            - accepted
-            - changes_requested
-            - expired
-            - pending
-          totals:
-            $ref: '#/components/schemas/ListTotals'
-          updatedOn:
-            type: string
-            format: date-time
-      required:
-      - client
-      - createdBy
-      - createdOn
-      - id
-      - lineItemCounts
-      - published
-      - referenceCode
-      - status
-      - totals
-      - updatedOn
-    ParentPartnerDetails:
+    Product:
       type: object
       properties:
-        parentPartnerId:
+        id:
           type: string
           format: uuid
-        parentPartnerName:
+        isMspOnly:
+          type: boolean
+        name:
+          type: string
+        sku:
+          type: string
+        type:
+          type: string
+          enum:
+          - Standalone
+          - Solution
+          - Custom
+      required:
+      - id
+      - isMspOnly
+      - name
+      - sku
+      - type
+    ListTotals:
+      type: object
+      properties:
+        initialTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+      required:
+      - initialTotal
+      - recurringTotal
+    LineItemResponse:
+      type: object
+      properties:
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 1 Year
+          - 2 Year
+          - 3 Year
+          - Trial
+          - Activation
+          - One-Time
+        commitmentTerm:
+          $ref: '#/components/schemas/CommitmentTerm'
+        cost:
+          $ref: '#/components/schemas/AmountCurrency'
+        effectiveDate:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        note:
+          type: string
+        price:
+          $ref: '#/components/schemas/AmountCurrency'
+        product:
+          $ref: '#/components/schemas/Product'
+        quantity:
+          type: integer
+          format: int64
+        relationship:
+          $ref: '#/components/schemas/LineItemRelationship'
+        subscriptionId:
+          type: string
+          format: uuid
+        totals:
+          $ref: '#/components/schemas/InvoiceTotals'
+        usageBased:
+          $ref: '#/components/schemas/UsageBased'
+      required:
+      - billingTerm
+      - cost
+      - effectiveDate
+      - id
+      - note
+      - price
+      - product
+      - quantity
+      - totals
+    ListQuotesViewV2: {}
+    OwnedByDetails:
+      type: object
+      properties:
+        email:
+          type: string
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
           type: string
       required:
-      - parentPartnerId
-      - parentPartnerName
-    ListLineItemCounts:
+      - email
+      - fullName
+      - id
+      - role
+    LineItemRelationship:
       type: object
       properties:
-        custom:
-          type: integer
-          format: int64
-        msp:
-          type: integer
-          format: int64
-        total:
-          type: integer
-          format: int64
+        requiredLineItemId:
+          type: string
+          format: uuid
+        requiredSubscriptionId:
+          type: string
+          format: uuid
+    CreatedBy:
+      type: object
+      properties:
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
+          type: string
       required:
-      - custom
-      - msp
-      - total
-    QuoteListPartnerDetails:
+      - fullName
+      - id
+      - role
+    UserModel:
       type: object
       properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        ipAddress:
+          type: string
+        quoteAcceptedByName:
+          type: string
+        userRole:
+          type: string
+      required:
+      - displayName
+      - email
+      - fullName
+      - id
+    CommitmentTerm:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        term:
+          type: string
+      required:
+      - id
+      - term
+    PartnerDetails:
+      type: object
+      properties:
+        city:
+          type: string
+        country:
+          type: string
         id:
           type: string
           format: uuid
@@ -383,40 +457,21 @@ components:
           type: string
         parentPartner:
           $ref: '#/components/schemas/ParentPartnerDetails'
+        postcode:
+          type: string
+        stateOrProvinceCode:
+          type: string
+        street:
+          type: string
+        street2:
+          type: string
       required:
+      - city
       - id
       - name
-    ListStatusCounts:
-      type: object
-      properties:
-        accepted:
-          type: integer
-          format: int32
-        closed:
-          type: integer
-          format: int32
-        declined:
-          type: integer
-          format: int32
-        draft:
-          type: integer
-          format: int32
-        expired:
-          type: integer
-          format: int32
-        pending:
-          type: integer
-          format: int32
-        sent:
-          type: integer
-          format: int32
-      required:
-      - accepted
-      - closed
-      - declined
-      - draft
-      - expired
-      - sent
+      - postcode
+      - stateOrProvinceCode
+      - street
     ErrorDetails:
       type: object
       properties:
@@ -498,57 +553,6 @@ components:
       required:
       - message
       - type
-    UserModel:
-      type: object
-      properties:
-        displayName:
-          type: string
-        email:
-          type: string
-        fullName:
-          type: string
-        id:
-          type: string
-          format: uuid
-        ipAddress:
-          type: string
-        quoteAcceptedByName:
-          type: string
-        userRole:
-          type: string
-      required:
-      - displayName
-      - email
-      - fullName
-      - id
-    ClientDetails:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        isShadowCompany:
-          type: boolean
-        name:
-          type: string
-      required:
-      - id
-      - isShadowCompany
-      - name
-    CreatedBy:
-      type: object
-      properties:
-        fullName:
-          type: string
-        id:
-          type: string
-          format: uuid
-        role:
-          type: string
-      required:
-      - fullName
-      - id
-      - role
     RespondedBy:
       type: object
       properties:
@@ -561,204 +565,17 @@ components:
       required:
       - email
       - fullName
-    OwnedByDetails:
+    ParentPartnerDetails:
       type: object
       properties:
-        email:
-          type: string
-        fullName:
-          type: string
-        id:
+        parentPartnerId:
           type: string
           format: uuid
-        role:
+        parentPartnerName:
           type: string
       required:
-      - email
-      - fullName
-      - id
-      - role
-    LineItemRelationship:
-      type: object
-      properties:
-        requiredLineItemId:
-          type: string
-          format: uuid
-        requiredSubscriptionId:
-          type: string
-          format: uuid
-    PageInfo:
-      type: object
-      properties:
-        number:
-          type: integer
-          format: int32
-        size:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-      required:
-      - number
-      - size
-      - totalElements
-      - totalPages
-    Product:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        isMspOnly:
-          type: boolean
-        name:
-          type: string
-        sku:
-          type: string
-        type:
-          type: string
-          enum:
-          - Standalone
-          - Solution
-          - Custom
-      required:
-      - id
-      - isMspOnly
-      - name
-      - sku
-      - type
-    UsageBased:
-      type: object
-      properties:
-        displayNote:
-          type: boolean
-        type:
-          type: string
-          enum:
-          - PRICE_FLAT
-          - PRICE_VARIES
-          - QTY_VARIES
-      required:
-      - displayNote
-      - type
-    PartnerDetails:
-      type: object
-      properties:
-        city:
-          type: string
-        country:
-          type: string
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        parentPartner:
-          $ref: '#/components/schemas/ParentPartnerDetails'
-        postcode:
-          type: string
-        stateOrProvinceCode:
-          type: string
-        street:
-          type: string
-        street2:
-          type: string
-      required:
-      - city
-      - id
-      - name
-      - postcode
-      - stateOrProvinceCode
-      - street
-    InvoiceTotals:
-      type: object
-      properties:
-        initialCost:
-          $ref: '#/components/schemas/AmountCurrency'
-        initialProfit:
-          $ref: '#/components/schemas/AmountCurrency'
-        initialTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringCost:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringProfit:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-      required:
-      - initialCost
-      - initialProfit
-      - initialTotal
-      - recurringCost
-      - recurringProfit
-      - recurringTotal
-    UpdateQuotePayload:
-      type: object
-      properties:
-        expiresOn:
-          type: string
-          format: date-time
-        introMessage:
-          type: string
-        published:
-          type: boolean
-        status:
-          type: string
-          enum:
-          - draft
-          - assigned
-          - sent
-          - closed
-          - declined
-          - accepted
-          - changes_requested
-          - expired
-          - pending
-        termsAndDisclaimers:
-          type: string
-      required:
-      - expiresOn
-      - introMessage
-      - published
-      - status
-      - termsAndDisclaimers
-    CreateQuotePayload:
-      type: object
-      properties:
-        clientId:
-          type: string
-          format: uuid
-        quoteRequestId:
-          type: string
-          format: uuid
-      required:
-      - clientId
-    ErrorResponse:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
-          type: string
-        message:
-          type: string
-        status:
-          type: integer
-          format: int32
-        type:
-          type: string
-      required:
-      - details
-      - instance
-      - message
-      - status
-      - type
+      - parentPartnerId
+      - parentPartnerName
     AttachmentResponse:
       type: object
       properties:
@@ -790,79 +607,36 @@ components:
       - order
       - type
       - url
-    LineItemResponse:
+    UsageBased:
       type: object
       properties:
-        billingTerm:
+        displayNote:
+          type: boolean
+        type:
           type: string
           enum:
-          - Monthly
-          - Annual
-          - 1 Year
-          - 2 Year
-          - 3 Year
-          - Trial
-          - Activation
-          - One-Time
-        commitmentTerm:
-          $ref: '#/components/schemas/CommitmentTerm'
-        cost:
-          $ref: '#/components/schemas/AmountCurrency'
-        effectiveDate:
-          type: string
-          format: date-time
-        id:
-          type: string
-          format: uuid
-        note:
-          type: string
-        price:
-          $ref: '#/components/schemas/AmountCurrency'
-        product:
-          $ref: '#/components/schemas/Product'
-        quantity:
+          - PRICE_FLAT
+          - PRICE_VARIES
+          - QTY_VARIES
+      required:
+      - displayNote
+      - type
+    ListLineItemCounts:
+      type: object
+      properties:
+        custom:
           type: integer
           format: int64
-        relationship:
-          $ref: '#/components/schemas/LineItemRelationship'
-        subscriptionId:
-          type: string
-          format: uuid
-        totals:
-          $ref: '#/components/schemas/InvoiceTotals'
-        usageBased:
-          $ref: '#/components/schemas/UsageBased'
+        msp:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
       required:
-      - billingTerm
-      - cost
-      - effectiveDate
-      - id
-      - note
-      - price
-      - product
-      - quantity
-      - totals
-    CommitmentTerm:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        term:
-          type: string
-      required:
-      - id
-      - term
-    ListTotals:
-      type: object
-      properties:
-        initialTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-      required:
-      - initialTotal
-      - recurringTotal
+      - custom
+      - msp
+      - total
     AmountCurrency:
       type: object
       properties:
@@ -874,6 +648,112 @@ components:
       required:
       - amount
       - currency
+    InvoiceTotals:
+      type: object
+      properties:
+        initialCost:
+          $ref: '#/components/schemas/AmountCurrency'
+        initialProfit:
+          $ref: '#/components/schemas/AmountCurrency'
+        initialTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringCost:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringProfit:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+      required:
+      - initialCost
+      - initialProfit
+      - initialTotal
+      - recurringCost
+      - recurringProfit
+      - recurringTotal
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
+    ListResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListContent'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+        statusCounts:
+          $ref: '#/components/schemas/ListStatusCounts'
+      required:
+      - content
+      - page
+      - statusCounts
+    QuoteListPartnerDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        parentPartner:
+          $ref: '#/components/schemas/ParentPartnerDetails'
+      required:
+      - id
+      - name
+    PageInfo:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+    ClientDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        isShadowCompany:
+          type: boolean
+        name:
+          type: string
+      required:
+      - id
+      - isShadowCompany
+      - name
     QuoteResponse:
       type: object
       properties:
@@ -965,25 +845,148 @@ components:
       - status
       - termsAndDisclaimers
       - totals
-    ListResponse:
+    UpdateQuotePayload:
       type: object
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListContent'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-        statusCounts:
-          $ref: '#/components/schemas/ListStatusCounts'
+        expiresOn:
+          type: string
+          format: date-time
+        introMessage:
+          type: string
+        published:
+          type: boolean
+        status:
+          type: string
+          enum:
+          - draft
+          - assigned
+          - sent
+          - closed
+          - declined
+          - accepted
+          - changes_requested
+          - expired
+          - pending
+        termsAndDisclaimers:
+          type: string
       required:
-      - content
-      - page
-      - statusCounts
+      - expiresOn
+      - introMessage
+      - published
+      - status
+      - termsAndDisclaimers
+    ListContent:
+      allOf:
+      - $ref: '#/components/schemas/ListQuotesViewV2'
+      - type: object
+        properties:
+          client:
+            $ref: '#/components/schemas/ClientDetails'
+          createdBy:
+            type: string
+          createdOn:
+            type: string
+            format: date-time
+          id:
+            type: string
+            format: uuid
+          intentType:
+            type: string
+            enum:
+            - PARTNER_TO_CLIENT
+            - PAX8_TO_PARTNER
+            - PAX8_TO_PARTNER_CLIENT
+          lineItemCounts:
+            $ref: '#/components/schemas/ListLineItemCounts'
+          ownedBy:
+            $ref: '#/components/schemas/OwnedByDetails'
+          partner:
+            $ref: '#/components/schemas/QuoteListPartnerDetails'
+          published:
+            type: boolean
+          publishedOn:
+            type: string
+            format: date-time
+          referenceCode:
+            type: string
+          status:
+            type: string
+            enum:
+            - draft
+            - assigned
+            - sent
+            - closed
+            - declined
+            - accepted
+            - changes_requested
+            - expired
+            - pending
+          totals:
+            $ref: '#/components/schemas/ListTotals'
+          updatedOn:
+            type: string
+            format: date-time
+      required:
+      - client
+      - createdBy
+      - createdOn
+      - id
+      - lineItemCounts
+      - published
+      - referenceCode
+      - status
+      - totals
+      - updatedOn
+    ListStatusCounts:
+      type: object
+      properties:
+        accepted:
+          type: integer
+          format: int32
+        closed:
+          type: integer
+          format: int32
+        declined:
+          type: integer
+          format: int32
+        draft:
+          type: integer
+          format: int32
+        expired:
+          type: integer
+          format: int32
+        pending:
+          type: integer
+          format: int32
+        sent:
+          type: integer
+          format: int32
+      required:
+      - accepted
+      - closed
+      - declined
+      - draft
+      - expired
+      - sent
+    CreateQuotePayload:
+      type: object
+      properties:
+        clientId:
+          type: string
+          format: uuid
+        quoteRequestId:
+          type: string
+          format: uuid
+      required:
+      - clientId
   securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+externalDocs:
+  description: Quoting Github docs
+  url: https://github.com/pax8/Quoting#readme
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

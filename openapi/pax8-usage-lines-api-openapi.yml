@@ -1,11 +1,11 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Usage Lines API
-  version: 1.0.0
-  termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  title: Vendor Usage Endpoints Usage Lines API
+  description: Vendor Usage Endpoints
+  version: v0
 servers:
-- url: https://api.pax8.com/v1
+- url: https://api.pax8.com/v2/usage
+  description: Pax8 API
 security:
 - OAuth2: []
 tags:
@@ -188,6 +188,18 @@ components:
         number:
           type: integer
           format: int32
+    PageDTOUsageLine:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageLine'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     AggregateUsageLine:
       required:
       - partnerAggregateQuantity
@@ -217,22 +229,16 @@ components:
             format: uuid
           unitOfMeasurement:
             type: string
-    PageDTOUsageLine:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageLine'
-        page:
-          $ref: '#/components/schemas/PageInfo'
   securitySchemes:
     OAuth2:
       type: oauth2
+      description: 'Requires ''audience'' parameter in token request: `api://usage`.'
       flows:
         clientCredentials:
-          tokenUrl: https://token-manager.pax8.com/oauth/token
-          scopes: {}
+          tokenUrl: https://api.pax8.com/v1/token
+          scopes:
+            read:usageLine: Grants read access for usage
+            write:usageLine: Grants write access for usage
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

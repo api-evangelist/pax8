@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Authentication Access Token Contacts API
+  title: PARTNER ENDPOINTS Contacts API
   version: 1.0.0
   termsOfService: https://usc.pax8.com/resource/display/65345
-  description: The Access Token that allows access to the Pax8 API
+  description: Contacts represent the people who should be provided visibility into events such as provisioning
 servers:
 - url: https://api.pax8.com/v1
 security:
@@ -51,6 +51,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: postCompaniesByCompanyIdContacts
+      x-operation-id-source: derived
     get:
       tags:
       - Contacts
@@ -100,6 +102,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: getCompaniesByCompanyIdContacts
+      x-operation-id-source: derived
   /companies/{companyId}/contacts/{contactId}:
     get:
       tags:
@@ -140,6 +144,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: getCompaniesByCompanyIdContactsByContactId
+      x-operation-id-source: derived
     put:
       tags:
       - Contacts
@@ -186,6 +192,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: putCompaniesByCompanyIdContactsByContactId
+      x-operation-id-source: derived
     delete:
       tags:
       - Contacts
@@ -222,23 +230,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: deleteCompaniesByCompanyIdContactsByContactId
+      x-operation-id-source: derived
 components:
   schemas:
-    ErrorDetail:
+    Page:
       type: object
       properties:
-        type:
-          type: string
-          description: optional
-        message:
-          type: string
-          description: required
-        instance:
-          type: string
-          description: optional
-        status:
-          type: integer
-          description: optional
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
     Error:
       type: object
       properties:
@@ -259,6 +273,19 @@ components:
           description: Additional API failures
           items:
             $ref: '#/components/schemas/ErrorDetail'
+    ContactType:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Admin
+          - Billing
+          - Technical
+          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
+        primary:
+          type: boolean
+          description: Is this contact the primary contact for this Contact Type
     Contact:
       type: object
       required:
@@ -300,38 +327,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContactType'
-    Page:
-      type: object
-      properties:
-        size:
-          type: number
-          default: 10
-          minimum: 1
-          maximum: 200
-          description: The size of the page
-          example: 50
-        totalElements:
-          description: The total number of elements able to be paged over
-          example: 237
-        totalPages:
-          description: The total number of pages based on the ```size``` and ```totalElements```
-          example: 5
-        number:
-          description: The current page
-          example: 1
-    ContactType:
+    ErrorDetail:
       type: object
       properties:
         type:
           type: string
-          enum:
-          - Admin
-          - Billing
-          - Technical
-          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
-        primary:
-          type: boolean
-          description: Is this contact the primary contact for this Contact Type
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
   securitySchemes:
     OAuth2:
       type: oauth2
