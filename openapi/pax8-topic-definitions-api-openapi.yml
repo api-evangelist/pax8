@@ -234,34 +234,26 @@ paths:
       - Topic Definitions
 components:
   schemas:
-    TopicDefinition:
+    WebhookTopic:
       type: object
       required:
+      - id
       - topic
-      - name
-      - description
-      - availableFilters
-      - samplePayload
+      - filters
       properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the webhook topic
         topic:
           type: string
           description: The topic name
-        name:
-          type: string
-          description: Human-readable name of the topic
-        description:
-          type: string
-          description: Description of the topic
-        availableFilters:
+        filters:
           type: array
           items:
-            $ref: '#/components/schemas/WebhookFilterDefinition'
-          description: Available filters for this topic
-        samplePayload:
-          allOf:
-          - $ref: '#/components/schemas/WebhookPayload'
-          description: Sample payload for this topic
-      description: Topic definition information
+            $ref: '#/components/schemas/WebhookFilter'
+          description: Advanced filtering configuration
+      description: Topic configuration for a webhook subscription
     TopicDefinitionPagedResult:
       type: object
       required:
@@ -293,59 +285,44 @@ components:
           format: int32
           description: Total number of pages
       description: Paged response for topic definitions
-    WebhookPayload:
+    WebhookFilter:
       type: object
       required:
-      - accountId
-      - url
-      - webhookId
-      - sentAt
-      - webhookTopic
+      - action
+      - conditions
       properties:
-        accountId:
+        action:
           type: string
-          format: uuid
-          description: Account ID associated with the event
-        url:
-          type: string
-          description: URL where the webhook was sent
-        webhookId:
-          type: string
-          format: uuid
-          description: Webhook ID that sent this payload
-        sentAt:
-          type: string
-          format: date-time
-          description: Timestamp when the webhook was sent
-        webhookTopic:
-          allOf:
-          - $ref: '#/components/schemas/WebhookTopic'
-          description: The webhook topic information
-        payloadData:
-          type: object
-          additionalProperties: {}
-          description: The actual event data
-      description: Webhook payload structure
-    WebhookTopic:
-      type: object
-      required:
-      - id
-      - topic
-      - filters
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the webhook topic
-        topic:
-          type: string
-          description: The topic name
-        filters:
+          description: Action to filter on
+        conditions:
           type: array
           items:
-            $ref: '#/components/schemas/WebhookFilter'
-          description: Advanced filtering configuration
-      description: Topic configuration for a webhook subscription
+            $ref: '#/components/schemas/FilterCondition'
+          description: List of conditions that must all be true
+      description: Filter configuration for webhook actions
+    WebhookFilterDefinition:
+      type: object
+      required:
+      - action
+      - actionDisplayName
+      - description
+      - conditions
+      properties:
+        action:
+          type: string
+          description: Action to filter on
+        actionDisplayName:
+          type: string
+          description: Display name normalizing the action for consistency in presentation
+        description:
+          type: string
+          description: Description of the filter
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterConditionDefinition'
+          description: Available conditions for this filter
+      description: Filter definition with available conditions
     FilterConditionDefinition:
       type: object
       required:
@@ -384,21 +361,39 @@ components:
       - NOT_IN
       - CONTAINS
       description: Filter operator for webhook conditions
-    WebhookFilter:
+    WebhookPayload:
       type: object
       required:
-      - action
-      - conditions
+      - accountId
+      - url
+      - webhookId
+      - sentAt
+      - webhookTopic
       properties:
-        action:
+        accountId:
           type: string
-          description: Action to filter on
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterCondition'
-          description: List of conditions that must all be true
-      description: Filter configuration for webhook actions
+          format: uuid
+          description: Account ID associated with the event
+        url:
+          type: string
+          description: URL where the webhook was sent
+        webhookId:
+          type: string
+          format: uuid
+          description: Webhook ID that sent this payload
+        sentAt:
+          type: string
+          format: date-time
+          description: Timestamp when the webhook was sent
+        webhookTopic:
+          allOf:
+          - $ref: '#/components/schemas/WebhookTopic'
+          description: The webhook topic information
+        payloadData:
+          type: object
+          additionalProperties: {}
+          description: The actual event data
+      description: Webhook payload structure
     FilterCondition:
       type: object
       required:
@@ -429,29 +424,34 @@ components:
       - INTERNAL_SERVER_ERROR
       - INVALID_PARAM
       description: The type of error that occurred
-    WebhookFilterDefinition:
+    TopicDefinition:
       type: object
       required:
-      - action
-      - actionDisplayName
+      - topic
+      - name
       - description
-      - conditions
+      - availableFilters
+      - samplePayload
       properties:
-        action:
+        topic:
           type: string
-          description: Action to filter on
-        actionDisplayName:
+          description: The topic name
+        name:
           type: string
-          description: Display name normalizing the action for consistency in presentation
+          description: Human-readable name of the topic
         description:
           type: string
-          description: Description of the filter
-        conditions:
+          description: Description of the topic
+        availableFilters:
           type: array
           items:
-            $ref: '#/components/schemas/FilterConditionDefinition'
-          description: Available conditions for this filter
-      description: Filter definition with available conditions
+            $ref: '#/components/schemas/WebhookFilterDefinition'
+          description: Available filters for this topic
+        samplePayload:
+          allOf:
+          - $ref: '#/components/schemas/WebhookPayload'
+          description: Sample payload for this topic
+      description: Topic definition information
   securitySchemes:
     OAuth2:
       type: oauth2

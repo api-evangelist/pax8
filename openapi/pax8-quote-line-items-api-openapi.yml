@@ -181,9 +181,136 @@ paths:
       - Quote Line Items
 components:
   schemas:
-    AddUsageBasedLineItemPayload:
+    DeleteLineItemsPayload:
+      type: object
+      properties:
+        lineItemIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+      - lineItemIds
+    CommitmentTerm:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        term:
+          type: string
+      required:
+      - id
+      - term
+    AddStandardLineItemPayload:
       allOf:
       - $ref: '#/components/schemas/AddLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - 1 Year
+            - 2 Year
+            - 3 Year
+            - Trial
+            - Activation
+            - One-Time
+          commitmentTermId:
+            type: string
+            format: uuid
+          productId:
+            type: string
+            format: uuid
+          requiredLineItemId:
+            type: string
+            format: uuid
+          requiredLineItemIndex:
+            type: integer
+            format: int32
+          requiredSubscriptionId:
+            type: string
+            format: uuid
+          subscriptionId:
+            type: string
+            format: uuid
+      required:
+      - billingTerm
+      - effectiveDate
+      - price
+      - productId
+      - quantity
+      - type
+    AddCustomLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/AddLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - Trial
+            - One-Time
+          cost:
+            type: number
+            format: double
+          initialTotal:
+            type: number
+            format: double
+          productName:
+            type: string
+            description: Max length 255 characters. Only alpha numeric characters and spaces allowed.
+          productSku:
+            type: string
+            description: Max length 100 characters. Only alpha numeric characters, and dashes allowed.
+      required:
+      - billingTerm
+      - cost
+      - effectiveDate
+      - initialTotal
+      - price
+      - productName
+      - quantity
+      - type
+    UpdateCustomLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/UpdateLineItemBasePayload'
+      - type: object
+        properties:
+          billingTerm:
+            type: string
+            enum:
+            - Monthly
+            - Annual
+            - Trial
+            - One-Time
+          cost:
+            type: number
+            format: double
+          initialTotal:
+            type: number
+            format: double
+          productName:
+            type: string
+          productSku:
+            type: string
+      required:
+      - billingTerm
+      - cost
+      - effectiveDate
+      - id
+      - initialTotal
+      - price
+      - productName
+      - quantity
+      - type
+    UpdateUsageBasedLineItemPayload:
+      allOf:
+      - $ref: '#/components/schemas/UpdateLineItemBasePayload'
       - type: object
         properties:
           billingTerm:
@@ -203,29 +330,14 @@ components:
           cost:
             type: number
             format: double
-          productId:
-            type: string
-            format: uuid
-          requiredLineItemId:
-            type: string
-            format: uuid
-          requiredLineItemIndex:
-            type: integer
-            format: int32
-          requiredSubscriptionId:
-            type: string
-            format: uuid
-          subscriptionId:
-            type: string
-            format: uuid
           usageBased:
             $ref: '#/components/schemas/UsageBased'
       required:
       - billingTerm
       - cost
       - effectiveDate
+      - id
       - price
-      - productId
       - quantity
       - type
       - usageBased
@@ -240,63 +352,90 @@ components:
       required:
       - amount
       - currency
-    Product:
+    UpdateLineItemBasePayload:
       type: object
+      discriminator:
+        propertyName: type
       properties:
+        effectiveDate:
+          type: string
+          format: date-time
         id:
           type: string
           format: uuid
-        isMspOnly:
-          type: boolean
-        name:
+        note:
           type: string
-        sku:
-          type: string
+        price:
+          type: number
+          format: double
+        quantity:
+          type: integer
+          format: int32
         type:
           type: string
+          description: Type of line item
           enum:
-          - Standalone
-          - Solution
+          - Standard
           - Custom
+          - UsageBased
       required:
+      - effectiveDate
       - id
-      - isMspOnly
-      - name
-      - sku
+      - price
+      - quantity
       - type
-    CommitmentTerm:
+    LineItemResponse:
       type: object
       properties:
+        billingTerm:
+          type: string
+          enum:
+          - Monthly
+          - Annual
+          - 1 Year
+          - 2 Year
+          - 3 Year
+          - Trial
+          - Activation
+          - One-Time
+        commitmentTerm:
+          $ref: '#/components/schemas/CommitmentTerm'
+        cost:
+          $ref: '#/components/schemas/AmountCurrency'
+        effectiveDate:
+          type: string
+          format: date-time
         id:
           type: string
           format: uuid
-        term:
+        note:
           type: string
+        price:
+          $ref: '#/components/schemas/AmountCurrency'
+        product:
+          $ref: '#/components/schemas/Product'
+        quantity:
+          type: integer
+          format: int64
+        relationship:
+          $ref: '#/components/schemas/LineItemRelationship'
+        subscriptionId:
+          type: string
+          format: uuid
+        totals:
+          $ref: '#/components/schemas/InvoiceTotals'
+        usageBased:
+          $ref: '#/components/schemas/UsageBased'
       required:
+      - billingTerm
+      - cost
+      - effectiveDate
       - id
-      - term
-    InvoiceTotals:
-      type: object
-      properties:
-        initialCost:
-          $ref: '#/components/schemas/AmountCurrency'
-        initialProfit:
-          $ref: '#/components/schemas/AmountCurrency'
-        initialTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringCost:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringProfit:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-      required:
-      - initialCost
-      - initialProfit
-      - initialTotal
-      - recurringCost
-      - recurringProfit
-      - recurringTotal
+      - note
+      - price
+      - product
+      - quantity
+      - totals
     ErrorDetails:
       type: object
       properties:
@@ -407,38 +546,6 @@ components:
       - price
       - quantity
       - type
-    UpdateCustomLineItemPayload:
-      allOf:
-      - $ref: '#/components/schemas/UpdateLineItemBasePayload'
-      - type: object
-        properties:
-          billingTerm:
-            type: string
-            enum:
-            - Monthly
-            - Annual
-            - Trial
-            - One-Time
-          cost:
-            type: number
-            format: double
-          initialTotal:
-            type: number
-            format: double
-          productName:
-            type: string
-          productSku:
-            type: string
-      required:
-      - billingTerm
-      - cost
-      - effectiveDate
-      - id
-      - initialTotal
-      - price
-      - productName
-      - quantity
-      - type
     ErrorResponse:
       type: object
       properties:
@@ -460,197 +567,6 @@ components:
       - instance
       - message
       - status
-      - type
-    DeleteLineItemsPayload:
-      type: object
-      properties:
-        lineItemIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-      required:
-      - lineItemIds
-    LineItemResponse:
-      type: object
-      properties:
-        billingTerm:
-          type: string
-          enum:
-          - Monthly
-          - Annual
-          - 1 Year
-          - 2 Year
-          - 3 Year
-          - Trial
-          - Activation
-          - One-Time
-        commitmentTerm:
-          $ref: '#/components/schemas/CommitmentTerm'
-        cost:
-          $ref: '#/components/schemas/AmountCurrency'
-        effectiveDate:
-          type: string
-          format: date-time
-        id:
-          type: string
-          format: uuid
-        note:
-          type: string
-        price:
-          $ref: '#/components/schemas/AmountCurrency'
-        product:
-          $ref: '#/components/schemas/Product'
-        quantity:
-          type: integer
-          format: int64
-        relationship:
-          $ref: '#/components/schemas/LineItemRelationship'
-        subscriptionId:
-          type: string
-          format: uuid
-        totals:
-          $ref: '#/components/schemas/InvoiceTotals'
-        usageBased:
-          $ref: '#/components/schemas/UsageBased'
-      required:
-      - billingTerm
-      - cost
-      - effectiveDate
-      - id
-      - note
-      - price
-      - product
-      - quantity
-      - totals
-    AddStandardLineItemPayload:
-      allOf:
-      - $ref: '#/components/schemas/AddLineItemBasePayload'
-      - type: object
-        properties:
-          billingTerm:
-            type: string
-            enum:
-            - Monthly
-            - Annual
-            - 1 Year
-            - 2 Year
-            - 3 Year
-            - Trial
-            - Activation
-            - One-Time
-          commitmentTermId:
-            type: string
-            format: uuid
-          productId:
-            type: string
-            format: uuid
-          requiredLineItemId:
-            type: string
-            format: uuid
-          requiredLineItemIndex:
-            type: integer
-            format: int32
-          requiredSubscriptionId:
-            type: string
-            format: uuid
-          subscriptionId:
-            type: string
-            format: uuid
-      required:
-      - billingTerm
-      - effectiveDate
-      - price
-      - productId
-      - quantity
-      - type
-    LineItemRelationship:
-      type: object
-      properties:
-        requiredLineItemId:
-          type: string
-          format: uuid
-        requiredSubscriptionId:
-          type: string
-          format: uuid
-    UsageBased:
-      type: object
-      properties:
-        displayNote:
-          type: boolean
-        type:
-          type: string
-          enum:
-          - PRICE_FLAT
-          - PRICE_VARIES
-          - QTY_VARIES
-      required:
-      - displayNote
-      - type
-    UpdateLineItemBasePayload:
-      type: object
-      discriminator:
-        propertyName: type
-      properties:
-        effectiveDate:
-          type: string
-          format: date-time
-        id:
-          type: string
-          format: uuid
-        note:
-          type: string
-        price:
-          type: number
-          format: double
-        quantity:
-          type: integer
-          format: int32
-        type:
-          type: string
-          description: Type of line item
-          enum:
-          - Standard
-          - Custom
-          - UsageBased
-      required:
-      - effectiveDate
-      - id
-      - price
-      - quantity
-      - type
-    AddCustomLineItemPayload:
-      allOf:
-      - $ref: '#/components/schemas/AddLineItemBasePayload'
-      - type: object
-        properties:
-          billingTerm:
-            type: string
-            enum:
-            - Monthly
-            - Annual
-            - Trial
-            - One-Time
-          cost:
-            type: number
-            format: double
-          initialTotal:
-            type: number
-            format: double
-          productName:
-            type: string
-            description: Max length 255 characters. Only alpha numeric characters and spaces allowed.
-          productSku:
-            type: string
-            description: Max length 100 characters. Only alpha numeric characters, and dashes allowed.
-      required:
-      - billingTerm
-      - cost
-      - effectiveDate
-      - initialTotal
-      - price
-      - productName
-      - quantity
       - type
     UpdateStandardLineItemPayload:
       allOf:
@@ -678,9 +594,78 @@ components:
       - price
       - quantity
       - type
-    UpdateUsageBasedLineItemPayload:
+    LineItemRelationship:
+      type: object
+      properties:
+        requiredLineItemId:
+          type: string
+          format: uuid
+        requiredSubscriptionId:
+          type: string
+          format: uuid
+    InvoiceTotals:
+      type: object
+      properties:
+        initialCost:
+          $ref: '#/components/schemas/AmountCurrency'
+        initialProfit:
+          $ref: '#/components/schemas/AmountCurrency'
+        initialTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringCost:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringProfit:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+      required:
+      - initialCost
+      - initialProfit
+      - initialTotal
+      - recurringCost
+      - recurringProfit
+      - recurringTotal
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        isMspOnly:
+          type: boolean
+        name:
+          type: string
+        sku:
+          type: string
+        type:
+          type: string
+          enum:
+          - Standalone
+          - Solution
+          - Custom
+      required:
+      - id
+      - isMspOnly
+      - name
+      - sku
+      - type
+    UsageBased:
+      type: object
+      properties:
+        displayNote:
+          type: boolean
+        type:
+          type: string
+          enum:
+          - PRICE_FLAT
+          - PRICE_VARIES
+          - QTY_VARIES
+      required:
+      - displayNote
+      - type
+    AddUsageBasedLineItemPayload:
       allOf:
-      - $ref: '#/components/schemas/UpdateLineItemBasePayload'
+      - $ref: '#/components/schemas/AddLineItemBasePayload'
       - type: object
         properties:
           billingTerm:
@@ -700,14 +685,29 @@ components:
           cost:
             type: number
             format: double
+          productId:
+            type: string
+            format: uuid
+          requiredLineItemId:
+            type: string
+            format: uuid
+          requiredLineItemIndex:
+            type: integer
+            format: int32
+          requiredSubscriptionId:
+            type: string
+            format: uuid
+          subscriptionId:
+            type: string
+            format: uuid
           usageBased:
             $ref: '#/components/schemas/UsageBased'
       required:
       - billingTerm
       - cost
       - effectiveDate
-      - id
       - price
+      - productId
       - quantity
       - type
       - usageBased

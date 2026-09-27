@@ -287,6 +287,35 @@ paths:
       - Library attachments
 components:
   schemas:
+    UpdateAttachmentPayload:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+      required:
+      - id
+      - name
+      - order
+    CreatedBy:
+      type: object
+      properties:
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
+          type: string
+      required:
+      - fullName
+      - id
+      - role
     ErrorDetails:
       type: object
       properties:
@@ -390,21 +419,14 @@ components:
       - message
       - status
       - type
-    UpdateAttachmentPayload:
+    CopyAttachmentPayload:
       type: object
       properties:
-        id:
+        attachmentId:
           type: string
           format: uuid
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
       required:
-      - id
-      - name
-      - order
+      - attachmentId
     AttachmentResponse:
       type: object
       properties:
@@ -436,28 +458,6 @@ components:
       - order
       - type
       - url
-    CopyAttachmentPayload:
-      type: object
-      properties:
-        attachmentId:
-          type: string
-          format: uuid
-      required:
-      - attachmentId
-    CreatedBy:
-      type: object
-      properties:
-        fullName:
-          type: string
-        id:
-          type: string
-          format: uuid
-        role:
-          type: string
-      required:
-      - fullName
-      - id
-      - role
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

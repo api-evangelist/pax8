@@ -75,6 +75,61 @@ paths:
       - Quote preferences
 components:
   schemas:
+    PreferencesResponse:
+      type: object
+      properties:
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentResponse'
+        daysToExpire:
+          type: integer
+          format: int32
+        introMessage:
+          type: string
+        salesMarginPercentage:
+          type: number
+          format: double
+        termsAndDisclaimers:
+          type: string
+      required:
+      - attachments
+      - daysToExpire
+      - introMessage
+      - salesMarginPercentage
+      - termsAndDisclaimers
+    QuotePreferencesResult:
+      type: object
+      properties:
+        daysToExpire:
+          type: integer
+          format: int32
+        introMessage:
+          type: string
+        salesMarginPercentage:
+          type: number
+          format: double
+        termsAndDisclaimers:
+          type: string
+      required:
+      - daysToExpire
+      - introMessage
+      - salesMarginPercentage
+      - termsAndDisclaimers
+    CreatedBy:
+      type: object
+      properties:
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
+          type: string
+      required:
+      - fullName
+      - id
+      - role
     ErrorDetails:
       type: object
       properties:
@@ -156,24 +211,6 @@ components:
       required:
       - message
       - type
-    QuotePreferencesResult:
-      type: object
-      properties:
-        daysToExpire:
-          type: integer
-          format: int32
-        introMessage:
-          type: string
-        salesMarginPercentage:
-          type: number
-          format: double
-        termsAndDisclaimers:
-          type: string
-      required:
-      - daysToExpire
-      - introMessage
-      - salesMarginPercentage
-      - termsAndDisclaimers
     ErrorResponse:
       type: object
       properties:
@@ -244,43 +281,6 @@ components:
       - order
       - type
       - url
-    PreferencesResponse:
-      type: object
-      properties:
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/AttachmentResponse'
-        daysToExpire:
-          type: integer
-          format: int32
-        introMessage:
-          type: string
-        salesMarginPercentage:
-          type: number
-          format: double
-        termsAndDisclaimers:
-          type: string
-      required:
-      - attachments
-      - daysToExpire
-      - introMessage
-      - salesMarginPercentage
-      - termsAndDisclaimers
-    CreatedBy:
-      type: object
-      properties:
-        fullName:
-          type: string
-        id:
-          type: string
-          format: uuid
-        role:
-          type: string
-      required:
-      - fullName
-      - id
-      - role
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

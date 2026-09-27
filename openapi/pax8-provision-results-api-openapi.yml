@@ -110,6 +110,38 @@ paths:
                 $ref: '#/components/schemas/ProvisionResult'
 components:
   schemas:
+    PageDTOProvisionResult:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionResult'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
     ProvisionResult:
       required:
       - status
@@ -156,38 +188,6 @@ components:
           pattern: ^[a-zA-Z0-9-_]+$
           type: string
           description: Cannot be empty and must only contain alphanumeric values, hyphens and underscores.
-    PageDTOProvisionResult:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionResult'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-    PageInfo:
-      required:
-      - number
-      - size
-      - totalElements
-      - totalPages
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-        number:
-          type: integer
-          format: int32
   securitySchemes:
     OAuth2:
       type: oauth2

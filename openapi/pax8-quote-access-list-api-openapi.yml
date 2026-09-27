@@ -126,6 +126,43 @@ paths:
       - Quote access list
 components:
   schemas:
+    AccessListEntry:
+      type: object
+      properties:
+        accountName:
+          type: string
+        accountRole:
+          type: string
+        accountType:
+          type: string
+          enum:
+          - user
+          - contact
+          - guest
+        email:
+          type: string
+        id:
+          type: string
+          format: uuid
+        link:
+          type: string
+        userId:
+          type: string
+          format: uuid
+      required:
+      - accountType
+      - email
+      - id
+      - link
+    AccessListResponse:
+      type: object
+      properties:
+        accessList:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessListEntry'
+      required:
+      - accessList
     ErrorDetails:
       type: object
       properties:
@@ -229,34 +266,6 @@ components:
       - message
       - status
       - type
-    AccessListEntry:
-      type: object
-      properties:
-        accountName:
-          type: string
-        accountRole:
-          type: string
-        accountType:
-          type: string
-          enum:
-          - user
-          - contact
-          - guest
-        email:
-          type: string
-        id:
-          type: string
-          format: uuid
-        link:
-          type: string
-        userId:
-          type: string
-          format: uuid
-      required:
-      - accountType
-      - email
-      - id
-      - link
     AddAccessListEntryPayload:
       type: object
       properties:
@@ -277,15 +286,6 @@ components:
           format: uuid
       required:
       - email
-    AccessListResponse:
-      type: object
-      properties:
-        accessList:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccessListEntry'
-      required:
-      - accessList
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

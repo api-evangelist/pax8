@@ -59,67 +59,6 @@ paths:
                 $ref: '#/components/schemas/PageDTOProvisionRequest'
 components:
   schemas:
-    VolumeCommitment:
-      type: object
-      properties:
-        minAmount:
-          type: number
-          description: Minimum commitment amount (must be less than maxAmount)
-        maxAmount:
-          type: number
-          description: Maximum commitment amount (must be greater than minAmount when present)
-        unitOfMeasure:
-          type: string
-          enum:
-          - Agents
-          - Devices
-          - Endpoints
-          - Environments
-          - Levels
-          - Points
-          - Users
-          - AUD
-          - CAD
-          - CHF
-          - DKK
-          - EUR
-          - GBP
-          - IDR
-          - MYR
-          - NOK
-          - NZD
-          - PHP
-          - SEK
-          - SGD
-          - THB
-          - USD
-          - VND
-        months:
-          type: integer
-          format: int32
-      description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
-    Commitment:
-      type: object
-      properties:
-        term:
-          $ref: '#/components/schemas/CommitmentTerm'
-        volume:
-          $ref: '#/components/schemas/VolumeCommitment'
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        postcode:
-          type: string
-        country:
-          type: string
-        stateOrProvince:
-          type: string
     CommitmentTerm:
       type: object
       properties:
@@ -129,6 +68,18 @@ components:
         endDate:
           type: string
           format: date-time
+    PageDTOProvisionRequest:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionRequest'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     ProvisionRequest:
       type: object
       properties:
@@ -209,18 +160,67 @@ components:
           - Monthly
           - One-Time
           - Trial
-    PageDTOProvisionRequest:
-      required:
-      - content
-      - page
+    VolumeCommitment:
       type: object
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionRequest'
-        page:
-          $ref: '#/components/schemas/PageInfo'
+        minAmount:
+          type: number
+          description: Minimum commitment amount (must be less than maxAmount)
+        maxAmount:
+          type: number
+          description: Maximum commitment amount (must be greater than minAmount when present)
+        unitOfMeasure:
+          type: string
+          enum:
+          - Agents
+          - Devices
+          - Endpoints
+          - Environments
+          - Levels
+          - Points
+          - Users
+          - AUD
+          - CAD
+          - CHF
+          - DKK
+          - EUR
+          - GBP
+          - IDR
+          - MYR
+          - NOK
+          - NZD
+          - PHP
+          - SEK
+          - SGD
+          - THB
+          - USD
+          - VND
+        months:
+          type: integer
+          format: int32
+      description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
+    Commitment:
+      type: object
+      properties:
+        term:
+          $ref: '#/components/schemas/CommitmentTerm'
+        volume:
+          $ref: '#/components/schemas/VolumeCommitment'
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        stateOrProvince:
+          type: string
     PageInfo:
       required:
       - number

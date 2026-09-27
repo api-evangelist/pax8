@@ -707,22 +707,38 @@ paths:
       - Webhook Logs
 components:
   schemas:
-    WebhookLogPagedResult:
+    WebhookCall:
       type: object
       required:
-      - content
-      - page
+      - id
+      - timestamp
+      - status
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookLog'
-          description: List of webhook logs
-        page:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the call attempt
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the call attempt
+        status:
           allOf:
-          - $ref: '#/components/schemas/Page'
-          description: Page information
-      description: Paged response for webhook logs
+          - $ref: '#/components/schemas/WebhookDeliveryStatus'
+          description: Status of the call attempt
+        errorMessage:
+          type: string
+          description: Error message if the call failed
+        httpStatusCode:
+          type: integer
+          format: int32
+          description: HTTP status code returned by the webhook endpoint
+        payload:
+          type: object
+          additionalProperties: {}
+          description: The payload that was sent in the webhook
+      description: Individual webhook call attempt
     Page:
       type: object
       required:
@@ -747,6 +763,40 @@ components:
           type: integer
           format: int32
           default: 0
+    WebhookLogPagedResult:
+      type: object
+      required:
+      - content
+      - page
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookLog'
+          description: List of webhook logs
+        page:
+          allOf:
+          - $ref: '#/components/schemas/Page'
+          description: Page information
+      description: Paged response for webhook logs
+    ErrorType:
+      type: string
+      enum:
+      - NOT_FOUND
+      - UNAUTHORIZED
+      - FORBIDDEN
+      - BAD_REQUEST
+      - INTERNAL_SERVER_ERROR
+      - INVALID_PARAM
+      description: The type of error that occurred
+    WebhookDeliveryStatus:
+      type: string
+      enum:
+      - PENDING
+      - SUCCESS
+      - FAILED
+      - RETRYING
+      description: Status of webhook delivery
     WebhookLog:
       type: object
       required:
@@ -784,56 +834,6 @@ components:
           description: Timestamp when the log was created
           readOnly: true
       description: Webhook log information
-    WebhookDeliveryStatus:
-      type: string
-      enum:
-      - PENDING
-      - SUCCESS
-      - FAILED
-      - RETRYING
-      description: Status of webhook delivery
-    WebhookCall:
-      type: object
-      required:
-      - id
-      - timestamp
-      - status
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the call attempt
-          readOnly: true
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the call attempt
-        status:
-          allOf:
-          - $ref: '#/components/schemas/WebhookDeliveryStatus'
-          description: Status of the call attempt
-        errorMessage:
-          type: string
-          description: Error message if the call failed
-        httpStatusCode:
-          type: integer
-          format: int32
-          description: HTTP status code returned by the webhook endpoint
-        payload:
-          type: object
-          additionalProperties: {}
-          description: The payload that was sent in the webhook
-      description: Individual webhook call attempt
-    ErrorType:
-      type: string
-      enum:
-      - NOT_FOUND
-      - UNAUTHORIZED
-      - FORBIDDEN
-      - BAD_REQUEST
-      - INTERNAL_SERVER_ERROR
-      - INVALID_PARAM
-      description: The type of error that occurred
   securitySchemes:
     OAuth2:
       type: oauth2

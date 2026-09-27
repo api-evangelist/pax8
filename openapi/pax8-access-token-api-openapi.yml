@@ -50,28 +50,6 @@ paths:
                 token-error-auth-example:
                   $ref: '#/components/examples/token-error-auth-example'
 components:
-  examples:
-    token-response-example:
-      summary: An Access Token
-      description: An Access Token response example
-      value:
-        access_token: <access-token>
-        expires_in: 86400
-        token_type: Bearer
-    token-error-auth-example:
-      summary: An Access Token Unauthorized error
-      description: An Access Token Unauthorized error
-      value:
-        error: access_denied
-        error_description: Unauthorized
-    token-request-example:
-      summary: An Access Token request headers
-      description: Header values used for an Access Token request
-      value:
-        client_id: <client-id>
-        client_secret: <client-secret>
-        audience: https://api.pax8.com
-        grant_type: client_credentials
   schemas:
     TokenRequest:
       type: object
@@ -113,6 +91,28 @@ components:
           type: string
           enum:
           - Bearer
+  examples:
+    token-error-auth-example:
+      summary: An Access Token Unauthorized error
+      description: An Access Token Unauthorized error
+      value:
+        error: access_denied
+        error_description: Unauthorized
+    token-request-example:
+      summary: An Access Token request headers
+      description: Header values used for an Access Token request
+      value:
+        client_id: <client-id>
+        client_secret: <client-secret>
+        audience: https://api.pax8.com
+        grant_type: client_credentials
+    token-response-example:
+      summary: An Access Token
+      description: An Access Token response example
+      value:
+        access_token: <access-token>
+        expires_in: 86400
+        token_type: Bearer
   securitySchemes:
     OAuth2:
       type: oauth2

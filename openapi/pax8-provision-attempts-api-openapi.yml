@@ -104,25 +104,18 @@ paths:
                 $ref: '#/components/schemas/ProvisionAttempt'
 components:
   schemas:
-    ProvisionAttempt:
+    PageDTOProvisionAttempt:
+      required:
+      - content
+      - page
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        provisionDetailId:
-          type: string
-          format: uuid
-        webhookId:
-          type: string
-          format: uuid
-        status:
-          type: string
-        errorDetail:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionAttempt'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     PageInfo:
       required:
       - number
@@ -143,18 +136,25 @@ components:
         number:
           type: integer
           format: int32
-    PageDTOProvisionAttempt:
-      required:
-      - content
-      - page
+    ProvisionAttempt:
       type: object
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionAttempt'
-        page:
-          $ref: '#/components/schemas/PageInfo'
+        id:
+          type: string
+          format: uuid
+        provisionDetailId:
+          type: string
+          format: uuid
+        webhookId:
+          type: string
+          format: uuid
+        status:
+          type: string
+        errorDetail:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -137,6 +137,33 @@ paths:
                 $ref: '#/components/schemas/Webhook'
 components:
   schemas:
+    CreatedWebhook:
+      required:
+      - createdDate
+      - sharedSecret
+      - url
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+        sharedSecret:
+          $ref: '#/components/schemas/CreatedSharedSecret'
+        createdDate:
+          type: string
+          format: date-time
+    CreatedSharedSecret:
+      required:
+      - credential
+      - header
+      type: object
+      properties:
+        header:
+          type: string
+        credential:
+          type: string
     SharedSecret:
       required:
       - credential
@@ -163,23 +190,6 @@ components:
         createdDate:
           type: string
           format: date-time
-    Provisioner:
-      required:
-      - name
-      - vendorId
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        createdDate:
-          type: string
-          format: date-time
-        vendorId:
-          type: string
-          format: uuid
-        name:
-          type: string
     PageDTOWebhook:
       required:
       - content
@@ -192,33 +202,6 @@ components:
             $ref: '#/components/schemas/Webhook'
         page:
           $ref: '#/components/schemas/PageInfo'
-    CreatedSharedSecret:
-      required:
-      - credential
-      - header
-      type: object
-      properties:
-        header:
-          type: string
-        credential:
-          type: string
-    CreatedWebhook:
-      required:
-      - createdDate
-      - sharedSecret
-      - url
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        url:
-          type: string
-        sharedSecret:
-          $ref: '#/components/schemas/CreatedSharedSecret'
-        createdDate:
-          type: string
-          format: date-time
     WebhookCreate:
       required:
       - url
@@ -233,6 +216,18 @@ components:
       properties:
         header:
           type: string
+    PageDTOProvisioner:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Provisioner'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     PageInfo:
       required:
       - number
@@ -253,18 +248,23 @@ components:
         number:
           type: integer
           format: int32
-    PageDTOProvisioner:
+    Provisioner:
       required:
-      - content
-      - page
+      - name
+      - vendorId
       type: object
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Provisioner'
-        page:
-          $ref: '#/components/schemas/PageInfo'
+        id:
+          type: string
+          format: uuid
+        createdDate:
+          type: string
+          format: date-time
+        vendorId:
+          type: string
+          format: uuid
+        name:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

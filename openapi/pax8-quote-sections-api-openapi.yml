@@ -133,6 +133,26 @@ components:
       required:
       - lineItemId
       - order
+    SectionPayload:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectionLineItem'
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+      required:
+      - id
+      - lineItems
+      - name
+      - order
     SectionsPayload:
       type: object
       properties:
@@ -142,6 +162,28 @@ components:
             $ref: '#/components/schemas/SectionPayload'
       required:
       - sections
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
     ErrorDetails:
       type: object
       properties:
@@ -223,55 +265,6 @@ components:
       required:
       - message
       - type
-    ErrorResponse:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
-          type: string
-        message:
-          type: string
-        status:
-          type: integer
-          format: int32
-        type:
-          type: string
-      required:
-      - details
-      - instance
-      - message
-      - status
-      - type
-    CreateSectionPayload:
-      type: object
-      properties:
-        name:
-          type: string
-      required:
-      - name
-    Section:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        lineItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectionLineItem'
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
-      required:
-      - id
-      - lineItems
-      - name
-      - order
     SectionsResponse:
       type: object
       properties:
@@ -281,7 +274,14 @@ components:
             $ref: '#/components/schemas/Section'
       required:
       - sections
-    SectionPayload:
+    CreateSectionPayload:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
+    Section:
       type: object
       properties:
         id:

@@ -168,6 +168,136 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  schemas:
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    UsageSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The id
+        companyId:
+          type: string
+          format: uuid
+          description: The company id
+        productId:
+          type: string
+          format: uuid
+          description: The product id
+        resourceGroup:
+          type: string
+          description: Resource group assigned to the usage summary
+        vendorName:
+          type: string
+          description: Vendor Name
+        currentCharges:
+          type: number
+          description: Charges for the current month
+        currencyCode:
+          type: string
+          description: The currency ISO 4217 code
+        partnerTotal:
+          type: number
+          description: The partner total for the current month
+        isTrial:
+          type: boolean
+          description: Indicates whether the usage summary is for a trial
+    UsageLine:
+      type: object
+      properties:
+        usageSummaryId:
+          type: string
+          format: uuid
+          description: The associated usage summary id
+        usageDate:
+          type: string
+          format: yyyy-MM-dd
+          description: The date the usage was recorded
+        productName:
+          type: string
+          description: The usage product name
+        productId:
+          type: string
+          format: uuid
+          description: The usage product id
+        unitOfMeasure:
+          type: string
+          description: The product unit of measure
+        quantity:
+          type: number
+          description: The usage quantity
+        currentCharges:
+          type: number
+          description: Charges for the usage line
+        currentProfit:
+          type: number
+          description: Profit for the usage line
+        partnerTotal:
+          type: number
+          description: The partner total for the usage line
+        unitPrice:
+          type: number
+          description: The unit price of the usage product
+        currencyCode:
+          type: string
+          description: The currency ISO 4217 code
+        isTrial:
+          type: boolean
+          description: Indicates if the usage line is for a trial
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
   examples:
     usage-summaries-paged:
       summary: A page of usage summaries
@@ -399,136 +529,6 @@ components:
           totalElements: 115
           totalPages: 11
           number: 0
-  schemas:
-    Page:
-      type: object
-      properties:
-        size:
-          type: number
-          default: 10
-          minimum: 1
-          maximum: 200
-          description: The size of the page
-          example: 50
-        totalElements:
-          description: The total number of elements able to be paged over
-          example: 237
-        totalPages:
-          description: The total number of pages based on the ```size``` and ```totalElements```
-          example: 5
-        number:
-          description: The current page
-          example: 1
-    UsageSummary:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The id
-        companyId:
-          type: string
-          format: uuid
-          description: The company id
-        productId:
-          type: string
-          format: uuid
-          description: The product id
-        resourceGroup:
-          type: string
-          description: Resource group assigned to the usage summary
-        vendorName:
-          type: string
-          description: Vendor Name
-        currentCharges:
-          type: number
-          description: Charges for the current month
-        currencyCode:
-          type: string
-          description: The currency ISO 4217 code
-        partnerTotal:
-          type: number
-          description: The partner total for the current month
-        isTrial:
-          type: boolean
-          description: Indicates whether the usage summary is for a trial
-    UsageLine:
-      type: object
-      properties:
-        usageSummaryId:
-          type: string
-          format: uuid
-          description: The associated usage summary id
-        usageDate:
-          type: string
-          format: yyyy-MM-dd
-          description: The date the usage was recorded
-        productName:
-          type: string
-          description: The usage product name
-        productId:
-          type: string
-          format: uuid
-          description: The usage product id
-        unitOfMeasure:
-          type: string
-          description: The product unit of measure
-        quantity:
-          type: number
-          description: The usage quantity
-        currentCharges:
-          type: number
-          description: Charges for the usage line
-        currentProfit:
-          type: number
-          description: Profit for the usage line
-        partnerTotal:
-          type: number
-          description: The partner total for the usage line
-        unitPrice:
-          type: number
-          description: The unit price of the usage product
-        currencyCode:
-          type: string
-          description: The currency ISO 4217 code
-        isTrial:
-          type: boolean
-          description: Indicates if the usage line is for a trial
-    Error:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of HTTP error
-        message:
-          type: string
-          description: Error message
-        instance:
-          type: string
-          description: The path called
-        status:
-          type: integer
-          description: HTTP error code
-        details:
-          type: array
-          description: Additional API failures
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-    ErrorDetail:
-      type: object
-      properties:
-        type:
-          type: string
-          description: optional
-        message:
-          type: string
-          description: required
-        instance:
-          type: string
-          description: optional
-        status:
-          type: integer
-          description: optional
   securitySchemes:
     OAuth2:
       type: oauth2

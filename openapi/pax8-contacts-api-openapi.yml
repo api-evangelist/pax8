@@ -253,6 +253,34 @@ components:
         number:
           description: The current page
           example: 1
+    ContactType:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Admin
+          - Billing
+          - Technical
+          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
+        primary:
+          type: boolean
+          description: Is this contact the primary contact for this Contact Type
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
     Error:
       type: object
       properties:
@@ -273,19 +301,6 @@ components:
           description: Additional API failures
           items:
             $ref: '#/components/schemas/ErrorDetail'
-    ContactType:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Admin
-          - Billing
-          - Technical
-          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
-        primary:
-          type: boolean
-          description: Is this contact the primary contact for this Contact Type
     Contact:
       type: object
       required:
@@ -327,21 +342,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContactType'
-    ErrorDetail:
-      type: object
-      properties:
-        type:
-          type: string
-          description: optional
-        message:
-          type: string
-          description: required
-        instance:
-          type: string
-          description: optional
-        status:
-          type: integer
-          description: optional
   securitySchemes:
     OAuth2:
       type: oauth2
