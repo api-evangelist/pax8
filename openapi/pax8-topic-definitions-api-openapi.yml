@@ -234,95 +234,17 @@ paths:
       - Topic Definitions
 components:
   schemas:
-    WebhookTopic:
-      type: object
-      required:
-      - id
-      - topic
-      - filters
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the webhook topic
-        topic:
-          type: string
-          description: The topic name
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookFilter'
-          description: Advanced filtering configuration
-      description: Topic configuration for a webhook subscription
-    TopicDefinitionPagedResult:
-      type: object
-      required:
-      - content
-      - number
-      - size
-      - totalElements
-      - totalPages
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/TopicDefinition'
-          description: List of topic definitions
-        number:
-          type: integer
-          format: int32
-          description: Current page number
-        size:
-          type: integer
-          format: int32
-          description: Number of items per page
-        totalElements:
-          type: integer
-          format: int64
-          description: Total number of elements
-        totalPages:
-          type: integer
-          format: int32
-          description: Total number of pages
-      description: Paged response for topic definitions
-    WebhookFilter:
-      type: object
-      required:
-      - action
-      - conditions
-      properties:
-        action:
-          type: string
-          description: Action to filter on
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterCondition'
-          description: List of conditions that must all be true
-      description: Filter configuration for webhook actions
-    WebhookFilterDefinition:
-      type: object
-      required:
-      - action
-      - actionDisplayName
-      - description
-      - conditions
-      properties:
-        action:
-          type: string
-          description: Action to filter on
-        actionDisplayName:
-          type: string
-          description: Display name normalizing the action for consistency in presentation
-        description:
-          type: string
-          description: Description of the filter
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterConditionDefinition'
-          description: Available conditions for this filter
-      description: Filter definition with available conditions
+    FilterOperator:
+      type: string
+      enum:
+      - EQUALS
+      - NOT_EQUALS
+      - GREATER_THAN
+      - LESS_THAN
+      - IN
+      - NOT_IN
+      - CONTAINS
+      description: Filter operator for webhook conditions
     FilterConditionDefinition:
       type: object
       required:
@@ -350,17 +272,6 @@ components:
           type: string
           description: Example value for the field
       description: Filter condition definition with metadata
-    FilterOperator:
-      type: string
-      enum:
-      - EQUALS
-      - NOT_EQUALS
-      - GREATER_THAN
-      - LESS_THAN
-      - IN
-      - NOT_IN
-      - CONTAINS
-      description: Filter operator for webhook conditions
     WebhookPayload:
       type: object
       required:
@@ -394,6 +305,21 @@ components:
           additionalProperties: {}
           description: The actual event data
       description: Webhook payload structure
+    WebhookFilter:
+      type: object
+      required:
+      - action
+      - conditions
+      properties:
+        action:
+          type: string
+          description: Action to filter on
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterCondition'
+          description: List of conditions that must all be true
+      description: Filter configuration for webhook actions
     FilterCondition:
       type: object
       required:
@@ -424,6 +350,80 @@ components:
       - INTERNAL_SERVER_ERROR
       - INVALID_PARAM
       description: The type of error that occurred
+    WebhookTopic:
+      type: object
+      required:
+      - id
+      - topic
+      - filters
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the webhook topic
+        topic:
+          type: string
+          description: The topic name
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookFilter'
+          description: Advanced filtering configuration
+      description: Topic configuration for a webhook subscription
+    WebhookFilterDefinition:
+      type: object
+      required:
+      - action
+      - actionDisplayName
+      - description
+      - conditions
+      properties:
+        action:
+          type: string
+          description: Action to filter on
+        actionDisplayName:
+          type: string
+          description: Display name normalizing the action for consistency in presentation
+        description:
+          type: string
+          description: Description of the filter
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterConditionDefinition'
+          description: Available conditions for this filter
+      description: Filter definition with available conditions
+    TopicDefinitionPagedResult:
+      type: object
+      required:
+      - content
+      - number
+      - size
+      - totalElements
+      - totalPages
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TopicDefinition'
+          description: List of topic definitions
+        number:
+          type: integer
+          format: int32
+          description: Current page number
+        size:
+          type: integer
+          format: int32
+          description: Number of items per page
+        totalElements:
+          type: integer
+          format: int64
+          description: Total number of elements
+        totalPages:
+          type: integer
+          format: int32
+          description: Total number of pages
+      description: Paged response for topic definitions
     TopicDefinition:
       type: object
       required:

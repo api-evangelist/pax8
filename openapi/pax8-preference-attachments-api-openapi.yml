@@ -91,20 +91,69 @@ paths:
       - Preference attachments
 components:
   schemas:
-    CreatedBy:
+    AttachmentResponse:
       type: object
       properties:
-        fullName:
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        createdOn:
           type: string
+          format: date-time
         id:
           type: string
           format: uuid
-        role:
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        replacedOn:
+          type: string
+          format: date-time
+        type:
+          type: string
+        url:
           type: string
       required:
-      - fullName
+      - createdBy
+      - createdOn
       - id
-      - role
+      - name
+      - order
+      - type
+      - url
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
+    AddPreferenceAttachmentsPayload:
+      type: object
+      properties:
+        attachments:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+      - attachments
     ErrorDetails:
       type: object
       properties:
@@ -186,69 +235,20 @@ components:
       required:
       - message
       - type
-    ErrorResponse:
+    CreatedBy:
       type: object
       properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
+        fullName:
           type: string
-        message:
-          type: string
-        status:
-          type: integer
-          format: int32
-        type:
-          type: string
-      required:
-      - details
-      - instance
-      - message
-      - status
-      - type
-    AddPreferenceAttachmentsPayload:
-      type: object
-      properties:
-        attachments:
-          type: array
-          items:
-            type: string
-            format: uuid
-      required:
-      - attachments
-    AttachmentResponse:
-      type: object
-      properties:
-        createdBy:
-          $ref: '#/components/schemas/CreatedBy'
-        createdOn:
-          type: string
-          format: date-time
         id:
           type: string
           format: uuid
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
-        replacedOn:
-          type: string
-          format: date-time
-        type:
-          type: string
-        url:
+        role:
           type: string
       required:
-      - createdBy
-      - createdOn
+      - fullName
       - id
-      - name
-      - order
-      - type
-      - url
+      - role
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

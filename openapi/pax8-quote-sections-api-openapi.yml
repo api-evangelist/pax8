@@ -121,18 +121,22 @@ paths:
       - Quote sections
 components:
   schemas:
-    SectionLineItem:
+    SectionsPayload:
       type: object
       properties:
-        lineItemId:
-          type: string
-          format: uuid
-        order:
-          type: integer
-          format: int32
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectionPayload'
       required:
-      - lineItemId
-      - order
+      - sections
+    CreateSectionPayload:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
     SectionPayload:
       type: object
       properties:
@@ -153,13 +157,13 @@ components:
       - lineItems
       - name
       - order
-    SectionsPayload:
+    SectionsResponse:
       type: object
       properties:
         sections:
           type: array
           items:
-            $ref: '#/components/schemas/SectionPayload'
+            $ref: '#/components/schemas/Section'
       required:
       - sections
     ErrorResponse:
@@ -184,6 +188,26 @@ components:
       - message
       - status
       - type
+    Section:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectionLineItem'
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+      required:
+      - id
+      - lineItems
+      - name
+      - order
     ErrorDetails:
       type: object
       properties:
@@ -265,41 +289,17 @@ components:
       required:
       - message
       - type
-    SectionsResponse:
+    SectionLineItem:
       type: object
       properties:
-        sections:
-          type: array
-          items:
-            $ref: '#/components/schemas/Section'
-      required:
-      - sections
-    CreateSectionPayload:
-      type: object
-      properties:
-        name:
-          type: string
-      required:
-      - name
-    Section:
-      type: object
-      properties:
-        id:
+        lineItemId:
           type: string
           format: uuid
-        lineItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectionLineItem'
-        name:
-          type: string
         order:
           type: integer
           format: int32
       required:
-      - id
-      - lineItems
-      - name
+      - lineItemId
       - order
   securitySchemes:
     bearerAuth:

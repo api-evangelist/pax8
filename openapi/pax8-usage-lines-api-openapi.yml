@@ -145,41 +145,6 @@ paths:
                 $ref: '#/components/schemas/PageDTOUsageLine'
 components:
   schemas:
-    UsageLine:
-      required:
-      - productId
-      - quantity
-      - summaryDisplayName
-      - summaryKey
-      - unitOfMeasurement
-      type: object
-      properties:
-        summaryKey:
-          maxLength: 255
-          type: string
-        summaryDisplayName:
-          maxLength: 255
-          type: string
-        quantity:
-          minimum: 0
-          type: number
-        productId:
-          type: string
-          format: uuid
-        unitOfMeasurement:
-          type: string
-    PageDTOUsageLine:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageLine'
-        page:
-          $ref: '#/components/schemas/PageInfo'
     PageInfo:
       required:
       - number
@@ -200,6 +165,18 @@ components:
         number:
           type: integer
           format: int32
+    PageDTOUsageLine:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageLine'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     AggregateUsageLine:
       required:
       - partnerAggregateQuantity
@@ -229,6 +206,29 @@ components:
             format: uuid
           unitOfMeasurement:
             type: string
+    UsageLine:
+      required:
+      - productId
+      - quantity
+      - summaryDisplayName
+      - summaryKey
+      - unitOfMeasurement
+      type: object
+      properties:
+        summaryKey:
+          maxLength: 255
+          type: string
+        summaryDisplayName:
+          maxLength: 255
+          type: string
+        quantity:
+          minimum: 0
+          type: number
+        productId:
+          type: string
+          format: uuid
+        unitOfMeasurement:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

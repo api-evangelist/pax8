@@ -110,18 +110,6 @@ paths:
                 $ref: '#/components/schemas/ProvisionResult'
 components:
   schemas:
-    PageDTOProvisionResult:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionResult'
-        page:
-          $ref: '#/components/schemas/PageInfo'
     PageInfo:
       required:
       - number
@@ -142,6 +130,18 @@ components:
         number:
           type: integer
           format: int32
+    PageDTOProvisionResult:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionResult'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     ProvisionResult:
       required:
       - status

@@ -75,6 +75,37 @@ paths:
       - Quote preferences
 components:
   schemas:
+    AttachmentResponse:
+      type: object
+      properties:
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        createdOn:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        replacedOn:
+          type: string
+          format: date-time
+        type:
+          type: string
+        url:
+          type: string
+      required:
+      - createdBy
+      - createdOn
+      - id
+      - name
+      - order
+      - type
+      - url
     PreferencesResponse:
       type: object
       properties:
@@ -98,7 +129,7 @@ components:
       - introMessage
       - salesMarginPercentage
       - termsAndDisclaimers
-    QuotePreferencesResult:
+    PreferencesPayload:
       type: object
       properties:
         daysToExpire:
@@ -114,22 +145,29 @@ components:
       required:
       - daysToExpire
       - introMessage
-      - salesMarginPercentage
       - termsAndDisclaimers
-    CreatedBy:
+    ErrorResponse:
       type: object
       properties:
-        fullName:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
           type: string
-        id:
+        message:
           type: string
-          format: uuid
-        role:
+        status:
+          type: integer
+          format: int32
+        type:
           type: string
       required:
-      - fullName
-      - id
-      - role
+      - details
+      - instance
+      - message
+      - status
+      - type
     ErrorDetails:
       type: object
       properties:
@@ -211,29 +249,7 @@ components:
       required:
       - message
       - type
-    ErrorResponse:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
-          type: string
-        message:
-          type: string
-        status:
-          type: integer
-          format: int32
-        type:
-          type: string
-      required:
-      - details
-      - instance
-      - message
-      - status
-      - type
-    PreferencesPayload:
+    QuotePreferencesResult:
       type: object
       properties:
         daysToExpire:
@@ -249,38 +265,22 @@ components:
       required:
       - daysToExpire
       - introMessage
+      - salesMarginPercentage
       - termsAndDisclaimers
-    AttachmentResponse:
+    CreatedBy:
       type: object
       properties:
-        createdBy:
-          $ref: '#/components/schemas/CreatedBy'
-        createdOn:
+        fullName:
           type: string
-          format: date-time
         id:
           type: string
           format: uuid
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
-        replacedOn:
-          type: string
-          format: date-time
-        type:
-          type: string
-        url:
+        role:
           type: string
       required:
-      - createdBy
-      - createdOn
+      - fullName
       - id
-      - name
-      - order
-      - type
-      - url
+      - role
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

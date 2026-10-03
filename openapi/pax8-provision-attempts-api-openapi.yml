@@ -104,18 +104,6 @@ paths:
                 $ref: '#/components/schemas/ProvisionAttempt'
 components:
   schemas:
-    PageDTOProvisionAttempt:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionAttempt'
-        page:
-          $ref: '#/components/schemas/PageInfo'
     PageInfo:
       required:
       - number
@@ -155,6 +143,18 @@ components:
         createdDate:
           type: string
           format: date-time
+    PageDTOProvisionAttempt:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionAttempt'
+        page:
+          $ref: '#/components/schemas/PageInfo'
   securitySchemes:
     OAuth2:
       type: oauth2

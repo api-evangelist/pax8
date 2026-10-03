@@ -31,6 +31,32 @@ paths:
                 $ref: '#/components/schemas/ProvisionTestingOrderEvent'
 components:
   schemas:
+    Commitment:
+      type: object
+      properties:
+        term:
+          $ref: '#/components/schemas/CommitmentTerm'
+        volume:
+          $ref: '#/components/schemas/VolumeCommitment'
+    ProvisionAttempt:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        provisionDetailId:
+          type: string
+          format: uuid
+        webhookId:
+          type: string
+          format: uuid
+        status:
+          type: string
+        errorDetail:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
     CommitmentTerm:
       type: object
       properties:
@@ -40,21 +66,54 @@ components:
         endDate:
           type: string
           format: date-time
-    Address:
+    VolumeCommitment:
       type: object
       properties:
-        street:
+        minAmount:
+          type: number
+          description: Minimum commitment amount (must be less than maxAmount)
+        maxAmount:
+          type: number
+          description: Maximum commitment amount (must be greater than minAmount when present)
+        unitOfMeasure:
           type: string
-        street2:
-          type: string
-        city:
-          type: string
-        postcode:
-          type: string
-        country:
-          type: string
-        stateOrProvince:
-          type: string
+          enum:
+          - Agents
+          - Devices
+          - Endpoints
+          - Environments
+          - Levels
+          - Points
+          - Users
+          - AUD
+          - CAD
+          - CHF
+          - DKK
+          - EUR
+          - GBP
+          - IDR
+          - MYR
+          - NOK
+          - NZD
+          - PHP
+          - SEK
+          - SGD
+          - THB
+          - USD
+          - VND
+        months:
+          type: integer
+          format: int32
+      description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
+    ProvisionTestingOrderEvent:
+      type: object
+      properties:
+        provisionRequest:
+          $ref: '#/components/schemas/ProvisionRequest'
+        provisionDetail:
+          $ref: '#/components/schemas/ProvisionDetail'
+        provisionAttempt:
+          $ref: '#/components/schemas/ProvisionAttempt'
     ProvisionRequest:
       type: object
       properties:
@@ -135,80 +194,6 @@ components:
           - Monthly
           - One-Time
           - Trial
-    ProvisionTestingOrderEvent:
-      type: object
-      properties:
-        provisionRequest:
-          $ref: '#/components/schemas/ProvisionRequest'
-        provisionDetail:
-          $ref: '#/components/schemas/ProvisionDetail'
-        provisionAttempt:
-          $ref: '#/components/schemas/ProvisionAttempt'
-    VolumeCommitment:
-      type: object
-      properties:
-        minAmount:
-          type: number
-          description: Minimum commitment amount (must be less than maxAmount)
-        maxAmount:
-          type: number
-          description: Maximum commitment amount (must be greater than minAmount when present)
-        unitOfMeasure:
-          type: string
-          enum:
-          - Agents
-          - Devices
-          - Endpoints
-          - Environments
-          - Levels
-          - Points
-          - Users
-          - AUD
-          - CAD
-          - CHF
-          - DKK
-          - EUR
-          - GBP
-          - IDR
-          - MYR
-          - NOK
-          - NZD
-          - PHP
-          - SEK
-          - SGD
-          - THB
-          - USD
-          - VND
-        months:
-          type: integer
-          format: int32
-      description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
-    Commitment:
-      type: object
-      properties:
-        term:
-          $ref: '#/components/schemas/CommitmentTerm'
-        volume:
-          $ref: '#/components/schemas/VolumeCommitment'
-    ProvisionAttempt:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        provisionDetailId:
-          type: string
-          format: uuid
-        webhookId:
-          type: string
-          format: uuid
-        status:
-          type: string
-        errorDetail:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
     ProvisionDetail:
       type: object
       properties:
@@ -225,6 +210,21 @@ components:
         createdDate:
           type: string
           format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        stateOrProvince:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

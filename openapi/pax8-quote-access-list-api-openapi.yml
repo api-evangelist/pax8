@@ -163,6 +163,48 @@ components:
             $ref: '#/components/schemas/AccessListEntry'
       required:
       - accessList
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
+    AddAccessListEntryPayload:
+      type: object
+      properties:
+        accountName:
+          type: string
+        accountRole:
+          type: string
+        accountType:
+          type: string
+          enum:
+          - user
+          - contact
+          - guest
+        email:
+          type: string
+        userId:
+          type: string
+          format: uuid
+      required:
+      - email
     ErrorDetails:
       type: object
       properties:
@@ -244,48 +286,6 @@ components:
       required:
       - message
       - type
-    ErrorResponse:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
-          type: string
-        message:
-          type: string
-        status:
-          type: integer
-          format: int32
-        type:
-          type: string
-      required:
-      - details
-      - instance
-      - message
-      - status
-      - type
-    AddAccessListEntryPayload:
-      type: object
-      properties:
-        accountName:
-          type: string
-        accountRole:
-          type: string
-        accountType:
-          type: string
-          enum:
-          - user
-          - contact
-          - guest
-        email:
-          type: string
-        userId:
-          type: string
-          format: uuid
-      required:
-      - email
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT
