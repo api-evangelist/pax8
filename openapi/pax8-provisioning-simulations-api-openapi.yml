@@ -31,6 +31,15 @@ paths:
                 $ref: '#/components/schemas/ProvisionTestingOrderEvent'
 components:
   schemas:
+    ProvisionTestingOrderEvent:
+      type: object
+      properties:
+        provisionRequest:
+          $ref: '#/components/schemas/ProvisionRequest'
+        provisionDetail:
+          $ref: '#/components/schemas/ProvisionDetail'
+        provisionAttempt:
+          $ref: '#/components/schemas/ProvisionAttempt'
     Commitment:
       type: object
       properties:
@@ -55,15 +64,6 @@ components:
         errorDetail:
           type: string
         createdDate:
-          type: string
-          format: date-time
-    CommitmentTerm:
-      type: object
-      properties:
-        months:
-          type: integer
-          format: int32
-        endDate:
           type: string
           format: date-time
     VolumeCommitment:
@@ -105,15 +105,30 @@ components:
           type: integer
           format: int32
       description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
-    ProvisionTestingOrderEvent:
+    CommitmentTerm:
       type: object
       properties:
-        provisionRequest:
-          $ref: '#/components/schemas/ProvisionRequest'
-        provisionDetail:
-          $ref: '#/components/schemas/ProvisionDetail'
-        provisionAttempt:
-          $ref: '#/components/schemas/ProvisionAttempt'
+        months:
+          type: integer
+          format: int32
+        endDate:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        stateOrProvince:
+          type: string
     ProvisionRequest:
       type: object
       properties:
@@ -210,21 +225,6 @@ components:
         createdDate:
           type: string
           format: date-time
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        postcode:
-          type: string
-        country:
-          type: string
-        stateOrProvince:
-          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -137,6 +137,100 @@ paths:
                 $ref: '#/components/schemas/Webhook'
 components:
   schemas:
+    SharedSecret:
+      required:
+      - credential
+      type: object
+      properties:
+        header:
+          type: string
+        credential:
+          type: string
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
+    WebhookCreate:
+      required:
+      - url
+      type: object
+      properties:
+        url:
+          type: string
+        sharedSecret:
+          $ref: '#/components/schemas/SharedSecretCreate'
+    CreatedSharedSecret:
+      required:
+      - credential
+      - header
+      type: object
+      properties:
+        header:
+          type: string
+        credential:
+          type: string
+    SharedSecretCreate:
+      type: object
+      properties:
+        header:
+          type: string
+    PageDTOProvisioner:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Provisioner'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+    PageDTOWebhook:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+    Webhook:
+      required:
+      - createdDate
+      - sharedSecret
+      - url
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        url:
+          type: string
+        sharedSecret:
+          $ref: '#/components/schemas/SharedSecret'
+        createdDate:
+          type: string
+          format: date-time
     Provisioner:
       required:
       - name
@@ -171,100 +265,6 @@ components:
         createdDate:
           type: string
           format: date-time
-    PageInfo:
-      required:
-      - number
-      - size
-      - totalElements
-      - totalPages
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-        number:
-          type: integer
-          format: int32
-    PageDTOWebhook:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Webhook'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-    WebhookCreate:
-      required:
-      - url
-      type: object
-      properties:
-        url:
-          type: string
-        sharedSecret:
-          $ref: '#/components/schemas/SharedSecretCreate'
-    Webhook:
-      required:
-      - createdDate
-      - sharedSecret
-      - url
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        url:
-          type: string
-        sharedSecret:
-          $ref: '#/components/schemas/SharedSecret'
-        createdDate:
-          type: string
-          format: date-time
-    PageDTOProvisioner:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Provisioner'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-    SharedSecret:
-      required:
-      - credential
-      type: object
-      properties:
-        header:
-          type: string
-        credential:
-          type: string
-    CreatedSharedSecret:
-      required:
-      - credential
-      - header
-      type: object
-      properties:
-        header:
-          type: string
-        credential:
-          type: string
-    SharedSecretCreate:
-      type: object
-      properties:
-        header:
-          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

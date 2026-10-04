@@ -707,6 +707,16 @@ paths:
       - Webhook Logs
 components:
   schemas:
+    ErrorType:
+      type: string
+      enum:
+      - NOT_FOUND
+      - UNAUTHORIZED
+      - FORBIDDEN
+      - BAD_REQUEST
+      - INTERNAL_SERVER_ERROR
+      - INVALID_PARAM
+      description: The type of error that occurred
     WebhookLog:
       type: object
       required:
@@ -800,16 +810,6 @@ components:
       - FAILED
       - RETRYING
       description: Status of webhook delivery
-    ErrorType:
-      type: string
-      enum:
-      - NOT_FOUND
-      - UNAUTHORIZED
-      - FORBIDDEN
-      - BAD_REQUEST
-      - INTERNAL_SERVER_ERROR
-      - INVALID_PARAM
-      description: The type of error that occurred
     Page:
       type: object
       required:

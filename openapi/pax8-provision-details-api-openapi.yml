@@ -99,6 +99,18 @@ components:
         number:
           type: integer
           format: int32
+    PageDTOProvisionDetail:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionDetail'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     ProvisionDetail:
       type: object
       properties:
@@ -115,18 +127,6 @@ components:
         createdDate:
           type: string
           format: date-time
-    PageDTOProvisionDetail:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionDetail'
-        page:
-          $ref: '#/components/schemas/PageInfo'
   securitySchemes:
     OAuth2:
       type: oauth2

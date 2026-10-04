@@ -254,38 +254,21 @@ components:
           description: Additional API failures
           items:
             $ref: '#/components/schemas/ErrorDetail'
-    ContactType:
+    ErrorDetail:
       type: object
       properties:
         type:
           type: string
-          enum:
-          - Admin
-          - Billing
-          - Technical
-          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
-        primary:
-          type: boolean
-          description: Is this contact the primary contact for this Contact Type
-    Page:
-      type: object
-      properties:
-        size:
-          type: number
-          default: 10
-          minimum: 1
-          maximum: 200
-          description: The size of the page
-          example: 50
-        totalElements:
-          description: The total number of elements able to be paged over
-          example: 237
-        totalPages:
-          description: The total number of pages based on the ```size``` and ```totalElements```
-          example: 5
-        number:
-          description: The current page
-          example: 1
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
     Contact:
       type: object
       required:
@@ -327,21 +310,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContactType'
-    ErrorDetail:
+    ContactType:
       type: object
       properties:
         type:
           type: string
-          description: optional
-        message:
-          type: string
-          description: required
-        instance:
-          type: string
-          description: optional
-        status:
-          type: integer
-          description: optional
+          enum:
+          - Admin
+          - Billing
+          - Technical
+          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
+        primary:
+          type: boolean
+          description: Is this contact the primary contact for this Contact Type
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
   securitySchemes:
     OAuth2:
       type: oauth2

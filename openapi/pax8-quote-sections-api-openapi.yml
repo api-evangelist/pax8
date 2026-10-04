@@ -121,51 +121,6 @@ paths:
       - Quote sections
 components:
   schemas:
-    SectionsPayload:
-      type: object
-      properties:
-        sections:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectionPayload'
-      required:
-      - sections
-    CreateSectionPayload:
-      type: object
-      properties:
-        name:
-          type: string
-      required:
-      - name
-    SectionPayload:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        lineItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/SectionLineItem'
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
-      required:
-      - id
-      - lineItems
-      - name
-      - order
-    SectionsResponse:
-      type: object
-      properties:
-        sections:
-          type: array
-          items:
-            $ref: '#/components/schemas/Section'
-      required:
-      - sections
     ErrorResponse:
       type: object
       properties:
@@ -188,7 +143,28 @@ components:
       - message
       - status
       - type
-    Section:
+    SectionLineItem:
+      type: object
+      properties:
+        lineItemId:
+          type: string
+          format: uuid
+        order:
+          type: integer
+          format: int32
+      required:
+      - lineItemId
+      - order
+    SectionsResponse:
+      type: object
+      properties:
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+      required:
+      - sections
+    SectionPayload:
       type: object
       properties:
         id:
@@ -208,6 +184,22 @@ components:
       - lineItems
       - name
       - order
+    CreateSectionPayload:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
+    SectionsPayload:
+      type: object
+      properties:
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectionPayload'
+      required:
+      - sections
     ErrorDetails:
       type: object
       properties:
@@ -289,17 +281,25 @@ components:
       required:
       - message
       - type
-    SectionLineItem:
+    Section:
       type: object
       properties:
-        lineItemId:
+        id:
           type: string
           format: uuid
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/SectionLineItem'
+        name:
+          type: string
         order:
           type: integer
           format: int32
       required:
-      - lineItemId
+      - id
+      - lineItems
+      - name
       - order
   securitySchemes:
     bearerAuth:

@@ -91,37 +91,6 @@ paths:
       - Preference attachments
 components:
   schemas:
-    AttachmentResponse:
-      type: object
-      properties:
-        createdBy:
-          $ref: '#/components/schemas/CreatedBy'
-        createdOn:
-          type: string
-          format: date-time
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
-        replacedOn:
-          type: string
-          format: date-time
-        type:
-          type: string
-        url:
-          type: string
-      required:
-      - createdBy
-      - createdOn
-      - id
-      - name
-      - order
-      - type
-      - url
     ErrorResponse:
       type: object
       properties:
@@ -154,6 +123,37 @@ components:
             format: uuid
       required:
       - attachments
+    AttachmentResponse:
+      type: object
+      properties:
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        createdOn:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        replacedOn:
+          type: string
+          format: date-time
+        type:
+          type: string
+        url:
+          type: string
+      required:
+      - createdBy
+      - createdOn
+      - id
+      - name
+      - order
+      - type
+      - url
     ErrorDetails:
       type: object
       properties:

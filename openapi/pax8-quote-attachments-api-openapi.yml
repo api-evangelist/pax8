@@ -296,14 +296,43 @@ paths:
       - Quote attachments
 components:
   schemas:
-    CopyAttachmentPayload:
+    ErrorResponse:
       type: object
       properties:
-        attachmentId:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
+    UpdateAttachmentPayload:
+      type: object
+      properties:
+        id:
           type: string
           format: uuid
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
       required:
-      - attachmentId
+      - id
+      - name
+      - order
     AttachmentResponse:
       type: object
       properties:
@@ -335,43 +364,14 @@ components:
       - order
       - type
       - url
-    UpdateAttachmentPayload:
+    CopyAttachmentPayload:
       type: object
       properties:
-        id:
+        attachmentId:
           type: string
           format: uuid
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
       required:
-      - id
-      - name
-      - order
-    ErrorResponse:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
-          type: string
-        message:
-          type: string
-        status:
-          type: integer
-          format: int32
-        type:
-          type: string
-      required:
-      - details
-      - instance
-      - message
-      - status
-      - type
+      - attachmentId
     ErrorDetails:
       type: object
       properties:

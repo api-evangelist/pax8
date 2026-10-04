@@ -165,18 +165,6 @@ components:
         number:
           type: integer
           format: int32
-    PageDTOUsageLine:
-      required:
-      - content
-      - page
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageLine'
-        page:
-          $ref: '#/components/schemas/PageInfo'
     AggregateUsageLine:
       required:
       - partnerAggregateQuantity
@@ -206,6 +194,18 @@ components:
             format: uuid
           unitOfMeasurement:
             type: string
+    PageDTOUsageLine:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageLine'
+        page:
+          $ref: '#/components/schemas/PageInfo'
     UsageLine:
       required:
       - productId

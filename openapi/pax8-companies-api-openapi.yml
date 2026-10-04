@@ -223,8 +223,247 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  schemas:
+    Contact:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - email
+      - phone
+      properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+          description: The id
+          example: 18d6329e-93f9-46a5-9df7-37e4c29d2840
+        firstName:
+          type: string
+          description: The first name
+          example: John
+        lastName:
+          type: string
+          description: The last name
+          example: Doe
+        email:
+          type: string
+          format: email
+          description: The email
+          example: john@doe.com
+        phone:
+          type: string
+          format: phone
+          description: The phone number
+          example: 555-555-5555
+        createdDate:
+          readOnly: true
+          type: string
+          description: The created date
+          example: '2020-05-12'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactType'
+    CompanyUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: The unique id of the company
+        name:
+          type: string
+          example: Pax8
+          description: The company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+          description: The primary phone number of the company
+          example: 555-555-5555
+        website:
+          type: string
+          description: The full URL of the company website
+          example: https://www.pax8.com/
+        externalId:
+          type: string
+          description: An external ID that can be assigned to the company for reference
+        billOnBehalfOfEnabled:
+          type: boolean
+          description: Value is ```true``` if Pax8 handles billing transactions, value is ```false``` if partner handles billing transactions
+        selfServiceAllowed:
+          type: boolean
+          description: Value is ```true``` if self-service privileges are available to the company, otherwise value is ```false```
+        orderApprovalRequired:
+          type: boolean
+          description: Value is ```true``` if the company's self-service orders require approval, otherwise value is ```false```
+        status:
+          readOnly: true
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Deleted
+          description: "Company Status:\n  * `Active` - The company is active\n  * `Inactive` - The company is inactive due to missing contacts\n  * `Deleted` - The company has been deleted\n"
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          description: The primary street information
+          example: 5500 S Quebec St
+        street2:
+          type: string
+          description: The secondary street information
+          example: Ste. 350
+        city:
+          type: string
+          description: The city
+          example: Greenwood Village
+        stateOrProvince:
+          type: string
+          description: The state or province
+          example: CO
+        postalCode:
+          type: string
+          description: The postal code
+          example: '80111'
+        country:
+          type: string
+          description: The ISO 3166-1 alpha-2 code for the country
+          pattern: ^[A-Z]{2}$
+          example: US
+    ContactType:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Admin
+          - Billing
+          - Technical
+          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
+        primary:
+          type: boolean
+          description: Is this contact the primary contact for this Contact Type
+    Company:
+      type: object
+      required:
+      - name
+      - address
+      - phone
+      - website
+      - billOnBehalfOfEnabled
+      - selfServiceAllowed
+      - orderApprovalRequired
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: The unique id of the company
+        name:
+          type: string
+          example: Pax8
+          description: The company name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+          description: The primary phone number of the company
+          example: 555-555-5555
+        website:
+          type: string
+          description: The full URL of the company website
+          example: https://www.pax8.com/
+        externalId:
+          type: string
+          description: An external ID that can be assigned to the company for reference
+        billOnBehalfOfEnabled:
+          type: boolean
+          description: Value is ```true``` if Pax8 handles billing transactions, value is ```false``` if partner handles billing transactions
+        selfServiceAllowed:
+          type: boolean
+          description: Value is ```true``` if self-service privileges are available to the company, otherwise value is ```false```
+        orderApprovalRequired:
+          type: boolean
+          description: Value is ```true``` if the company's self-service orders require approval, otherwise value is ```false```
+        status:
+          readOnly: true
+          type: string
+          enum:
+          - Active
+          - Inactive
+          - Deleted
+          description: "Company Status:\n  * `Active` - The company is active\n  * `Inactive` - The company is inactive due to missing contacts\n  * `Deleted` - The company has been deleted\n"
+        updatedDate:
+          type: string
+          format: date-time
+          readOnly: true
+          description: The date and time the company was last updated
+        contacts:
+          type: array
+          description: Optional array of contacts to create with the company. Including contacts during company creation will set the company status to "Active" immediately.
+          items:
+            $ref: '#/components/schemas/Contact'
+    Page:
+      type: object
+      properties:
+        size:
+          type: number
+          default: 10
+          minimum: 1
+          maximum: 200
+          description: The size of the page
+          example: 50
+        totalElements:
+          description: The total number of elements able to be paged over
+          example: 237
+        totalPages:
+          description: The total number of pages based on the ```size``` and ```totalElements```
+          example: 5
+        number:
+          description: The current page
+          example: 1
   examples:
-    company-0:
+    company-update-post:
       summary: An example company
       description: An example response for a company
       value:
@@ -243,7 +482,35 @@ components:
         selfServiceAllowed: false
         billOnBehalfOfEnabled: false
         orderApprovalRequired: false
-        updatedDate: 2023-08-11T11:33:12.314-0600
+    company-post:
+      summary: An example company with contacts
+      description: An example request for creating a company with contacts
+      value:
+        name: VFC Network, Inc
+        address:
+          street: 48918 Liberty Lane Ave
+          city: Denver
+          postalCode: '80210'
+          country: US
+          stateOrProvince: Colorado
+        phone: 123-456-5555
+        website: vfc-network-inc-liberty.com
+        externalId: A123
+        selfServiceAllowed: false
+        billOnBehalfOfEnabled: false
+        orderApprovalRequired: false
+        contacts:
+        - firstName: John
+          lastName: Doe
+          email: john.doe@vfc-network-inc-liberty.com
+          phone: 555-555-5555
+          types:
+          - type: Admin
+            primary: true
+          - type: Billing
+            primary: true
+          - type: Technical
+            primary: true
     companies-paged:
       summary: A page of companies
       description: An example page of companies
@@ -394,7 +661,7 @@ components:
           totalElements: 65
           totalPages: 7
           number: 0
-    company-update-post:
+    company-0:
       summary: An example company
       description: An example response for a company
       value:
@@ -413,274 +680,7 @@ components:
         selfServiceAllowed: false
         billOnBehalfOfEnabled: false
         orderApprovalRequired: false
-    company-post:
-      summary: An example company with contacts
-      description: An example request for creating a company with contacts
-      value:
-        name: VFC Network, Inc
-        address:
-          street: 48918 Liberty Lane Ave
-          city: Denver
-          postalCode: '80210'
-          country: US
-          stateOrProvince: Colorado
-        phone: 123-456-5555
-        website: vfc-network-inc-liberty.com
-        externalId: A123
-        selfServiceAllowed: false
-        billOnBehalfOfEnabled: false
-        orderApprovalRequired: false
-        contacts:
-        - firstName: John
-          lastName: Doe
-          email: john.doe@vfc-network-inc-liberty.com
-          phone: 555-555-5555
-          types:
-          - type: Admin
-            primary: true
-          - type: Billing
-            primary: true
-          - type: Technical
-            primary: true
-  schemas:
-    CompanyUpdate:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: The unique id of the company
-        name:
-          type: string
-          example: Pax8
-          description: The company name
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
-          description: The primary phone number of the company
-          example: 555-555-5555
-        website:
-          type: string
-          description: The full URL of the company website
-          example: https://www.pax8.com/
-        externalId:
-          type: string
-          description: An external ID that can be assigned to the company for reference
-        billOnBehalfOfEnabled:
-          type: boolean
-          description: Value is ```true``` if Pax8 handles billing transactions, value is ```false``` if partner handles billing transactions
-        selfServiceAllowed:
-          type: boolean
-          description: Value is ```true``` if self-service privileges are available to the company, otherwise value is ```false```
-        orderApprovalRequired:
-          type: boolean
-          description: Value is ```true``` if the company's self-service orders require approval, otherwise value is ```false```
-        status:
-          readOnly: true
-          type: string
-          enum:
-          - Active
-          - Inactive
-          - Deleted
-          description: "Company Status:\n  * `Active` - The company is active\n  * `Inactive` - The company is inactive due to missing contacts\n  * `Deleted` - The company has been deleted\n"
-    Company:
-      type: object
-      required:
-      - name
-      - address
-      - phone
-      - website
-      - billOnBehalfOfEnabled
-      - selfServiceAllowed
-      - orderApprovalRequired
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: The unique id of the company
-        name:
-          type: string
-          example: Pax8
-          description: The company name
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
-          description: The primary phone number of the company
-          example: 555-555-5555
-        website:
-          type: string
-          description: The full URL of the company website
-          example: https://www.pax8.com/
-        externalId:
-          type: string
-          description: An external ID that can be assigned to the company for reference
-        billOnBehalfOfEnabled:
-          type: boolean
-          description: Value is ```true``` if Pax8 handles billing transactions, value is ```false``` if partner handles billing transactions
-        selfServiceAllowed:
-          type: boolean
-          description: Value is ```true``` if self-service privileges are available to the company, otherwise value is ```false```
-        orderApprovalRequired:
-          type: boolean
-          description: Value is ```true``` if the company's self-service orders require approval, otherwise value is ```false```
-        status:
-          readOnly: true
-          type: string
-          enum:
-          - Active
-          - Inactive
-          - Deleted
-          description: "Company Status:\n  * `Active` - The company is active\n  * `Inactive` - The company is inactive due to missing contacts\n  * `Deleted` - The company has been deleted\n"
-        updatedDate:
-          type: string
-          format: date-time
-          readOnly: true
-          description: The date and time the company was last updated
-        contacts:
-          type: array
-          description: Optional array of contacts to create with the company. Including contacts during company creation will set the company status to "Active" immediately.
-          items:
-            $ref: '#/components/schemas/Contact'
-    Error:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of HTTP error
-        message:
-          type: string
-          description: Error message
-        instance:
-          type: string
-          description: The path called
-        status:
-          type: integer
-          description: HTTP error code
-        details:
-          type: array
-          description: Additional API failures
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-    ContactType:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Admin
-          - Billing
-          - Technical
-          description: "A company must have a primary contact for each contact type. A single contact can be marked as a primary contact for all types\nContact Type:\n  * `Admin` - Administrative contact\n  * `Billing` - Billing contact\n  * `Technical` - Technical contact\n"
-        primary:
-          type: boolean
-          description: Is this contact the primary contact for this Contact Type
-    Contact:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - email
-      - phone
-      properties:
-        id:
-          readOnly: true
-          type: string
-          format: uuid
-          description: The id
-          example: 18d6329e-93f9-46a5-9df7-37e4c29d2840
-        firstName:
-          type: string
-          description: The first name
-          example: John
-        lastName:
-          type: string
-          description: The last name
-          example: Doe
-        email:
-          type: string
-          format: email
-          description: The email
-          example: john@doe.com
-        phone:
-          type: string
-          format: phone
-          description: The phone number
-          example: 555-555-5555
-        createdDate:
-          readOnly: true
-          type: string
-          description: The created date
-          example: '2020-05-12'
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactType'
-    Page:
-      type: object
-      properties:
-        size:
-          type: number
-          default: 10
-          minimum: 1
-          maximum: 200
-          description: The size of the page
-          example: 50
-        totalElements:
-          description: The total number of elements able to be paged over
-          example: 237
-        totalPages:
-          description: The total number of pages based on the ```size``` and ```totalElements```
-          example: 5
-        number:
-          description: The current page
-          example: 1
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-          description: The primary street information
-          example: 5500 S Quebec St
-        street2:
-          type: string
-          description: The secondary street information
-          example: Ste. 350
-        city:
-          type: string
-          description: The city
-          example: Greenwood Village
-        stateOrProvince:
-          type: string
-          description: The state or province
-          example: CO
-        postalCode:
-          type: string
-          description: The postal code
-          example: '80111'
-        country:
-          type: string
-          description: The ISO 3166-1 alpha-2 code for the country
-          pattern: ^[A-Z]{2}$
-          example: US
-    ErrorDetail:
-      type: object
-      properties:
-        type:
-          type: string
-          description: optional
-        message:
-          type: string
-          description: required
-        instance:
-          type: string
-          description: optional
-        status:
-          type: integer
-          description: optional
+        updatedDate: 2023-08-11T11:33:12.314-0600
   securitySchemes:
     OAuth2:
       type: oauth2

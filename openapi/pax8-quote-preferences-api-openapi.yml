@@ -75,37 +75,28 @@ paths:
       - Quote preferences
 components:
   schemas:
-    AttachmentResponse:
+    ErrorResponse:
       type: object
       properties:
-        createdBy:
-          $ref: '#/components/schemas/CreatedBy'
-        createdOn:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
           type: string
-          format: date-time
-        id:
+        message:
           type: string
-          format: uuid
-        name:
-          type: string
-        order:
+        status:
           type: integer
           format: int32
-        replacedOn:
-          type: string
-          format: date-time
         type:
           type: string
-        url:
-          type: string
       required:
-      - createdBy
-      - createdOn
-      - id
-      - name
-      - order
+      - details
+      - instance
+      - message
+      - status
       - type
-      - url
     PreferencesResponse:
       type: object
       properties:
@@ -146,28 +137,37 @@ components:
       - daysToExpire
       - introMessage
       - termsAndDisclaimers
-    ErrorResponse:
+    AttachmentResponse:
       type: object
       properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        createdOn:
           type: string
-        message:
+          format: date-time
+        id:
           type: string
-        status:
+          format: uuid
+        name:
+          type: string
+        order:
           type: integer
           format: int32
+        replacedOn:
+          type: string
+          format: date-time
         type:
           type: string
+        url:
+          type: string
       required:
-      - details
-      - instance
-      - message
-      - status
+      - createdBy
+      - createdOn
+      - id
+      - name
+      - order
       - type
+      - url
     ErrorDetails:
       type: object
       properties:
@@ -249,6 +249,20 @@ components:
       required:
       - message
       - type
+    CreatedBy:
+      type: object
+      properties:
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
+          type: string
+      required:
+      - fullName
+      - id
+      - role
     QuotePreferencesResult:
       type: object
       properties:
@@ -267,20 +281,6 @@ components:
       - introMessage
       - salesMarginPercentage
       - termsAndDisclaimers
-    CreatedBy:
-      type: object
-      properties:
-        fullName:
-          type: string
-        id:
-          type: string
-          format: uuid
-        role:
-          type: string
-      required:
-      - fullName
-      - id
-      - role
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

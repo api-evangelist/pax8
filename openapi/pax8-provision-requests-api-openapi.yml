@@ -66,27 +66,26 @@ components:
           $ref: '#/components/schemas/CommitmentTerm'
         volume:
           $ref: '#/components/schemas/VolumeCommitment'
-    PageDTOProvisionRequest:
+    PageInfo:
       required:
-      - content
-      - page
+      - number
+      - size
+      - totalElements
+      - totalPages
       type: object
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProvisionRequest'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-    CommitmentTerm:
-      type: object
-      properties:
-        months:
+        size:
           type: integer
           format: int32
-        endDate:
-          type: string
-          format: date-time
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
     VolumeCommitment:
       type: object
       properties:
@@ -126,26 +125,30 @@ components:
           type: integer
           format: int32
       description: Details relating to volume commitments. When both minAmount AND maxAmount are specified, minAmount shall be less than maxAmount.
-    PageInfo:
-      required:
-      - number
-      - size
-      - totalElements
-      - totalPages
+    CommitmentTerm:
       type: object
       properties:
-        size:
+        months:
           type: integer
           format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-        number:
-          type: integer
-          format: int32
+        endDate:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        street2:
+          type: string
+        city:
+          type: string
+        postcode:
+          type: string
+        country:
+          type: string
+        stateOrProvince:
+          type: string
     ProvisionRequest:
       type: object
       properties:
@@ -226,21 +229,18 @@ components:
           - Monthly
           - One-Time
           - Trial
-    Address:
+    PageDTOProvisionRequest:
+      required:
+      - content
+      - page
       type: object
       properties:
-        street:
-          type: string
-        street2:
-          type: string
-        city:
-          type: string
-        postcode:
-          type: string
-        country:
-          type: string
-        stateOrProvince:
-          type: string
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProvisionRequest'
+        page:
+          $ref: '#/components/schemas/PageInfo'
   securitySchemes:
     OAuth2:
       type: oauth2
