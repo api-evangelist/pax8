@@ -1,0 +1,12 @@
+{
+ "url": "https://devx.pax8.com/openapi/vendor-usage-endpoints.json",
+ "requested_url": "https://devx.pax8.com/openapi/vendor-usage-endpoints.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 6415,
+ "sha256": "2e091bee2af2e99d762480765d7fcc8a69c1b3c7ee4c01ebc65596015649d3ba",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
