@@ -42,7 +42,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-10-06'
 image: https://www.pax8.com/favicon.ico
 tags:
 - Company
@@ -353,6 +353,10 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- url: https://www.pax8.com/blog/
+  type: Blog
+- url: https://www.pax8.com/blog/feed/
+  type: BlogRSS
 - type: Website
   url: https://www.pax8.com/
 - type: CapabilityMap
