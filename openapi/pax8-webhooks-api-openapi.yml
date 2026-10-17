@@ -2349,143 +2349,23 @@ paths:
       - Webhooks
 components:
   schemas:
-    FilterOperator:
-      type: string
-      enum:
-      - EQUALS
-      - NOT_EQUALS
-      - GREATER_THAN
-      - LESS_THAN
-      - IN
-      - NOT_IN
-      - CONTAINS
-      description: Filter operator for webhook conditions
-    UpdateFilterCondition:
+    WebhookPagedResult:
       type: object
       required:
-      - field
-      - operator
-      - value
+      - content
+      - page
       properties:
-        field:
-          type: string
-          description: Field path to filter on
-        operator:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+          description: List of webhooks
+        page:
           allOf:
-          - $ref: '#/components/schemas/FilterOperator'
-          description: Operator to use for comparison
-        value:
-          type: array
-          items:
-            type: string
-          description: Values to compare against
-      description: Command for filter condition
-    WebhookTopic:
-      type: object
-      required:
-      - id
-      - topic
-      - filters
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the webhook topic
-        topic:
-          type: string
-          description: The topic name
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookFilter'
-          description: Advanced filtering configuration
-      description: Topic configuration for a webhook subscription
-    AddWebhookTopic:
-      type: object
-      required:
-      - topic
-      - filters
-      properties:
-        topic:
-          type: string
-          description: The topic name to subscribe to
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateWebhookFilter'
-          description: Advanced filtering configuration
-      description: Command for webhook topic configuration
-    ErrorType:
-      type: string
-      enum:
-      - NOT_FOUND
-      - UNAUTHORIZED
-      - FORBIDDEN
-      - BAD_REQUEST
-      - INTERNAL_SERVER_ERROR
-      - INVALID_PARAM
-      description: The type of error that occurred
-    UpdateWebhookConfiguration:
-      type: object
-      properties:
-        displayName:
-          type: string
-          description: Display name for the webhook
-        url:
-          type: string
-          description: URL where webhook events will be sent
-        authorization:
-          type: string
-          description: Authorization header value for webhooks
-        contactEmail:
-          type: string
-          description: Email address to notify when webhook delivery errors occur
-        errorThreshold:
-          type: integer
-          format: int32
-          maximum: 20
-          description: Number of times a webhook will be retried and consecutive errors will result in an email notification
-          default: 3
-      description: Command for updating a webhook's configuration
-    CreateWebhook:
-      type: object
-      required:
-      - displayName
-      properties:
-        displayName:
-          type: string
-          description: Display name for the webhook
-        url:
-          type: string
-          description: URL where webhook events will be sent
-        authorization:
-          type: string
-          description: Authorization header value for webhook commands
-        active:
-          type: boolean
-          description: Whether the webhook is active
-          default: false
-        contactEmail:
-          type: string
-          description: Email address to notify when webhook delivery errors occur
-        errorThreshold:
-          type: integer
-          format: int32
-          maximum: 20
-          description: Number of times a webhook will be retried and consecutive errors will result in an email notification
-          default: 3
-        integrationId:
-          type: string
-          format: uuid
-          description: 'Id of the integration this webhook is associated with. This is required for 3rd party integrators '
-        webhookTopics:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddWebhookTopic'
-          description: List of topics and configurations this webhook subscribes to
-          default: []
-      description: Command for creating a new webhook
-    UpdateWebhookFilter:
+          - $ref: '#/components/schemas/Page'
+          description: Page information
+      description: Paged response for webhooks
+    WebhookFilter:
       type: object
       required:
       - action
@@ -2497,9 +2377,61 @@ components:
         conditions:
           type: array
           items:
-            $ref: '#/components/schemas/UpdateFilterCondition'
+            $ref: '#/components/schemas/FilterCondition'
           description: List of conditions that must all be true
-      description: Command for webhook filter configuration
+      description: Filter configuration for webhook actions
+    Page:
+      type: object
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      properties:
+        number:
+          type: integer
+          format: int32
+          default: 0
+        size:
+          type: integer
+          format: int32
+          default: 0
+        totalElements:
+          type: integer
+          format: int64
+          default: 0
+        totalPages:
+          type: integer
+          format: int32
+          default: 0
+    WebhookDeliveryStatus:
+      type: string
+      enum:
+      - PENDING
+      - SUCCESS
+      - FAILED
+      - RETRYING
+      description: Status of webhook delivery
+    UpdateWebhookTopicConfiguration:
+      type: object
+      required:
+      - filters
+      properties:
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateWebhookFilter'
+          description: Advanced filtering configuration
+      description: Command for updating webhook topic configuration
+    UpdateWebhookStatus:
+      type: object
+      required:
+      - active
+      properties:
+        active:
+          type: boolean
+          description: Whether the webhook should be active
+      description: Command for updating a webhook's status
     WebhookTest:
       type: object
       required:
@@ -2518,21 +2450,16 @@ components:
           additionalProperties: {}
           description: Sample payload that was sent
       description: Response from testing a webhook
-    WebhookFilter:
-      type: object
-      required:
-      - action
-      - conditions
-      properties:
-        action:
-          type: string
-          description: Action to filter on
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterCondition'
-          description: List of conditions that must all be true
-      description: Filter configuration for webhook actions
+    ErrorType:
+      type: string
+      enum:
+      - NOT_FOUND
+      - UNAUTHORIZED
+      - FORBIDDEN
+      - BAD_REQUEST
+      - INTERNAL_SERVER_ERROR
+      - INVALID_PARAM
+      description: The type of error that occurred
     FilterCondition:
       type: object
       required:
@@ -2553,26 +2480,32 @@ components:
             type: string
           description: Values to compare against
       description: Condition for filtering webhook events
-    UpdateWebhookStatus:
+    FilterOperator:
+      type: string
+      enum:
+      - EQUALS
+      - NOT_EQUALS
+      - GREATER_THAN
+      - LESS_THAN
+      - IN
+      - NOT_IN
+      - CONTAINS
+      description: Filter operator for webhook conditions
+    UpdateWebhookFilter:
       type: object
       required:
-      - active
+      - action
+      - conditions
       properties:
-        active:
-          type: boolean
-          description: Whether the webhook should be active
-      description: Command for updating a webhook's status
-    UpdateWebhookTopicConfiguration:
-      type: object
-      required:
-      - filters
-      properties:
-        filters:
+        action:
+          type: string
+          description: Action to filter on
+        conditions:
           type: array
           items:
-            $ref: '#/components/schemas/UpdateWebhookFilter'
-          description: Advanced filtering configuration
-      description: Command for updating webhook topic configuration
+            $ref: '#/components/schemas/UpdateFilterCondition'
+          description: List of conditions that must all be true
+      description: Command for webhook filter configuration
     Webhook:
       type: object
       required:
@@ -2637,54 +2570,48 @@ components:
           description: Timestamp when the webhook was last updated
           readOnly: true
       description: Webhook subscription information
-    Page:
+    UpdateWebhookConfiguration:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: Display name for the webhook
+        url:
+          type: string
+          description: URL where webhook events will be sent
+        authorization:
+          type: string
+          description: Authorization header value for webhooks
+        contactEmail:
+          type: string
+          description: Email address to notify when webhook delivery errors occur
+        errorThreshold:
+          type: integer
+          format: int32
+          maximum: 20
+          description: Number of times a webhook will be retried and consecutive errors will result in an email notification
+          default: 3
+      description: Command for updating a webhook's configuration
+    WebhookTopic:
       type: object
       required:
-      - number
-      - size
-      - totalElements
-      - totalPages
+      - id
+      - topic
+      - filters
       properties:
-        number:
-          type: integer
-          format: int32
-          default: 0
-        size:
-          type: integer
-          format: int32
-          default: 0
-        totalElements:
-          type: integer
-          format: int64
-          default: 0
-        totalPages:
-          type: integer
-          format: int32
-          default: 0
-    WebhookDeliveryStatus:
-      type: string
-      enum:
-      - PENDING
-      - SUCCESS
-      - FAILED
-      - RETRYING
-      description: Status of webhook delivery
-    WebhookPagedResult:
-      type: object
-      required:
-      - content
-      - page
-      properties:
-        content:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the webhook topic
+        topic:
+          type: string
+          description: The topic name
+        filters:
           type: array
           items:
-            $ref: '#/components/schemas/Webhook'
-          description: List of webhooks
-        page:
-          allOf:
-          - $ref: '#/components/schemas/Page'
-          description: Page information
-      description: Paged response for webhooks
+            $ref: '#/components/schemas/WebhookFilter'
+          description: Advanced filtering configuration
+      description: Topic configuration for a webhook subscription
     ReplaceWebhookTopics:
       type: object
       required:
@@ -2696,6 +2623,79 @@ components:
             $ref: '#/components/schemas/AddWebhookTopic'
           description: List of webhook topics to replace existing ones
       description: Command for replacing webhook topics
+    UpdateFilterCondition:
+      type: object
+      required:
+      - field
+      - operator
+      - value
+      properties:
+        field:
+          type: string
+          description: Field path to filter on
+        operator:
+          allOf:
+          - $ref: '#/components/schemas/FilterOperator'
+          description: Operator to use for comparison
+        value:
+          type: array
+          items:
+            type: string
+          description: Values to compare against
+      description: Command for filter condition
+    CreateWebhook:
+      type: object
+      required:
+      - displayName
+      properties:
+        displayName:
+          type: string
+          description: Display name for the webhook
+        url:
+          type: string
+          description: URL where webhook events will be sent
+        authorization:
+          type: string
+          description: Authorization header value for webhook commands
+        active:
+          type: boolean
+          description: Whether the webhook is active
+          default: false
+        contactEmail:
+          type: string
+          description: Email address to notify when webhook delivery errors occur
+        errorThreshold:
+          type: integer
+          format: int32
+          maximum: 20
+          description: Number of times a webhook will be retried and consecutive errors will result in an email notification
+          default: 3
+        integrationId:
+          type: string
+          format: uuid
+          description: 'Id of the integration this webhook is associated with. This is required for 3rd party integrators '
+        webhookTopics:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddWebhookTopic'
+          description: List of topics and configurations this webhook subscribes to
+          default: []
+      description: Command for creating a new webhook
+    AddWebhookTopic:
+      type: object
+      required:
+      - topic
+      - filters
+      properties:
+        topic:
+          type: string
+          description: The topic name to subscribe to
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateWebhookFilter'
+          description: Advanced filtering configuration
+      description: Command for webhook topic configuration
   securitySchemes:
     OAuth2:
       type: oauth2

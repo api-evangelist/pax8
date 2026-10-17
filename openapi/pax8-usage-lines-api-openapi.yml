@@ -145,26 +145,6 @@ paths:
                 $ref: '#/components/schemas/PageDTOUsageLine'
 components:
   schemas:
-    PageInfo:
-      required:
-      - number
-      - size
-      - totalElements
-      - totalPages
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-        number:
-          type: integer
-          format: int32
     AggregateUsageLine:
       required:
       - partnerAggregateQuantity
@@ -194,18 +174,26 @@ components:
             format: uuid
           unitOfMeasurement:
             type: string
-    PageDTOUsageLine:
+    PageInfo:
       required:
-      - content
-      - page
+      - number
+      - size
+      - totalElements
+      - totalPages
       type: object
       properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsageLine'
-        page:
-          $ref: '#/components/schemas/PageInfo'
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
     UsageLine:
       required:
       - productId
@@ -229,6 +217,18 @@ components:
           format: uuid
         unitOfMeasurement:
           type: string
+    PageDTOUsageLine:
+      required:
+      - content
+      - page
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsageLine'
+        page:
+          $ref: '#/components/schemas/PageInfo'
   securitySchemes:
     OAuth2:
       type: oauth2

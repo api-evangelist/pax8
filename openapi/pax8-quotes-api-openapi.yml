@@ -313,90 +313,93 @@ components:
       - draft
       - expired
       - sent
-    ListTotals:
+    PartnerDetails:
       type: object
       properties:
-        initialTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-      required:
-      - initialTotal
-      - recurringTotal
-    ListLineItemCounts:
-      type: object
-      properties:
-        custom:
-          type: integer
-          format: int64
-        msp:
-          type: integer
-          format: int64
-        total:
-          type: integer
-          format: int64
-      required:
-      - custom
-      - msp
-      - total
-    CommitmentTerm:
-      type: object
-      properties:
+        city:
+          type: string
+        country:
+          type: string
         id:
           type: string
           format: uuid
-        term:
-          type: string
-      required:
-      - id
-      - term
-    RespondedBy:
-      type: object
-      properties:
-        email:
-          type: string
-        fullName:
-          type: string
-        ipAddress:
-          type: string
-      required:
-      - email
-      - fullName
-    Product:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        isMspOnly:
-          type: boolean
         name:
           type: string
-        sku:
+        parentPartner:
+          $ref: '#/components/schemas/ParentPartnerDetails'
+        postcode:
           type: string
-        type:
+        stateOrProvinceCode:
           type: string
-          enum:
-          - Standalone
-          - Solution
-          - Custom
+        street:
+          type: string
+        street2:
+          type: string
       required:
+      - city
       - id
-      - isMspOnly
       - name
-      - sku
-      - type
-    AmountCurrency:
+      - postcode
+      - stateOrProvinceCode
+      - street
+    CreatedBy:
       type: object
       properties:
-        amount:
-          type: number
-          format: double
-        currency:
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
           type: string
       required:
-      - amount
-      - currency
+      - fullName
+      - id
+      - role
+    QuoteListPartnerDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        parentPartner:
+          $ref: '#/components/schemas/ParentPartnerDetails'
+      required:
+      - id
+      - name
+    AttachmentResponse:
+      type: object
+      properties:
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        createdOn:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        replacedOn:
+          type: string
+          format: date-time
+        type:
+          type: string
+        url:
+          type: string
+      required:
+      - createdBy
+      - createdOn
+      - id
+      - name
+      - order
+      - type
+      - url
     ErrorDetails:
       type: object
       properties:
@@ -478,199 +481,18 @@ components:
       required:
       - message
       - type
-    PartnerDetails:
+    RespondedBy:
       type: object
       properties:
-        city:
+        email:
           type: string
-        country:
-          type: string
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        parentPartner:
-          $ref: '#/components/schemas/ParentPartnerDetails'
-        postcode:
-          type: string
-        stateOrProvinceCode:
-          type: string
-        street:
-          type: string
-        street2:
-          type: string
-      required:
-      - city
-      - id
-      - name
-      - postcode
-      - stateOrProvinceCode
-      - street
-    ListQuotesViewV2: {}
-    ErrorResponse:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
-          type: string
-        message:
-          type: string
-        status:
-          type: integer
-          format: int32
-        type:
-          type: string
-      required:
-      - details
-      - instance
-      - message
-      - status
-      - type
-    PageInfo:
-      type: object
-      properties:
-        number:
-          type: integer
-          format: int32
-        size:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-      required:
-      - number
-      - size
-      - totalElements
-      - totalPages
-    CreateQuotePayload:
-      type: object
-      properties:
-        clientId:
-          type: string
-          format: uuid
-        quoteRequestId:
-          type: string
-          format: uuid
-      required:
-      - clientId
-    ClientDetails:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        isShadowCompany:
-          type: boolean
-        name:
-          type: string
-      required:
-      - id
-      - isShadowCompany
-      - name
-    AttachmentResponse:
-      type: object
-      properties:
-        createdBy:
-          $ref: '#/components/schemas/CreatedBy'
-        createdOn:
-          type: string
-          format: date-time
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        order:
-          type: integer
-          format: int32
-        replacedOn:
-          type: string
-          format: date-time
-        type:
-          type: string
-        url:
-          type: string
-      required:
-      - createdBy
-      - createdOn
-      - id
-      - name
-      - order
-      - type
-      - url
-    QuoteListPartnerDetails:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        parentPartner:
-          $ref: '#/components/schemas/ParentPartnerDetails'
-      required:
-      - id
-      - name
-    UsageBased:
-      type: object
-      properties:
-        displayNote:
-          type: boolean
-        type:
-          type: string
-          enum:
-          - PRICE_FLAT
-          - PRICE_VARIES
-          - QTY_VARIES
-      required:
-      - displayNote
-      - type
-    LineItemRelationship:
-      type: object
-      properties:
-        requiredLineItemId:
-          type: string
-          format: uuid
-        requiredSubscriptionId:
-          type: string
-          format: uuid
-    CreatedBy:
-      type: object
-      properties:
         fullName:
           type: string
-        id:
-          type: string
-          format: uuid
-        role:
+        ipAddress:
           type: string
       required:
+      - email
       - fullName
-      - id
-      - role
-    ListResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListContent'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-        statusCounts:
-          $ref: '#/components/schemas/ListStatusCounts'
-      required:
-      - content
-      - page
-      - statusCounts
     QuoteResponse:
       type: object
       properties:
@@ -762,6 +584,60 @@ components:
       - status
       - termsAndDisclaimers
       - totals
+    InvoiceTotals:
+      type: object
+      properties:
+        initialCost:
+          $ref: '#/components/schemas/AmountCurrency'
+        initialProfit:
+          $ref: '#/components/schemas/AmountCurrency'
+        initialTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringCost:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringProfit:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+      required:
+      - initialCost
+      - initialProfit
+      - initialTotal
+      - recurringCost
+      - recurringProfit
+      - recurringTotal
+    LineItemRelationship:
+      type: object
+      properties:
+        requiredLineItemId:
+          type: string
+          format: uuid
+        requiredSubscriptionId:
+          type: string
+          format: uuid
+    UserModel:
+      type: object
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        ipAddress:
+          type: string
+        quoteAcceptedByName:
+          type: string
+        userRole:
+          type: string
+      required:
+      - displayName
+      - email
+      - fullName
+      - id
     ListContent:
       allOf:
       - $ref: '#/components/schemas/ListQuotesViewV2'
@@ -824,6 +700,51 @@ components:
       - status
       - totals
       - updatedOn
+    ListQuotesViewV2: {}
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
+    CommitmentTerm:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        term:
+          type: string
+      required:
+      - id
+      - term
+    ParentPartnerDetails:
+      type: object
+      properties:
+        parentPartnerId:
+          type: string
+          format: uuid
+        parentPartnerName:
+          type: string
+      required:
+      - parentPartnerId
+      - parentPartnerName
     UpdateQuotePayload:
       type: object
       properties:
@@ -854,6 +775,26 @@ components:
       - published
       - status
       - termsAndDisclaimers
+    PageInfo:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
     LineItemResponse:
       type: object
       properties:
@@ -906,39 +847,6 @@ components:
       - product
       - quantity
       - totals
-    InvoiceTotals:
-      type: object
-      properties:
-        initialCost:
-          $ref: '#/components/schemas/AmountCurrency'
-        initialProfit:
-          $ref: '#/components/schemas/AmountCurrency'
-        initialTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringCost:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringProfit:
-          $ref: '#/components/schemas/AmountCurrency'
-        recurringTotal:
-          $ref: '#/components/schemas/AmountCurrency'
-      required:
-      - initialCost
-      - initialProfit
-      - initialTotal
-      - recurringCost
-      - recurringProfit
-      - recurringTotal
-    ParentPartnerDetails:
-      type: object
-      properties:
-        parentPartnerId:
-          type: string
-          format: uuid
-        parentPartnerName:
-          type: string
-      required:
-      - parentPartnerId
-      - parentPartnerName
     OwnedByDetails:
       type: object
       properties:
@@ -956,29 +864,121 @@ components:
       - fullName
       - id
       - role
-    UserModel:
+    Product:
       type: object
       properties:
-        displayName:
-          type: string
-        email:
-          type: string
-        fullName:
-          type: string
         id:
           type: string
           format: uuid
-        ipAddress:
+        isMspOnly:
+          type: boolean
+        name:
           type: string
-        quoteAcceptedByName:
+        sku:
           type: string
-        userRole:
+        type:
+          type: string
+          enum:
+          - Standalone
+          - Solution
+          - Custom
+      required:
+      - id
+      - isMspOnly
+      - name
+      - sku
+      - type
+    AmountCurrency:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        currency:
           type: string
       required:
-      - displayName
-      - email
-      - fullName
+      - amount
+      - currency
+    ListLineItemCounts:
+      type: object
+      properties:
+        custom:
+          type: integer
+          format: int64
+        msp:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+      required:
+      - custom
+      - msp
+      - total
+    UsageBased:
+      type: object
+      properties:
+        displayNote:
+          type: boolean
+        type:
+          type: string
+          enum:
+          - PRICE_FLAT
+          - PRICE_VARIES
+          - QTY_VARIES
+      required:
+      - displayNote
+      - type
+    ListTotals:
+      type: object
+      properties:
+        initialTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+        recurringTotal:
+          $ref: '#/components/schemas/AmountCurrency'
+      required:
+      - initialTotal
+      - recurringTotal
+    CreateQuotePayload:
+      type: object
+      properties:
+        clientId:
+          type: string
+          format: uuid
+        quoteRequestId:
+          type: string
+          format: uuid
+      required:
+      - clientId
+    ListResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListContent'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+        statusCounts:
+          $ref: '#/components/schemas/ListStatusCounts'
+      required:
+      - content
+      - page
+      - statusCounts
+    ClientDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        isShadowCompany:
+          type: boolean
+        name:
+          type: string
+      required:
       - id
+      - isShadowCompany
+      - name
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

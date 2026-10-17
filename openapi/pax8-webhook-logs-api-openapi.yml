@@ -707,6 +707,14 @@ paths:
       - Webhook Logs
 components:
   schemas:
+    WebhookDeliveryStatus:
+      type: string
+      enum:
+      - PENDING
+      - SUCCESS
+      - FAILED
+      - RETRYING
+      description: Status of webhook delivery
     ErrorType:
       type: string
       enum:
@@ -717,6 +725,38 @@ components:
       - INTERNAL_SERVER_ERROR
       - INVALID_PARAM
       description: The type of error that occurred
+    WebhookCall:
+      type: object
+      required:
+      - id
+      - timestamp
+      - status
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the call attempt
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the call attempt
+        status:
+          allOf:
+          - $ref: '#/components/schemas/WebhookDeliveryStatus'
+          description: Status of the call attempt
+        errorMessage:
+          type: string
+          description: Error message if the call failed
+        httpStatusCode:
+          type: integer
+          format: int32
+          description: HTTP status code returned by the webhook endpoint
+        payload:
+          type: object
+          additionalProperties: {}
+          description: The payload that was sent in the webhook
+      description: Individual webhook call attempt
     WebhookLog:
       type: object
       required:
@@ -770,46 +810,6 @@ components:
           - $ref: '#/components/schemas/Page'
           description: Page information
       description: Paged response for webhook logs
-    WebhookCall:
-      type: object
-      required:
-      - id
-      - timestamp
-      - status
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the call attempt
-          readOnly: true
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the call attempt
-        status:
-          allOf:
-          - $ref: '#/components/schemas/WebhookDeliveryStatus'
-          description: Status of the call attempt
-        errorMessage:
-          type: string
-          description: Error message if the call failed
-        httpStatusCode:
-          type: integer
-          format: int32
-          description: HTTP status code returned by the webhook endpoint
-        payload:
-          type: object
-          additionalProperties: {}
-          description: The payload that was sent in the webhook
-      description: Individual webhook call attempt
-    WebhookDeliveryStatus:
-      type: string
-      enum:
-      - PENDING
-      - SUCCESS
-      - FAILED
-      - RETRYING
-      description: Status of webhook delivery
     Page:
       type: object
       required:

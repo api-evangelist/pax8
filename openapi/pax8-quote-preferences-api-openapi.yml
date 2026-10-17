@@ -75,28 +75,24 @@ paths:
       - Quote preferences
 components:
   schemas:
-    ErrorResponse:
+    QuotePreferencesResult:
       type: object
       properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorDetails'
-        instance:
-          type: string
-        message:
-          type: string
-        status:
+        daysToExpire:
           type: integer
           format: int32
-        type:
+        introMessage:
+          type: string
+        salesMarginPercentage:
+          type: number
+          format: double
+        termsAndDisclaimers:
           type: string
       required:
-      - details
-      - instance
-      - message
-      - status
-      - type
+      - daysToExpire
+      - introMessage
+      - salesMarginPercentage
+      - termsAndDisclaimers
     PreferencesResponse:
       type: object
       properties:
@@ -120,6 +116,42 @@ components:
       - introMessage
       - salesMarginPercentage
       - termsAndDisclaimers
+    CreatedBy:
+      type: object
+      properties:
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
+          type: string
+      required:
+      - fullName
+      - id
+      - role
+    ErrorResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+        instance:
+          type: string
+        message:
+          type: string
+        status:
+          type: integer
+          format: int32
+        type:
+          type: string
+      required:
+      - details
+      - instance
+      - message
+      - status
+      - type
     PreferencesPayload:
       type: object
       properties:
@@ -249,38 +281,6 @@ components:
       required:
       - message
       - type
-    CreatedBy:
-      type: object
-      properties:
-        fullName:
-          type: string
-        id:
-          type: string
-          format: uuid
-        role:
-          type: string
-      required:
-      - fullName
-      - id
-      - role
-    QuotePreferencesResult:
-      type: object
-      properties:
-        daysToExpire:
-          type: integer
-          format: int32
-        introMessage:
-          type: string
-        salesMarginPercentage:
-          type: number
-          format: double
-        termsAndDisclaimers:
-          type: string
-      required:
-      - daysToExpire
-      - introMessage
-      - salesMarginPercentage
-      - termsAndDisclaimers
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

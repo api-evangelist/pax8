@@ -91,6 +91,30 @@ paths:
       - Preference attachments
 components:
   schemas:
+    AddPreferenceAttachmentsPayload:
+      type: object
+      properties:
+        attachments:
+          type: array
+          items:
+            type: string
+            format: uuid
+      required:
+      - attachments
+    CreatedBy:
+      type: object
+      properties:
+        fullName:
+          type: string
+        id:
+          type: string
+          format: uuid
+        role:
+          type: string
+      required:
+      - fullName
+      - id
+      - role
     ErrorResponse:
       type: object
       properties:
@@ -113,16 +137,6 @@ components:
       - message
       - status
       - type
-    AddPreferenceAttachmentsPayload:
-      type: object
-      properties:
-        attachments:
-          type: array
-          items:
-            type: string
-            format: uuid
-      required:
-      - attachments
     AttachmentResponse:
       type: object
       properties:
@@ -235,20 +249,6 @@ components:
       required:
       - message
       - type
-    CreatedBy:
-      type: object
-      properties:
-        fullName:
-          type: string
-        id:
-          type: string
-          format: uuid
-        role:
-          type: string
-      required:
-      - fullName
-      - id
-      - role
   securitySchemes:
     bearerAuth:
       bearerFormat: JWT

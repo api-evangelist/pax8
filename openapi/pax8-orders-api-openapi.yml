@@ -134,41 +134,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of HTTP error
-        message:
-          type: string
-          description: Error message
-        instance:
-          type: string
-          description: The path called
-        status:
-          type: integer
-          description: HTTP error code
-        details:
-          type: array
-          description: Additional API failures
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-    ErrorDetail:
-      type: object
-      properties:
-        type:
-          type: string
-          description: optional
-        message:
-          type: string
-          description: required
-        instance:
-          type: string
-          description: optional
-        status:
-          type: integer
-          description: optional
     LineItem:
       type: object
       properties:
@@ -227,7 +192,58 @@ components:
       - companyId
       - lineItemNumber
       - quantity
-    Order:
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    ProvisioningDetail:
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          description: The label to display
+        key:
+          type: string
+          example: userEmailAddress
+          description: The key
+        values:
+          type: array
+          items:
+            type: string
+          description: A list of values based on the ```valuetype``` and ```possibleValues```
+          writeOnly: true
+        description:
+          type: string
+          example: Provide the user's email address
+          description: Instructions and context to help enter the required provisioning information
+          readOnly: true
+        valueType:
+          type: string
+          readOnly: true
+          enum:
+          - Input
+          - Single-Value
+          - Multi-Value
+          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
+        possibleValues:
+          type: array
+          readOnly: true
+          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
+          items:
+            type: string
+    CreateOrder:
       type: object
       required:
       - companyId
@@ -271,43 +287,7 @@ components:
         lineItems:
           type: array
           items:
-            $ref: '#/components/schemas/LineItem'
-    ProvisioningDetail:
-      type: object
-      properties:
-        label:
-          type: string
-          readOnly: true
-          description: The label to display
-        key:
-          type: string
-          example: userEmailAddress
-          description: The key
-        values:
-          type: array
-          items:
-            type: string
-          description: A list of values based on the ```valuetype``` and ```possibleValues```
-          writeOnly: true
-        description:
-          type: string
-          example: Provide the user's email address
-          description: Instructions and context to help enter the required provisioning information
-          readOnly: true
-        valueType:
-          type: string
-          readOnly: true
-          enum:
-          - Input
-          - Single-Value
-          - Multi-Value
-          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
-        possibleValues:
-          type: array
-          readOnly: true
-          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
-          items:
-            type: string
+            $ref: '#/components/schemas/CreateLineItem'
     CreateLineItem:
       type: object
       properties:
@@ -365,7 +345,27 @@ components:
       - lineItemNumber
       - quantity
       - billingTerm
-    CreateOrder:
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+    Order:
       type: object
       required:
       - companyId
@@ -409,7 +409,7 @@ components:
         lineItems:
           type: array
           items:
-            $ref: '#/components/schemas/CreateLineItem'
+            $ref: '#/components/schemas/LineItem'
     Page:
       type: object
       properties:

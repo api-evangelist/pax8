@@ -51,12 +51,6 @@ paths:
                   $ref: '#/components/examples/token-error-auth-example'
 components:
   examples:
-    token-error-auth-example:
-      summary: An Access Token Unauthorized error
-      description: An Access Token Unauthorized error
-      value:
-        error: access_denied
-        error_description: Unauthorized
     token-request-example:
       summary: An Access Token request headers
       description: Header values used for an Access Token request
@@ -72,7 +66,28 @@ components:
         access_token: <access-token>
         expires_in: 86400
         token_type: Bearer
+    token-error-auth-example:
+      summary: An Access Token Unauthorized error
+      description: An Access Token Unauthorized error
+      value:
+        error: access_denied
+        error_description: Unauthorized
   schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: The Access Token
+        expires_in:
+          type: number
+          description: The time to live of the Access Token in seconds
+          enum:
+          - 86400
+        token_type:
+          type: string
+          enum:
+          - Bearer
     TokenRequest:
       type: object
       required:
@@ -98,21 +113,6 @@ components:
           type: string
           enum:
           - client_credentials
-    TokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-          description: The Access Token
-        expires_in:
-          type: number
-          description: The time to live of the Access Token in seconds
-          enum:
-          - 86400
-        token_type:
-          type: string
-          enum:
-          - Bearer
   securitySchemes:
     OAuth2:
       type: oauth2

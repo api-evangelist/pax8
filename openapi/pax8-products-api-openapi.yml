@@ -211,6 +211,68 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ProductDependency:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the product constraint
+        products:
+          type: array
+          description: A list of products that satisfy the constraint
+          items:
+            $ref: '#/components/schemas/Product'
+    ErrorDetail:
+      type: object
+      properties:
+        type:
+          type: string
+          description: optional
+        message:
+          type: string
+          description: required
+        instance:
+          type: string
+          description: optional
+        status:
+          type: integer
+          description: optional
+    ProvisioningDetail:
+      type: object
+      properties:
+        label:
+          type: string
+          readOnly: true
+          description: The label to display
+        key:
+          type: string
+          example: userEmailAddress
+          description: The key
+        values:
+          type: array
+          items:
+            type: string
+          description: A list of values based on the ```valuetype``` and ```possibleValues```
+          writeOnly: true
+        description:
+          type: string
+          example: Provide the user's email address
+          description: Instructions and context to help enter the required provisioning information
+          readOnly: true
+        valueType:
+          type: string
+          readOnly: true
+          enum:
+          - Input
+          - Single-Value
+          - Multi-Value
+          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
+        possibleValues:
+          type: array
+          readOnly: true
+          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
+          items:
+            type: string
     Commitment:
       type: object
       properties:
@@ -247,6 +309,87 @@ components:
         isTransferable:
           type: boolean
           description: Is ```true``` if commitment can be transferred to another company
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          description: The name of a product
+          example: Acme Corps Productivity Suite
+        vendorName:
+          type: string
+          description: The name of the vendor
+          example: Acme Corps
+        shortDescription:
+          example: Short description about the product to sell
+          description: A short description of the product
+          type: string
+        sku:
+          type: string
+          example: 4225-776-3234
+          description: The product sku
+        vendorSku:
+          type: string
+          example: 12345-AA-XYZ
+          description: The product vendor sku
+        altVendorSku:
+          type: string
+          format: uuid
+          deprecated: true
+          description: The Microsoft legacy sku has been deprecated. Please transition to vendorSku
+        requiresCommitment:
+          type: boolean
+          example: false
+          description: Whether the product requires a commitment
+    Rate:
+      type: object
+      properties:
+        partnerBuyRate:
+          type: number
+          description: The partner cost
+          example: 145.8
+        suggestedRetailPrice:
+          type: number
+          description: The suggested customer cost
+          example: 151.8
+        startQuantityRange:
+          type: number
+          example: 5
+          description: The start of the quantity range. If not set 0 is the default
+        endQuantityRange:
+          type: number
+          example: 200
+          description: The end of the quantity range. If ```null``` there is no end of range
+        chargeType:
+          type: string
+          enum:
+          - Per Unit
+          - Flat Rate
+          description: "Rate Charge Type:\n  * `Per Unit` - The rate is multiplied directly by the quantity based on the start and end quantity range\n  * `Flat Rate` - The rate is flat for the quantity based on the start and end quantity range\n"
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of HTTP error
+        message:
+          type: string
+          description: Error message
+        instance:
+          type: string
+          description: The path called
+        status:
+          type: integer
+          description: HTTP error code
+        details:
+          type: array
+          description: Additional API failures
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
     Pricing:
       type: object
       properties:
@@ -291,6 +434,17 @@ components:
           description: A list of rates
           items:
             $ref: '#/components/schemas/Rate'
+    Dependencies:
+      type: object
+      properties:
+        commitmentDependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Commitment'
+        productDependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDependency'
     ProductDetail:
       type: object
       properties:
@@ -331,160 +485,6 @@ components:
           type: boolean
           example: false
           description: Whether the product requires a commitment
-    Error:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of HTTP error
-        message:
-          type: string
-          description: Error message
-        instance:
-          type: string
-          description: The path called
-        status:
-          type: integer
-          description: HTTP error code
-        details:
-          type: array
-          description: Additional API failures
-          items:
-            $ref: '#/components/schemas/ErrorDetail'
-    ErrorDetail:
-      type: object
-      properties:
-        type:
-          type: string
-          description: optional
-        message:
-          type: string
-          description: required
-        instance:
-          type: string
-          description: optional
-        status:
-          type: integer
-          description: optional
-    Rate:
-      type: object
-      properties:
-        partnerBuyRate:
-          type: number
-          description: The partner cost
-          example: 145.8
-        suggestedRetailPrice:
-          type: number
-          description: The suggested customer cost
-          example: 151.8
-        startQuantityRange:
-          type: number
-          example: 5
-          description: The start of the quantity range. If not set 0 is the default
-        endQuantityRange:
-          type: number
-          example: 200
-          description: The end of the quantity range. If ```null``` there is no end of range
-        chargeType:
-          type: string
-          enum:
-          - Per Unit
-          - Flat Rate
-          description: "Rate Charge Type:\n  * `Per Unit` - The rate is multiplied directly by the quantity based on the start and end quantity range\n  * `Flat Rate` - The rate is flat for the quantity based on the start and end quantity range\n"
-    ProductDependency:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the product constraint
-        products:
-          type: array
-          description: A list of products that satisfy the constraint
-          items:
-            $ref: '#/components/schemas/Product'
-    ProvisioningDetail:
-      type: object
-      properties:
-        label:
-          type: string
-          readOnly: true
-          description: The label to display
-        key:
-          type: string
-          example: userEmailAddress
-          description: The key
-        values:
-          type: array
-          items:
-            type: string
-          description: A list of values based on the ```valuetype``` and ```possibleValues```
-          writeOnly: true
-        description:
-          type: string
-          example: Provide the user's email address
-          description: Instructions and context to help enter the required provisioning information
-          readOnly: true
-        valueType:
-          type: string
-          readOnly: true
-          enum:
-          - Input
-          - Single-Value
-          - Multi-Value
-          description: "Provisioning Detail Value Type:\n * `Input` - A value that is supplied by a user\n * `Single-Value` - A single value that is picked from the `possibleValues` list\n * `Multi-Value` - One or multiple values that are picked from the `possibleValues` list\n"
-        possibleValues:
-          type: array
-          readOnly: true
-          description: A list of possible values. `possibleValues` will be null when `valueType` is `Input`
-          items:
-            type: string
-    Product:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        name:
-          type: string
-          description: The name of a product
-          example: Acme Corps Productivity Suite
-        vendorName:
-          type: string
-          description: The name of the vendor
-          example: Acme Corps
-        shortDescription:
-          example: Short description about the product to sell
-          description: A short description of the product
-          type: string
-        sku:
-          type: string
-          example: 4225-776-3234
-          description: The product sku
-        vendorSku:
-          type: string
-          example: 12345-AA-XYZ
-          description: The product vendor sku
-        altVendorSku:
-          type: string
-          format: uuid
-          deprecated: true
-          description: The Microsoft legacy sku has been deprecated. Please transition to vendorSku
-        requiresCommitment:
-          type: boolean
-          example: false
-          description: Whether the product requires a commitment
-    Dependencies:
-      type: object
-      properties:
-        commitmentDependencies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Commitment'
-        productDependencies:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductDependency'
     Page:
       type: object
       properties:
@@ -505,29 +505,6 @@ components:
           description: The current page
           example: 1
   examples:
-    dependencies-example:
-      summary: An example of product dependencies
-      description: An example of product dependencies
-      value:
-        commitmentDependencies:
-        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-          term: 3-Year
-          autoRenew: true
-          renewalWindowDaysBeforeTermEnd: 0
-          renewalWindowDaysAfterTermEnd: 0
-          allowForQuantityIncrease: true
-          allowForQuantityDecrease: true
-          allowForEarlyCancellation: true
-          cancellationFeeApplied: true
-          isTransferable: true
-        productDependencies:
-        - name: Requires
-          products:
-          - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-            name: Acme Corps Productivity Suite
-            vendorName: Acme Corps
-            shortDescription: Short description about the product to sell
-            sku: 4225-776-3234
     microsoft-office-365-e3-details:
       summary: Provision details for `Microsoft Office 365 E3`
       description: An example response of provision details for `Microsoft Office 365 E3`
@@ -568,6 +545,29 @@ components:
           key: mca2020EffectiveDate
           valueType: Input
           description: (YYYY-MM-DD)
+    dependencies-example:
+      summary: An example of product dependencies
+      description: An example of product dependencies
+      value:
+        commitmentDependencies:
+        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          term: 3-Year
+          autoRenew: true
+          renewalWindowDaysBeforeTermEnd: 0
+          renewalWindowDaysAfterTermEnd: 0
+          allowForQuantityIncrease: true
+          allowForQuantityDecrease: true
+          allowForEarlyCancellation: true
+          cancellationFeeApplied: true
+          isTransferable: true
+        productDependencies:
+        - name: Requires
+          products:
+          - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+            name: Acme Corps Productivity Suite
+            vendorName: Acme Corps
+            shortDescription: Short description about the product to sell
+            sku: 4225-776-3234
     microsoft-office-365-e3:
       summary: Microsoft Office 365 E3
       description: an example response for `Microsoft Office 365 E3`

@@ -79,26 +79,6 @@ paths:
                 $ref: '#/components/schemas/ProvisionDetail'
 components:
   schemas:
-    PageInfo:
-      required:
-      - number
-      - size
-      - totalElements
-      - totalPages
-      type: object
-      properties:
-        size:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int32
-        number:
-          type: integer
-          format: int32
     PageDTOProvisionDetail:
       required:
       - content
@@ -127,6 +107,26 @@ components:
         createdDate:
           type: string
           format: date-time
+    PageInfo:
+      required:
+      - number
+      - size
+      - totalElements
+      - totalPages
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
   securitySchemes:
     OAuth2:
       type: oauth2
