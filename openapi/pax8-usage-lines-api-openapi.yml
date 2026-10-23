@@ -242,3 +242,9 @@ components:
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
+x-provenance:
+  method: harvested
+  publisher: Pax8
+  source: https://devx.pax8.com/openapi/vendor-usage-endpoints.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
